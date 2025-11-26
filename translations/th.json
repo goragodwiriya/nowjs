@@ -1,0 +1,14 @@
+{
+  "Home": "หน้าแรก",
+  "Features": "คุณสมบัติ",
+  "Examples": "ตัวอย่าง",
+  "Documentation": "เอกสาร",
+  "Get Started": "เริ่มต้นใช้งาน",
+  "Copy code": "คัดลอกโค้ด",
+  "Copied!": "คัดลอกแล้ว",
+  "Error": "เกิดข้อผิดพลาด",
+  "Loading": "กำลังโหลด...",
+  "footer": {
+    "slogan": "เขียน JavaScript น้อยลง ทำงานได้มากขึ้น ด้วย Framework ที่ครบครัน ไม่ต้อง Build ไม่ต้อง Compile"
+  }
+}
