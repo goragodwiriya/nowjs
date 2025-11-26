@@ -1,0 +1,81 @@
+# IDE and Editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# AI Assistant rules (keep private)
+.clinerules/
+.kilocode/
+.roo/
+.windsurf/
+.cursor/
+.kiro/
+.qoder/
+.augment/
+.antigravity/
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Development files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Testing
+coverage/
+.nyc_output/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Exclude non-core files and directories
+examples/
+demos/
+documents/
+th/
+en/
+index.php
+.htaccess
+js/
+css/
+images/
+fonts/
+api/
+*.php
+*.html
+
+# Include only specific HTML files
+!example-cdn.html
+
+# Keep core framework files:
+# - Now/ directory (framework core)
+# - package.json (npm config)
+# - vite.config.js (build config)
+# - translations/ (i18n files)
+# - CDN.md (documentation)
+# - README.md (if exists)
