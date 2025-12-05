@@ -1,0 +1,195 @@
+em {
+  font-style: normal;
+  color: var(--color-red);
+}
+.comment {
+  color: var(--color-comment);
+  font-size: 0.9rem;
+}
+.color-white {
+  color: var(--color-white) !important;
+}
+.bg-white {
+  background-color: var(--color-white);
+}
+.color-light {
+  color: var(--color-light) !important;
+}
+.bg-light {
+  background-color: var(--color-light);
+}
+.color-silver {
+  color: var(--color-silver) !important;
+}
+.bg-silver {
+  background-color: var(--color-silver);
+}
+.color-gray {
+  color: var(--color-gray) !important;
+}
+.bg-gray {
+  background-color: var(--color-gray);
+}
+.bg-dark-gray {
+  background-color: var(--color-dark-gray);
+}
+.color-dark-gray {
+  color: var(--color-dark-gray) !important;
+}
+.color-dark {
+  color: var(--color-dark) !important;
+}
+.bg-dark {
+  background-color: var(--color-dark);
+}
+.color-black {
+  color: var(--color-black) !important;
+}
+.bg-black {
+  background-color: var(--color-black);
+}
+.color-blue {
+  color: var(--color-blue) !important;
+}
+.bg-blue {
+  background-color: var(--color-blue);
+}
+.color-brown {
+  color: var(--color-brown) !important;
+}
+.bg-brown {
+  background-color: var(--color-brown);
+}
+.color-cyan {
+  color: var(--color-cyan) !important;
+}
+.bg-cyan {
+  background-color: var(--color-cyan);
+}
+.color-gold {
+  color: var(--color-gold) !important;
+}
+.bg-gold {
+  background-color: var(--color-gold);
+}
+.color-green {
+  color: var(--color-green) !important;
+}
+.bg-green {
+  background-color: var(--color-green);
+}
+.color-magenta {
+  color: var(--color-magenta) !important;
+}
+.bg-magenta {
+  background-color: var(--color-magenta);
+}
+.color-orange {
+  color: var(--color-orange) !important;
+}
+.bg-orange {
+  background-color: var(--color-orange);
+}
+.color-pink {
+  color: var(--color-pink) !important;
+}
+.bg-pink {
+  background-color: var(--color-pink);
+}
+.color-purple {
+  color: var(--color-purple) !important;
+}
+.bg-purple {
+  background-color: var(--color-purple);
+}
+.color-rosy {
+  color: var(--color-rosy) !important;
+}
+.bg-rosy {
+  background-color: var(--color-rosy);
+}
+.color-red {
+  color: var(--color-red) !important;
+}
+.bg-red {
+  background-color: var(--color-red);
+}
+.error {
+  color: var(--notification-error-text) !important;
+}
+.warning {
+  color: var(--notification-warning-text) !important;
+}
+.success {
+  color: var(--notification-success-text) !important;
+}
+.info {
+  color: var(--notification-info-text) !important;
+}
+.big,
+big {
+  font-size: 1.2em;
+}
+.small,
+small {
+  font-size: 0.9em;
+}
+[class^="status"],
+[class*=" status"] {
+  color: var(--color-white);
+  border-color: var(--color-border);
+  border-radius: var(--field-border-radius);
+  padding: 0 0.4rem;
+  text-shadow: none;
+  white-space: nowrap;
+  max-width: fit-content;
+  margin: 0 auto;
+}
+.status0 {
+  background-color: var(--color-0);
+}
+.status1 {
+  background-color: var(--color-1);
+}
+.status2 {
+  background-color: var(--color-2);
+  color: var(--color-black);
+}
+.status3 {
+  background-color: var(--color-3);
+}
+.status4 {
+  background-color: var(--color-4);
+}
+.status5 {
+  background-color: var(--color-5);
+}
+.status6 {
+  background-color: var(--color-6);
+}
+.status7 {
+  background-color: var(--color-7);
+}
+.status8 {
+  background-color: var(--color-8);
+  color: var(--color-black);
+}
+.status9 {
+  background-color: var(--color-9);
+  color: var(--color-black);
+}
+.status10 {
+  background-color: var(--color-10);
+}
+.status11 {
+  background-color: var(--color-11);
+}
+.tablebody {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 10px;
+}
+.empty-table {
+  text-align: center;
+  color: var(--notification-error-text);
+}

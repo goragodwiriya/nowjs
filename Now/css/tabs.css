@@ -1,0 +1,351 @@
+/**
+ * Tabs Component Styles
+ * Modern, accessible tabs with smooth animations
+ *
+ * Style Scoping:
+ * - Default styles apply when NO data-style attribute OR data-style="default"
+ * - Add data-style="custom" (or any value) to use your own CSS
+ */
+/* ============================================
+   Scope Selector Variables (for readability)
+   Using :where() for lower specificity where appropriate
+   ============================================ */
+/* ============================================
+   Base Tabs Container
+   ============================================ */
+[data-component="tabs"]:not([data-style]),
+[data-component="tabs"][data-style="default"] {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--tabs-bg);
+  border-radius: var(--tabs-border-radius);
+  overflow: hidden;
+}
+[data-component="tabs"][data-orientation="vertical"]:not([data-style]),
+[data-component="tabs"][data-orientation="vertical"][data-style="default"] {
+  flex-direction: row;
+}
+/* ============================================
+   Tab Buttons Container (Tablist)
+   ============================================ */
+[data-component="tabs"]:not([data-style]) .tab-buttons,
+[data-component="tabs"]:not([data-style]) [role="tablist"],
+[data-component="tabs"][data-style="default"] .tab-buttons,
+[data-component="tabs"][data-style="default"] [role="tablist"] {
+  display: flex;
+  gap: var(--tabs-button-gap);
+  border-bottom: 1px solid var(--tabs-border);
+  background-color: var(--tabs-buttons-bg);
+  padding: 0.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--tabs-border) transparent;
+}
+/* Webkit scrollbar styling */
+[data-component="tabs"]:not([data-style]) .tab-buttons::-webkit-scrollbar,
+[data-component="tabs"]:not([data-style]) [role="tablist"]::-webkit-scrollbar,
+[data-component="tabs"][data-style="default"] .tab-buttons::-webkit-scrollbar,
+[data-component="tabs"][data-style="default"] [role="tablist"]::-webkit-scrollbar {
+  height: 4px;
+}
+[data-component="tabs"]:not([data-style]) .tab-buttons::-webkit-scrollbar-track,
+[data-component="tabs"]:not([data-style]) [role="tablist"]::-webkit-scrollbar-track,
+[data-component="tabs"][data-style="default"] .tab-buttons::-webkit-scrollbar-track,
+[data-component="tabs"][data-style="default"] [role="tablist"]::-webkit-scrollbar-track {
+  background: transparent;
+}
+[data-component="tabs"]:not([data-style]) .tab-buttons::-webkit-scrollbar-thumb,
+[data-component="tabs"]:not([data-style]) [role="tablist"]::-webkit-scrollbar-thumb,
+[data-component="tabs"][data-style="default"] .tab-buttons::-webkit-scrollbar-thumb,
+[data-component="tabs"][data-style="default"] [role="tablist"]::-webkit-scrollbar-thumb {
+  background: var(--tabs-border);
+  border-radius: 2px;
+}
+/* Vertical orientation */
+[data-component="tabs"]:not([data-style]) [role="tablist"][aria-orientation="vertical"],
+[data-component="tabs"][data-style="default"] [role="tablist"][aria-orientation="vertical"] {
+  flex-direction: column;
+  border-bottom: none;
+  border-right: 1px solid var(--tabs-border);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+/* ============================================
+   Tab Buttons
+   ============================================ */
+[data-component="tabs"]:not([data-style]) .tab-button,
+[data-component="tabs"]:not([data-style]) [role="tab"],
+[data-component="tabs"][data-style="default"] .tab-button,
+[data-component="tabs"][data-style="default"] [role="tab"] {
+  position: relative;
+  padding: var(--tabs-button-padding);
+  background-color: var(--tabs-button-bg);
+  color: var(--tabs-button-text);
+  border: none;
+  border-bottom: var(--tabs-border-width) solid transparent;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--tabs-transition-duration) var(--tabs-transition-timing);
+  white-space: nowrap;
+  outline: none;
+  user-select: none;
+}
+/* Hover state */
+[data-component="tabs"]:not([data-style]) .tab-button:hover,
+[data-component="tabs"]:not([data-style]) [role="tab"]:hover,
+[data-component="tabs"][data-style="default"] .tab-button:hover,
+[data-component="tabs"][data-style="default"] [role="tab"]:hover {
+  background-color: var(--tabs-button-bg-hover);
+  color: var(--tabs-button-text-active);
+}
+/* Active state */
+[data-component="tabs"]:not([data-style]) .tab-button.active,
+[data-component="tabs"]:not([data-style]) [role="tab"][aria-selected="true"],
+[data-component="tabs"][data-style="default"] .tab-button.active,
+[data-component="tabs"][data-style="default"] [role="tab"][aria-selected="true"] {
+  background-color: var(--tabs-button-bg-active);
+  color: var(--tabs-button-text-active);
+  border-bottom-color: var(--tabs-border-active);
+}
+/* Focus state (keyboard navigation) */
+[data-component="tabs"]:not([data-style]) .tab-button:focus-visible,
+[data-component="tabs"]:not([data-style]) [role="tab"]:focus-visible,
+[data-component="tabs"][data-style="default"] .tab-button:focus-visible,
+[data-component="tabs"][data-style="default"] [role="tab"]:focus-visible {
+  outline: 2px solid var(--tabs-focus-ring);
+  outline-offset: 2px;
+  z-index: 1;
+}
+/* Disabled state */
+[data-component="tabs"]:not([data-style]) .tab-button:disabled,
+[data-component="tabs"]:not([data-style]) [role="tab"]:disabled,
+[data-component="tabs"][data-style="default"] .tab-button:disabled,
+[data-component="tabs"][data-style="default"] [role="tab"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+/* Active indicator (optional decorative element) */
+[data-component="tabs"]:not([data-style]) .tab-button.active::after,
+[data-component="tabs"]:not([data-style]) [role="tab"][aria-selected="true"]::after,
+[data-component="tabs"][data-style="default"] .tab-button.active::after,
+[data-component="tabs"][data-style="default"] [role="tab"][aria-selected="true"]::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: var(--tabs-border-width);
+  background-color: var(--tabs-border-active);
+  animation: tabsSlideIn var(--tabs-transition-duration) var(--tabs-transition-timing);
+}
+@keyframes tabsSlideIn {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+/* Vertical tabs button styling */
+[data-component="tabs"]:not([data-style]) [aria-orientation="vertical"] .tab-button,
+[data-component="tabs"]:not([data-style]) [aria-orientation="vertical"] [role="tab"],
+[data-component="tabs"][data-style="default"] [aria-orientation="vertical"] .tab-button,
+[data-component="tabs"][data-style="default"] [aria-orientation="vertical"] [role="tab"] {
+  border-bottom: none;
+  border-right: var(--tabs-border-width) solid transparent;
+  text-align: left;
+}
+[data-component="tabs"]:not([data-style]) [aria-orientation="vertical"] .tab-button.active,
+[data-component="tabs"]:not([data-style]) [aria-orientation="vertical"] [role="tab"][aria-selected="true"],
+[data-component="tabs"][data-style="default"] [aria-orientation="vertical"] .tab-button.active,
+[data-component="tabs"][data-style="default"] [aria-orientation="vertical"] [role="tab"][aria-selected="true"] {
+  border-right-color: var(--tabs-border-active);
+  border-bottom-color: transparent;
+}
+[data-component="tabs"]:not([data-style]) [aria-orientation="vertical"] .tab-button.active::after,
+[data-component="tabs"]:not([data-style]) [aria-orientation="vertical"] [role="tab"][aria-selected="true"]::after,
+[data-component="tabs"][data-style="default"] [aria-orientation="vertical"] .tab-button.active::after,
+[data-component="tabs"][data-style="default"] [aria-orientation="vertical"] [role="tab"][aria-selected="true"]::after {
+  bottom: 0;
+  left: auto;
+  right: -1px;
+  top: 0;
+  width: var(--tabs-border-width);
+  height: auto;
+}
+/* ============================================
+   Tab Content Container
+   ============================================ */
+[data-component="tabs"]:not([data-style]) .tab-content,
+[data-component="tabs"][data-style="default"] .tab-content {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+/* ============================================
+   Tab Panels
+   ============================================ */
+[data-component="tabs"]:not([data-style]) .tab-pane,
+[data-component="tabs"]:not([data-style]) [role="tabpanel"],
+[data-component="tabs"][data-style="default"] .tab-pane,
+[data-component="tabs"][data-style="default"] [role="tabpanel"] {
+  padding: var(--tabs-panel-padding);
+  color: var(--tabs-panel-text);
+  display: none;
+  opacity: 0;
+  animation: tabsFadeOut var(--tabs-transition-duration) var(--tabs-transition-timing);
+}
+/* Active panel */
+[data-component="tabs"]:not([data-style]) .tab-pane.active,
+[data-component="tabs"]:not([data-style]) [role="tabpanel"]:not([hidden]),
+[data-component="tabs"][data-style="default"] .tab-pane.active,
+[data-component="tabs"][data-style="default"] [role="tabpanel"]:not([hidden]) {
+  display: block;
+  opacity: 1;
+  animation: tabsFadeIn var(--tabs-transition-duration) var(--tabs-transition-timing);
+}
+/* Fade animations */
+@keyframes tabsFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes tabsFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+/* Panel focus state */
+[data-component="tabs"]:not([data-style]) .tab-pane:focus,
+[data-component="tabs"]:not([data-style]) [role="tabpanel"]:focus,
+[data-component="tabs"][data-style="default"] .tab-pane:focus,
+[data-component="tabs"][data-style="default"] [role="tabpanel"]:focus {
+  outline: 2px solid var(--tabs-focus-ring);
+  outline-offset: -2px;
+}
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 768px) {
+  [data-component="tabs"]:not([data-style]) .tab-buttons,
+  [data-component="tabs"]:not([data-style]) [role="tablist"],
+  [data-component="tabs"][data-style="default"] .tab-buttons,
+  [data-component="tabs"][data-style="default"] [role="tablist"] {
+    padding: 0.25rem;
+  }
+  [data-component="tabs"]:not([data-style]) .tab-button,
+  [data-component="tabs"]:not([data-style]) [role="tab"],
+  [data-component="tabs"][data-style="default"] .tab-button,
+  [data-component="tabs"][data-style="default"] [role="tab"] {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+  }
+  [data-component="tabs"]:not([data-style]) .tab-pane,
+  [data-component="tabs"]:not([data-style]) [role="tabpanel"],
+  [data-component="tabs"][data-style="default"] .tab-pane,
+  [data-component="tabs"][data-style="default"] [role="tabpanel"] {
+    padding: 1rem;
+  }
+}
+/* ============================================
+   Utility Classes
+   ============================================ */
+/* Centered tabs */
+[data-component="tabs"]:not([data-style]) .tab-buttons.centered,
+[data-component="tabs"]:not([data-style]) [role="tablist"].centered,
+[data-component="tabs"][data-style="default"] .tab-buttons.centered,
+[data-component="tabs"][data-style="default"] [role="tablist"].centered {
+  justify-content: center;
+}
+/* Full width tabs */
+[data-component="tabs"]:not([data-style]) .tab-buttons.full-width,
+[data-component="tabs"]:not([data-style]) [role="tablist"].full-width,
+[data-component="tabs"][data-style="default"] .tab-buttons.full-width,
+[data-component="tabs"][data-style="default"] [role="tablist"].full-width {
+  gap: 0;
+}
+[data-component="tabs"]:not([data-style]) .tab-buttons.full-width .tab-button,
+[data-component="tabs"]:not([data-style]) [role="tablist"].full-width [role="tab"],
+[data-component="tabs"][data-style="default"] .tab-buttons.full-width .tab-button,
+[data-component="tabs"][data-style="default"] [role="tablist"].full-width [role="tab"] {
+  flex: 1;
+  text-align: center;
+}
+/* Compact tabs */
+[data-component="tabs"]:not([data-style]) .tab-buttons.compact .tab-button,
+[data-component="tabs"]:not([data-style]) [role="tablist"].compact [role="tab"],
+[data-component="tabs"][data-style="default"] .tab-buttons.compact .tab-button,
+[data-component="tabs"][data-style="default"] [role="tablist"].compact [role="tab"] {
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+}
+/* Pills style tabs */
+[data-component="tabs"]:not([data-style]) .tab-buttons.pills .tab-button,
+[data-component="tabs"]:not([data-style]) [role="tablist"].pills [role="tab"],
+[data-component="tabs"][data-style="default"] .tab-buttons.pills .tab-button,
+[data-component="tabs"][data-style="default"] [role="tablist"].pills [role="tab"] {
+  border-radius: 9999px;
+  border-bottom: none;
+}
+[data-component="tabs"]:not([data-style]) .tab-buttons.pills .tab-button.active,
+[data-component="tabs"]:not([data-style]) [role="tablist"].pills [role="tab"][aria-selected="true"],
+[data-component="tabs"][data-style="default"] .tab-buttons.pills .tab-button.active,
+[data-component="tabs"][data-style="default"] [role="tablist"].pills [role="tab"][aria-selected="true"] {
+  background-color: var(--tabs-border-active);
+  color: white;
+  border-bottom-color: transparent;
+}
+[data-component="tabs"]:not([data-style]) .tab-buttons.pills .tab-button.active::after,
+[data-component="tabs"]:not([data-style]) [role="tablist"].pills [role="tab"][aria-selected="true"]::after,
+[data-component="tabs"][data-style="default"] .tab-buttons.pills .tab-button.active::after,
+[data-component="tabs"][data-style="default"] [role="tablist"].pills [role="tab"][aria-selected="true"]::after {
+  display: none;
+}
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+  [data-component="tabs"]:not([data-style]) .tab-buttons,
+  [data-component="tabs"]:not([data-style]) [role="tablist"],
+  [data-component="tabs"][data-style="default"] .tab-buttons,
+  [data-component="tabs"][data-style="default"] [role="tablist"] {
+    display: none;
+  }
+  [data-component="tabs"]:not([data-style]) .tab-pane,
+  [data-component="tabs"]:not([data-style]) [role="tabpanel"],
+  [data-component="tabs"][data-style="default"] .tab-pane,
+  [data-component="tabs"][data-style="default"] [role="tabpanel"] {
+    display: block !important;
+    opacity: 1 !important;
+    page-break-inside: avoid;
+  }
+}
+/* ============================================
+   Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  [data-component="tabs"]:not([data-style]) .tab-button,
+  [data-component="tabs"]:not([data-style]) [role="tab"],
+  [data-component="tabs"]:not([data-style]) .tab-pane,
+  [data-component="tabs"]:not([data-style]) [role="tabpanel"],
+  [data-component="tabs"][data-style="default"] .tab-button,
+  [data-component="tabs"][data-style="default"] [role="tab"],
+  [data-component="tabs"][data-style="default"] .tab-pane,
+  [data-component="tabs"][data-style="default"] [role="tabpanel"] {
+    animation: none !important;
+    transition: none !important;
+  }
+}

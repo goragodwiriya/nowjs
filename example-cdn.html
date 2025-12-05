@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Now.js - jsDelivr CDN Example</title>
+
+  <!-- Performance Optimization -->
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <!-- Preload Critical Resources -->
+  <link rel="preload"
+        href="https://cdn.jsdelivr.net/gh/YOUR_USERNAME/now-js@v1.0.0/Now/dist/now.core.min.css"
+        as="style">
+  <link rel="preload"
+        href="https://cdn.jsdelivr.net/gh/YOUR_USERNAME/now-js@v1.0.0/Now/dist/now.core.min.js"
+        as="script">
+
+  <!-- Now.js Core CSS from jsDelivr -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/YOUR_USERNAME/now-js@v1.0.0/Now/dist/now.core.min.css">
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .btn {
+      background: #0066cc;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+
+    .btn:hover {
+      background: #0052a3;
+    }
+
+    .status {
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status.info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 Now.js - jsDelivr CDN Example</h1>
+
+  <div class="card">
+    <h2>Core Framework</h2>
+    <p>Now.js core loaded from jsDelivr CDN</p>
+    <div id="core-status" class="status"></div>
+  </div>
+
+  <div class="card">
+    <h2>Optional Modules (Lazy Loading)</h2>
+    <p>Click buttons to load modules on-demand from CDN:</p>
+
+    <button class="btn" onclick="loadTableModule()">Load Table Module</button>
+    <button class="btn" onclick="loadMediaModule()">Load Media Module</button>
+    <button class="btn" onclick="loadGraphModule()">Load Graph Module</button>
+    <button class="btn" onclick="loadSortableModule()">Load Sortable Module</button>
+
+    <div id="module-status" class="status"></div>
+  </div>
+
+  <div class="card">
+    <h2>Framework Info</h2>
+    <pre id="framework-info"></pre>
+  </div>
+
+  <!-- Now.js Core from jsDelivr -->
+  <script src="https://cdn.jsdelivr.net/gh/YOUR_USERNAME/now-js@v1.0.0/Now/dist/now.core.min.js"></script>
+
+  <script>
+    // Initialize Now.js
+    Now.init({
+      environment: 'production',
+      debug: true,
+      i18n: {
+        enabled: true,
+        defaultLanguage: 'th'
+      }
+    });
+
+    // Show core status
+    const coreStatus = document.getElementById('core-status');
+    coreStatus.textContent = '✅ Core framework loaded successfully from jsDelivr CDN';
+    coreStatus.className = 'status success';
+    coreStatus.style.display = 'block';
+
+    // Display framework info
+    const info = document.getElementById('framework-info');
+    info.textContent = JSON.stringify({
+      version: Now.version || '1.0.0',
+      environment: Now.config.environment,
+      managers: Object.keys(Now.managers || {}),
+      loadedFrom: 'jsDelivr CDN'
+    }, null, 2);
+
+    // Helper function to load module
+    async function loadModule(name, url, cssUrl = null) {
+      const status = document.getElementById('module-status');
+      status.textContent = `⏳ Loading ${name} module...`;
+      status.className = 'status info';
+      status.style.display = 'block';
+
+      try {
+        // Load CSS if provided
+        if (cssUrl) {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = cssUrl;
+          document.head.appendChild(link);
+        }
+
+        // Load JS
+        const script = document.createElement('script');
+        script.src = url;
+        await new Promise((resolve, reject) => {
+          script.onload = resolve;
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+
+        status.textContent = `✅ ${name} module loaded successfully!`;
+        status.className = 'status success';
+
+        console.log(`${name} module loaded:`, window[name + 'Manager'] || window[name]);
+      } catch (error) {
+        status.textContent = `❌ Failed to load ${name} module: ${error.message}`;
+        status.className = 'status error';
+        console.error(error);
+      }
+    }
+
+    // Load Table Module
+    async function loadTableModule() {
+      await loadModule(
+        'Table',
+        'https://cdn.jsdelivr.net/gh/YOUR_USERNAME/now-js@v1.0.0/Now/dist/now.table.min.js'
+      );
+    }
+
+    // Load Media Module
+    async function loadMediaModule() {
+      await loadModule(
+        'Media',
+        'https://cdn.jsdelivr.net/gh/YOUR_USERNAME/now-js@v1.0.0/Now/dist/now.media.min.js',
+        'https://cdn.jsdelivr.net/gh/YOUR_USERNAME/now-js@v1.0.0/Now/dist/now.media.min.css'
+      );
+    }
+
+    // Load Graph Module
+    async function loadGraphModule() {
+      await loadModule(
+        'Graph',
+        'https://cdn.jsdelivr.net/gh/YOUR_USERNAME/now-js@v1.0.0/Now/dist/now.graph.min.js'
+      );
+    }
+
+    // Load Sortable Module
+    async function loadSortableModule() {
+      await loadModule(
+        'Sortable',
+        'https://cdn.jsdelivr.net/gh/YOUR_USERNAME/now-js@v1.0.0/Now/dist/now.sortable.min.js'
+      );
+    }
+  </script>
+</body>
+</html>
