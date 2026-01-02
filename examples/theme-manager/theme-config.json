@@ -1,0 +1,9 @@
+{
+  "variables": {
+    "--color-primary": "#6366f1",
+    "--color-warning": "#f59e0b",
+    "--color-success": "#22c55e",
+    "--color-error": "#ef4444",
+    "--hero-bg": "images/hero.jpg"
+  }
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Feed - Now.js Example</title>
+  <meta name="description" content="Social media feed with infinite scroll, media upload, and real-time updates using Now.js declarative patterns">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>Social Feed</h1>
+        <p class="text-gradient" data-i18n>Infinite scroll, media upload, and real-time updates with declarative Now.js patterns</p>
+      </div>
+    </section>
+
+    <!-- Feed Component -->
+    <article class="container feed-container" data-component="feed">
+
+      <!-- Create Post Section -->
+      <section class="create-post" data-enter="fade">
+        <div class="create-post-header">
+          <img src="https://i.pravatar.cc/150?img=5" alt="Your avatar" class="avatar">
+          <span data-i18n>What's on your mind?</span>
+        </div>
+
+        <form data-form="create-post" data-validate="true" data-reset="true" data-csrf="false">
+          <div class="form-group">
+            <textarea name="content" data-model="newPost.content" placeholder="Share your thoughts..." rows="3" required minlength="1" maxlength="500"></textarea>
+            <div class="char-counter">
+              <span data-text="newPost.content.length || 0"></span>/500
+            </div>
+          </div>
+
+          <!-- Media Upload -->
+          <div class="media-upload-section">
+            <input type="file" id="post-media" name="media" multiple data-preview="true" data-drag-drop="true" data-allow-remove-existing="true" accept="image/*,video/*" placeholder="Add photos or videos">
+          </div>
+
+          <div class="create-post-actions">
+            <div class="media-buttons">
+              <label for="post-media" class="btn outline icon-image" title="Add Photo">
+                <span data-i18n>Photo</span>
+              </label>
+              <button type="button" class="btn outline icon-video" disabled title="Add Video">
+                <span data-i18n>Video</span>
+              </button>
+              <button type="button" class="btn outline icon-smile" disabled title="Add Emoji">
+                <span data-i18n>Emoji</span>
+              </button>
+            </div>
+            <button type="submit" class="btn btn-primary icon-send" data-on="click:createPost">
+              <span data-i18n>Post</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Feed Stats -->
+      <div class="feed-stats" data-enter="fade" data-enter-delay="100">
+        <span><strong data-text="posts.length"></strong> <span data-i18n>posts loaded</span></span>
+        <span class="separator">•</span>
+        <span data-text="totalLikes"></span> <span data-i18n>total likes</span>
+      </div>
+
+      <!-- Posts Feed -->
+      <section class="feed-posts">
+        <div data-for="post in posts" class="posts-list">
+          <template>
+            <article class="post-card" data-enter="fade-up" data-enter-stagger="50">
+              <!-- Post Header -->
+              <header class="post-header">
+                <img class="avatar" data-attr="src:post.user.avatar" alt="" onerror="this.src='https://ui-avatars.com/api/?name=User&background=6366f1&color=fff'">
+                <div class="post-meta">
+                  <strong data-text="post.content"></strong>
+                  <span class="handle" data-text="post.user.handle"></span>
+                  <span class="separator">•</span>
+                  <time data-text="post.timeAgo"></time>
+                </div>
+                <button class="btn-icon icon-more" aria-label="More options"></button>
+              </header>
+
+              <!-- Post Content -->
+              <div class="post-content">
+                <p data-text="post.content"></p>
+              </div>
+
+              <!-- Post Media Gallery -->
+              <div class="post-media" data-if="post.media && post.media.length > 0">
+                <div data-for="media of post.media" class="media-grid" data-attr="class:post.mediaGridClass">
+                  <template>
+                    <div class="media-item">
+                      <img data-attr="src:media.url" data-if="media.type === 'image'" alt="Post image" loading="lazy" onerror="this.parentElement.style.display='none'">
+                      <video data-attr="src:media.url" data-if="media.type === 'video'" controls preload="metadata"></video>
+                    </div>
+                  </template>
+                </div>
+              </div>
+
+              <!-- Post Actions -->
+              <footer class="post-actions">
+                <button class="action-btn" data-on="click:toggleLike(post.id)" data-class="liked:post.liked" data-attr="aria-pressed:post.liked">
+                  <span class="icon-heart"></span>
+                  <span data-text="post.likes"></span>
+                </button>
+                <button class="action-btn" data-on="click:showComments(post.id)">
+                  <span class="icon-comment"></span>
+                  <span data-text="post.comments"></span>
+                </button>
+                <button class="action-btn" data-on="click:sharePost(post.id)">
+                  <span class="icon-share"></span>
+                  <span data-i18n>Share</span>
+                </button>
+                <button class="action-btn" data-on="click:bookmarkPost(post.id)" data-class="bookmarked:post.bookmarked">
+                  <span class="icon-bookmark"></span>
+                </button>
+              </footer>
+            </article>
+          </template>
+        </div>
+      </section>
+
+      <!-- Infinite Scroll Trigger -->
+      <div id="load-more-trigger" class="load-more" data-scroll-track data-on-enter="loadMorePosts">
+        <div class="spinner" style="display: none;"></div>
+        <p class="load-more-text" data-i18n>Scroll for more...</p>
+        <p class="end-of-feed" style="display: none;">
+          <span class="icon-check-circle"></span>
+          <span data-i18n>You're all caught up!</span>
+        </p>
+      </div>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

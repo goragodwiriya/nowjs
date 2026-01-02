@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation - Now.js Example</title>
+  <meta name="description" content="Form validation example with Now.js - Coming Soon">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>Typography</h1>
+        <p class="text-gradient" data-i18n>Beautiful and modern buttons for Now.js Framework.</p>
+      </div>
+    </section>
+
+    <article class="container content">
+      <section class="section">
+        <h2>Heading Levels</h2>
+        <div class="demo-section">
+          <div class="flex bottom gap">
+            <h1 style="margin-bottom: 0;">H1 Heading</h1> <span class=comment>ไม่สามารถนำไปใช้ได้ (ถูกใช้งานโดย Theme)</span>
+          </div>
+          <div class="flex bottom gap">
+            <h2 style="margin-bottom: 0;">H2 Heading</h2> <span class=comment>ไม่สามารถนำไปใช้ได้ (ถูกใช้งานในส่วนของ Header)</span>
+          </div>
+          <div class="flex bottom gap">
+            <h3 style="margin-bottom: 0;">H3 Heading</h3> <span class=comment>สำหรับใช้เป็นหัวข้อของฟอร์มหรือตาราง</span>
+          </div>
+          <h4 style="margin-bottom: 0;">H4 Heading</h4>
+          <h5 style="margin-bottom: 0;">H5 Heading</h5>
+          <h6 style="margin-bottom: 0;">H6 Heading</h6>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Paragraphs</h2>
+        <div class="demo-section">
+          <p>นี่คือย่อหน้าที่เกิดจาก tag &lt;p&gt;....&lt;/p&gt; คุณสามารถใส่เนื้อหาต่างๆได้ภายใต้ tag นี้</p>
+          <p class="right">จัดตัวอักษรชิดขวาด้วย &lt;p class=right&gt;...&lt;/p&gt;</p>
+          <p class="center">จัดตัวอักษรกึ่งกลางด้วย &lt;p class=center&gt;...&lt;/p&gt;</p>
+          <p class="left">จัดตัวอักษรชิดซ้ายด้วย &lt;p class=left&gt;...&lt;/p&gt;</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Code/Blockquote</h2>
+        <div class="demo-section">
+          <code>ใช้สำหรับระบุส่วนที่เป็นโค้ด โดยอยู่ภายใต้ tag &lt;code&gt;....&lt;/code&gt;</code>
+          <blockquote> ใช้สำหรับการอ้างอิงไปยังคำพูด &lt;blockquote&gt;...&lt;blockquote&gt; </blockquote>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Color</h2>
+        <div class="demo-section">
+          <p class="color-green">สีสำหรับข้อความ &lt;p class=color-green&gt;...&lt;/p&gt;</p>
+          <p class="color-black">สีสำหรับข้อความ &lt;p class=color-black&gt;...&lt;/p&gt;</p>
+          <p class="color-blue">สีสำหรับข้อความ &lt;p class=color-blue&gt;...&lt;/p&gt;</p>
+          <p class="color-brown">สีสำหรับข้อความ &lt;p class=color-brown&gt;...&lt;/p&gt;</p>
+          <p class="color-cyan">สีสำหรับข้อความ &lt;p class=color-cyan&gt;...&lt;/p&gt;</p>
+          <p class="color-dark">สีสำหรับข้อความ &lt;p class=color-dark&gt;...&lt;/p&gt;</p>
+          <p class="color-gold">สีสำหรับข้อความ &lt;p class=color-gold&gt;...&lt;/p&gt;</p>
+          <p class="color-gray">สีสำหรับข้อความ &lt;p class=color-gray&gt;...&lt;/p&gt;</p>
+          <p class="color-magenta">สีสำหรับข้อความ &lt;p class=color-magenta&gt;...&lt;/p&gt;</p>
+          <p class="color-orange">สีสำหรับข้อความ &lt;p class=color-orange&gt;...&lt;/p&gt;</p>
+          <p class="color-pink">สีสำหรับข้อความ &lt;p class=color-pink&gt;...&lt;/p&gt;</p>
+          <p class="color-purple">สีสำหรับข้อความ &lt;p class=color-purple&gt;...&lt;/p&gt;</p>
+          <p class="color-red">สีสำหรับข้อความ &lt;p class=color-red&gt;...&lt;/p&gt;</p>
+          <p class="color-rosy">สีสำหรับข้อความ &lt;p class=color-rosy&gt;...&lt;/p&gt;</p>
+          <p class="color-silver">สีสำหรับข้อความ &lt;p class=color-silver&gt;...&lt;/p&gt;</p>
+          <p class="color-white bg-black">สีสำหรับข้อความ &lt;p class=color-white&gt;...&lt;/p&gt;</p>
+          <p class="comment">สีสำหรับส่วนที่ใช้เป็นหมายเหตุ &lt;p class=comment&gt;...&lt;/p&gt; จะมีขนาดตัวอักษรเล็กกว่าปกติเล็กน้อย</p>
+          <p class="comment">สีพื้นหลังใช้เป็นตัวอย่างให้สามารถเห็นตัวอักษรเท่านั้น</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Backgound Color</h2>
+        <div class="demo-section">
+          <p class="bg-black color-white">สีพื้นหลัง &lt;p class=bg-black&gt;...&lt;/p&gt;</p>
+          <p class="bg-blue color-white">สีพื้นหลัง &lt;p class=bg-blue&gt;...&lt;/p&gt;</p>
+          <p class="bg-brown color-white">สีพื้นหลัง &lt;p class=bg-brown&gt;...&lt;/p&gt;</p>
+          <p class="bg-cyan color-white">สีพื้นหลัง &lt;p class=bg-cyan&gt;...&lt;/p&gt;</p>
+          <p class="bg-dark color-white">สีพื้นหลัง &lt;p class=bg-dark&gt;...&lt;/p&gt;</p>
+          <p class="bg-gold color-white">สีพื้นหลัง &lt;p class=bg-gold&gt;...&lt;/p&gt;</p>
+          <p class="bg-gray color-white">สีพื้นหลัง &lt;p class=bg-gray&gt;...&lt;/p&gt;</p>
+          <p class="bg-green color-white">สีพื้นหลัง &lt;p class=bg-green&gt;...&lt;/p&gt;</p>
+          <p class="bg-light color-black">สีพื้นหลัง &lt;p class=bg-light&gt;...&lt;/p&gt;</p>
+          <p class="bg-magenta color-white">สีพื้นหลัง &lt;p class=bg-magenta&gt;...&lt;/p&gt;</p>
+          <p class="bg-orange color-white">สีพื้นหลัง &lt;p class=bg-orange&gt;...&lt;/p&gt;</p>
+          <p class="bg-pink color-white">สีพื้นหลัง &lt;p class=bg-pink&gt;...&lt;/p&gt;</p>
+          <p class="bg-purple color-white">สีพื้นหลัง &lt;p class=bg-purple&gt;...&lt;/p&gt;</p>
+          <p class="bg-red color-white">สีพื้นหลัง &lt;p class=bg-red&gt;...&lt;/p&gt;</p>
+          <p class="bg-rosy color-white">สีพื้นหลัง &lt;p class=bg-rosy&gt;...&lt;/p&gt;</p>
+          <p class="bg-white color-black">สีพื้นหลัง &lt;p class=bg-white&gt;...&lt;/p&gt;</p>
+          <p class="comment">สีตัวอักษรใช้เป็นตัวอย่างให้สามารถเห็นตัวอักษรเท่านั้น</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Inline Text</h2>
+        <div class="demo-section">
+          <p>class status0-status10 For making highlights, messages or showing various status
+            <mark class="status0">.status0</mark>
+            <mark class="status1">.status1</mark>
+            <mark class="status2">.status2</mark>
+            <mark class="status3">.status3</mark>
+            <mark class="status4">.status4</mark>
+            <mark class="status5">.status5</mark>
+            <mark class="status6">.status6</mark>
+            <mark class="status7">.status7</mark>
+            <mark class="status8">.status8</mark>
+            <mark class="status9">.status9</mark>
+            <mark class="status10">.status10</mark>
+            <mark class="status11">.status11</mark>
+          </p>
+          <p>Badgets for showing status or number
+            <span class="badge-success" data-badge="10">badge-success</span>
+            <span class="badge-error" data-badge="-10">badge-error</span>
+            <span class="badge-warning" data-badge="+5">badge-warning</span>
+            <span class="badge-info" data-badge="1">badge-info</span>
+          </p>
+          <p>Tag
+            <em>&lt;em&gt;</em> used for emphasizing important messages
+          </p>
+          <p>Tag
+            <strong>&lt;strong&gt;</strong> and
+            <b>&lt;b&gt;</b> and
+            <b>&lt;dt&gt;</b> display as bold
+          </p>
+          <p>Tag
+            <i>&lt;i&gt;</i> and
+            <dfn>&lt;dfn&gt;</dfn> display as italic
+          </p>
+          <p>Tag
+            <ins>&lt;ins&gt;</ins> and
+            <u>&lt;u&gt;</u> display as underline
+          </p>
+          <p>Tag
+            <del>&lt;del&gt;</del> display as strikethrough
+          </p>
+          <p>Tag
+            <acronym>&lt;acronym&gt;</acronym> and
+            <abbr>&lt;abbr&gt;</abbr>
+          </p>
+          <p>Tag
+            <sub>&lt;sub&gt;</sub> and
+            <sup>&lt;sup&gt;</sup> display as subscript and superscript
+          </p>
+          <p>Tag
+            <small>&lt;small&gt;</small> and
+            <big>&lt;big&gt;</big> for adjusting the font size
+          </p>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+  <script src="main.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</body>
+
+</html>

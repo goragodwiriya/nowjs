@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hierarchical Address - Now.js Example</title>
+  <meta name="description" content="Thai address autocomplete with hierarchical selection (Province → District → Subdistrict) using Now.js HierarchicalTextFactory">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>Hierarchical Address</h1>
+        <p class="text-gradient" data-i18n>Thai address autocomplete with cascading selection (Province → District → Subdistrict)</p>
+      </div>
+    </section>
+
+    <article class="container content">
+
+      <!-- Features Overview -->
+      <section class="section">
+        <h2 class="icon-info">Features Overview</h2>
+        <p>HierarchicalTextFactory provides a powerful cascading address selection system for Thai addresses:</p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>🔗 Cascading Selection</h3>
+            <p>Select Province first, then District options update automatically</p>
+            <code>data-hierarchy="province"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>🔍 Reverse Search</h3>
+            <p>Type subdistrict name to auto-fill province and district</p>
+            <code>Smart auto-completion</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>📦 Data Loading</h3>
+            <p>Load address data from URL or global variable</p>
+            <code>data-source="address.json"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>⌨️ Keyboard Support</h3>
+            <p>Full keyboard navigation with arrow keys</p>
+            <code>Arrow keys, Enter, Escape</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>📱 Mobile Friendly</h3>
+            <p>Touch-friendly dropdown with smooth scrolling</p>
+            <code>Responsive design</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>🏷️ Hidden Values</h3>
+            <p>Store address codes in hidden inputs for form submission</p>
+            <code>name="province" → hidden input</code>
+          </div>
+        </div>
+      </section>
+
+      <!-- API Reference -->
+      <section class="section">
+        <h2 class="icon-code">API Reference</h2>
+        <p>HierarchicalTextFactory attributes:</p>
+
+        <div class="api-example">
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Type</th>
+                <th>Values</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>data-hierarchy</code></td>
+                <td>string</td>
+                <td>province, district, subdistrict</td>
+                <td>Required. Defines the level in hierarchy</td>
+              </tr>
+              <tr>
+                <td><code>data-source</code></td>
+                <td>string</td>
+                <td>URL or variable name</td>
+                <td>Data source (only needed on first field)</td>
+              </tr>
+              <tr>
+                <td><code>name</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>Form field name (creates hidden input)</td>
+              </tr>
+              <tr>
+                <td><code>placeholder</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>Placeholder text</td>
+              </tr>
+              <tr>
+                <td><code>required</code></td>
+                <td>boolean</td>
+                <td>-</td>
+                <td>Make field required</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Data Format</h3>
+        <p>The hierarchical data should be structured as nested objects:</p>
+        <pre><code data-component="syntaxhighlighter" data-language="javascript">
+            {
+            "กรุงเทพมหานคร": {
+            "เขตพระนคร": {
+            "100101": "แขวงพระบรมมหาราชวัง",
+            "100102": "แขวงวังบูรพาภิรมย์",
+            "100103": "แขวงวัดราชบพิธ"
+            },
+            "เขตดุสิต": {
+            "100201": "แขวงดุสิต",
+            "100202": "แขวงวชิรพยาบาล"
+            }
+            },
+            "นนทบุรี": {
+            "อำเภอเมืองนนทบุรี": {
+            "120101": "ตำบลสวนใหญ่",
+            "120102": "ตำบลตลาดขวัญ"
+            }
+            }
+            }
+          </code></pre>
+      </section>
+
+      <!-- Code Examples -->
+      <section class="section">
+        <h2 class="icon-code">Code Examples</h2>
+
+        <h3>Example 1: Basic Usage</h3>
+        <p>Three connected input fields for Thai address (form must have <code>data-form</code> attribute):</p>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+            &lt;form data-form="myForm" data-validate="false" data-csrf="false"&gt;
+            &lt;!-- Province (first level - includes data source) --&gt;
+            &lt;input type="text" name="province"
+            data-hierarchy="province"
+            data-source="address.json"
+            placeholder="จังหวัด"
+            autocomplete="off"&gt;
+
+            &lt;!-- District (second level) --&gt;
+            &lt;input type="text" name="district"
+            data-hierarchy="district"
+            placeholder="อำเภอ/เขต"
+            autocomplete="off"&gt;
+
+            &lt;!-- Subdistrict (third level) --&gt;
+            &lt;input type="text" name="subdistrict"
+            data-hierarchy="subdistrict"
+            placeholder="ตำบล/แขวง"
+            autocomplete="off"&gt;
+            &lt;/form&gt;
+          </code></pre>
+
+        <h3>Example 2: With Form Submission</h3>
+        <p>Complete form with AJAX submission:</p>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+            &lt;form data-form="addressForm"
+            data-validate="true"
+            data-csrf="false"
+            data-ajax-submit="true"
+            action="save-address.php"&gt;
+            &lt;div&gt;
+            &lt;label&gt;Province&lt;/label&gt;
+            &lt;input type="text" name="province" required
+            data-hierarchy="province"
+            data-source="address.json"
+            placeholder="Select province..."
+            autocomplete="off"&gt;
+            &lt;/div&gt;
+
+            &lt;div&gt;
+            &lt;label&gt;District&lt;/label&gt;
+            &lt;input type="text" name="district" required
+            data-hierarchy="district"
+            placeholder="Select district..."
+            autocomplete="off"&gt;
+            &lt;/div&gt;
+
+            &lt;div&gt;
+            &lt;label&gt;Subdistrict&lt;/label&gt;
+            &lt;input type="text" name="subdistrict" required
+            data-hierarchy="subdistrict"
+            placeholder="Select subdistrict..."
+            autocomplete="off"&gt;
+            &lt;/div&gt;
+
+            &lt;button type="submit"&gt;Submit&lt;/button&gt;
+            &lt;/form&gt;
+          </code></pre>
+
+        <h3>Example 3: Loading from Global Variable</h3>
+        <p>Use pre-loaded data from a global variable:</p>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+            &lt;script&gt;
+            // Pre-load address data
+            window.thaiAddressData = {
+            "กรุงเทพมหานคร": {
+            "เขตพระนคร": {
+            "100101": "แขวงพระบรมมหาราชวัง"
+            }
+            }
+            };
+            &lt;/script&gt;
+
+            &lt;form data-form="myForm" data-csrf="false"&gt;
+            &lt;input type="text" name="province"
+            data-hierarchy="province"
+            data-source="thaiAddressData"
+            placeholder="จังหวัด"
+            autocomplete="off"&gt;
+            &lt;/form&gt;
+          </code></pre>
+      </section>
+
+      <!-- Live Demo Section -->
+      <section class="section">
+        <h2 class="icon-published1">Live Demo</h2>
+        <p>Try the hierarchical address selection:</p>
+
+        <!-- Demo 1: Basic Hierarchical Address -->
+        <div class="demo-section">
+          <h3>Demo 1: Thai Address Selection</h3>
+          <p>Select province first, then district options will update. You can also type in the subdistrict field to search and auto-fill all fields.</p>
+
+          <form method="POST" action="save-address.php" data-form="addressForm" data-validate="true" data-csrf="false" data-reset="false" data-ajax-submit="true">
+            <fieldset>
+              <legend>
+                <h4>Select Address</h4>
+              </legend>
+              <div class="form-group">
+                <div class="width33">
+                  <label for="addr_province">Province (จังหวัด)</label>
+                  <span class="form-control icon-location">
+                    <input type="text" id="addr_province" name="province" required data-hierarchy="province" data-source="api/v1/address/all" placeholder="เลือกหรือพิมพ์ชื่อจังหวัด..." autocomplete="off">
+                  </span>
+                  <div class="comment">Click or type to search provinces</div>
+                </div>
+                <div class="width33">
+                  <label for="addr_amphur">District (อำเภอ/เขต)</label>
+                  <span class="form-control icon-location">
+                    <input type="text" id="addr_amphur" name="amphur" required data-hierarchy="amphur" placeholder="เลือกหรือพิมพ์ชื่ออำเภอ..." autocomplete="off">
+                  </span>
+                  <div class="comment">Select province first</div>
+                </div>
+                <div class="width33">
+                  <label for="addr_district">Subdistrict (ตำบล/แขวง)</label>
+                  <span class="form-control icon-location">
+                    <input type="text" id="addr_district" name="district" required data-hierarchy="district" placeholder="เลือกหรือพิมพ์ชื่อตำบล..." autocomplete="off">
+                  </span>
+                  <div class="comment">Type here to reverse search!</div>
+                </div>
+              </div>
+              <div>
+                <label for="addr_zipcode">Zipcode (รหัสไปรษณีย์)</label>
+                <span class="form-control icon-mail">
+                  <input type="number" id="addr_zipcode" name="zipcode" placeholder="รหัสไปรษณีย์" maxlength="5">
+                </span>
+              </div>
+              <div>
+                <label for="addr_detail">Address Detail (รายละเอียดที่อยู่)</label>
+                <span class="form-control icon-home">
+                  <textarea id="addr_detail" name="address_detail" rows="3" placeholder="บ้านเลขที่ ซอย ถนน..."></textarea>
+                </span>
+              </div>
+            </fieldset>
+            <fieldset class="submit right">
+              <button type="submit" class="btn btn-primary large icon-save">Save Address</button>
+            </fieldset>
+          </form>
+          <div id="address-output" class="output-section"></div>
+        </div>
+      </section>
+
+      <!-- How It Works -->
+      <section class="section">
+        <h2 class="icon-tip">How It Works</h2>
+
+        <div class="how-it-works">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Form Enhancement</h4>
+              <p>FormManager enhances all forms with <code>data-form</code> attribute and registers inputs with ElementManager.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Register Hierarchical Inputs</h4>
+              <p>Inputs with <code>data-hierarchy</code> attribute are automatically registered with HierarchicalTextFactory, grouped by form.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Load Data</h4>
+              <p>Data is loaded from <code>data-source</code> (URL or global variable) on the first hierarchical input. Data is shared across all groups.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h4>Cascading Updates</h4>
+              <p>When a selection is made, lower level fields are cleared. On focus, relevant options are populated based on parent selections.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <h4>Reverse Search</h4>
+              <p>Typing in the subdistrict field (without province/district selected) searches all levels and auto-fills when a unique match is found.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Keyboard Navigation -->
+      <section class="section">
+        <h2 class="icon-keyboard">Keyboard Navigation</h2>
+        <p>Full keyboard support for accessibility:</p>
+
+        <div class="keyboard-guide">
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><kbd>↓</kbd> Arrow Down</td>
+                <td>Move to next option in dropdown</td>
+              </tr>
+              <tr>
+                <td><kbd>↑</kbd> Arrow Up</td>
+                <td>Move to previous option in dropdown</td>
+              </tr>
+              <tr>
+                <td><kbd>Enter</kbd></td>
+                <td>Select highlighted option</td>
+              </tr>
+              <tr>
+                <td><kbd>Escape</kbd></td>
+                <td>Close dropdown</td>
+              </tr>
+              <tr>
+                <td><kbd>Tab</kbd></td>
+                <td>Move to next field (closes dropdown)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

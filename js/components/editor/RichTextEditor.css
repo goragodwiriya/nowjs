@@ -1,0 +1,743 @@
+/**
+ * RichTextEditor Styles
+ * Modern, clean styling with CSS variables for theming
+ *
+ * @author Goragod Wiriya
+ * @version 1.0
+ */
+/* ========================================
+   CSS Variables (Theme Tokens)
+   ======================================== */
+:root {
+  /* Colors */
+  --rte-primary-color: #4285f4;
+  --rte-primary-hover: #3367d6;
+  --rte-primary-light: #e3f2fd;
+  --rte-border-color: #ddd;
+  --rte-border-radius: 8px;
+  --rte-bg-color: #fff;
+  --rte-bg-secondary: #f9f9f9;
+  --rte-bg-hover: #f0f0f0;
+  --rte-text-color: #333;
+  --rte-text-secondary: #666;
+  --rte-text-muted: #999;
+  --rte-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --rte-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.15);
+  /* Toolbar */
+  --rte-toolbar-bg: #f9f9f9;
+  --rte-toolbar-border: #e0e0e0;
+  --rte-toolbar-btn-size: 32px;
+  --rte-toolbar-gap: 4px;
+  /* Button */
+  --rte-btn-hover-bg: #e8e8e8;
+  --rte-btn-active-bg: #e3f2fd;
+  --rte-btn-active-color: #4285f4;
+  /* Dialog */
+  --rte-dialog-overlay-bg: rgba(0, 0, 0, 0.5);
+  --rte-dialog-bg: #fff;
+  --rte-dialog-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  /* Content */
+  --rte-content-padding: 16px;
+  --rte-content-font-size: 16px;
+  --rte-content-line-height: 1.6;
+  /* Notification */
+  --rte-notification-success: #4caf50;
+  --rte-notification-error: #f44336;
+  --rte-notification-warning: #ff9800;
+  --rte-notification-info: #2196f3;
+  /* Transition */
+  --rte-transition: 0.2s ease;
+}
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --rte-bg-color: #1e1e1e;
+    --rte-bg-secondary: #2d2d2d;
+    --rte-bg-hover: #3d3d3d;
+    --rte-text-color: #e0e0e0;
+    --rte-text-secondary: #aaa;
+    --rte-text-muted: #777;
+    --rte-border-color: #444;
+    --rte-toolbar-bg: #2d2d2d;
+    --rte-toolbar-border: #444;
+    --rte-btn-hover-bg: #3d3d3d;
+    --rte-btn-active-bg: #1e3a5f;
+    --rte-dialog-bg: #2d2d2d;
+  }
+}
+/* ========================================
+   Container
+   ======================================== */
+.rte-container {
+  display: flex;
+  flex-direction: column;
+  background: var(--rte-bg-color);
+  border: 1px solid var(--rte-border-color);
+  border-radius: var(--rte-border-radius);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  color: var(--rte-text-color);
+}
+.rte-container.readonly {
+  opacity: 0.7;
+  pointer-events: none;
+}
+.rte-container.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  border-radius: 0;
+  width: 100%;
+  height: 100%;
+}
+body.rte-fullscreen-active {
+  overflow: hidden;
+}
+/* ========================================
+   Toolbar
+   ======================================== */
+.rte-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rte-toolbar-gap);
+  padding: 8px;
+  background: var(--rte-toolbar-bg);
+  border-bottom: 1px solid var(--rte-toolbar-border);
+  user-select: none;
+}
+.rte-toolbar.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.rte-toolbar-group {
+  display: flex;
+  gap: var(--rte-toolbar-gap);
+  align-items: center;
+}
+.rte-toolbar-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--rte-border-color);
+  margin: 0 4px;
+}
+/* Toolbar Button */
+.rte-toolbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--rte-toolbar-btn-size);
+  height: var(--rte-toolbar-btn-size);
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--rte-text-color);
+  cursor: pointer;
+  transition: all var(--rte-transition);
+}
+.rte-toolbar-btn:hover:not(:disabled) {
+  background: var(--rte-btn-hover-bg);
+}
+.rte-toolbar-btn.active {
+  background: var(--rte-btn-active-bg);
+  color: var(--rte-btn-active-color);
+}
+.rte-toolbar-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.rte-toolbar-btn .rte-icon {
+  font-size: 16px;
+}
+/* Dropdown */
+.rte-toolbar-dropdown {
+  position: relative;
+}
+.rte-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  width: auto;
+  min-width: var(--rte-toolbar-btn-size);
+}
+.rte-dropdown-arrow {
+  font-size: 8px;
+  opacity: 0.6;
+}
+.rte-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  min-width: 158px;
+  padding: 4px 0;
+  background: var(--rte-bg-color);
+  border: 1px solid var(--rte-border-color);
+  border-radius: 6px;
+  box-shadow: var(--rte-shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all var(--rte-transition);
+}
+.rte-toolbar-dropdown.open .rte-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(4px);
+}
+.rte-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  color: var(--rte-text-color);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--rte-transition);
+}
+.rte-dropdown-item:hover {
+  background: var(--rte-bg-hover);
+}
+.rte-dropdown-item-label {
+  flex: 1;
+}
+/* Color Picker */
+.rte-color-picker {
+  padding: 8px;
+}
+.rte-color-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.rte-color-btn {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--rte-border-color);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: transform var(--rte-transition);
+}
+.rte-color-btn:hover {
+  transform: scale(1.2);
+  z-index: 1;
+}
+.rte-color-custom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--rte-border-color);
+}
+.rte-color-input {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid var(--rte-border-color);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.rte-color-clear {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  border: 1px solid var(--rte-border-color);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--rte-text-secondary);
+  cursor: pointer;
+}
+.rte-color-clear:hover {
+  background: var(--rte-bg-hover);
+}
+/* ========================================
+   Content Area
+   ======================================== */
+.rte-content-wrapper {
+  position: relative;
+  flex: 1;
+  overflow: auto;
+}
+.rte-content-wrapper.focused {
+  outline: none;
+}
+.rte-content {
+  min-height: 200px;
+  padding: var(--rte-content-padding);
+  font-size: var(--rte-content-font-size);
+  line-height: var(--rte-content-line-height);
+  color: var(--rte-text-color);
+  outline: none;
+}
+.rte-content:empty::before {
+  content: attr(data-placeholder);
+  color: var(--rte-text-muted);
+  pointer-events: none;
+}
+.rte-placeholder {
+  position: absolute;
+  top: var(--rte-content-padding);
+  left: var(--rte-content-padding);
+  color: var(--rte-text-muted);
+  pointer-events: none;
+}
+/* Content Styles */
+.rte-content h1,
+.rte-content h2,
+.rte-content h3,
+.rte-content h4,
+.rte-content h5,
+.rte-content h6 {
+  margin: 0.5em 0;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.rte-content h1 {
+  font-size: 2em;
+}
+.rte-content h2 {
+  font-size: 1.5em;
+}
+.rte-content h3 {
+  font-size: 1.17em;
+}
+.rte-content h4 {
+  font-size: 1em;
+}
+.rte-content h5 {
+  font-size: 0.83em;
+}
+.rte-content h6 {
+  font-size: 0.67em;
+}
+.rte-content p {
+  margin: 0 0 1em 0;
+}
+.rte-content ul,
+.rte-content ol {
+  margin: 0 0 1em 0;
+  padding-left: 2em;
+}
+.rte-content li {
+  margin: 0.25em 0;
+}
+.rte-content blockquote {
+  margin: 1em 0;
+  padding: 0.5em 1em;
+  border-left: 4px solid var(--rte-primary-color);
+  background: var(--rte-bg-secondary);
+  color: var(--rte-text-secondary);
+}
+.rte-content pre {
+  margin: 1em 0;
+  padding: 1em;
+  background: #282c34;
+  color: #abb2bf;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+.rte-content code {
+  padding: 0.2em 0.4em;
+  background: var(--rte-bg-secondary);
+  border-radius: 4px;
+  font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+  font-size: 0.9em;
+}
+.rte-content pre code {
+  padding: 0;
+  background: transparent;
+}
+.rte-content a {
+  color: var(--rte-primary-color);
+  text-decoration: underline;
+}
+.rte-content a:hover {
+  color: var(--rte-primary-hover);
+}
+.rte-content img {
+  max-width: 100%;
+  height: auto;
+}
+.rte-content hr {
+  margin: 1.5em 0;
+  border: none;
+  border-top: 1px solid var(--rte-border-color);
+}
+.rte-content table {
+  width: 100%;
+  margin: 1em 0;
+  border-collapse: collapse;
+}
+.rte-content th,
+.rte-content td {
+  padding: 8px 12px;
+  border: 1px solid var(--rte-border-color);
+  text-align: left;
+}
+.rte-content th {
+  background: var(--rte-bg-secondary);
+  font-weight: 600;
+}
+/* ========================================
+   Footer
+   ======================================== */
+.rte-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 4px 12px;
+  background: var(--rte-bg-secondary);
+  border-top: 1px solid var(--rte-toolbar-border);
+  font-size: 12px;
+  color: var(--rte-text-muted);
+}
+.rte-footer-item {
+  margin-left: 16px;
+}
+/* ========================================
+   Dialog
+   ======================================== */
+.rte-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--rte-dialog-overlay-bg);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--rte-transition);
+}
+.rte-dialog-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+.rte-dialog {
+  background: var(--rte-dialog-bg);
+  border-radius: var(--rte-border-radius);
+  box-shadow: var(--rte-dialog-shadow);
+  transform: scale(0.95) translateY(-20px);
+  transition: transform var(--rte-transition);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.rte-dialog-overlay.open .rte-dialog {
+  transform: scale(1) translateY(0);
+}
+.rte-dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--rte-border-color);
+}
+.rte-dialog-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+.rte-dialog-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: var(--rte-text-muted);
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all var(--rte-transition);
+}
+.rte-dialog-close:hover {
+  background: var(--rte-bg-hover);
+  color: var(--rte-text-color);
+}
+.rte-dialog-body {
+  padding: 20px;
+  overflow-y: auto;
+}
+.rte-dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--rte-border-color);
+  background: var(--rte-bg-secondary);
+}
+/* Dialog Form Fields */
+.rte-dialog-field {
+  margin-bottom: 16px;
+}
+.rte-dialog-field:last-child {
+  margin-bottom: 0;
+}
+.rte-dialog-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--rte-text-secondary);
+}
+.rte-dialog-input,
+.rte-dialog-textarea,
+.rte-dialog-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--rte-border-color);
+  border-radius: 6px;
+  background: var(--rte-bg-color);
+  color: var(--rte-text-color);
+  font-size: 14px;
+  transition: border-color var(--rte-transition), box-shadow var(--rte-transition);
+}
+.rte-dialog-input:focus,
+.rte-dialog-textarea:focus,
+.rte-dialog-select:focus {
+  outline: none;
+  border-color: var(--rte-primary-color);
+  box-shadow: 0 0 0 3px var(--rte-primary-light);
+}
+.rte-dialog-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+.rte-dialog-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.rte-dialog-checkbox input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+.rte-dialog-help {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--rte-text-muted);
+}
+.rte-dialog-error {
+  padding: 8px 12px;
+  margin-bottom: 16px;
+  background: #ffebee;
+  border: 1px solid #ffcdd2;
+  border-radius: 6px;
+  color: #c62828;
+  font-size: 14px;
+}
+.rte-dialog-field.error .rte-dialog-input,
+.rte-dialog-field.error .rte-dialog-textarea,
+.rte-dialog-field.error .rte-dialog-select {
+  border-color: #f44336;
+}
+/* Dialog Buttons */
+.rte-dialog-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--rte-transition);
+}
+.rte-dialog-btn-cancel {
+  background: var(--rte-bg-secondary);
+  color: var(--rte-text-color);
+  border: 1px solid var(--rte-border-color);
+}
+.rte-dialog-btn-cancel:hover {
+  background: var(--rte-bg-hover);
+}
+.rte-dialog-btn-primary {
+  background: var(--rte-primary-color);
+  color: #fff;
+}
+.rte-dialog-btn-primary:hover {
+  background: var(--rte-primary-hover);
+}
+.rte-dialog-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.rte-dialog-btn.loading {
+  position: relative;
+  color: transparent;
+}
+.rte-dialog-btn.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: rte-spin 0.6s linear infinite;
+}
+@keyframes rte-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* ========================================
+   Notification
+   ======================================== */
+.rte-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: var(--rte-shadow-lg);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 10001;
+}
+.rte-notification.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+.rte-notification-success {
+  background: var(--rte-notification-success);
+}
+.rte-notification-error {
+  background: var(--rte-notification-error);
+}
+.rte-notification-warning {
+  background: var(--rte-notification-warning);
+}
+.rte-notification-info {
+  background: var(--rte-notification-info);
+}
+/* ========================================
+   Source View
+   ======================================== */
+.rte-source-view {
+  display: none;
+  flex: 1;
+  width: 100%;
+  padding: var(--rte-content-padding);
+  border: none;
+  background: #282c34;
+  color: #abb2bf;
+  font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: none;
+}
+.rte-container.source-mode .rte-content-wrapper {
+  display: none;
+}
+.rte-container.source-mode .rte-source-view {
+  display: block;
+}
+/* ========================================
+   Image Resize Handles
+   ======================================== */
+.rte-image-container {
+  position: relative;
+  display: inline-block;
+}
+.rte-image-container.selected {
+  outline: 2px solid var(--rte-primary-color);
+}
+.rte-resize-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--rte-primary-color);
+  border: 2px solid #fff;
+  border-radius: 2px;
+}
+.rte-resize-handle-se {
+  right: -5px;
+  bottom: -5px;
+  cursor: se-resize;
+}
+.rte-resize-handle-sw {
+  left: -5px;
+  bottom: -5px;
+  cursor: sw-resize;
+}
+.rte-resize-handle-ne {
+  right: -5px;
+  top: -5px;
+  cursor: ne-resize;
+}
+.rte-resize-handle-nw {
+  left: -5px;
+  top: -5px;
+  cursor: nw-resize;
+}
+/* ========================================
+   Table Editor
+   ======================================== */
+.rte-table-toolbar {
+  position: absolute;
+  display: none;
+  gap: 4px;
+  padding: 4px;
+  background: var(--rte-bg-color);
+  border: 1px solid var(--rte-border-color);
+  border-radius: 4px;
+  box-shadow: var(--rte-shadow);
+}
+.rte-table-toolbar.visible {
+  display: flex;
+}
+/* ========================================
+   Responsive
+   ======================================== */
+@media (max-width: 768px) {
+  .rte-toolbar {
+    padding: 4px;
+  }
+  .rte-toolbar-btn {
+    width: 28px;
+    height: 28px;
+  }
+  .rte-toolbar-btn .rte-icon {
+    font-size: 14px;
+  }
+  .rte-content {
+    padding: 12px;
+    font-size: 15px;
+  }
+  .rte-dialog {
+    width: 95vw !important;
+  }
+}
+/* ===== RTE Icons - Using System icomoon Font ===== */
+/* Toolbar icons use system icon font from fonts.css */
+.rte-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}

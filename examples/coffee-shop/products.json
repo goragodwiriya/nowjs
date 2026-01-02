@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "name": "เอสเพรสโซ่",
+    "name_en": "Espresso",
+    "description": "กาแฟเข้มข้น สกัดจากเมล็ดกาแฟคั่วเข้ม",
+    "price": 45,
+    "category": "hot",
+    "image": "espresso.jpeg",
+    "available": true
+  },
+  {
+    "id": 2,
+    "name": "อเมริกาโน่",
+    "name_en": "Americano",
+    "description": "เอสเพรสโซ่ผสมน้ำร้อน รสชาติกลมกล่อม",
+    "price": 50,
+    "category": "hot",
+    "image": "americano.jpeg",
+    "available": true
+  },
+  {
+    "id": 3,
+    "name": "คาปูชิโน่",
+    "name_en": "Cappuccino",
+    "description": "เอสเพรสโซ่ ฟองนม และโกโก้ผง",
+    "price": 60,
+    "category": "hot",
+    "image": "cappuccino.jpeg",
+    "available": true
+  },
+  {
+    "id": 4,
+    "name": "ลาเต้",
+    "name_en": "Caffe Latte",
+    "description": "เอสเพรสโซ่ผสมนมสด รสชาตินุ่มนวล",
+    "price": 60,
+    "category": "hot",
+    "image": "latte.jpeg",
+    "available": true
+  },
+  {
+    "id": 5,
+    "name": "มอคค่า",
+    "name_en": "Caffe Mocha",
+    "description": "ลาเต้ผสมช็อกโกแลต หวานมัน ลงตัว",
+    "price": 65,
+    "category": "hot",
+    "image": "mocha.jpeg",
+    "available": true
+  },
+  {
+    "id": 6,
+    "name": "อเมริกาโน่เย็น",
+    "name_en": "Iced Americano",
+    "description": "เอสเพรสโซ่ผสมน้ำเย็น สดชื่น",
+    "price": 55,
+    "category": "iced",
+    "image": "americano_iced.jpeg",
+    "available": true
+  },
+  {
+    "id": 7,
+    "name": "ลาเต้เย็น",
+    "name_en": "Iced Latte",
+    "description": "กาแฟผสมนมสดเย็น เข้มข้นพอดี",
+    "price": 65,
+    "category": "iced",
+    "image": "latte_iced.jpeg",
+    "available": true
+  },
+  {
+    "id": 8,
+    "name": "มอคค่าเย็น",
+    "name_en": "Iced Mocha",
+    "description": "ช็อกโกแลตและกาแฟเย็น หวานมัน",
+    "price": 70,
+    "category": "iced",
+    "image": "mocha_iced.jpeg",
+    "available": true
+  },
+  {
+    "id": 9,
+    "name": "คาราเมลมัคคิอาโต้เย็น",
+    "name_en": "Iced Caramel Macchiato",
+    "description": "ลาเต้ราดคาราเมล หวานหอม เข้มข้น",
+    "price": 75,
+    "category": "iced",
+    "image": "caramel_macchiato_iced.jpeg",
+    "available": true
+  },
+  {
+    "id": 10,
+    "name": "ช็อกโกแลตปั่น",
+    "name_en": "Chocolate Frappe",
+    "description": "ช็อกโกแลตปั่นเย็นฉ่ำ เข้มข้น",
+    "price": 70,
+    "category": "blended",
+    "image": "chocolate_frappe.jpeg",
+    "available": true
+  },
+  {
+    "id": 11,
+    "name": "กรีนทีปั่น",
+    "name_en": "Green Tea Frappe",
+    "description": "ชาเขียวปั่นเย็น หอมชา สดชื่น",
+    "price": 70,
+    "category": "blended",
+    "image": "green_tea_frappe.jpeg",
+    "available": true
+  },
+  {
+    "id": 12,
+    "name": "คุกกี้ปั่น",
+    "name_en": "Cookies & Cream Frappe",
+    "description": "คุกกี้ครีมปั่น หวานมัน อร่อย",
+    "price": 75,
+    "category": "blended",
+    "image": "cookies_cream_frappe.jpeg",
+    "available": true
+  },
+  {
+    "id": 13,
+    "name": "ครัวซองต์เนย",
+    "name_en": "Butter Croissant",
+    "description": "ครัวซองต์เนยสด กรอบนอก นุ่มใน",
+    "price": 45,
+    "category": "bakery",
+    "image": "croissant.jpeg",
+    "available": true
+  },
+  {
+    "id": 14,
+    "name": "ชีสเค้ก",
+    "name_en": "Cheesecake",
+    "description": "เค้กชีสนุ่ม หวานมัน รสชาติเข้มข้น",
+    "price": 65,
+    "category": "bakery",
+    "image": "cheesecake.jpeg",
+    "available": true
+  },
+  {
+    "id": 15,
+    "name": "บราวนี่ช็อกโกแลต",
+    "name_en": "Chocolate Brownie",
+    "description": "บราวนี่ช็อกโกแลต เข้มข้น หวานมัน",
+    "price": 55,
+    "category": "bakery",
+    "image": "brownie.jpeg",
+    "available": true
+  },
+  {
+    "id": 16,
+    "name": "คุกกี้ช็อกชิพ",
+    "name_en": "Chocolate Chip Cookie",
+    "description": "คุกกี้ช็อกโกแลตชิพ กรอบ อร่อย",
+    "price": 35,
+    "category": "bakery",
+    "image": "chocolate_chip_cookie.jpeg",
+    "available": true
+  }
+]

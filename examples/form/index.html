@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation - Now.js Example</title>
+  <meta name="description" content="Form validation examples with Now.js - Complete guide to declarative form handling">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>FormManager Examples</h1>
+        <p class="text-gradient" data-i18n>Complete examples of declarative form handling - No JavaScript required!</p>
+      </div>
+    </section>
+
+    <article class="container content">
+
+      <!-- Section 1: Basic Contact Form -->
+      <section class="section">
+        <h2 data-i18n>Example 1: Contact Form (Declarative)</h2>
+        <p data-i18n>Basic contact form with validation and success message - No JavaScript needed</p>
+
+        <div class="demo-area">
+          <form data-form="contact" data-action="api/contact.php" data-method="POST" data-ajax-submit="true" data-reset-after-submit="true"
+                data-success-message="Thank you! Your message has been sent." data-show-success-in-notification="true" data-prevent-double-submit="true">
+
+            <fieldset>
+              <div>
+                <label for="contact_name" data-i18n>Name</label>
+                <span class="form-control icon-customer">
+                  <input type="text" id="contact_name" name="name" required minlength="2" maxlength="100" data-error-required="Please enter your name"
+                         data-error-minlength="Name must be at least 2 characters">
+                </span>
+              </div>
+
+              <div>
+                <label for="contact_email" data-i18n>Email</label>
+                <span class="form-control icon-email">
+                  <input type="email" id="contact_email" name="email" required data-error-required="Please enter your email" data-error-email="Please enter a valid email address">
+                </span>
+              </div>
+
+              <div>
+                <label for="contact_subject" data-i18n>Subject</label>
+                <span class="form-control icon-tag">
+                  <select id="contact_subject" name="subject" required data-error-required="Please select a subject">
+                    <option value="" data-i18n>-- Select Subject --</option>
+                    <option value="general" data-i18n>General Inquiry</option>
+                    <option value="support" data-i18n>Technical Support</option>
+                    <option value="feedback" data-i18n>Feedback</option>
+                  </select>
+                </span>
+              </div>
+
+              <div>
+                <label for="contact_message" data-i18n>Message</label>
+                <span class="form-control icon-comment">
+                  <textarea id="contact_message" name="message" rows="4" required minlength="10" maxlength="1000" data-error-required="Please enter your message"
+                            data-error-minlength="Message must be at least 10 characters"></textarea>
+                </span>
+              </div>
+            </fieldset>
+
+            <fieldset class="submit right">
+              <button type="submit" class="btn btn-primary icon-send" data-i18n>Send Message</button>
+            </fieldset>
+          </form>
+        </div>
+
+        <div class="code-section">
+          <h3 data-i18n>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">
+              &lt;!-- Contact Form - Zero JavaScript! --&gt;
+              &lt;form
+              data-form="contact"
+              data-action="api/contact.php"
+              data-method="POST"
+              data-ajax-submit="true"
+              data-reset-after-submit="true"
+              data-success-message="Thank you!"
+              data-show-success-in-notification="true"
+              data-prevent-double-submit="true"&gt;
+
+              &lt;fieldset&gt;
+              &lt;div&gt;
+              &lt;label for="contact_name"&gt;Name&lt;/label&gt;
+              &lt;span class="form-control icon-customer"&gt;
+              &lt;input type="text" id="contact_name" name="name"
+              required minlength="2" maxlength="100"
+              data-error-required="Please enter your name"&gt;
+              &lt;/span&gt;
+              &lt;/div&gt;
+
+              &lt;div&gt;
+              &lt;label for="contact_email"&gt;Email&lt;/label&gt;
+              &lt;span class="form-control icon-email"&gt;
+              &lt;input type="email" id="contact_email" name="email"
+              required
+              data-error-required="Please enter your email"
+              data-error-email="Invalid email address"&gt;
+              &lt;/span&gt;
+              &lt;/div&gt;
+
+              &lt;div&gt;
+              &lt;label for="contact_message"&gt;Message&lt;/label&gt;
+              &lt;span class="form-control icon-comment"&gt;
+              &lt;textarea id="contact_message" name="message"
+              rows="4" required minlength="10"
+              data-error-required="Please enter your message"&gt;&lt;/textarea&gt;
+              &lt;/span&gt;
+              &lt;/div&gt;
+              &lt;/fieldset&gt;
+
+              &lt;fieldset class="form-actions submit right"&gt;
+              &lt;button type="submit" class="btn btn-primary icon-send"&gt;Send&lt;/button&gt;
+              &lt;/fieldset&gt;
+              &lt;/form&gt;
+            </code></pre>
+        </div>
+      </section>
+
+      <!-- Section 2: Login Form -->
+      <section class="section">
+        <h2 data-i18n>Example 2: Login Form (Zero JavaScript)</h2>
+        <p data-i18n>Complete login form using exact patterns from dashboard/crm examples - No JavaScript required!</p>
+
+        <div class="demo-area">
+          <!-- Pattern from dashboard/crm: data-form="login" + action + data-ajax-submit + data-redirect -->
+          <form data-form="login" class="auth-form" novalidate action="api/login.php" method="post" data-ajax-submit="true" data-auto-fill-intended-url="true">
+
+            <!-- login-message: Welcome message displayed above form -->
+            <p class="login-message center" data-i18n>Welcome back! Please login to proceed.</p>
+
+            <fieldset>
+              <div>
+                <label for="login_username" data-i18n>Username/Email</label>
+                <span class="form-control icon-email">
+                  <!-- data-persist: Remember username in localStorage -->
+                  <!-- data-persist-key: Custom key for storage -->
+                  <!-- data-persist-ttl-days: Expiry in days -->
+                  <input maxlength="50" type="text" id="login_username" name="username" autocomplete="username" data-persist="local" data-persist-key="login_username"
+                         data-persist-ttl-days="30">
+                </span>
+              </div>
+              <div>
+                <label for="login_password" data-i18n>Password</label>
+                <span class="form-control icon-password">
+                  <input maxlength="50" type="password" id="login_password" name="password" autocomplete="current-password">
+                </span>
+              </div>
+              <div>
+                <!-- form-group + width50 for side-by-side layout -->
+                <div class="form-group">
+                  <div class="width50">
+                    <!-- switch class: Toggle switch style checkbox -->
+                    <!-- data-persist: Remember checkbox state -->
+                    <input type="checkbox" id="remember" class="switch" name="remember" value="1" data-persist="local" data-persist-key="login_remember">
+                    <label for="remember" data-i18n>Remember Me</label>
+                  </div>
+                  <div class="width50 right">
+                    <a href="forgot" data-i18n>Forgot Password</a>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="center">
+              <button type="submit" class="btn btn-primary fullwidth large icon-signin" data-i18n>Log in</button>
+            </fieldset>
+          </form>
+        </div>
+
+        <div class="code-section">
+          <h3 data-i18n>Login Form Pattern (No JavaScript!):</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">
+              &lt;!-- Complete login form - Zero JavaScript required! --&gt;
+              &lt;form
+              data-form="login"
+              class="auth-form"
+              novalidate
+              action="api/v1/auth/login"
+              method="post"
+              data-ajax-submit="true"
+              data-redirect="/"
+              data-auto-fill-intended-url="true"&gt;
+
+              &lt;!-- Welcome message --&gt;
+              &lt;p class="login-message"&gt;Welcome back!&lt;/p&gt;
+
+              &lt;fieldset&gt;
+              &lt;div&gt;
+              &lt;label for="login_username"&gt;Username/Email&lt;/label&gt;
+              &lt;span class="form-control icon-email"&gt;
+              &lt;!-- data-persist: Remember username in localStorage --&gt;
+              &lt;input type="text" id="login_username" name="username"
+              autocomplete="username" autofocus
+              data-persist="local"
+              data-persist-key="login_username"
+              data-persist-ttl-days="30"&gt;
+              &lt;/span&gt;
+              &lt;/div&gt;
+
+              &lt;div&gt;
+              &lt;label for="login_password"&gt;Password&lt;/label&gt;
+              &lt;span class="form-control icon-password"&gt;
+              &lt;input type="password" id="login_password" name="password"
+              autocomplete="current-password"&gt;
+              &lt;/span&gt;
+              &lt;/div&gt;
+
+              &lt;div&gt;
+              &lt;div class="form-group"&gt;
+              &lt;div class="width50"&gt;
+              &lt;!-- switch: Toggle style, data-persist: Remember state --&gt;
+              &lt;input type="checkbox" id="remember" class="switch"
+              name="remember" value="1"
+              data-persist="local"
+              data-persist-key="login_remember"&gt;
+              &lt;label for="remember"&gt;Remember Me&lt;/label&gt;
+              &lt;/div&gt;
+              &lt;div class="width50 right"&gt;
+              &lt;a href="forgot"&gt;Forgot Password&lt;/a&gt;
+              &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;/fieldset&gt;
+
+              &lt;fieldset class="center"&gt;
+              &lt;button type="submit" class="btn btn-primary fullwidth large icon-signin"&gt;Log in&lt;/button&gt;
+              &lt;/fieldset&gt;
+              &lt;/form&gt;
+            </code></pre>
+        </div>
+
+        <!-- Key attributes table -->
+        <h3 class="mt-4" data-i18n>Login Form Attributes</h3>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th data-i18n>Attribute</th>
+                <th data-i18n>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>data-form="login"</code></td>
+                <td data-i18n>Identifies form for FormManager (required)</td>
+              </tr>
+              <tr>
+                <td><code>data-ajax-submit="true"</code></td>
+                <td data-i18n>Submit via AJAX instead of page reload</td>
+              </tr>
+              <tr>
+                <td><code>data-redirect="/"</code></td>
+                <td data-i18n>Where to redirect on success</td>
+              </tr>
+              <tr>
+                <td><code>data-auto-fill-intended-url="true"</code></td>
+                <td data-i18n>Auto-fill hidden field with URL user tried to access</td>
+              </tr>
+              <tr>
+                <td><code>data-persist="local"</code></td>
+                <td data-i18n>Persist field value in localStorage</td>
+              </tr>
+              <tr>
+                <td><code>data-persist-key="..."</code></td>
+                <td data-i18n>Custom key for localStorage</td>
+              </tr>
+              <tr>
+                <td><code>data-persist-ttl-days="30"</code></td>
+                <td data-i18n>Expiry time in days</td>
+              </tr>
+              <tr>
+                <td><code>class="login-message"</code></td>
+                <td data-i18n>Styled welcome message</td>
+              </tr>
+              <tr>
+                <td><code>class="switch"</code></td>
+                <td data-i18n>Toggle switch style for checkbox</td>
+              </tr>
+              <tr>
+                <td><code>novalidate</code></td>
+                <td data-i18n>Disable browser validation, use FormManager instead</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 3: Validation Showcase -->
+      <section class="section">
+        <h2 data-i18n>Example 3: Validation Types</h2>
+        <p data-i18n>Demonstrating all built-in validation types with custom error messages</p>
+
+        <div class="demo-area">
+          <form data-form="validation-demo" data-ajax-submit="false" data-validate-on-input="true" data-validate-on-blur="true" data-auto-focus-error="true">
+
+            <fieldset>
+              <legend data-i18n>Required & Length Validation</legend>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="v_required" data-i18n>Required Field</label>
+                  <span class="form-control">
+                    <input type="text" id="v_required" name="required_field" required data-error-required="This field is required">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="v_length" data-i18n>Length: 3-20 characters</label>
+                  <span class="form-control">
+                    <input type="text" id="v_length" name="length_field" minlength="3" maxlength="20" data-error-minlength="Minimum 3 characters"
+                           data-error-maxlength="Maximum 20 characters">
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend data-i18n>Type Validation</legend>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="v_email" data-i18n>Email</label>
+                  <span class="form-control icon-email">
+                    <input type="email" id="v_email" name="email" data-error-email="Please enter a valid email">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="v_url" data-i18n>Website URL</label>
+                  <span class="form-control icon-link">
+                    <input type="url" id="v_url" name="website" placeholder="https://..." data-error-url="Please enter a valid URL">
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend data-i18n>Number Validation</legend>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="v_number" data-i18n>Age (18-100)</label>
+                  <span class="form-control">
+                    <input type="number" id="v_number" name="age" min="18" max="100" data-error-min="Must be at least 18" data-error-max="Must be no more than 100"
+                           data-error-number="Please enter a valid number">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="v_phone" data-i18n>Phone (Pattern: 10 digits)</label>
+                  <span class="form-control icon-phone">
+                    <input type="tel" id="v_phone" name="phone" pattern="^[0-9]{10}$" data-error-pattern="Please enter exactly 10 digits">
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend data-i18n>Password Match Validation</legend>
+
+              <div>
+                <div class="form-group">
+                  <div class="width50">
+                    <label for="v_password" data-i18n>Password</label>
+                    <span class="form-control icon-password">
+                      <input type="password" id="v_password" name="password" minlength="8" data-element="password" data-password-strength="bar"
+                             data-error-minlength="Password must be at least 8 characters">
+                    </span>
+                  </div>
+                  <div class="width50">
+                    <label for="v_confirm" data-i18n>Confirm Password</label>
+                    <span class="form-control icon-password">
+                      <input type="password" id="v_confirm" name="confirm_password" data-element="password" data-target-password="v_password"
+                             data-error-match="Passwords do not match">
+                    </span>
+                  </div>
+                </div>
+                <div class="comment" id="result_v_password" data-i18n>Password must be at least 8 characters with uppercase and lowercase letters.</div>
+              </div>
+            </fieldset>
+
+            <fieldset class="submit right">
+              <button type="reset" class="btn outline" data-i18n>Reset</button>
+              <button type="submit" class="btn btn-primary icon-list" data-i18n>Validate All</button>
+            </fieldset>
+          </form>
+        </div>
+
+        <div class="code-section">
+          <h3 data-i18n>Validation Attributes:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">
+              &lt;!-- Required field --&gt;
+              &lt;div&gt;
+              &lt;label for="name"&gt;Name&lt;/label&gt;
+              &lt;span class="form-control icon-customer"&gt;
+              &lt;input id="name" name="name" required
+              data-error-required="This field is required"&gt;
+              &lt;/span&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Length validation --&gt;
+              &lt;div&gt;
+              &lt;label for="username"&gt;Username&lt;/label&gt;
+              &lt;span class="form-control"&gt;
+              &lt;input id="username" name="username"
+              minlength="3" maxlength="20"
+              data-error-minlength="Minimum 3 characters"
+              data-error-maxlength="Maximum 20 characters"&gt;
+              &lt;/span&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Email validation --&gt;
+              &lt;div&gt;
+              &lt;label for="email"&gt;Email&lt;/label&gt;
+              &lt;span class="form-control icon-email"&gt;
+              &lt;input type="email" id="email" name="email"
+              data-error-email="Invalid email"&gt;
+              &lt;/span&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Number range --&gt;
+              &lt;div&gt;
+              &lt;label for="age"&gt;Age&lt;/label&gt;
+              &lt;span class="form-control"&gt;
+              &lt;input type="number" id="age" name="age"
+              min="18" max="100"
+              data-error-min="Must be at least 18"
+              data-error-max="Must be no more than 100"&gt;
+              &lt;/span&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Password with confirm --&gt;
+              &lt;div class="form-group"&gt;
+              &lt;div class="width50"&gt;
+              &lt;label for="password"&gt;Password&lt;/label&gt;
+              &lt;span class="form-control icon-password"&gt;
+              &lt;input type="password" id="password" name="password"
+              data-element="password"
+              data-password-strength="bar"&gt;
+              &lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div class="width50"&gt;
+              &lt;label for="confirm"&gt;Confirm&lt;/label&gt;
+              &lt;span class="form-control icon-password"&gt;
+              &lt;input type="password" id="confirm" name="confirm"
+              data-target-password="password"
+              data-error-match="Passwords do not match"&gt;
+              &lt;/span&gt;
+              &lt;/div&gt;
+              &lt;/div&gt;
+            </code></pre>
+        </div>
+      </section>
+
+      <!-- Section 4: Form with Confirmation Dialog -->
+      <section class="section">
+        <h2 data-i18n>Example 4: Confirmation Dialog</h2>
+        <p data-i18n>Form that asks for confirmation before submitting</p>
+
+        <div class="demo-area">
+          <form data-form="delete-account" data-action="api/delete.php" data-method="DELETE" data-ajax-submit="true"
+                data-confirm="Are you sure you want to delete your account? This action cannot be undone." data-success-message="Account deleted successfully" data-redirect="/"
+                data-prevent-double-submit="true">
+
+            <fieldset>
+              <div class="alert alert-warning">
+                <span class="icon-warning"></span>
+                <span data-i18n>Warning: This action will permanently delete your account and all associated data.</span>
+              </div>
+
+              <div>
+                <label for="delete_confirm" data-i18n>Type "DELETE" to confirm</label>
+                <span class="form-control">
+                  <input type="text" id="delete_confirm" name="confirmation" required pattern="^DELETE$" data-error-required="Please type DELETE to confirm"
+                         data-error-pattern="Please type exactly: DELETE">
+                </span>
+              </div>
+            </fieldset>
+
+            <fieldset class="submit right">
+              <button type="button" class="btn" onclick="history.back()" data-i18n>Cancel</button>
+              <button type="submit" class="btn btn-danger icon-trash" data-i18n>Delete Account</button>
+            </fieldset>
+          </form>
+        </div>
+
+        <div class="code-section">
+          <h3 data-i18n>Confirmation Attribute:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">
+              &lt;form
+              data-form=&quot;delete-account&quot;
+              data-action=&quot;api/delete.php&quot;
+              data-method=&quot;DELETE&quot;
+              data-ajax-submit=&quot;true&quot;
+              data-confirm=&quot;Are you sure you want to delete your account? This action cannot be undone.&quot;
+              data-success-message=&quot;Account deleted successfully&quot;
+              data-redirect=&quot;/&quot;
+              data-prevent-double-submit=&quot;true&quot;&gt;
+
+              &lt;fieldset&gt;
+              &lt;div class="alert alert-warning"&gt;
+              &lt;span class="icon-warning"&gt;&lt;/span&gt;
+              &lt;span&gt;Warning: This action is permanent.&lt;/span&gt;
+              &lt;/div&gt;
+
+              &lt;div&gt;
+              &lt;label for="delete_confirm"&gt;Type "DELETE" to confirm&lt;/label&gt;
+              &lt;span class="form-control"&gt;
+              &lt;input type="text" id="delete_confirm" name="confirmation"
+              required pattern="^DELETE$"
+              data-error-required="Please type DELETE"
+              data-error-pattern="Please type exactly: DELETE"&gt;
+              &lt;/span&gt;
+              &lt;/div&gt;
+              &lt;/fieldset&gt;
+
+              &lt;fieldset class="submit right"&gt;
+              &lt;button type="button" class="btn" onclick="history.back()"&gt;Cancel&lt;/button&gt;
+              &lt;button type="submit" class="btn btn-danger icon-trash"&gt;Delete&lt;/button&gt;
+              &lt;/fieldset&gt;
+              &lt;/form&gt;
+            </code></pre>
+        </div>
+      </section>
+
+      <!-- Section 5: Reset Password with URL Params -->
+      <section class="section">
+        <h2 data-i18n>Example 5: URL Parameters Loading</h2>
+        <p data-i18n>Load form values from URL query parameters (e.g., password reset links)</p>
+
+        <div class="demo-area">
+          <form data-form="reset-password" data-action="api/reset-password.php" data-method="POST" data-ajax-submit="true" data-load-url-params="true"
+                data-url-params-required="false" data-success-message="Password reset successfully!" data-redirect="/login" data-prevent-double-submit="true">
+
+            <fieldset>
+              <div class="alert alert-info">
+                <span class="icon-info"></span>
+                <span data-i18n>Try adding ?token=abc123&uid=42 to the URL to see auto-fill in action!</span>
+              </div>
+
+              <!-- Hidden fields populated from URL params -->
+              <input type="hidden" name="token" data-attr="value:token">
+              <input type="hidden" name="uid" data-attr="value:uid">
+
+              <div>
+                <label for="reset_password" data-i18n>New Password</label>
+                <span class="form-control icon-password">
+                  <input type="password" id="reset_password" name="password" required minlength="8" data-element="password" data-password-strength="bar"
+                         data-error-required="Please enter a new password" data-error-minlength="Password must be at least 8 characters">
+                </span>
+              </div>
+
+              <div>
+                <label for="reset_confirm" data-i18n>Confirm New Password</label>
+                <span class="form-control icon-password">
+                  <input type="password" id="reset_confirm" name="confirm_password" required data-element="password" data-target-password="reset_password"
+                         data-error-required="Please confirm your password" data-error-match="Passwords do not match">
+                </span>
+              </div>
+            </fieldset>
+
+            <fieldset class="submit right">
+              <button type="submit" class="btn btn-primary icon-save" data-i18n>Reset Password</button>
+            </fieldset>
+          </form>
+        </div>
+
+        <div class="code-section">
+          <h3 data-i18n>URL Parameters Attributes:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">
+              &lt;!-- URL: /reset-password?token=abc123&amp;uid=42 --&gt;
+              &lt;form
+              data-form="reset-password"
+              data-ajax-submit="true"
+              data-load-url-params="true"
+              data-url-params-required="true"
+              data-url-params-required-fields="token,uid"&gt;
+
+              &lt;!-- Hidden fields auto-filled from URL params --&gt;
+              &lt;input type="hidden" name="token" data-attr="value:token"&gt;
+              &lt;input type="hidden" name="uid" data-attr="value:uid"&gt;
+
+              &lt;fieldset&gt;
+              &lt;div class="form-group"&gt;
+              &lt;div class="width50"&gt;
+              &lt;label for="reset_password"&gt;New Password&lt;/label&gt;
+              &lt;span class="form-control icon-password"&gt;
+              &lt;input type="password" id="reset_password" name="password"
+              required minlength="8"
+              data-element="password"
+              data-password-strength="bar"&gt;
+              &lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div class="width50"&gt;
+              &lt;label for="reset_confirm"&gt;Confirm Password&lt;/label&gt;
+              &lt;span class="form-control icon-password"&gt;
+              &lt;input type="password" id="reset_confirm" name="confirm"
+              required
+              data-target-password="reset_password"
+              data-error-match="Passwords do not match"&gt;
+              &lt;/span&gt;
+              &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;/fieldset&gt;
+
+              &lt;fieldset class="submit right"&gt;
+              &lt;button type="submit" class="btn btn-primary icon-save"&gt;Reset Password&lt;/button&gt;
+              &lt;/fieldset&gt;
+              &lt;/form&gt;
+            </code></pre>
+        </div>
+      </section>
+
+      <!-- Section 6: Profile Edit (with API) -->
+      <section class="section">
+        <h2 data-i18n>Example 6: Edit Profile (API Integration)</h2>
+        <p data-i18n>Advanced form with API data loading and file upload</p>
+
+        <div class="alert alert-info mb-4">
+          <span class="icon-info"></span>
+          <span data-i18n>This example requires a backend API endpoint. See documentation for API response format.</span>
+        </div>
+
+        <div class="demo-area">
+          <form data-form="editprofile" data-validate="true" data-reset="false" action="api/v1/form/update" method="post" data-ajax-submit="true" data-load-api="api/v1/form">
+            <fieldset>
+              <div>
+                <label for="profile_name" data-i18n>Name</label>
+                <span class="form-control icon-customer">
+                  <input maxlength="150" type="text" id="profile_name" name="name" data-attr="value:name" required minlength="3">
+                </span>
+              </div>
+
+              <div>
+                <label for="avatar">Avatar</label>
+                <span class="form-control icon-image">
+                  <!-- File input with existing file display -->
+                  <!-- data-files will be populated by FormManager from API response -->
+                  <input type="file" id="avatar" name="avatar" data-preview="true" data-allow-remove-existing="true" data-file-reference="url" data-action-url="api/v1/files"
+                         accept="image/*" data-max-file-size="5242880" placeholder="Click to upload or drag and drop">
+                </span>
+                <div id="result_avatar" class="comment" data-i18n>Supported: jpg, jpeg, png, webp (max 5MB)</div>
+              </div>
+
+              <div>
+                <label for="profile_username" data-i18n>Username/Email</label>
+                <span class="form-control icon-email">
+                  <input type="text" id="profile_username" name="username" data-attr="value:username" autocomplete="username" required>
+                </span>
+              </div>
+
+              <div>
+                <div class="form-group">
+                  <div class="width50">
+                    <label for="profile_password" data-i18n>Password</label>
+                    <span class="form-control icon-password">
+                      <input data-element="password" maxlength="20" type="password" id="profile_password" name="password" autocomplete="new-password"
+                             data-password-criteria-list="false" data-password-strength="bar" minlength="8">
+                    </span>
+                  </div>
+                  <div class="width50">
+                    <label for="profile_repassword" data-i18n>Confirm Password</label>
+                    <span class="form-control icon-password">
+                      <input data-element="password" maxlength="20" type="password" id="profile_repassword" name="repassword" data-target-password="profile_password">
+                    </span>
+                  </div>
+                </div>
+                <div class="comment" id="result_profile_password" data-i18n>Password must be at least 8 characters long and contain at least one uppercase letter and one lowercase
+                  letter.</div>
+              </div>
+
+              <div>
+                <label for="profile_phone" data-i18n>Phone</label>
+                <span class="form-control icon-phone">
+                  <input type="tel" id="profile_phone" name="phone" data-attr="value:phone" title="Please enter 9-10 digits">
+                </span>
+              </div>
+
+              <div>
+                <label for="profile_sex" data-i18n>Gender</label>
+                <span class="form-control icon-email">
+                  <select id="profile_sex" name="sex" data-attr="value:sex" data-options-key="genders" required>
+                    <option value="">Not specified</option>
+                  </select>
+                </span>
+              </div>
+
+              <div>
+                <label for="profile_birthday" data-i18n>Birthday</label>
+                <span class="form-control icon-calendar">
+                  <input type="date" id="profile_birthday" name="birthday" data-attr="value:birthday" max="2024-12-31">
+                </span>
+              </div>
+
+              <div>
+                <label for="profile_address" data-i18n>Address</label>
+                <span class="form-control icon-address">
+                  <textarea rows="3" id="profile_address" name="address" data-text="address" maxlength="500"></textarea>
+                </span>
+              </div>
+
+              <div>
+                <label for="profile_provinceID" data-i18n>Province</label>
+                <span class="form-control icon-location">
+                  <input type="text" id="profile_province" name="province" data-options-key="provinces" data-attr="value:provinceID" placeholder="Type to search province..."
+                         required>
+                </span>
+              </div>
+
+              <div>
+                <label for="profile_zipcode" data-i18n>Zipcode</label>
+                <span class="form-control icon-location">
+                  <input type="number" id="profile_zipcode" name="zipcode" min="10000" max="99999" data-attr="value:zipcode" title="Please enter 5 digits">
+                </span>
+              </div>
+
+              <div>
+                <label for="profile_color" data-i18n>Primary Color</label>
+                <span class="form-control icon-color">
+                  <input type="color" id="profile_color" name="color" data-attr="value:color">
+                </span>
+              </div>
+            </fieldset>
+
+            <fieldset class="submit right">
+              <button type="submit" class="btn btn-primary icon-save" data-i18n>Save Changes</button>
+              <input type="hidden" name="id" data-attr="value:id">
+            </fieldset>
+          </form>
+        </div>
+
+        <div class="code-section">
+          <h3 data-i18n>API Integration Attributes:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">
+              &lt;form
+              data-form="editprofile"
+              data-action="api/v1/form/update"
+              data-load-api="api/v1/form"
+              data-ajax-submit="true"&gt;
+
+              &lt;!-- Fields with data-attr bind to API response --&gt;
+              &lt;input name="name" data-attr="value:name"&gt;
+              &lt;input name="email" data-attr="value:email"&gt;
+
+              &lt;!-- Select with dynamic options --&gt;
+              &lt;select name="gender" data-options-key="genders"&gt;
+              &lt;option value=""&gt;Select...&lt;/option&gt;
+              &lt;/select&gt;
+
+              &lt;!-- File upload with preview --&gt;
+              &lt;input type="file" name="avatar"
+              data-preview="true"
+              data-allow-remove-existing="true"&gt;
+
+              &lt;!-- Hidden ID field --&gt;
+              &lt;input type="hidden" name="id" data-attr="value:id"&gt;
+              &lt;/form&gt;
+            </code></pre>
+        </div>
+      </section>
+
+      <!-- Recommended HTML Structure -->
+      <section class="section">
+        <h2 data-i18n>Recommended HTML Structure</h2>
+        <p data-i18n>Follow these HTML patterns for proper form styling and JavaScript integration</p>
+
+        <div class="demo-area">
+          <form data-form="structure-demo" data-ajax-submit="false">
+            <fieldset>
+              <legend data-i18n>Basic Field Structure</legend>
+
+              <!-- Single field pattern -->
+              <div>
+                <label for="s_name" data-i18n>Name</label>
+                <span class="form-control icon-customer">
+                  <input type="text" id="s_name" name="name" required>
+                </span>
+              </div>
+
+              <!-- Field with comment/help text -->
+              <div>
+                <label for="s_email" data-i18n>Email</label>
+                <span class="form-control icon-email">
+                  <input type="email" id="s_email" name="email" required>
+                </span>
+                <div class="comment" data-i18n>We'll never share your email.</div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend data-i18n>Side-by-Side Fields (form-group)</legend>
+
+              <!-- Two columns: width50 + width50 -->
+              <div class="form-group">
+                <div class="width50">
+                  <label for="s_firstname" data-i18n>First Name</label>
+                  <span class="form-control icon-customer">
+                    <input type="text" id="s_firstname" name="firstname">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="s_lastname" data-i18n>Last Name</label>
+                  <span class="form-control icon-customer">
+                    <input type="text" id="s_lastname" name="lastname">
+                  </span>
+                </div>
+              </div>
+
+              <!-- Three columns: width33 + width33 + width33 -->
+              <div class="form-group">
+                <div class="width33">
+                  <label for="s_day" data-i18n>Day</label>
+                  <span class="form-control">
+                    <input type="number" id="s_day" name="day" min="1" max="31">
+                  </span>
+                </div>
+                <div class="width33">
+                  <label for="s_month" data-i18n>Month</label>
+                  <span class="form-control">
+                    <input type="number" id="s_month" name="month" min="1" max="12">
+                  </span>
+                </div>
+                <div class="width33">
+                  <label for="s_year" data-i18n>Year</label>
+                  <span class="form-control">
+                    <input type="number" id="s_year" name="year" min="1900" max="2100">
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend data-i18n>Special Elements (data-element)</legend>
+
+              <!-- Password with strength indicator -->
+              <div class="form-group">
+                <div class="width50">
+                  <label for="s_password" data-i18n>Password</label>
+                  <span class="form-control icon-password">
+                    <input type="password" id="s_password" name="password" data-element="password" data-password-strength="bar" data-password-criteria-list="true" minlength="8">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="s_repassword" data-i18n>Confirm Password</label>
+                  <span class="form-control icon-password">
+                    <input type="password" id="s_repassword" name="repassword" data-element="password" data-target-password="s_password">
+                  </span>
+                </div>
+              </div>
+              <div class="comment" id="result_s_password" data-i18n>Password must be at least 8 characters</div>
+            </fieldset>
+
+            <!-- Submit actions -->
+            <fieldset class="submit right">
+              <button type="reset" class="btn" data-i18n>Reset</button>
+              <button type="submit" class="btn btn-primary icon-save" data-i18n>Save</button>
+            </fieldset>
+          </form>
+        </div>
+
+        <div class="code-section">
+          <h3 data-i18n>Structure Patterns:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">
+              &lt;!-- ===== FORM CONTAINER ===== --&gt;
+              &lt;form data-form="formId" data-ajax-submit="true"&gt;
+
+              &lt;!-- ===== FIELDSET: Groups related fields ===== --&gt;
+              &lt;fieldset&gt;
+              &lt;legend&gt;Section Title&lt;/legend&gt;
+
+              &lt;!-- SINGLE FIELD PATTERN --&gt;
+              &lt;div&gt;
+              &lt;label for="fieldId"&gt;Label&lt;/label&gt;
+              &lt;span class="form-control icon-name"&gt;
+              &lt;input type="text" id="fieldId" name="fieldName"&gt;
+              &lt;/span&gt;
+              &lt;div class="comment"&gt;Help text&lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;/fieldset&gt;
+
+              &lt;!-- ===== SIDE-BY-SIDE FIELDS ===== --&gt;
+              &lt;fieldset&gt;
+              &lt;div class="form-group"&gt;
+              &lt;div class="width50"&gt; &lt;!-- 50% width --&gt;
+              &lt;label&gt;First Field&lt;/label&gt;
+              &lt;span class="form-control"&gt;
+              &lt;input type="text" name="field1"&gt;
+              &lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div class="width50"&gt; &lt;!-- 50% width --&gt;
+              &lt;label&gt;Second Field&lt;/label&gt;
+              &lt;span class="form-control"&gt;
+              &lt;input type="text" name="field2"&gt;
+              &lt;/span&gt;
+              &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;/fieldset&gt;
+
+              &lt;!-- ===== SUBMIT ACTIONS ===== --&gt;
+              &lt;fieldset class="submit right"&gt;
+              &lt;button type="reset" class="btn"&gt;Reset&lt;/button&gt;
+              &lt;button type="submit" class="btn btn-primary"&gt;Save&lt;/button&gt;
+              &lt;/fieldset&gt;
+
+              &lt;/form&gt;
+            </code></pre>
+        </div>
+
+        <!-- Structure Reference Table -->
+        <h3 class="mt-4" data-i18n>HTML Structure Reference</h3>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th data-i18n>Pattern</th>
+                <th data-i18n>Description</th>
+                <th data-i18n>Usage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>&lt;fieldset&gt;</code></td>
+                <td data-i18n>Groups related form fields</td>
+                <td data-i18n>Wrap sections of related inputs</td>
+              </tr>
+              <tr>
+                <td><code>&lt;legend&gt;</code></td>
+                <td data-i18n>Section title inside fieldset</td>
+                <td data-i18n>Label for field groups</td>
+              </tr>
+              <tr>
+                <td><code>fieldset.submit</code></td>
+                <td data-i18n>Submit button container</td>
+                <td data-i18n>Wrap submit/reset buttons</td>
+              </tr>
+              <tr>
+                <td><code>.right</code></td>
+                <td data-i18n>Align content to right</td>
+                <td data-i18n>Add to .submit for right alignment</td>
+              </tr>
+              <tr>
+                <td><code>span.form-control</code></td>
+                <td data-i18n>Input wrapper (REQUIRED)</td>
+                <td data-i18n>Wrap every input/select/textarea</td>
+              </tr>
+              <tr>
+                <td><code>.icon-{name}</code></td>
+                <td data-i18n>Input icon</td>
+                <td data-i18n>Add to form-control for icons</td>
+              </tr>
+              <tr>
+                <td><code>.form-group</code></td>
+                <td data-i18n>Side-by-side container</td>
+                <td data-i18n>Flexbox container for columns</td>
+              </tr>
+              <tr>
+                <td><code>.width50</code></td>
+                <td data-i18n>50% width column</td>
+                <td data-i18n>Use inside form-group</td>
+              </tr>
+              <tr>
+                <td><code>.width33</code></td>
+                <td data-i18n>33% width column</td>
+                <td data-i18n>For 3-column layouts</td>
+              </tr>
+              <tr>
+                <td><code>.comment</code></td>
+                <td data-i18n>Help/hint text below field</td>
+                <td data-i18n>Place after form-control span</td>
+              </tr>
+              <tr>
+                <td><code>id="result_{fieldId}"</code></td>
+                <td data-i18n>Error message container</td>
+                <td data-i18n>FormError displays errors here</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- data-element Reference -->
+        <h3 class="mt-4" data-i18n>data-element Attribute</h3>
+        <p data-i18n>The <code>data-element</code> attribute enables JavaScript-enhanced functionality for specific input types:</p>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th data-i18n>Element Type</th>
+                <th data-i18n>Additional Attributes</th>
+                <th data-i18n>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>data-element="password"</code></td>
+                <td>
+                  <code>data-password-strength="bar"</code><br>
+                  <code>data-password-criteria-list="true"</code><br>
+                  <code>data-target-password="fieldId"</code>
+                </td>
+                <td data-i18n>Password with strength meter and/or confirmation matching</td>
+              </tr>
+              <tr>
+                <td><code>data-element="file"</code></td>
+                <td>
+                  <code>data-preview="true"</code><br>
+                  <code>data-allow-remove-existing="true"</code><br>
+                  <code>data-file-reference="url"</code>
+                </td>
+                <td data-i18n>File upload with preview and remove functionality</td>
+              </tr>
+              <tr>
+                <td><code>data-element="autocomplete"</code></td>
+                <td>
+                  <code>data-options-key="keyName"</code><br>
+                  <code>data-api="endpoint"</code>
+                </td>
+                <td data-i18n>Autocomplete input with API or predefined options</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Data Attributes Reference -->
+      <section class="section">
+        <h2 data-i18n>Quick Reference: Form Data Attributes</h2>
+
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th data-i18n>Attribute</th>
+                <th data-i18n>Description</th>
+                <th data-i18n>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>data-form</code></td>
+                <td data-i18n>Form ID (required)</td>
+                <td><code>"contact"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-ajax-submit</code></td>
+                <td data-i18n>Submit via AJAX</td>
+                <td><code>"true"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-confirm</code></td>
+                <td data-i18n>Confirmation dialog</td>
+                <td><code>"Are you sure?"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-reset-after-submit</code></td>
+                <td data-i18n>Reset form after success</td>
+                <td><code>"true"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-success-message</code></td>
+                <td data-i18n>Success notification</td>
+                <td><code>"Saved!"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-redirect</code></td>
+                <td data-i18n>Redirect after success</td>
+                <td><code>"/dashboard"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-load-url-params</code></td>
+                <td data-i18n>Load values from URL</td>
+                <td><code>"true"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-prevent-double-submit</code></td>
+                <td data-i18n>Prevent duplicate submissions</td>
+                <td><code>"true"</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-responsive mt-4">
+          <table class="table">
+            <thead>
+              <tr>
+                <th data-i18n>Input Attribute</th>
+                <th data-i18n>Description</th>
+                <th data-i18n>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>data-error-required</code></td>
+                <td data-i18n>Custom required message</td>
+                <td><code>"Please fill this"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-error-email</code></td>
+                <td data-i18n>Custom email error</td>
+                <td><code>"Invalid email"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-error-minlength</code></td>
+                <td data-i18n>Minimum length error</td>
+                <td><code>"Too short"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-error-pattern</code></td>
+                <td data-i18n>Pattern mismatch error</td>
+                <td><code>"Invalid format"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-target-password</code></td>
+                <td data-i18n>ID of password to match</td>
+                <td><code>"password"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-attr</code></td>
+                <td data-i18n>Bind to API data</td>
+                <td><code>"value:fieldname"</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <!-- Website Scripts -->
+  <script src="main.js"></script>
+</body>
+
+</html>

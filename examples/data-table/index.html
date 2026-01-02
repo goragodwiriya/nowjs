@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TableManager - Now.js Examples</title>
+  <meta name="description" content="Complete TableManager examples with Now.js - sorting, filtering, pagination, inline editing, and more">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>TableManager Examples</h1>
+        <p class="text-gradient" data-i18n>Complete examples of Now.js TableManager with sorting, filtering, pagination,
+          and CRUD operations</p>
+      </div>
+    </section>
+
+    <article class="container content">
+
+      <!-- Example 1: Basic Table with Sorting and Filtering -->
+      <section class="section">
+        <h2 data-i18n>Example 1: Basic Table with Sorting and Filtering</h2>
+        <p>ตัวอย่าง table พื้นฐานที่มีการ sort และ filter พร้อม pagination</p>
+
+        <div class="tablebody">
+          <table class="table border fullwidth" data-table="basic-table" data-source="data/example-table-data.json" data-page-size="10">
+            <thead>
+              <tr>
+                <th data-field="id" data-sort="id">ID</th>
+                <th data-field="name" data-sort="name" data-filter="true" data-type="text">Name</th>
+                <th data-field="position" data-format="lookup" data-sort="position"
+                    data-options='{"1":"Programmer","2":"Systems Analyst","3":"Project Manager","4":"QA Tester","5":"UI/UX Designer","6":"Sales","7":"Marketer","8":"Accountant","9":"HR Officer"}'>
+                  Position</th>
+                <th data-field="department" data-format="lookup" data-filter="true" data-type="select" data-show-all="true" class="center"
+                    data-options='{"1":"Engineering","2":"Business Analysis","3":"Project Management","4":"QA","5":"UI/UX","6":"Sales","7":"Marketing","8":"Accounting","9":"Human Resources"}'>
+                  Department</th>
+                <th data-field="status" data-sort="status" data-filter="true" data-type="select" data-format="lookup" data-show-all="true" class="center" data-cell-class="right"
+                    data-options='{"1":"Working","2":"On Leave","3":"Resigned","4":"Probation"}'>
+                  Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="code-section">
+          <h3>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">
+              &lt;table class=&quot;table border fullwidth&quot; data-table=&quot;basic-table&quot; data-source=&quot;data/example-table-data.json&quot;
+              data-page-size=&quot;10&quot;&gt;
+              &lt;thead&gt;
+              &lt;tr&gt;
+              &lt;th data-field=&quot;id&quot; data-sort=&quot;id&quot;&gt;ID&lt;/th&gt;
+              &lt;th data-field=&quot;name&quot; data-sort=&quot;name&quot; data-filter=&quot;true&quot; data-type=&quot;text&quot;&gt;Name&lt;/th&gt;
+              &lt;th data-field=&quot;position&quot; data-format=&quot;lookup&quot; data-sort=&quot;position&quot;
+              data-options=&apos;{&quot;1&quot;:&quot;Programmer&quot;,&quot;2&quot;:&quot;Systems Analyst&quot;,&quot;3&quot;:&quot;Project Manager&quot;,&quot;4&quot;:&quot;QA
+              Tester&quot;,&quot;5&quot;:&quot;UI/UX
+              Designer&quot;,&quot;6&quot;:&quot;Sales&quot;,&quot;7&quot;:&quot;Marketer&quot;,&quot;8&quot;:&quot;Accountant&quot;,&quot;9&quot;:&quot;HR Officer&quot;}&apos;&gt;
+              Position&lt;/th&gt;
+              &lt;th data-field=&quot;department&quot; data-format=&quot;lookup&quot; data-filter=&quot;true&quot; data-type=&quot;select&quot;
+              data-show-all=&quot;true&quot; class=&quot;center&quot;
+              data-options=&apos;{&quot;1&quot;:&quot;Engineering&quot;,&quot;2&quot;:&quot;Business Analysis&quot;,&quot;3&quot;:&quot;Project
+              Management&quot;,&quot;4&quot;:&quot;QA&quot;,&quot;5&quot;:&quot;UI/UX&quot;,&quot;6&quot;:&quot;Sales&quot;,&quot;7&quot;:&quot;Marketing&quot;,&quot;8&quot;:&quot;Accounting&quot;,&quot;9&quot;:&quot;Human
+              Resources&quot;}&apos;&gt;
+              Department&lt;/th&gt;
+              &lt;th data-field=&quot;status&quot; data-sort=&quot;status&quot; data-filter=&quot;true&quot; data-type=&quot;select&quot; data-format=&quot;lookup&quot;
+              data-show-all=&quot;true&quot; class=&quot;center&quot; data-cell-class=&quot;right&quot;
+              data-options=&apos;{&quot;1&quot;:&quot;Working&quot;,&quot;2&quot;:&quot;On
+              Leave&quot;,&quot;3&quot;:&quot;Resigned&quot;,&quot;4&quot;:&quot;Probation&quot;}&apos;&gt;
+              Status&lt;/th&gt;
+              &lt;/tr&gt;
+              &lt;/thead&gt;
+              &lt;tbody&gt;&lt;/tbody&gt;
+              &lt;/table&gt;
+            </code></pre>
+
+
+          <div class="alert alert-info">
+            <strong>Note:</strong>
+            <ul class="compact">
+              <li><strong>Static HTML:</strong> ใช้ <code>class</code> attribute ปกติสำหรับ &lt;th&gt;, ใช้ <code>data-cell-class</code> สำหรับ &lt;td&gt;</li>
+              <li><strong>Dynamic Columns (API):</strong> ใช้ <code>class</code> สำหรับ &lt;th&gt;, ใช้ <code>cellClass</code> สำหรับ &lt;td&gt;</li>
+              <li>แยกกันเด็ดขาด ไม่มี fallback ระหว่าง th และ td</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Example 2: Table with Checkboxes and Bulk Actions -->
+      <section class="section">
+        <h2 data-i18n>Example 2: Checkboxes and Bulk Actions</h2>
+        <p>Table พร้อม checkboxes สำหรับเลือกแถวและทำ bulk actions</p>
+
+        <div class="tablebody">
+          <table class="table border fullwidth" data-table="bulk-actions-table" data-source="data/example-table-data.json" data-page-size="10" data-show-checkbox="true"
+                 data-actions='{"delete":"Delete","activate":"Activate","deactivate":"Deactivate"}' data-action-url="api/bulk-action" data-action-button="Process Selected">
+            <thead>
+              <tr>
+                <th data-field="name" data-sort="name">Name</th>
+                <th data-field="email">Email</th>
+                <th data-field="department" data-format="lookup"
+                    data-options='{"1":"Engineering","2":"Business Analysis","3":"Project Management","4":"QA","5":"UI/UX","6":"Sales","7":"Marketing","8":"Accounting","9":"Human Resources"}'>
+                  Department</th>
+                <th data-field="status" data-format="lookup" data-options='{"1":"Working","2":"On Leave","3":"Resigned","4":"Probation"}'>Status</th>
+                <th data-field="salary" data-format="number">Salary</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="code-section">
+          <h3>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;table data-table="bulk-actions-table"
+              data-source="data/example-table-data.json"
+              data-show-checkbox="true"
+              data-actions='{"delete":"Delete","activate":"Activate"}'
+              data-action-url="api/bulk-action"
+              data-action-button="Process Selected"&gt;
+              &lt;!-- table content --&gt;
+              &lt;/table&gt;</code></pre>
+
+          <h3>JavaScript:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">// Listen to action completion
+              document.addEventListener('table:action-complete', (e) => {
+              const {tableId, action, items, response} = e.detail;
+              console.log(`${action} completed for ${items.length} items`);
+
+              // Reload table data
+              TableManager.loadTableData(tableId);
+              });</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 3: Row Actions with Dropdown Menu -->
+      <section class="section">
+        <h2 data-i18n>Example 3: Row Actions with Dropdown Menu</h2>
+        <p>Table พร้อม dropdown menu สำหรับ row actions - ใช้ submenu configuration</p>
+
+        <div class="tablebody">
+          <table class="table border fullwidth" data-table="row-actions-table" data-source="data/example-table-data.json" data-page-size="10" data-row-actions='{
+                   "view": {
+                     "label": "View",
+                     "className": "btn btn-info icon-published1",
+                     "modal": {
+                       "template": "user-detail",
+                       "title": "User Details"
+                     }
+                   },
+                   "actions": {
+                     "label": "Actions",
+                     "className": "btn btn-primary dropdown icon-menu",
+                     "submenu": {
+                       "edit": {
+                         "label": "Edit",
+                         "className": "icon-edit",
+                         "modal": {
+                           "template": "user-edit",
+                           "title": "Edit User"
+                         }
+                       },
+                       "delete": {
+                         "label": "Delete",
+                         "className": "color-red icon-delete",
+                         "modal": {
+                           "template": "confirm-delete",
+                           "title": "Confirm Delete"
+                         }
+                       }
+                     }
+                   }
+                 }'>
+            <thead>
+              <tr>
+                <th data-field="id">ID</th>
+                <th data-field="name" data-sort="name">Name</th>
+                <th data-field="email">Email</th>
+                <th data-field="position" data-format="lookup"
+                    data-options='{"1":"Programmer","2":"Systems Analyst","3":"Project Manager","4":"QA Tester","5":"UI/UX Designer","6":"Sales","7":"Marketer","8":"Accountant","9":"HR Officer"}'>
+                  Position</th>
+                <th data-field="status" data-format="lookup" data-options='{"1":"Working","2":"On Leave","3":"Resigned","4":"Probation"}'>Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="code-section">
+          <h3>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;table data-table="row-actions-table"
+              data-source="data/example-table-data.json"
+              data-row-actions='{
+              "view": {
+              "label": "View",
+              "className": "btn btn-info icon-published1"
+              },
+              "actions": {
+              "label": "Actions",
+              "className": "btn btn-primary dropdown icon-menu",
+              "submenu": {
+              "edit": {
+              "label": "Edit",
+              "className": "icon-edit"
+              },
+              "delete": {
+              "label": "Delete",
+              "className": "color-red icon-delete"
+              }
+              }
+              }
+              }'&gt;
+              &lt;thead&gt;
+              &lt;tr&gt;
+              &lt;th data-field="name"&gt;Name&lt;/th&gt;
+              &lt;th data-field="email"&gt;Email&lt;/th&gt;
+              &lt;/tr&gt;
+              &lt;/thead&gt;
+              &lt;tbody&gt;&lt;/tbody&gt;
+              &lt;/table&gt;</code></pre>
+
+          <h3>Note:</h3>
+          <p class="alert alert-info">
+            <strong>Split Button:</strong> ใช้ <code>submenu</code> configuration เพื่อสร้าง split button โดยมีปุ่ม
+            <strong>View</strong> เป็นปุ่มหลัก และปุ่ม <strong>Actions</strong> dropdown (hover) ที่มี Edit และ Delete
+            ใน submenu
+          </p>
+        </div>
+      </section>
+
+      <!-- Example 4: Server-Side Pagination -->
+      <section class="section">
+        <h2 data-i18n>Example 4: Server-Side Pagination and Filtering</h2>
+        <p>Table ที่โหลดข้อมูลจาก API พร้อม server-side pagination, sorting และ filtering</p>
+
+        <div class="alert alert-info">
+          <strong>Note:</strong> ตัวอย่างนี้ต้องการ API endpoint ที่รองรับ pagination parameters (page, pageSize, sort,
+          filters)
+        </div>
+
+        <div class="tablebody">
+          <table class="table border fullwidth" data-table="server-side-table" data-source="api/v1/users" data-page-size="10" data-show-checkbox="true"
+                 data-search-columns="name,email" data-url-params="true">
+            <thead>
+              <tr>
+                <th data-field="id" data-sort="id">ID</th>
+                <th data-field="name" data-sort="name" data-filter="true">Name</th>
+                <th data-field="email" data-filter="true">Email</th>
+                <th data-field="phone">Phone</th>
+                <th data-field="status" data-sort="status" data-filter="true" data-type="select" data-format="lookup" data-options='{"0":"Inactive","1":"Active"}'>Status</th>
+                <th data-field="create_date" data-sort="create_date" data-format="date">Created</th>
+                <th data-field="lastvisited" data-sort="lastvisited" data-format="datetime">Last Visit</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="code-section">
+          <h3>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;table data-table="server-side-table"
+              data-source="api/v1/users"
+              data-page-size="10"
+              data-url-params="true"&gt;
+              &lt;thead&gt;
+              &lt;tr&gt;
+              &lt;th data-field="name" data-sort="name" data-filter="true"&gt;Name&lt;/th&gt;
+              &lt;th data-field="status" data-filter="true" data-type="select"&gt;Status&lt;/th&gt;
+              &lt;/tr&gt;
+              &lt;/thead&gt;
+              &lt;/table&gt;</code></pre>
+
+          <h3>Expected API Response:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="json">{
+              "success": true,
+              "data": [
+              {"id": 1, "name": "John Doe", "email": "john@example.com"},
+              {"id": 2, "name": "Jane Smith", "email": "jane@example.com"}
+              ],
+              "meta": {
+              "total": 1000,
+              "totalPages": 40,
+              "currentPage": 1,
+              "pageSize": 10
+              },
+              "filters": {
+              "status": [
+              {"value": "1", "text": "Active"},
+              {"value": "0", "text": "Inactive"}
+              ]
+              }
+              }</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 5: Inline Editing -->
+      <section class="section">
+        <h2 data-i18n>Example 5: Table with Date Formatting</h2>
+        <p>Table ที่แสดงข้อมูลพร้อม date formatting และ number formatting</p>
+
+        <div class="tablebody">
+          <table class="table border fullwidth" data-table="inline-edit-table" data-source="data/example-table-data.json" data-page-size="10">
+            <thead>
+              <tr>
+                <th data-field="id">ID</th>
+                <th data-field="name" data-sort="name">Name</th>
+                <th data-field="email">Email</th>
+                <th data-field="position" data-format="lookup" data-sort="position"
+                    data-options='{"1":"Programmer","2":"Systems Analyst","3":"Project Manager","4":"QA Tester","5":"UI/UX Designer","6":"Sales","7":"Marketer","8":"Accountant","9":"HR Officer"}'>
+                  Position</th>
+                <th data-field="status" data-format="lookup" data-options='{"1":"Working","2":"On Leave","3":"Resigned","4":"Probation"}'>Status</th>
+                <th data-field="joinDate" data-format="date" data-sort="joinDate">Join Date</th>
+                <th data-field="salary" data-format="number" data-sort="salary">Salary</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="code-section">
+          <h3>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;table data-table="inline-edit-table"
+              data-source="data/example-table-data.json"&gt;
+              &lt;thead&gt;
+              &lt;tr&gt;
+              &lt;th data-field="name" data-sort="name"&gt;Name&lt;/th&gt;
+              &lt;th data-field="joinDate" data-format="date"&gt;Join Date&lt;/th&gt;
+              &lt;th data-field="salary" data-format="number"&gt;Salary&lt;/th&gt;
+              &lt;/tr&gt;
+              &lt;/thead&gt;
+              &lt;/table&gt;</code></pre>
+
+          <h3>Available Formats:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">// data-format options:
+              // - "lookup": แปลงค่าตาม data-options
+              // - "date": แสดงวันที่ (YYYY-MM-DD → DD/MM/YYYY)
+              // - "datetime": แสดงวันที่และเวลา
+              // - "number": แสดงตัวเลขพร้อม comma separator
+              // - "currency": แสดงเงิน (ต้องระบุ currency ใน config)</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 6: Footer with Aggregates -->
+      <section class="section">
+        <h2 data-i18n>Example 6: Table Footer with Aggregates</h2>
+        <p>Table พร้อม footer ที่แสดงค่ารวม, ค่าเฉลี่ย, และการนับ</p>
+
+        <div class="tablebody">
+          <table class="table border fullwidth" data-table="footer-table" data-source="data/example-table-data.json" data-page-size="10" data-show-footer="true"
+                 data-footer-aggregates='{"salary":"sum","id":"count","joinDate":"count"}'>
+            <thead>
+              <tr>
+                <th data-field="id">ID</th>
+                <th data-field="name" data-sort="name">Name</th>
+                <th data-field="position" data-format="lookup"
+                    data-options='{"1":"Programmer","2":"Systems Analyst","3":"Project Manager","4":"QA Tester","5":"UI/UX Designer","6":"Sales","7":"Marketer","8":"Accountant","9":"HR Officer"}'>
+                  Position</th>
+                <th data-field="department" data-format="lookup"
+                    data-options='{"1":"Engineering","2":"Business Analysis","3":"Project Management","4":"QA","5":"UI/UX","6":"Sales","7":"Marketing","8":"Accounting","9":"Human Resources"}'>
+                  Department</th>
+                <th data-field="salary" data-format="number" data-sort="salary">Salary</th>
+                <th data-field="joinDate" data-format="date">Join Date</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
+
+        <div class="code-section">
+          <h3>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;table data-table="footer-table"
+              data-show-footer="true"
+              data-footer-aggregates='{"salary":"sum","id":"count"}'&gt;
+              &lt;thead&gt;
+              &lt;tr&gt;
+              &lt;th data-field="id"&gt;ID&lt;/th&gt;
+              &lt;th data-field="salary" data-format="number"&gt;Salary&lt;/th&gt;
+              &lt;/tr&gt;
+              &lt;/thead&gt;
+              &lt;tfoot&gt;&lt;/tfoot&gt;
+              &lt;/table&gt;</code></pre>
+
+          <h3>JavaScript Initialization:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">await TableManager.init({
+              showFooter: true,
+              footerAggregates: {
+              salary: 'sum', // แสดงผลรวม
+              quantity: 'sum',
+              rating: 'avg', // แสดงค่าเฉลี่ย
+              id: 'count' // นับจำนวน
+              }
+              });</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 7: Client-Side Data -->
+      <section class="section">
+        <h2 data-i18n>Example 7: Client-Side Data Management</h2>
+        <p>Table ที่ใช้ข้อมูลฝั่ง client โดยไม่ต้องเรียก API</p>
+
+        <div class="controls">
+          <button id="loadClientData" class="button primary">Load Sample Data</button>
+          <button id="addRow" class="button">Add Row</button>
+          <button id="clearData" class="button danger">Clear Data</button>
+        </div>
+
+        <div class="tablebody">
+          <table class="table border fullwidth" data-table="client-side-table" data-page-size="10">
+            <thead>
+              <tr>
+                <th data-field="id" data-sort="id">ID</th>
+                <th data-field="product" data-sort="product">Product</th>
+                <th data-field="category" data-sort="category" data-filter="true" data-type="select">Category</th>
+                <th data-field="price" data-sort="price" data-format="number">Price</th>
+                <th data-field="stock" data-sort="stock">Stock</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="code-section">
+          <h3>JavaScript Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">// Client-side data
+              const products = [
+              { id: 1, product: 'Laptop', category: 'Electronics', price: 999, stock: 50 },
+              { id: 2, product: 'Mouse', category: 'Accessories', price: 25, stock: 200 },
+              { id: 3, product: 'Keyboard', category: 'Accessories', price: 75, stock: 150 }
+              ];
+
+              // Set data to table
+              TableManager.setData('client-side-table', products);
+
+              // Add new row
+              const newProduct = {
+              id: products.length + 1,
+              product: 'Monitor',
+              category: 'Electronics',
+              price: 299,
+              stock: 75
+              };
+              products.push(newProduct);
+              TableManager.setData('client-side-table', products);
+
+              // Get all data
+              const allData = TableManager.getData('client-side-table');
+
+              // Get filtered data
+              const filteredData = TableManager.getData('client-side-table', true);</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 8: Export Functionality -->
+      <section class="section">
+        <h2 data-i18n>Example 8: Export Data</h2>
+        <p>Export table data เป็น CSV, Excel, หรือ JSON</p>
+
+        <div class="controls">
+          <button id="exportCSV" class="button">Export CSV</button>
+          <button id="exportExcel" class="button">Export Excel</button>
+          <button id="exportJSON" class="button">Export JSON</button>
+          <button id="exportFiltered" class="button primary">Export Filtered Data</button>
+        </div>
+
+        <div class="tablebody">
+          <table class="table border fullwidth" data-table="export-table" data-source="data/example-table-data.json" data-page-size="10">
+            <thead>
+              <tr>
+                <th data-field="id">ID</th>
+                <th data-field="name" data-sort="name" data-filter="true">Name</th>
+                <th data-field="email" data-filter="true">Email</th>
+                <th data-field="department" data-format="lookup" data-filter="true" data-type="select"
+                    data-options='{"1":"Engineering","2":"Business Analysis","3":"Project Management","4":"QA","5":"UI/UX","6":"Sales","7":"Marketing","8":"Accounting","9":"Human Resources"}'>
+                  Department</th>
+                <th data-field="status" data-format="lookup" data-filter="true" data-type="select" data-options='{"1":"Working","2":"On Leave","3":"Resigned","4":"Probation"}'>
+                  Status</th>
+                <th data-field="salary" data-format="number">Salary</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="code-section">
+          <h3>JavaScript Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">// Export to CSV
+              document.getElementById('exportCSV').addEventListener('click', () => {
+              TableManager.exportData('export-table', 'csv', {
+              filename: 'employees.csv'
+              });
+              });
+
+              // Export to Excel (server-side)
+              document.getElementById('exportExcel').addEventListener('click', () => {
+              TableManager.exportData('export-table', 'excel', {
+              filename: 'employees.xlsx'
+              });
+              });
+
+              // Export to JSON
+              document.getElementById('exportJSON').addEventListener('click', () => {
+              TableManager.exportData('export-table', 'json', {
+              filename: 'employees.json'
+              });
+              });
+
+              // Export filtered data only
+              document.getElementById('exportFiltered').addEventListener('click', () => {
+              TableManager.exportData('export-table', 'csv', {
+              filename: 'filtered_employees.csv',
+              filtered: true
+              });
+              });</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 9: Filter Actions -->
+      <section class="section">
+        <h2 data-i18n>Example 9: Filter Actions (Table-level Actions)</h2>
+        <p>ปุ่มและลิงค์ที่ส่ง filter parameters ไปยัง action URL - สำหรับ export, report generation, หรือ bulk
+          operations</p>
+
+        <div class="alert alert-info">
+          <strong>Note:</strong> เลือก filter ก่อน แล้วกดปุ่ม - filter params จะถูกส่งไปพร้อม request
+        </div>
+
+        <div class="tablebody">
+          <table class="table border fullwidth" data-table="filter-actions-table" data-source="data/example-table-data.json" data-page-size="10" data-filter-actions='{
+                   "export": {
+                     "label": "Export Filtered",
+                     "url": "api/export",
+                     "type": "button",
+                     "className": "btn-primary icon-download"
+                   },
+                   "report": {
+                     "label": "View Report",
+                     "url": "/reports",
+                     "type": "link",
+                     "className": "btn-info icon-published1",
+                     "target": "_blank"
+                   },
+                   "print": {
+                     "label": "Print",
+                     "url": "api/print",
+                     "type": "button",
+                     "className": "btn-default icon-print",
+                     "confirm": "Are you sure you want to print this report?"
+                   }
+                 }'>
+            <thead>
+              <tr>
+                <th data-field="id" data-sort="id">ID</th>
+                <th data-field="name" data-sort="name" data-filter="true" data-type="text">Name</th>
+                <th data-field="department" data-format="lookup" data-filter="true" data-type="select" data-show-all="true"
+                    data-options='{"1":"Engineering","2":"Business Analysis","3":"Project Management","4":"QA","5":"UI/UX","6":"Sales","7":"Marketing","8":"Accounting","9":"Human Resources"}'>
+                  Department</th>
+                <th data-field="status" data-sort="status" data-filter="true" data-type="select" data-format="lookup" data-show-all="true"
+                    data-options='{"1":"Working","2":"On Leave","3":"Resigned","4":"Probation"}'>
+                  Status</th>
+                <th data-field="salary" data-format="number" data-sort="salary">Salary</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="code-section">
+          <h3>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;table data-table="filter-actions-table"
+              data-source="api/users"
+              data-filter-actions='{
+              "export": {
+              "label": "Export Filtered",
+              "url": "api/export",
+              "type": "button",
+              "className": "btn-primary"
+              },
+              "report": {
+              "label": "View Report",
+              "url": "/reports",
+              "type": "link",
+              "className": "btn-info",
+              "target": "_blank"
+              }
+              }'&gt;
+              &lt;!-- table content --&gt;
+              &lt;/table&gt;</code></pre>
+
+          <h3>Filter Actions Options:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">// data-filter-actions configuration
+              {
+              "actionKey": {
+              "label": "Button Text", // ข้อความบน button/link
+              "url": "api/action", // URL สำหรับ action (required)
+              "type": "button", // "button" (POST) หรือ "link" (GET redirect)
+              "className": "btn-primary icon-xxx", // CSS classes
+              "target": "_self", // สำหรับ link: "_blank" เปิด tab ใหม่
+              "confirm": "Are you sure?" // ข้อความยืนยัน (optional)
+              }
+              }
+
+              // Button จะส่ง POST request:
+              {
+              "action": "export",
+              "tableId": "filter-actions-table",
+              "filters": {"status": "1", "department": "5"},
+              "sort": {"name": "asc"}
+              }
+
+              // Link จะ redirect ไปยัง:
+              // /reports?status=1&department=5</code></pre>
+
+          <h3>Event Listener:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">// Listen to filter action events
+              document.addEventListener('table:filterAction', (e) => {
+              const {tableId, action, type, params, response} = e.detail;
+              console.log(`Filter action: ${action} (${type})`);
+              console.log('Filters:', params);
+              });</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 10: Row Drag & Editable Rows -->
+      <section class="section">
+        <h2 data-i18n>Example 10: Row Drag & Editable Rows</h2>
+        <p>สาธิตการเปิด/ปิดการลากแถวด้วย drag handle (แสดงเมื่อแก้ไขแถวได้) พร้อม UX ล่าสุด: ghost
+          เป็นไอคอนเล็กติดเคอร์เซอร์, placeholder เส้นประ และล็อกการลากแนวตั้ง</p>
+
+        <div class="controls">
+          <button id="enableRowSort" class="button primary">Enable Row Drag</button>
+          <button id="disableRowSort" class="button">Disable Row Drag</button>
+          <button id="resetRowOrder" class="button">Reload Data</button>
+        </div>
+
+        <div class="tablebody">
+          <table class="table border fullwidth" data-table="row-sortable-table" data-source="data/example-table-data.json" data-page-size="10" data-editable-rows="true"
+                 data-row-sortable="true">
+            <thead>
+              <tr>
+                <th data-field="id" data-sort="id">ID</th>
+                <th data-field="name" data-sort="name">Name</th>
+                <th data-field="department" data-format="lookup"
+                    data-options='{"1":"Engineering","2":"Business Analysis","3":"Project Management","4":"QA","5":"UI/UX","6":"Sales","7":"Marketing","8":"Accounting","9":"Human Resources"}'>
+                  Department</th>
+                <th data-field="status" data-format="lookup" data-options='{"1":"Working","2":"On Leave","3":"Resigned","4":"Probation"}'>Status</th>
+                <th data-field="salary" data-format="number" data-sort="salary">Salary</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="code-section">
+          <h3>JavaScript Toggle:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">const tableId = 'row-sortable-table';
+
+              document.getElementById('enableRowSort').onclick = () => TableManager.enableRowSort(tableId);
+              document.getElementById('disableRowSort').onclick = () => TableManager.disableRowSort(tableId);
+              document.getElementById('resetRowOrder').onclick = () => TableManager.loadTableData(tableId);
+
+              // Drag handles appear only when allowRowModification is true.
+              // Dragging is vertical-only with dashed placeholder and icon ghost at cursor.</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 11: Cell Elements (ElementManager) -->
+      <section class="section">
+        <h2 data-i18n>Example 11: Cell Elements (ElementManager)</h2>
+        <p>เรนเดอร์ input/select/textarea ในเซลล์ด้วย <code>data-cell-element</code> (หรือ <code>data-type</code> shorthand)
+          พร้อม config ส่งต่อไปยัง ElementManager</p>
+
+        <div class="tablebody">
+          <table class="table border fullwidth" data-table="element-table" data-source="data/example-table-data.json" data-page-size="10" data-editable-rows="true">
+            <thead>
+              <tr>
+                <th data-field="name" data-cell-element="text" data-placeholder="Full name" data-max-length="120">Name</th>
+                <th data-field="email" data-type="email" data-placeholder="user@example.com">Email</th>
+                <th data-field="status" data-cell-element="select" data-options='{"1":"Working","2":"On Leave","3":"Resigned","4":"Probation"}' data-allow-empty="true">Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="code-section">
+          <h3>Key Attributes:</h3>
+          <ul>
+            <li><code>data-cell-element</code> หรือ <code>data-type</code> (shorthand) เลือกชนิด control</li>
+            <li><code>data-options</code> สำหรับ select, <code>data-allow-empty</code> เพื่อแสดงตัวเลือกว่าง</li>
+            <li><code>data-max-length</code> ใช้เมื่อค่ามากกว่า 0 เท่านั้น</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Example 12: Dynamic Columns -->
+      <section class="section">
+        <h2 data-i18n>Example 12: Dynamic Table Columns</h2>
+        <p>Table headers generated automatically from API column metadata - perfect for multi-language tables or dynamic schemas</p>
+
+        <div class="alert alert-info">
+          <strong>Note:</strong> ตัวอย่างนี้ใช้ mock API response แบบ static file เพื่อสาธิตการทำงาน
+        </div>
+
+        <div class="tablebody">
+          <table class="table border fullwidth" data-table="dynamic-columns-table" data-source="data/dynamic-columns-example.json" data-dynamic-columns="true" data-page-size="10">
+            <!-- Headers will be generated from API response -->
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="code-section">
+          <h3>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;table data-table="dynamic-columns-table"
+              data-source="api/languages"
+              data-dynamic-columns="true"&gt;
+              &lt;!-- NO thead needed - generated from API --&gt;
+              &lt;tbody&gt;&lt;/tbody&gt;
+              &lt;/table&gt;</code></pre>
+
+          <h3>API Response Format:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="json">{
+              "columns": [
+              {
+              "field": "id",
+              "label": "ID",
+              "sort": "id",
+              "type": "number",
+              "i18n": true
+              },
+              {
+              "field": "key",
+              "label": "Key",
+              "sort": "key",
+              "searchable": true,
+              "i18n": true
+              },
+              {
+              "field": "th",
+              "label": "TH",
+              "sort": "th",
+              "searchable": true,
+              "i18n": true
+              },
+              {
+              "field": "en",
+              "label": "EN",
+              "sort": "en",
+              "searchable": true,
+              "i18n": true
+              }
+              ],
+              "data": [
+              {"id": 1, "key": "Hello", "th": "สวัสดี", "en": "Hello"},
+              {"id": 2, "key": "Goodbye", "th": "ลาก่อน", "en": "Goodbye"}
+              ]
+              }</code></pre>
+
+          <h3>PHP Example:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="php">// Auto-detect language columns from database
+              $columns = [
+              ['field' => 'id', 'label' => 'ID', 'sort' => 'id', 'type' => 'number'],
+              ['field' => 'key', 'label' => 'Key', 'sort' => 'key', 'searchable' => true]
+              ];
+
+              $language = \Kotchasan\DB::create()->first('language');
+              foreach ($language as $key => $value) {
+              if (!in_array($key, ['id', 'key', 'type', 'js'])) {
+              $columns[] = [
+              'field' => $key,
+              'label' => strtoupper($key),
+              'sort' => $key,
+              'searchable' => true
+              ];
+              }
+              }
+
+              return ['columns' => $columns, 'data' => $data];</code></pre>
+
+          <h3>Benefits:</h3>
+          <ul>
+            <li>✅ <strong>Zero HTML Changes</strong>: เพิ่ม/ลด คอลัมน์โดยไม่แก้ template</li>
+            <li>✅ <strong>Multi-Language Support</strong>: เหมาะสำหรับตารางที่มีหลายภาษา</li>
+            <li>✅ <strong>Database-Driven</strong>: อ่านโครงสร้างจากฐานข้อมูลอัตโนมัติ</li>
+            <li>✅ <strong>Full Features</strong>: รองรับ sort, filter, search, validation ครบทุกอย่าง</li>
+          </ul>
+
+          <h3>Column Styling with class and cellClass:</h3>
+          <p>แยกการกำหนด CSS class ระหว่าง header และ body cells:</p>
+          <pre><code data-component="syntaxhighlighter" data-language="json">{
+              "columns": [
+              {
+              "field": "id",
+              "label": "ID",
+              "class": "header-mono", // CSS class for &lt;th&gt; only
+              "cellClass": "mono small" // CSS class for &lt;td&gt; only
+              },
+              {
+              "field": "name",
+              "label": "Name",
+              "class": "header-bold",
+              "cellClass": "text-bold"
+              },
+              {
+              "field": "status",
+              "label": "Status",
+              "cellClass": "badge text-center" // Only td gets class
+              }
+              ]
+              }</code></pre>
+
+          <div class="alert alert-info">
+            <strong>Note:</strong>
+            <ul class="compact">
+              <li><code>class</code> attribute ใช้กับ <code>&lt;th&gt;</code> เท่านั้น</li>
+              <li><code>cellClass</code> attribute ใช้กับ <code>&lt;td&gt;</code> เท่านั้น</li>
+              <li>ทั้งสองแยกกันเด็ดขาด ไม่มี fallback</li>
+              <li>สามารถกำหนดแค่ตัวใดตัวหนึ่ง หรือทั้งคู่ก็ได้</li>
+            </ul>
+          </div>
+
+
+          <h3>Use Cases:</h3>
+          <ul>
+            <li><strong>Language Tables</strong>: เพิ่ม/ลด ภาษาได้โดยแค่ ALTER TABLE</li>
+            <li><strong>Custom Fields</strong>: Schema ที่ผู้ใช้กำหนดเองได้</li>
+            <li><strong>Multi-Tenant</strong>: แต่ละ tenant มี columns ต่างกัน</li>
+            <li><strong>Report Tables</strong>: Columns ขึ้นอยู่กับ report type</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Initialization Code -->
+      <section class="section">
+        <h2>TableManager Initialization</h2>
+        <p>Global initialization และ configuration สำหรับทุก table</p>
+
+        <div class="code-section">
+          <h3>Basic Initialization:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">// เริ่มต้น TableManager
+              await TableManager.init({
+              pageSizes: [10, 25, 50, 100],
+              urlParams: true,
+              showCheckbox: false,
+              confirmDelete: true
+              });</code></pre>
+
+          <h3>Complete Configuration:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">await TableManager.init({
+              debug: false, // เปิด debug logging
+              urlParams: true, // บันทึก state ลง URL
+              pageSizes: [10, 25, 50, 100], // ตัวเลือก page sizes
+              showCaption: true, // แสดง table caption
+              showCheckbox: false, // แสดง checkboxes
+              showFooter: false, // แสดง footer
+              footerAggregates: {}, // Footer calculations
+              searchColumns: [], // Columns สำหรับค้นหา
+              persistColumnWidths: true, // บันทึกความกว้าง columns
+              allowRowModification: false, // อนุญาต inline editing
+              confirmDelete: true, // ยืนยันก่อนลบ
+              source: '', // Default data source
+              actionUrl: '', // URL สำหรับ bulk actions
+              actionButton: 'Process' // Label ของปุ่ม action
+              });</code></pre>
+        </div>
+      </section>
+
+      <!-- Events Documentation -->
+      <section class="section">
+        <h2>Event Handling</h2>
+        <p>TableManager emit events สำหรับ tracking และ custom handling</p>
+
+        <div class="code-section">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">// Table loaded
+              document.addEventListener('table:loaded', (e) => {
+              const {tableId, data, meta} = e.detail;
+              console.log(`Table ${tableId} loaded with ${data.length} records`);
+              });
+
+              // Table sorted
+              document.addEventListener('table:sorted', (e) => {
+              const {tableId, field, direction} = e.detail;
+              console.log(`Sorted by ${field} ${direction}`);
+              });
+
+              // Table filtered
+              document.addEventListener('table:filtered', (e) => {
+              const {tableId, filters} = e.detail;
+              console.log('Active filters:', filters);
+              });
+
+              // Page changed
+              document.addEventListener('table:page-changed', (e) => {
+              const {tableId, page, pageSize} = e.detail;
+              console.log(`Page changed to ${page}`);
+              });
+
+              // Selection changed
+              document.addEventListener('table:selection-changed', (e) => {
+              const {tableId, selected, count} = e.detail;
+              console.log(`${count} rows selected`);
+              });
+
+              // Field changed (inline editing)
+              document.addEventListener('table:field-changed', (e) => {
+              const {tableId, field, value, oldValue, rowData, success} = e.detail;
+              if (success) {
+              console.log(`${field} updated successfully`);
+              }
+              });
+
+              // Bulk action complete
+              document.addEventListener('table:action-complete', (e) => {
+              const {tableId, action, items, response} = e.detail;
+              console.log(`${action} completed for ${items.length} items`);
+              });</code></pre>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+  <script src="../../Now/dist/now.table.min.js"></script>
+  <script src="main.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</body>
+
+</html>

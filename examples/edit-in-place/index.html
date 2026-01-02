@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EditInPlaceManager - Now.js Examples</title>
+  <meta name="description" content="Learn how to build a reactive counter component with Now.js. Explore state management, event handling, and data binding in action.">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>Edit In Place</h1>
+        <p class="text-gradient" data-i18n>Click any text to edit it inline without opening a form or modal</p>
+      </div>
+    </section>
+    <div class="container">
+      <!-- Section 1: Basic Usage -->
+      <section class="demo-section">
+        <h2 data-i18n>1. Basic Text Editing</h2>
+        <p class="description" data-i18n>Click on any text below to edit it directly</p>
+
+        <div class="demo-area">
+          <div class="demo-grid">
+            <div class="demo-card">
+              <label data-i18n>Username</label>
+              <span data-component="editinplace" data-field="username" class="editable-value">johndoe</span>
+            </div>
+
+            <div class="demo-card">
+              <label data-i18n>Email</label>
+              <span data-component="editinplace" data-field="email" data-pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}" class="editable-value">john@example.com</span>
+            </div>
+
+            <div class="demo-card">
+              <label data-i18n>Phone</label>
+              <span data-component="editinplace" data-field="phone" class="editable-value">081-234-5678</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-example">
+          <h4 data-i18n>HTML Code</h4>
+          <pre data-component="syntaxhighlighter" data-auto-indent="false"><code class="language-html">&lt;span data-component="editinplace"
+              data-field="username"&gt;johndoe&lt;/span&gt;
+
+              &lt;!-- With input type --&gt;
+              &lt;span data-component="editinplace"
+              data-pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}"
+              data-field="email"&gt;john@example.com&lt;/span&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 2: HTML5 Input Types & Validation -->
+      <section class="demo-section">
+        <h2 data-i18n>2. HTML5 Input Types & Validation</h2>
+        <p class="description" data-i18n>Use HTML5 input attributes for client-side validation. Server handles final validation and returns error if needed.</p>
+
+        <div class="demo-area">
+          <div class="demo-grid">
+            <div class="demo-card">
+              <label data-i18n>Number (required)</label>
+              <span data-component="editinplace" data-pattern="[0-9]+" data-minlength="1" data-maxlength="3" data-required data-placeholder="Enter age" data-field="age" class="editable-value">25</span>
+            </div>
+
+            <div class="demo-card">
+              <label data-i18n>Email Pattern</label>
+              <span data-component="editinplace" data-pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}" data-placeholder="user@example.com" data-field="user_email" class="editable-value">user@example.com</span>
+            </div>
+
+            <div class="demo-card">
+              <label data-i18n>Phone Pattern</label>
+              <span data-component="editinplace" data-pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" data-placeholder="081-234-5678" data-field="phone" class="editable-value">081-234-5678</span>
+            </div>
+
+            <div class="demo-card">
+              <label data-i18n>Username (3-20 chars)</label>
+              <span data-component="editinplace" data-minlength="3" data-maxlength="20" data-placeholder="Enter username" data-field="username" class="editable-value">johndoe</span>
+            </div>
+          </div>
+
+          <div class="alert info">
+            <strong data-i18n>Note:</strong>
+            <span data-i18n>Uses pattern, minlength, maxlength, placeholder, and required attributes. Server should validate and return error for final validation.</span>
+          </div>
+        </div>
+
+        <div class="code-example">
+          <h4 data-i18n>HTML Code</h4>
+          <pre data-component="syntaxhighlighter" data-auto-indent="false"><code class="language-html">&lt;!-- Pattern validation --&gt;
+              &lt;span data-component="editinplace"
+              data-pattern="[0-9]+"
+              data-required
+              data-placeholder="Enter age"&gt;25&lt;/span&gt;
+
+              &lt;!-- Email pattern --&gt;
+              &lt;span data-component="editinplace"
+              data-pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}"
+              data-placeholder="user@example.com"&gt;user@example.com&lt;/span&gt;
+
+              &lt;!-- Length validation --&gt;
+              &lt;span data-component="editinplace"
+              data-minlength="3"
+              data-maxlength="20"&gt;johndoe&lt;/span&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 3: AJAX Auto-Save -->
+      <section class="demo-section">
+        <h2 data-i18n>3. AJAX Auto-Save</h2>
+        <p class="description" data-i18n>Automatically save changes to server via AJAX</p>
+
+        <div class="demo-area">
+          <div class="demo-grid">
+            <div class="demo-card">
+              <label data-i18n>Product Name</label>
+              <span data-component="editinplace" data-ajax-url="api/save.php" data-field="product_name" class="editable-value">iPhone 15 Pro</span>
+            </div>
+
+            <div class="demo-card">
+              <label data-i18n>Product Price</label>
+              <span data-component="editinplace" data-ajax-url="api/save.php" data-field="product_price" class="editable-value">39,900.00</span>
+            </div>
+          </div>
+
+          <div class="alert info">
+            <strong data-i18n>Note:</strong>
+            <span data-i18n>Changes are automatically saved to the server when you finish editing. Server will format the price with 2 decimals.</span>
+          </div>
+        </div>
+
+        <div class="code-example">
+          <h4 data-i18n>HTML Code</h4>
+          <pre data-component="syntaxhighlighter" data-auto-indent="false"><code class="language-html">&lt;!-- AJAX is auto-enabled when data-ajax-url is provided --&gt;
+              &lt;span data-component="editinplace"
+              data-ajax-url="api/save.php"
+              data-field="product_name"&gt;iPhone 15 Pro&lt;/span&gt;
+
+              &lt;!-- Server can return formatted value --&gt;
+              &lt;span data-component="editinplace"
+              data-ajax-url="api/save.php"
+              data-field="product_price"&gt;39,900.00&lt;/span&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 4: JavaScript Callbacks -->
+      <section class="demo-section">
+        <h2 data-i18n>4. JavaScript Callbacks</h2>
+        <p class="description" data-i18n>Handle save events with custom JavaScript functions</p>
+
+        <div class="demo-area">
+          <div class="demo-grid">
+            <div class="demo-card">
+              <label data-i18n>With Callback</label>
+              <span data-component="editinplace" data-callback="handleSave" data-field="with_callback" class="editable-value">Edit me to see callback</span>
+            </div>
+          </div>
+
+          <div id="callback-result" class="alert success" style="display: none;">
+            <span data-i18n>Saved successfully!</span>
+          </div>
+        </div>
+
+        <div class="code-example">
+          <h4 data-i18n>HTML + JavaScript</h4>
+          <pre data-component="syntaxhighlighter" data-auto-indent="false"><code class="language-html">&lt;span data-component="editinplace"
+              data-callback="handleSave"
+              data-field="with_callback"&gt;Edit me&lt;/span&gt;
+
+              &lt;script&gt;
+              function handleSave(newValue, instance) {
+              console.log('Saved:', newValue);
+              // Return false to cancel save
+              // Return new value to modify before saving
+              return true;
+              }
+              &lt;/script&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 5: Table Integration -->
+      <section class="demo-section">
+        <h2 data-i18n>5. Table Integration</h2>
+        <p class="description" data-i18n>Use edit-in-place within tables for quick editing</p>
+
+        <div class="tablebody">
+          <table class="border fullwidth">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th data-i18n>Name</th>
+                <th data-i18n>Email</th>
+                <th data-i18n>Status</th>
+                <th data-i18n>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>
+                  <span data-component="editinplace" data-field="name" class="editable-value">John Doe</span>
+                </td>
+                <td>
+                  <span data-component="editinplace" data-field="email" class="editable-value">john@example.com</span>
+                </td>
+                <td>
+                  <span data-component="editinplace" data-field="status" class="editable-value status-active">Active</span>
+                </td>
+                <td>
+                  <span data-component="editinplace" data-field="role" class="editable-value">Admin</span>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>
+                  <span data-component="editinplace" data-field="name" class="editable-value">Jane Smith</span>
+                </td>
+                <td>
+                  <span data-component="editinplace" data-field="email" class="editable-value">jane@example.com</span>
+                </td>
+                <td>
+                  <span data-component="editinplace" data-field="status" class="editable-value status-inactive">Inactive</span>
+                </td>
+                <td>
+                  <span data-component="editinplace" data-field="role" class="editable-value">Editor</span>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>
+                  <span data-component="editinplace" data-field="name" class="editable-value">Bob Wilson</span>
+                </td>
+                <td>
+                  <span data-component="editinplace" data-field="email" class="editable-value">bob@example.com</span>
+                </td>
+                <td>
+                  <span data-component="editinplace" data-field="status" class="editable-value status-active">Active</span>
+                </td>
+                <td>
+                  <span data-component="editinplace" data-field="role" class="editable-value">Viewer</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Data Attributes Reference -->
+      <section class="demo-section">
+        <h2 data-i18n>Data Attributes Reference</h2>
+
+        <div class="tablebody">
+          <table class="border fullwidth">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th data-i18n>Description</th>
+                <th data-i18n>Values</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>data-component="editinplace"</code></td>
+                <td data-i18n>Enable edit-in-place component</td>
+                <td><code>editinplace</code></td>
+              </tr>
+              <tr>
+                <td><code>data-pattern</code></td>
+                <td data-i18n>Regex pattern for validation</td>
+                <td>Regex string</td>
+              </tr>
+              <tr>
+                <td><code>data-minlength</code></td>
+                <td data-i18n>Minimum length of text</td>
+                <td>Number</td>
+              </tr>
+              <tr>
+                <td><code>data-maxlength</code></td>
+                <td data-i18n>Maximum length of text</td>
+                <td>Number</td>
+              </tr>
+              <tr>
+                <td><code>data-placeholder</code></td>
+                <td data-i18n>Placeholder text for input</td>
+                <td>Text string</td>
+              </tr>
+              <tr>
+                <td><code>data-required</code></td>
+                <td data-i18n>Require a value (boolean attribute)</td>
+                <td>No value needed</td>
+              </tr>
+              <tr>
+                <td><code>data-field</code></td>
+                <td data-i18n>Field name for server</td>
+                <td>String</td>
+              </tr>
+              <tr>
+                <td><code>data-ajax-save</code></td>
+                <td data-i18n>Enable AJAX save</td>
+                <td><code>true</code></td>
+              </tr>
+              <tr>
+                <td><code>data-ajax-url</code></td>
+                <td data-i18n>AJAX endpoint URL</td>
+                <td>URL string</td>
+              </tr>
+              <tr>
+                <td><code>data-callback</code></td>
+                <td data-i18n>Global function name for onSave</td>
+                <td>Function name</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Keyboard Shortcuts -->
+      <section class="demo-section">
+        <h2 data-i18n>Keyboard Shortcuts</h2>
+
+        <div class="tablebody">
+          <table class="border fullwidth">
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th data-i18n>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><kbd>Enter</kbd></td>
+                <td data-i18n>Start editing / Save changes (for input)</td>
+              </tr>
+              <tr>
+                <td><kbd>Space</kbd></td>
+                <td data-i18n>Start editing (when focused)</td>
+              </tr>
+              <tr>
+                <td><kbd>Escape</kbd></td>
+                <td data-i18n>Cancel editing and restore original value</td>
+              </tr>
+              <tr>
+                <td><kbd>Tab</kbd></td>
+                <td data-i18n>Move to next editable element</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

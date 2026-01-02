@@ -1,0 +1,22 @@
+/* Counter Component Styles */
+.counter-app {
+  text-align: center;
+  padding: var(--space-8);
+}
+.counter-display {
+  font-size: 4rem;
+  font-weight: bold;
+}
+.counter-controls {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  margin-bottom: var(--space-4);
+}
+.counter-controls button {
+  font-size: 1.5em;
+}
+.counter-number {
+  font-family: var(--font-family-mono);
+  color: var(--color-primary);
+}

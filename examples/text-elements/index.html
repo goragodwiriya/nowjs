@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation - Now.js Example</title>
+  <meta name="description" content="Form validation example with Now.js - Coming Soon">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <!-- Header Section -->
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>Text Elements</h1>
+        <p class="text-gradient" data-i18n>Comprehensive examples of TextElement and its subclasses with autocomplete</p>
+      </div>
+    </section>
+
+    <article class="container content">
+
+      <!-- Overview Section -->
+      <section class="section">
+        <h2 class="icon-info">Overview</h2>
+        <p>Now.js provides powerful text input elements with various features:</p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>📝 TextElement</h3>
+            <p>Basic text input with autocomplete support</p>
+            <code>data-element="text"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>📧 EmailElement</h3>
+            <p>Email validation and formatting</p>
+            <code>data-element="email"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>🔗 UrlElement</h3>
+            <p>URL validation</p>
+            <code>data-element="url"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>👤 UsernameElement</h3>
+            <p>Username or email validation</p>
+            <code>data-element="username"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>🔍 SearchElement</h3>
+            <p>Search input with live results</p>
+            <code>data-element="search"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>📱 MaskElement</h3>
+            <p>Input masking for phone, date, ID card</p>
+            <code>data-element="mask"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>🏷️ TagsElement</h3>
+            <p>Multiple tags/chips input</p>
+            <code>data-element="tags"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>🔤 TextareaElement</h3>
+            <p>Multi-line text with auto-resize</p>
+            <code>data-element="textarea"</code>
+          </div>
+        </div>
+      </section>
+
+      <!-- Demo 1: Basic Text with Static Autocomplete -->
+      <section class="section">
+        <h2 class="icon-published1">Demo 1: Static Autocomplete</h2>
+        <p>Autocomplete from static datalist or inline options:</p>
+
+        <form method="POST" action="save.php" data-form="staticAutocomplete" data-validate="true" data-csrf="false" data-reset="false" data-ajax-submit="true">
+          <fieldset>
+            <legend>
+              <h4>Static Autocomplete Examples</h4>
+            </legend>
+
+            <!-- From Datalist -->
+            <div class="form-row">
+              <div>
+                <label for="country">Country (from Datalist)</label>
+                <span class="form-control icon-world">
+                  <input type="text" id="country" name="country" data-element="text" data-autocomplete="true" list="country-list" placeholder="พิมพ์ชื่อประเทศ...">
+                  <datalist id="country-list">
+                    <option value="TH" label="Thailand">Thailand</option>
+                    <option value="JP" label="Japan">Japan</option>
+                    <option value="KR" label="South Korea">South Korea</option>
+                    <option value="CN" label="China">China</option>
+                    <option value="US" label="United States">United States</option>
+                    <option value="UK" label="United Kingdom">United Kingdom</option>
+                    <option value="DE" label="Germany">Germany</option>
+                    <option value="FR" label="France">France</option>
+                    <option value="IT" label="Italy">Italy</option>
+                    <option value="SG" label="Singapore">Singapore</option>
+                  </datalist>
+                </span>
+                <div class="comment">Select a country (uses &lt;datalist&gt;)</div>
+              </div>
+
+              <!-- From JavaScript Global Variable -->
+              <div>
+                <label for="programming_language">Programming Language</label>
+                <span class="form-control icon-code">
+                  <input type="text" id="programming_language" name="programming_language" data-element="text" data-autocomplete="true" data-source="PROGRAMMING_LANGUAGES" data-min-length="1" placeholder="พิมพ์ชื่อภาษา...">
+                </span>
+                <div class="comment">Source from global variable (PROGRAMMING_LANGUAGES)</div>
+              </div>
+            </div>
+
+            <!-- Custom Callback -->
+            <div class="form-row">
+              <div>
+                <label for="fruit">Fruit (Custom Render)</label>
+                <span class="form-control icon-food">
+                  <input type="text" id="fruit" name="fruit" data-element="text" data-autocomplete="true" data-source="FRUITS" data-callback="renderFruitItem" data-min-length="1" placeholder="พิมพ์ชื่อผลไม้...">
+                </span>
+                <div class="comment">Custom rendering with emoji icons</div>
+              </div>
+
+              <!-- With Max Results -->
+              <div>
+                <label for="city">City (Max 5 results)</label>
+                <span class="form-control icon-location">
+                  <input type="text" id="city" name="city" data-element="text" data-autocomplete="true" data-source="CITIES" data-max-results="5" data-min-length="1" placeholder="พิมพ์ชื่อเมือง...">
+                </span>
+                <div class="comment">Limited to 5 results in dropdown</div>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="submit right">
+            <button type="reset" class="btn">Reset</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+
+        <h3>Code Example</h3>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+            &lt;!-- From Datalist --&gt;
+            &lt;input type="text" name="country"
+            data-element="text"
+            data-autocomplete="true"
+            list="country-list"&gt;
+            &lt;datalist id="country-list"&gt;
+            &lt;option value="TH" label="Thailand"&gt;Thailand&lt;/option&gt;
+            &lt;option value="JP" label="Japan"&gt;Japan&lt;/option&gt;
+            &lt;/datalist&gt;
+
+            &lt;!-- From Global Variable --&gt;
+            &lt;input type="text" name="language"
+            data-element="text"
+            data-autocomplete="true"
+            data-source="PROGRAMMING_LANGUAGES"
+            data-min-length="1"&gt;
+          </code></pre>
+      </section>
+
+      <!-- Demo 2: API Autocomplete -->
+      <section class="section">
+        <h2 class="icon-cloud">Demo 2: API Autocomplete</h2>
+        <p>Load autocomplete options from API endpoint:</p>
+
+        <form method="POST" action="save.php" data-form="apiAutocomplete" data-validate="true" data-csrf="false" data-reset="false" data-ajax-submit="true">
+          <fieldset>
+            <legend>
+              <h4>API-Based Autocomplete</h4>
+            </legend>
+
+            <!-- Simple API Autocomplete -->
+            <div>
+              <label for="product">Product (from API)</label>
+              <span class="form-control icon-cart">
+                <input type="text" id="product" name="product" data-element="text" data-autocomplete="true" data-source="api/products.php" data-min-length="2" data-delay="300" placeholder="ค้นหาสินค้า...">
+              </span>
+              <div class="comment">Loads products from API on each keystroke</div>
+            </div>
+
+            <!-- API with Parameters -->
+            <div>
+              <label for="employee">Employee (Search API)</label>
+              <span class="form-control icon-user">
+                <input type="text" id="employee" name="employee" data-element="text" data-autocomplete="true" data-source="api/employees.php" data-min-length="2" data-delay="500" placeholder="ค้นหาพนักงาน...">
+              </span>
+              <div class="comment">500ms delay for API rate limiting</div>
+            </div>
+
+            <!-- API with Custom Response Format -->
+            <div>
+              <label for="customer">Customer (Full Info)</label>
+              <span class="form-control icon-users">
+                <input type="text" id="customer" name="customer" data-element="text" data-autocomplete="true" data-source="api/customers.php" data-callback="renderCustomerItem" data-min-length="2" placeholder="ค้นหาลูกค้า...">
+              </span>
+              <div class="comment">Custom rendering with multiple fields (name, email, phone)</div>
+            </div>
+          </fieldset>
+
+          <fieldset class="submit right">
+            <button type="reset" class="btn">Reset</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </fieldset>
+        </form>
+
+        <h3>Code Example</h3>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+            &lt;!-- Simple API Autocomplete --&gt;
+            &lt;input type="text" name="product"
+            data-element="text"
+            data-autocomplete="true"
+            data-source="api/products.php"
+            data-min-length="2"
+            data-delay="300"&gt;
+
+            &lt;!-- With Custom Callback --&gt;
+            &lt;input type="text" name="customer"
+            data-element="text"
+            data-autocomplete="true"
+            data-source="api/customers.php"
+            data-callback="renderCustomerItem"&gt;
+          </code></pre>
+
+        <h3>API Response Format</h3>
+        <pre><code data-component="syntaxhighlighter" data-language="javascript">
+            // Simple format (array of objects)
+            {
+            "success": true,
+            "data": [
+            {"value": "1", "text": "Product A"},
+            {"value": "2", "text": "Product B"}
+            ]
+            }
+
+            // Alternative formats (auto-detected)
+            [{"id": "1", "name": "Product A"}] // id→value, name→text
+            [{"key": "1", "label": "Product A"}] // key→value, label→text
+            {"1": "Product A", "2": "Product B"} // Object format
+          </code></pre>
+      </section>
+
+      <!-- Demo 3: Email, URL, Username -->
+      <section class="section">
+        <h2 class="icon-shield">Demo 3: Validated Input Types</h2>
+        <p>Built-in validation for email, URL, and username:</p>
+
+        <form method="POST" action="save.php" data-form="validatedInputs" data-validate="true" data-csrf="false" data-reset="false" data-ajax-submit="true">
+          <fieldset>
+            <legend>
+              <h4>Email, URL, Username</h4>
+            </legend>
+
+            <div>
+              <label for="user_email">Email</label>
+              <span class="form-control icon-email">
+                <input type="text" id="user_email" name="email" data-element="email" required placeholder="you@example.com">
+              </span>
+              <div class="comment">Auto lowercase, email validation</div>
+            </div>
+
+            <div>
+              <label for="user_url">Website URL</label>
+              <span class="form-control icon-link">
+                <input type="text" id="user_url" name="url" data-element="url" placeholder="https://example.com">
+              </span>
+              <div class="comment">URL format validation</div>
+            </div>
+
+            <div>
+              <label for="login_username">Username or Email</label>
+              <span class="form-control icon-user">
+                <input type="text" id="login_username" name="username" data-element="username" required placeholder="username or email">
+              </span>
+              <div class="comment">Accepts username_123 or email format</div>
+            </div>
+
+            <div>
+              <label for="confirm_email">Confirm Email</label>
+              <span class="form-control icon-email">
+                <input type="text" id="confirm_email" name="confirm_email" data-element="email" data-match="user_email" placeholder="Confirm email">
+              </span>
+              <div class="comment">Must match email field</div>
+            </div>
+          </fieldset>
+
+          <fieldset class="submit right">
+            <button type="reset" class="btn">Reset</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </fieldset>
+        </form>
+      </section>
+
+      <!-- Demo 4: Mask Input -->
+      <section class="section">
+        <h2 class="icon-phone">Demo 4: Mask Input</h2>
+        <p>Auto-formatting with input masks:</p>
+
+        <form method="POST" action="save.php" data-form="maskInputs" data-validate="true" data-csrf="false" data-reset="false" data-ajax-submit="true">
+          <fieldset>
+            <legend>
+              <h4>Pre-defined Masks</h4>
+            </legend>
+
+            <div>
+              <label for="phone">Phone Number</label>
+              <span class="form-control icon-phone">
+                <input type="text" id="phone" name="phone" data-element="tel" placeholder="08-1234-5678">
+              </span>
+              <div class="comment">Format: 99-9999-9999</div>
+            </div>
+
+            <div>
+              <label for="idcard">ID Card</label>
+              <span class="form-control icon-profile">
+                <input type="text" id="idcard" name="idcard" data-element="mask" data-format="idcard" placeholder="1-2345-67890-12-3">
+              </span>
+              <div class="comment">Format: 9-9999-99999-99-9</div>
+            </div>
+
+            <div>
+              <label for="creditcard">Credit Card</label>
+              <span class="form-control icon-payment">
+                <input type="text" id="creditcard" name="creditcard" data-element="mask" data-format="creditcard" placeholder="1234-5678-9012-3456">
+              </span>
+              <div class="comment">Format: 9999-9999-9999-9999</div>
+            </div>
+
+            <div>
+              <label for="ip_address">IP Address</label>
+              <span class="form-control icon-ip">
+                <input type="text" id="ip_address" name="ip_address" data-element="mask" data-format="ip" placeholder="192.168.1.1">
+              </span>
+              <div class="comment">Format: 999.999.999.999</div>
+            </div>
+
+            <div>
+              <label for="date_mask">Date</label>
+              <span class="form-control icon-calendar">
+                <input type="text" id="date_mask" name="date_mask" data-element="mask" data-format="date" placeholder="DD/MM/YYYY">
+              </span>
+              <div class="comment">Format: 99/99/9999</div>
+            </div>
+
+            <div>
+              <label for="time_mask">Time</label>
+              <span class="form-control icon-clock">
+                <input type="text" id="time_mask" name="time_mask" data-element="mask" data-format="time" placeholder="HH:MM">
+              </span>
+              <div class="comment">Format: 99:99</div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>
+              <h4>Custom Masks</h4>
+            </legend>
+
+            <div>
+              <label for="zipcode">Zipcode</label>
+              <span class="form-control icon-location">
+                <input type="text" id="zipcode" name="zipcode" data-element="mask" data-pattern="99999" placeholder="10110">
+              </span>
+              <div class="comment">Custom pattern: 99999</div>
+            </div>
+
+            <div>
+              <label for="product_code">Product Code</label>
+              <span class="form-control icon-barcode">
+                <input type="text" id="product_code" name="product_code" data-element="mask" data-pattern="AAA-9999" placeholder="ABC-1234">
+              </span>
+              <div class="comment">Custom pattern: AAA-9999 (letters + numbers)</div>
+            </div>
+          </fieldset>
+
+          <fieldset class="submit right">
+            <button type="reset" class="btn">Reset</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </fieldset>
+        </form>
+
+        <h3>Mask Pattern Characters</h3>
+        <pre><code data-component="syntaxhighlighter" data-language="text">
+            9 - Any digit (0-9)
+            a - Any letter (a-z, A-Z)
+            A - Any letter (uppercase only)
+            * - Any alphanumeric
+            # - Any numeric with . , -
+            X - Any character
+          </code></pre>
+      </section>
+
+      <!-- Demo 5: Tags Input -->
+      <section class="section">
+        <h2 class="icon-tags">Demo 5: Tags Input</h2>
+        <p>Multiple value selection with tags/chips:</p>
+
+        <form method="POST" action="save.php" data-form="tagsInputs" data-validate="true" data-csrf="false" data-reset="false" data-ajax-submit="true">
+          <fieldset>
+            <legend>
+              <h4>Tags Input Examples</h4>
+            </legend>
+
+            <!-- Basic Tags -->
+            <div>
+              <label for="basic_tags">Basic Tags</label>
+              <span class="form-control icon-tags">
+                <input type="text" id="basic_tags" name="tags" data-element="tags" placeholder="Add tags and press Enter...">
+              </span>
+              <div class="comment">Type and press Enter to add tag, Backspace to remove</div>
+            </div>
+
+            <!-- Tags with Autocomplete -->
+            <div>
+              <label for="skill_tags">Skills (with Autocomplete)</label>
+              <span class="form-control icon-list">
+                <input type="text" id="skill_tags" name="skills" data-element="tags" data-autocomplete="true" data-source="SKILLS" data-min-length="1" placeholder="Search skills...">
+              </span>
+              <div class="comment">Autocomplete suggestions from predefined list (JavaScript, HTML ...)</div>
+            </div>
+
+            <!-- Tags with Max Limit -->
+            <div>
+              <label for="limited_tags">Limited Tags (Max 5)</label>
+              <span class="form-control icon-tags">
+                <input type="text" id="limited_tags" name="limited_tags" data-element="tags" data-max-tags="5" placeholder="Maximum 5 tags...">
+              </span>
+              <div class="comment">Maximum 5 tags allowed</div>
+            </div>
+
+            <!-- Tags from API -->
+            <div>
+              <label for="category_tags">Categories (from API)</label>
+              <span class="form-control icon-folder">
+                <input type="text" id="category_tags" name="categories" data-element="tags" data-autocomplete="true" data-source="api/categories.php" data-min-length="1" placeholder="Search categories...">
+              </span>
+              <div class="comment">Load categories from API endpoint</div>
+            </div>
+
+            <!-- Tags with Datalist -->
+            <div>
+              <label for="color_tags">Colors (from Datalist)</label>
+              <span class="form-control icon-color">
+                <input type="text" id="color_tags" name="colors" data-element="tags" data-autocomplete="true" list="color-list" placeholder="Select colors...">
+                <datalist id="color-list">
+                  <option value="red">Red</option>
+                  <option value="blue">Blue</option>
+                  <option value="green">Green</option>
+                  <option value="yellow">Yellow</option>
+                  <option value="orange">Orange</option>
+                  <option value="purple">Purple</option>
+                  <option value="pink">Pink</option>
+                  <option value="black">Black</option>
+                  <option value="white">White</option>
+                </datalist>
+              </span>
+              <div class="comment">Autocomplete from datalist</div>
+            </div>
+          </fieldset>
+
+          <fieldset class="submit right">
+            <button type="reset" class="btn">Reset</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </fieldset>
+        </form>
+      </section>
+
+      <!-- Demo 6: Search Element -->
+      <section class="section">
+        <h2 class="icon-search">Demo 6: Search Element</h2>
+        <p>Search input with live results and clear button:</p>
+
+        <form method="POST" action="save.php" data-form="searchInputs" data-validate="true" data-csrf="false" data-reset="false" data-ajax-submit="false">
+          <fieldset>
+            <legend>
+              <h4>Search Input Examples</h4>
+            </legend>
+
+            <div>
+              <label for="global_search">Global Search</label>
+              <span class="form-control icon-search">
+                <input type="search" id="global_search" name="search" data-element="search" data-min-length="2" data-delay="300" placeholder="Search anything...">
+              </span>
+              <div class="comment">Type at least 2 characters</div>
+            </div>
+
+            <!-- Search Results Display -->
+            <div id="search-results" class="search-results-container" style="display:none;">
+              <h4>Search Results:</h4>
+              <ul id="results-list"></ul>
+            </div>
+          </fieldset>
+        </form>
+      </section>
+
+      <!-- Demo 7: Hierarchical Text -->
+      <section class="section">
+        <h2 class="icon-category">Demo 7: Hierarchical Text (Address)</h2>
+        <p>Reverse search across hierarchical data (Province → District → Subdistrict):</p>
+
+        <form method="POST" action="save.php" data-form="hierarchicalText" data-validate="true" data-csrf="false" data-reset="false" data-ajax-submit="true">
+          <fieldset>
+            <legend>
+              <h4>Thai Address (Auto-fill from any level)</h4>
+            </legend>
+
+            <div>
+              <label for="h_province">Province (จังหวัด)</label>
+              <span class="form-control icon-location">
+                <input type="text" id="h_province" name="province" data-element="text" data-autocomplete="true" data-search-api="api/search-address.php" data-search-field="province" data-min-length="1" placeholder="พิมพ์ชื่อจังหวัด...">
+              </span>
+              <div class="comment">Type province name to search</div>
+            </div>
+
+            <div>
+              <label for="h_district">District (อำเภอ)</label>
+              <span class="form-control icon-location">
+                <input type="text" id="h_district" name="district" data-element="text" data-autocomplete="true" data-search-api="api/search-address.php" data-search-field="amphur" data-min-length="1" placeholder="พิมพ์ชื่ออำเภอ...">
+              </span>
+              <div class="comment">Type district name - auto-fills province</div>
+            </div>
+
+            <div>
+              <label for="h_subdistrict">Subdistrict (ตำบล)</label>
+              <span class="form-control icon-location">
+                <input type="text" id="h_subdistrict" name="subdistrict" data-element="text" data-autocomplete="true" data-search-api="api/search-address.php" data-search-field="district" data-min-length="1" placeholder="พิมพ์ชื่อตำบล...">
+              </span>
+              <div class="comment">Type subdistrict - auto-fills district & province</div>
+            </div>
+
+            <div>
+              <label for="h_zipcode">Zipcode (รหัสไปรษณีย์)</label>
+              <span class="form-control icon-map">
+                <input type="text" id="h_zipcode" name="zipcode" readonly placeholder="Auto-filled">
+              </span>
+              <div class="comment">Auto-filled from selection</div>
+            </div>
+          </fieldset>
+
+          <fieldset class="submit right">
+            <button type="reset" class="btn">Reset</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </fieldset>
+        </form>
+      </section>
+
+      <!-- Demo 8: Dynamic Options Loading -->
+      <section class="section">
+        <h2 class="icon-stack">Demo 8: Dynamic Options</h2>
+        <p>Load autocomplete options dynamically via JavaScript:</p>
+
+        <form method="POST" action="save.php" data-form="dynamicOptions" data-validate="true" data-csrf="false" data-reset="false" data-ajax-submit="true">
+          <fieldset>
+            <legend>
+              <h4>Dynamic Options via JavaScript</h4>
+            </legend>
+
+            <div>
+              <label for="dynamic_field">Dynamic Autocomplete</label>
+              <span class="form-control icon-magic">
+                <input type="text" id="dynamic_field" name="dynamic" data-element="text" data-options-key="dynamicItems" placeholder="Options will be loaded...">
+              </span>
+              <div class="comment">Options loaded via TextElementFactory.populateFromOptions()</div>
+            </div>
+
+            <div class="button-group">
+              <button type="button" id="load-options-btn" class="btn secondary">Load Options</button>
+              <button type="button" id="clear-options-btn" class="btn">Clear</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="submit right">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </fieldset>
+        </form>
+
+        <h3>JavaScript Code</h3>
+        <pre><code data-component="syntaxhighlighter" data-language="javascript">
+            // Load options dynamically
+            const options = {
+            dynamicItems: [
+            {value: '1', text: 'Option 1'},
+            {value: '2', text: 'Option 2'},
+            {value: '3', text: 'Option 3'}
+            ]
+            };
+
+            // Method 1: Populate specific element
+            const input = document.getElementById('dynamic_field');
+            TextElementFactory.populateFromOptions(input, options, 'dynamicItems');
+
+            // Method 2: Populate all elements in container with data-options-key
+            TextElementFactory.populateFromOptionsInContainer(form, options);
+
+            // Method 3: Update options directly on instance
+            const instance = ElementManager.getInstanceByElement(input);
+            TextElementFactory.updateOptions(input, options.dynamicItems);
+          </code></pre>
+      </section>
+
+      <!-- API Reference -->
+      <section class="section">
+        <h2 class="icon-documents">API Reference</h2>
+
+        <h3>Data Attributes</h3>
+        <table class="api-table">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>data-element</code></td>
+              <td>string</td>
+              <td>Element type: text, email, url, username, search, mask, tags</td>
+            </tr>
+            <tr>
+              <td><code>data-autocomplete</code></td>
+              <td>boolean</td>
+              <td>Enable autocomplete: "true" or "false"</td>
+            </tr>
+            <tr>
+              <td><code>data-source</code></td>
+              <td>string</td>
+              <td>Autocomplete source: global variable name or API URL</td>
+            </tr>
+            <tr>
+              <td><code>data-min-length</code></td>
+              <td>number</td>
+              <td>Minimum characters before autocomplete (default: 2)</td>
+            </tr>
+            <tr>
+              <td><code>data-max-results</code></td>
+              <td>number</td>
+              <td>Maximum results in dropdown (default: 10)</td>
+            </tr>
+            <tr>
+              <td><code>data-delay</code></td>
+              <td>number</td>
+              <td>Debounce delay in ms (default: 300)</td>
+            </tr>
+            <tr>
+              <td><code>data-callback</code></td>
+              <td>string</td>
+              <td>Custom render callback function name</td>
+            </tr>
+            <tr>
+              <td><code>data-format</code></td>
+              <td>string</td>
+              <td>Mask format: tel, date, time, creditcard, ip, idcard, zipcode</td>
+            </tr>
+            <tr>
+              <td><code>data-pattern</code></td>
+              <td>string</td>
+              <td>Custom mask pattern</td>
+            </tr>
+            <tr>
+              <td><code>data-max-tags</code></td>
+              <td>number</td>
+              <td>Maximum tags allowed (TagsElement)</td>
+            </tr>
+            <tr>
+              <td><code>data-search-api</code></td>
+              <td>string</td>
+              <td>API URL for hierarchical search</td>
+            </tr>
+            <tr>
+              <td><code>data-search-field</code></td>
+              <td>string</td>
+              <td>Field name for hierarchical search</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+  <!-- Website Scripts -->
+  <script src="main.js"></script>
+</body>
+
+</html>

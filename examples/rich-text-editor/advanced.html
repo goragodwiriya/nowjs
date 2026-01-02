@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rich Text Editor - Advanced Example</title>
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+  <!-- Single bundled CSS -->
+  <link rel="stylesheet" href="../../Now/dist/richtext-editor.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 20px;
+      font-size: 28px;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .demo-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .demo-card h2 {
+      margin: 0 0 16px;
+      font-size: 20px;
+      color: #333;
+    }
+
+    .demo-card p {
+      color: #666;
+      margin: 0 0 16px;
+      font-size: 14px;
+    }
+
+    .profile-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .profile-btn {
+      padding: 8px 16px;
+      border: 2px solid #667eea;
+      border-radius: 20px;
+      background: transparent;
+      color: #667eea;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .profile-btn:hover {
+      background: #667eea;
+      color: #fff;
+    }
+
+    .profile-btn.active {
+      background: #667eea;
+      color: #fff;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background: #eee;
+    }
+
+    .btn-danger {
+      background: #f44336;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #d32f2f;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 12px;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 600;
+      color: #667eea;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    .output-section {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #eee;
+    }
+
+    .output-section h3 {
+      margin: 0 0 12px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .output-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+
+    .output-tab {
+      padding: 8px 16px;
+      border: none;
+      background: #f5f5f5;
+      border-radius: 6px 6px 0 0;
+      cursor: pointer;
+      font-size: 13px;
+      color: #666;
+      transition: all 0.2s;
+    }
+
+    .output-tab.active {
+      background: #333;
+      color: #fff;
+    }
+
+    .output-content {
+      padding: 16px;
+      background: #282c34;
+      border-radius: 0 6px 6px 6px;
+      color: #abb2bf;
+      font-family: 'Fira Code', 'Monaco', monospace;
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-break: break-all;
+      max-height: 300px;
+      overflow: auto;
+    }
+
+    /* Mention styles */
+    .rte-mention {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>✨ Rich Text Editor - Advanced Example</h1>
+
+    <div class="demo-card">
+      <h2>Select Profile</h2>
+      <p>Click a profile to recreate the editor with different feature sets:</p>
+
+      <div class="profile-buttons">
+        <button class="profile-btn" data-profile="minimal">Minimal</button>
+        <button class="profile-btn" data-profile="comment">Comment</button>
+        <button class="profile-btn active" data-profile="basic">Basic</button>
+        <button class="profile-btn" data-profile="email">Email</button>
+        <button class="profile-btn" data-profile="full">Full</button>
+      </div>
+
+      <div id="editor"></div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="insertSampleContent()">Insert Sample</button>
+        <button class="btn btn-secondary" onclick="toggleReadOnly()">Toggle Read-Only</button>
+        <button class="btn btn-secondary" onclick="editor.focus()">Focus</button>
+        <button class="btn btn-danger" onclick="editor.clear()">Clear</button>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-value" id="stat-words">0</div>
+          <div class="stat-label">Words</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-chars">0</div>
+          <div class="stat-label">Characters</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-profile">basic</div>
+          <div class="stat-label">Profile</div>
+        </div>
+      </div>
+
+      <div class="output-section">
+        <h3>Output</h3>
+        <div class="output-tabs">
+          <button class="output-tab active" onclick="showOutput('html', this)">HTML</button>
+          <button class="output-tab" onclick="showOutput('text', this)">Plain Text</button>
+          <button class="output-tab" onclick="showOutput('json', this)">JSON</button>
+        </div>
+        <pre class="output-content" id="output"></pre>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <h2>Available Profiles</h2>
+      <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+        <tr>
+          <th style="text-align: left; padding: 8px; border-bottom: 2px solid #ddd;">Profile</th>
+          <th style="text-align: left; padding: 8px; border-bottom: 2px solid #ddd;">Plugins</th>
+          <th style="text-align: left; padding: 8px; border-bottom: 2px solid #ddd;">Use Case</th>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;"><code>minimal</code></td>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;">None</td>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;">Simple text formatting</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;"><code>comment</code></td>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;">link, emoji</td>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;">Short comments / replies</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;"><code>basic</code></td>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;">link, image, table, sourceView, wordcount</td>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;">General content editing</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;"><code>email</code></td>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;">link, image, autosave</td>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;">Email composition</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px;"><code>full</code></td>
+          <td style="padding: 8px;">All 13 plugins</td>
+          <td style="padding: 8px;">Full-featured editing</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Single bundled JS -->
+  <script src="/Now/Now/dist/richtext-editor.min.js"></script>
+
+  <script>
+    let editor = null;
+    let currentProfile = 'basic';
+    let currentOutputMode = 'html';
+
+    // Sample users for @mentions (used with 'full' profile)
+    const sampleUsers = [
+      {id: 1, name: 'John Doe', username: 'johnd', avatar: 'https://i.pravatar.cc/40?img=1'},
+      {id: 2, name: 'Jane Smith', username: 'janes', avatar: 'https://i.pravatar.cc/40?img=2'},
+      {id: 3, name: 'Bob Wilson', username: 'bobw', avatar: 'https://i.pravatar.cc/40?img=3'},
+      {id: 4, name: 'Alice Brown', username: 'aliceb', avatar: 'https://i.pravatar.cc/40?img=4'}
+    ];
+
+    // Create editor with profile
+    function createEditor(profile) {
+      if (editor) {
+        editor.destroy();
+      }
+
+      const options = {
+        profile: profile,
+        placeholder: 'Start typing'
+      };
+
+      // Add mention data source for full profile
+      if (profile === 'full') {
+        options.mention = {
+          dataSource: (query) => {
+            return sampleUsers.filter(u =>
+              u.name.toLowerCase().includes(query.toLowerCase()) ||
+              u.username.toLowerCase().includes(query.toLowerCase())
+            );
+          },
+          linkTemplate: (user) => `/users/${user.username}`
+        };
+      }
+
+      editor = RichTextEditor.create('#editor', options);
+      currentProfile = profile;
+
+      // Listen for content changes
+      editor.on('content:change', () => {
+        updateStats();
+        updateOutput();
+      });
+
+      // Update UI
+      document.querySelectorAll('.profile-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.profile === profile);
+      });
+      document.getElementById('stat-profile').textContent = profile;
+
+      updateStats();
+      updateOutput();
+
+      console.log(`Created editor with "${profile}" profile`);
+    }
+
+    // Update stats
+    function updateStats() {
+      if (!editor) return;
+      document.getElementById('stat-words').textContent = editor.getWordCount();
+      document.getElementById('stat-chars').textContent = editor.getCharacterCount();
+    }
+
+    // Update output
+    function updateOutput() {
+      if (!editor) return;
+      const output = document.getElementById('output');
+
+      switch (currentOutputMode) {
+        case 'html':
+          output.textContent = editor.getContent();
+          break;
+        case 'text':
+          output.textContent = editor.getTextContent();
+          break;
+        case 'json':
+          output.textContent = JSON.stringify({
+            html: editor.getContent(),
+            text: editor.getTextContent(),
+            wordCount: editor.getWordCount(),
+            charCount: editor.getCharacterCount(),
+            profile: currentProfile
+          }, null, 2);
+          break;
+      }
+    }
+
+    // Show output mode
+    function showOutput(mode, btn) {
+      currentOutputMode = mode;
+      document.querySelectorAll('.output-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      updateOutput();
+    }
+
+    // Insert sample content
+    function insertSampleContent() {
+      editor.setContent(`
+        <h2>Welcome to the Advanced Editor!</h2>
+        <p>This is a <strong>feature-rich</strong> WYSIWYG editor with many capabilities:</p>
+        <ul>
+          <li>Text formatting (bold, italic, underline)</li>
+          <li>Headings and lists</li>
+          <li>Links, images, videos, tables</li>
+          <li>Undo/Redo with full history</li>
+        </ul>
+        <blockquote>
+          "The best way to predict the future is to invent it." — Alan Kay
+        </blockquote>
+        <p>Try the <strong>@mention</strong> feature in <em>full</em> profile!</p>
+      `.trim());
+    }
+
+    // Toggle read-only
+    function toggleReadOnly() {
+      const isReadOnly = editor.isReadOnly();
+      editor.setReadOnly(!isReadOnly);
+      alert(isReadOnly ? 'Editor is now editable' : 'Editor is now read-only');
+    }
+
+    // Profile button clicks
+    document.querySelectorAll('.profile-btn').forEach(btn => {
+      btn.addEventListener('click', () => createEditor(btn.dataset.profile));
+    });
+
+    // Initialize
+    createEditor('basic');
+  </script>
+</body>
+
+</html>

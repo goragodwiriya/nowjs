@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rich Text Editor - Bundled Example</title>
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+  <!-- Single bundled CSS -->
+  <link rel="stylesheet" href="../../Now/dist/richtext-editor.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: #fff;
+      margin: 0 0 20px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h2 {
+      margin: 0 0 16px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .profile-buttons {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .profile-btn {
+      padding: 8px 16px;
+      border: 2px solid #667eea;
+      border-radius: 20px;
+      background: transparent;
+      color: #667eea;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .profile-btn:hover {
+      background: #667eea;
+      color: #fff;
+    }
+
+    .profile-btn.active {
+      background: #667eea;
+      color: #fff;
+    }
+
+    .code-block {
+      background: #282c34;
+      color: #abb2bf;
+      padding: 16px;
+      border-radius: 8px;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+
+    .code-block .comment {
+      color: #5c6370;
+    }
+
+    .code-block .keyword {
+      color: #c678dd;
+    }
+
+    .code-block .string {
+      color: #98c379;
+    }
+
+    .code-block .function {
+      color: #61afef;
+    }
+
+    .info {
+      background: #e3f2fd;
+      border-left: 4px solid #2196f3;
+      padding: 12px 16px;
+      margin: 16px 0;
+      border-radius: 0 6px 6px 0;
+      font-size: 14px;
+      color: #1565c0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🚀 RichTextEditor - Bundled Version</h1>
+
+    <div class="card">
+      <h2>Select Profile</h2>
+      <div class="profile-buttons">
+        <button class="profile-btn" data-profile="minimal">Minimal</button>
+        <button class="profile-btn" data-profile="comment">Comment</button>
+        <button class="profile-btn active" data-profile="basic">Basic</button>
+        <button class="profile-btn" data-profile="email">Email</button>
+        <button class="profile-btn" data-profile="full">Full</button>
+      </div>
+
+      <div id="editor"></div>
+    </div>
+
+    <div class="card">
+      <h2>Usage</h2>
+
+      <div class="info">
+        The bundled version includes all plugins and loads with just 2 files!
+      </div>
+
+      <div class="code-block">
+        <span class="comment">// HTML</span>
+        &lt;link rel="stylesheet" href="/dist/richtext-editor.min.css"&gt;
+        &lt;script src="/dist/richtext-editor.min.js"&gt;&lt;/script&gt;
+
+        <span class="comment">// Create with profile name</span>
+        <span class="keyword">const</span> editor = RichTextEditor.<span class="function">create</span>(<span class="string">'#editor'</span>, <span class="string">'full'</span>);
+
+        <span class="comment">// Or with custom options</span>
+        <span class="keyword">const</span> editor = RichTextEditor.<span class="function">create</span>(<span class="string">'#editor'</span>, {
+        profile: <span class="string">'basic'</span>,
+        placeholder: <span class="string">'Type here...'</span>,
+        minHeight: 400
+        });
+
+        <span class="comment">// API</span>
+        editor.<span class="function">getContent</span>(); <span class="comment">// Get HTML</span>
+        editor.<span class="function">setContent</span>(html); <span class="comment">// Set HTML</span>
+        editor.<span class="function">clear</span>(); <span class="comment">// Clear content</span>
+      </div>
+
+      <h3>Available Profiles</h3>
+      <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+        <tr>
+          <th style="text-align: left; padding: 8px; border-bottom: 2px solid #ddd;">Profile</th>
+          <th style="text-align: left; padding: 8px; border-bottom: 2px solid #ddd;">Description</th>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;"><code>minimal</code></td>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;">Text formatting only</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;"><code>comment</code></td>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;">Short comments (links, emoji)</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;"><code>basic</code></td>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;">General content editing</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;"><code>email</code></td>
+          <td style="padding: 8px; border-bottom: 1px solid #eee;">Email composition with autosave</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px;"><code>full</code></td>
+          <td style="padding: 8px;">All features enabled</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Single bundled JS -->
+  <script src="/Now/Now/dist/richtext-editor.min.js"></script>
+
+  <script>
+    let editor = null;
+
+    function createEditor(profile) {
+      if (editor) {
+        editor.destroy();
+      }
+
+      editor = RichTextEditor.create('#editor', {
+        profile: profile,
+        placeholder: 'Start typing'
+      });
+
+      // Update button states
+      document.querySelectorAll('.profile-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.profile === profile);
+      });
+
+      console.log(`Created editor with "${profile}" profile`);
+      console.log('Available profiles:', Object.keys(RichTextEditor.getProfiles()));
+    }
+
+    // Profile button clicks
+    document.querySelectorAll('.profile-btn').forEach(btn => {
+      btn.addEventListener('click', () => createEditor(btn.dataset.profile));
+    });
+
+    // Initialize
+    createEditor('basic');
+  </script>
+</body>
+
+</html>
