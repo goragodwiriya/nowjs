@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ThemeManager Demo - Now.js</title>
+  <meta name="description" content="Demo page for ThemeManager - Light/Dark mode, API config loading, CSS variables, and smooth transitions.">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1>ThemeManager Demo</h1>
+        <p class="text-gradient">ระบบจัดการ Theme พร้อม API Integration และ Security</p>
+      </div>
+    </section>
+
+    <article class="container">
+      <!-- Feature 1: Light/Dark Toggle -->
+      <section class="section">
+        <div class="card">
+          <h2>🌓 1. Light/Dark Mode Toggle</h2>
+          <p class="text-muted">ผู้ใช้ควบคุม light/dark mode - บันทึกใน localStorage อัตโนมัติ</p>
+          <div class="button-group">
+            <button class="btn btn-primary" onclick="ThemeManager.toggle()">Toggle Theme</button>
+            <button class="btn btn-secondary" onclick="ThemeManager.setTheme('light')">Light</button>
+            <button class="btn btn-secondary" onclick="ThemeManager.setTheme('dark')">Dark</button>
+          </div>
+          <div class="info-box" id="current-theme">
+            Current: <strong id="theme-value">-</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature 2: API Config Loading -->
+      <section class="section">
+        <div class="card">
+          <h2>📡 2. API Config Loading</h2>
+          <p class="text-muted">โหลด CSS Variables จาก server - ตกแต่งหน้าเว็บตามต้องการ</p>
+          <div class="button-group">
+            <button class="btn btn-danger" onclick="ThemeManager.clearVariables()">Clear Variables</button>
+            <button class="btn text" onclick="ThemeManager.refreshFromAPI()">Refresh (Clear Cache)</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature 3: Applied Variables Display -->
+      <section class="section">
+        <div class="card">
+          <h2>📋 3. Applied CSS Variables</h2>
+          <div id="variables-display" class="variables-grid">
+            <p class="text-muted">No variables applied yet.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature 4: Smooth Transitions -->
+      <section class="section">
+        <div class="card">
+          <h2>✨ 4. Smooth Transitions (Anti-FOUC)</h2>
+          <p class="text-muted">Fade out → Apply theme → Fade in</p>
+          <div class="button-group">
+            <button class="btn btn-primary" onclick="testTransition()">Test Transition</button>
+          </div>
+          <div class="info-box">
+            Ready: <strong id="ready-status">-</strong> |
+            Transitioning: <strong id="transition-status">-</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature 5: Security Tests -->
+      <section class="section">
+        <div class="card test-section">
+          <h2>🔒 6. Security Tests</h2>
+          <p class="text-muted">ทดสอบ XSS prevention และ property whitelisting</p>
+          <div class="button-group">
+            <button class="btn btn-danger" onclick="testXSS()">Test XSS Payload</button>
+            <button class="btn btn-danger" onclick="testInvalidProps()">Test Invalid Properties</button>
+          </div>
+          <div id="security-status" class="info-box"></div>
+        </div>
+      </section>
+
+      <!-- Console Output -->
+      <section class="section">
+        <div class="card">
+          <h2>📟 Console Output</h2>
+          <div id="console" class="console">
+            <div class="log info">Ready to test ThemeManager...</div>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

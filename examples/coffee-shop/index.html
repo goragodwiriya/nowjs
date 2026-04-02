@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bean & Brew - ร้านกาแฟออนไลน์</title>
+  <meta name="description" content="ร้านกาแฟคุณภาพพรีเมียม สั่งออนไลน์ ส่งถึงบ้าน">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <span class="logo-icon">☕</span>
+          <span class="logo-text">Bean & Brew</span>
+        </div>
+
+        <nav class="nav" data-scroll-nav>
+          <a href="#home" class="nav-link">หน้าแรก</a>
+          <a href="#products" class="nav-link active">เมนู</a>
+          <a href="#about" class="nav-link">เกี่ยวกับเรา</a>
+          <a href="#contact" class="nav-link">ติดต่อ</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="btn-icon icon-cart" id="cart-btn" data-cart-count="0">
+            <span class="badge" id="cart-badge">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+    <!-- Hero Section -->
+    <section class="hero" id="home" data-scroll-section>
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">กาแฟคุณภาพ ส่งตรงถึงบ้าน</h1>
+          <p class="hero-subtitle">เลือกเมนูโปรดของคุณ เราจัดส่งถึงมือภายใน 30-45 นาที</p>
+          <a href="#products" class="btn btn-primary btn-lg">สั่งเลย</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products-section" data-scroll-section data-component="api" data-endpoint="products.json" data-method="GET" data-cache="true" data-cache-time="60000">
+      <div class="container">
+        <h2 class="section-title">เมนูของเรา</h2>
+
+        <!-- Category Filter -->
+        <div class="category-filter" data-filter-scope="#products-grid" data-filter-attr="data-category" data-filter-animation="fade">
+          <button class="filter-btn active" data-filter-value="*" data-i18n>ทั้งหมด</button>
+          <button class="filter-btn" data-filter-value="hot" data-i18n>ร้อน</button>
+          <button class="filter-btn" data-filter-value="iced" data-i18n>เย็น</button>
+          <button class="filter-btn" data-filter-value="blended" data-i18n>ปั่น</button>
+          <button class="filter-btn" data-filter-value="bakery" data-i18n>เบเกอรี่</button>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="products-grid" data-for="item of data">
+          <template>
+            <div class="product-card" data-attr="data-category:item.category" data-scroll-reveal>
+              <div class="product-image" data-style="backgroundImage:url({{'images/' + item.image}})"></div>
+              <div class="product-info">
+                <span class="product-category" data-text="item.category"></span>
+                <h3 class="product-name" data-text="item.name"></h3>
+                <p class="product-description" d ata-text="item.description"></p>
+                <div class="product-footer">
+                  <span class="product-price" data-text="item.price"></span>
+                  <button class="btn btn-primary add-cart" data-on="click:addToCart(item)">เพิ่ม</button>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section" data-scroll-section>
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h2>เกี่ยวกับเรา</h2>
+            <p>Bean & Brew คือร้านกาแฟที่มุ่งมั่นนำเสนอกาแฟคุณภาพพรีเมียมจากเมล็ดกาแฟคัดสรรจากแหล่งปลูกชั้นดี ผ่านกระบวนการคั่วและชงด้วยความใส่ใจในทุกรายละเอียด</p>
+            <p>เราเชื่อว่ากาแฟที่ดีต้องมาพร้อมกับบริการที่ดี จึงพัฒนาระบบสั่งออนไลน์ที่สะดวก รวดเร็ว และปลอดภัย</p>
+          </div>
+          <div class="about-features">
+            <div class="feature">
+              <div class="feature-icon">🚚</div>
+              <h3>จัดส่งรวดเร็ว</h3>
+              <p>ภายใน 30-45 นาที</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">☕</div>
+              <h3>คุณภาพพรีเมียม</h3>
+              <p>เมล็ดกาแฟคัดสรร</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">💳</div>
+              <h3>ชำระง่าย</h3>
+              <p>PromptPay QR Code</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section" data-scroll-section>
+      <div class="container">
+        <h2 class="section-title">ติดต่อเรา</h2>
+        <div class="ggrid">
+          <div class="block6 contact-info">
+            <div class="contact-item icon-map">
+              <div>
+                <h3>ที่อยู่</h3>
+                <p>123 ถนนกาแฟ แขวงเมล็ดคั่ว เขตชงร้อน กรุงเทพฯ 10100</p>
+              </div>
+            </div>
+            <div class="contact-item icon-phone">
+              <div>
+                <h3>โทรศัพท์:</h3>
+                <p><a href="tel:021234567">02-123-4567</a></p>
+              </div>
+            </div>
+            <div class="contact-item icon-email">
+              <div>
+                <h3>อีเมล:</h3>
+                <p><a href="mailto:hello@beanandbrew.com">hello@beanandbrew.com</a></p>
+              </div>
+            </div>
+            <div class="contact-item icon-clock">
+              <div>
+                <h3>เวลาทำการ:</h3>
+                <p>จันทร์ - อาทิตย์: 07:00 - 20:00 น.</p>
+              </div>
+            </div>
+          </div>
+          <div class="block6" id="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.6395326465376!2d100.53831731538278!3d13.744670690354378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2991dc8c90b5d%3A0x7e4b89ccb281e48!2sWat%20Phra%20Kaew!5e0!3m2!1sen!2sth!4v1620000000000!5m2!1sen!2sth" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Bean & Brew. สงวนลิขสิทธิ์. | ตัวอย่างการใช้งาน Now.js Framework</p>
+    </div>
+  </footer>
+
+  <!-- Cart Sidebar -->
+  <div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+      <h3>ตะกร้าของฉัน</h3>
+      <button class="btn-close" id="close-cart"></button>
+    </div>
+
+    <div class="cart-body" id="cart-body">
+      <div class="cart-empty">
+        <p>🛒</p>
+        <p>ตะกร้าว่างเปล่า</p>
+      </div>
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>ยอดรวม:</span>
+        <span class="total-price">฿0</span>
+      </div>
+
+      <!-- ✅ Form สำหรับส่งข้อมูลตะกร้าไป Server -->
+      <form data-form="checkout-form" action="api/checkout-init.php" method="post" data-csrf="false" data-ajax-submit="true">
+        <!-- Hidden fields สำหรับส่งข้อมูลตะกร้า -->
+        <input type="hidden" name="cart" id="cart-data">
+        <input type="hidden" name="subtotal" id="cart-subtotal">
+        <input type="hidden" name="total" id="cart-total">
+
+        <button type="submit" class="btn btn-primary btn-block" id="checkout-btn" disabled>
+          สั่งซื้อ
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <!-- App Scripts -->
+  <script src="config.js.php"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

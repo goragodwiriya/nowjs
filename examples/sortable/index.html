@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sortable - Now.js Example</title>
+  <meta name="description" content="Drag and drop sorting examples with Now.js Sortable component">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>Sortable - Drag and Drop</h1>
+        <p class="text-gradient" data-i18n>Interactive examples of drag and drop sorting</p>
+      </div>
+    </section>
+
+    <article class="container content">
+
+      <!-- Example 1: Basic Sortable List -->
+      <section class="section">
+        <h2>Example 1: Basic Sortable List</h2>
+        <p>Simple drag and drop list. Drag items to reorder them.</p>
+
+        <div class="example-box">
+          <ul data-component="sortable" class="simple-list" id="basic-list">
+            <li draggable="true" data-id="1">🍎 Apple</li>
+            <li draggable="true" data-id="2">🍌 Banana</li>
+            <li draggable="true" data-id="3">🍊 Orange</li>
+            <li draggable="true" data-id="4">🍇 Grape</li>
+            <li draggable="true" data-id="5">🍓 Strawberry</li>
+          </ul>
+        </div>
+
+        <pre><code data-component="syntaxhighlighter" data-language="html">&lt;ul data-component="sortable" class="simple-list"&gt;
+            &lt;li draggable="true" data-id="1"&gt;🍎 Apple&lt;/li&gt;
+            &lt;li draggable="true" data-id="2"&gt;🍌 Banana&lt;/li&gt;
+            &lt;li draggable="true" data-id="3"&gt;🍊 Orange&lt;/li&gt;
+            &lt;/ul&gt;</code></pre>
+      </section>
+
+      <!-- Example 2: Drag Handle -->
+      <section class="section">
+        <h2>Example 2: Drag Handle</h2>
+        <p>Drag only from the handle (⋮⋮). This prevents accidental dragging when clicking buttons.</p>
+
+        <div class="example-box">
+          <div data-component="sortable" data-handle=".drag-handle" class="card-list" id="handle-list">
+
+            <div class="card" draggable="true" data-id="1">
+              <span class="drag-handle">⋮⋮</span>
+              <div class="card-content">
+                <h3>Task 1: Design UI</h3>
+                <p>Create mockups for the homepage</p>
+                <div class="card-actions">
+                  <button class="btn text" onclick="alert('Edit clicked')">Edit</button>
+                  <button class="btn outline" onclick="alert('Delete clicked')">Delete</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="2">
+              <span class="drag-handle">⋮⋮</span>
+              <div class="card-content">
+                <h3>Task 2: Develop Backend</h3>
+                <p>Create REST API endpoints</p>
+                <div class="card-actions">
+                  <button class="btn text" onclick="alert('Edit clicked')">Edit</button>
+                  <button class="btn outline" onclick="alert('Delete clicked')">Delete</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="3">
+              <span class="drag-handle">⋮⋮</span>
+              <div class="card-content">
+                <h3>Task 3: Test System</h3>
+                <p>Write unit and integration tests</p>
+                <div class="card-actions">
+                  <button class="btn text" onclick="alert('Edit clicked')">Edit</button>
+                  <button class="btn outline" onclick="alert('Delete clicked')">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;div data-component="sortable" data-handle=".drag-handle"&gt;
+              &lt;div class="card" draggable="true" data-id="1"&gt;
+              &lt;span class="drag-handle"&gt;⋮⋮&lt;/span&gt;
+              &lt;div class="card-content"&gt;
+              &lt;h3&gt;Task 1&lt;/h3&gt;
+              &lt;button&gt;Edit&lt;/button&gt;
+              &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 3: Cross-Container (Kanban Board) -->
+      <section class="section">
+        <h2>Example 3: Kanban Board</h2>
+        <p>Drag cards between columns. All columns share the same group name.</p>
+
+        <div class="example-box">
+          <div class="kanban-board">
+            <div class="kanban-column" data-component="sortable" data-group="kanban" data-draggable=".kanban-card" data-category="todo">
+              <h3>📋 To Do</h3>
+              <div class="kanban-card" draggable="true" data-id="k1">
+                <h4>Design Logo</h4>
+                <p>Create new company logo</p>
+                <span class="badge">Design</span>
+              </div>
+              <div class="kanban-card" draggable="true" data-id="k2">
+                <h4>Write Documentation</h4>
+                <p>API documentation</p>
+                <span class="badge">Docs</span>
+              </div>
+            </div>
+
+            <div class="kanban-column" data-component="sortable" data-group="kanban" data-draggable=".kanban-card" data-category="in-progress">
+              <h3>🔄 In Progress</h3>
+              <div class="kanban-card" draggable="true" data-id="k3">
+                <h4>Develop API</h4>
+                <p>Create REST API endpoints</p>
+                <span class="badge">Development</span>
+              </div>
+            </div>
+
+            <div class="kanban-column" data-component="sortable" data-group="kanban" data-draggable=".kanban-card" data-category="done">
+              <h3>✅ Done</h3>
+              <div class="kanban-card" draggable="true" data-id="k4">
+                <h4>Setup Server</h4>
+                <p>Install and configure server</p>
+                <span class="badge">DevOps</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <pre><code data-component="syntaxhighlighter" data-language="html">&lt;div class="kanban-column"
+            data-component="sortable"
+            data-group="kanban"
+            data-category="todo"&gt;
+            &lt;h3&gt;To Do&lt;/h3&gt;
+            &lt;div class="kanban-card" draggable="true" data-id="1"&gt;
+            &lt;h4&gt;Task Title&lt;/h4&gt;
+            &lt;/div&gt;
+            &lt;/div&gt;</code></pre>
+      </section>
+
+      <!-- Example 4: Priority List -->
+      <section class="section">
+        <h2>Example 4: Priority List</h2>
+        <p>Reorder items by priority. Uses keyboard support (Arrow keys + Space).</p>
+
+        <div class="example-box">
+          <div data-component="sortable" class="priority-list" id="priority-list">
+            <div class="priority-item high" draggable="true" data-id="p1" tabindex="0">
+              <span class="priority-badge">HIGH</span>
+              <span class="priority-text">Fix critical security bug</span>
+            </div>
+            <div class="priority-item medium" draggable="true" data-id="p2" tabindex="0">
+              <span class="priority-badge">MEDIUM</span>
+              <span class="priority-text">Update dependencies</span>
+            </div>
+            <div class="priority-item low" draggable="true" data-id="p3" tabindex="0">
+              <span class="priority-badge">LOW</span>
+              <span class="priority-text">Refactor old code</span>
+            </div>
+            <div class="priority-item medium" draggable="true" data-id="p4" tabindex="0">
+              <span class="priority-badge">MEDIUM</span>
+              <span class="priority-text">Add new feature</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <strong>💡 Tip:</strong> Focus an item and use Arrow keys to move, Space to select
+        </div>
+
+        <pre><code data-component="syntaxhighlighter" data-language="html">&lt;div data-component="sortable" class="priority-list"&gt;
+            &lt;div class="priority-item high" draggable="true" data-id="1" tabindex="0"&gt;
+            &lt;span class="priority-badge"&gt;HIGH&lt;/span&gt;
+            &lt;span&gt;Fix critical bug&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;/div&gt;</code></pre>
+      </section>
+
+      <!-- Example 5: Event Logging -->
+      <section class="section">
+        <h2>Example 5: Event Logging</h2>
+        <p>See all events fired by Sortable component in real-time.</p>
+
+        <div class="example-box">
+          <div data-component="sortable" class="event-list" id="event-list">
+            <div draggable="true" data-id="e1" class="event-item">Item 1</div>
+            <div draggable="true" data-id="e2" class="event-item">Item 2</div>
+            <div draggable="true" data-id="e3" class="event-item">Item 3</div>
+            <div draggable="true" data-id="e4" class="event-item">Item 4</div>
+          </div>
+
+          <div class="event-log">
+            <h4>Event Log:</h4>
+            <div id="event-output" class="log-output">
+              <div class="log-entry">Drag items to see events...</div>
+            </div>
+            <button class="btn outline" onclick="clearEventLog()">Clear Log</button>
+          </div>
+        </div>
+
+        <pre><code data-component="syntaxhighlighter" data-language="javascript">const container = document.querySelector('#event-list');
+
+            container.addEventListener('sortable:start', (e) => {
+            console.log('Start:', e.detail);
+            });
+
+            container.addEventListener('sortable:end', (e) => {
+            console.log('End:', e.detail);
+            });</code></pre>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
