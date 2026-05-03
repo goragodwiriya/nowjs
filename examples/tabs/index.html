@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabs Component - Now.js Example</title>
+  <meta name="description" content="Learn how to use TabsComponent with Now.js. Explore automatic initialization, keyboard navigation, ARIA accessibility, and dynamic tab management.">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>Tabs Component</h1>
+        <p class="text-gradient" data-i18n>Production-ready tabs with full ARIA accessibility, keyboard navigation, and dynamic management</p>
+      </div>
+    </section>
+
+    <article class="container content">
+      <!-- Live Demo Section -->
+      <section class="section">
+        <h2 class="icon-published1" data-i18n>Live Demo</h2>
+        <div class="demo-tab-section">
+          <!-- Basic Tabs Example -->
+          <h3 data-i18n>Basic Tabs</h3>
+          <div data-component="tabs" data-default-tab="profile">
+            <div class="tab-buttons" role="tablist">
+              <button class="tab-button" data-tab="home" role="tab">
+                <span class="icon-home">Home</span>
+              </button>
+              <button class="tab-button" data-tab="profile" role="tab">
+                <span class="icon-user">Profile</span>
+              </button>
+              <button class="tab-button" data-tab="settings" role="tab">
+                <span class="icon-cog">Settings</span>
+              </button>
+            </div>
+            <div class="tab-content">
+              <div class="tab-pane" data-tab="home" role="tabpanel">
+                <h4>Welcome Home</h4>
+                <p>This is your home dashboard where you can see an overview of your activity.</p>
+                <ul>
+                  <li>Quick access to recent items</li>
+                  <li>Activity summary</li>
+                  <li>Important notifications</li>
+                </ul>
+              </div>
+              <div class="tab-pane" data-tab="profile" role="tabpanel">
+                <h4>User Profile</h4>
+                <p>Manage your personal information and preferences here.</p>
+                <div class="profile-info">
+                  <p><strong>Name:</strong> John Doe</p>
+                  <p><strong>Email:</strong> john.doe@example.com</p>
+                  <p><strong>Role:</strong> Administrator</p>
+                </div>
+              </div>
+              <div class="tab-pane" data-tab="settings" role="tabpanel">
+                <h4>Settings</h4>
+                <p>Configure your application settings and preferences.</p>
+                <div class="settings-options">
+                  <label><input type="checkbox" checked> Enable notifications</label>
+                  <label><input type="checkbox"> Dark mode</label>
+                  <label><input type="checkbox" checked> Auto-save</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vertical Tabs Example -->
+          <h3 data-i18n style="margin-top: 2rem;">Vertical Tabs</h3>
+          <div data-component="tabs" data-orientation="vertical" class="vertical-tabs-demo">
+            <div class="tab-buttons vertical" role="tablist">
+              <button class="tab-button" data-tab="general" role="tab">General</button>
+              <button class="tab-button" data-tab="security" role="tab">Security</button>
+              <button class="tab-button" data-tab="privacy" role="tab">Privacy</button>
+              <button class="tab-button" data-tab="notifications" role="tab">Notifications</button>
+            </div>
+            <div class="tab-content">
+              <div class="tab-pane" data-tab="general" role="tabpanel">
+                <h4>General Settings</h4>
+                <p>Configure general application settings.</p>
+              </div>
+              <div class="tab-pane" data-tab="security" role="tabpanel">
+                <h4>Security Settings</h4>
+                <p>Manage your security preferences and authentication methods.</p>
+              </div>
+              <div class="tab-pane" data-tab="privacy" role="tabpanel">
+                <h4>Privacy Settings</h4>
+                <p>Control your privacy settings and data sharing options.</p>
+              </div>
+              <div class="tab-pane" data-tab="notifications" role="tabpanel">
+                <h4>Notification Preferences</h4>
+                <p>Choose how and when you want to receive notifications.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Custom Style Tabs Example -->
+          <h3 data-i18n style="margin-top: 2rem;">Custom Style Tabs</h3>
+          <p class="text-muted" data-i18n>Use <code>data-style="custom"</code> to disable default CSS and apply your own styles.</p>
+          <div data-component="tabs" data-style="wizard" data-button-selector=".wizard-step" data-panel-selector=".wizard-panel" class="wizard-tabs-demo">
+            <div class="wizard-nav" role="tablist">
+              <button class="wizard-step" data-tab="step1" role="tab">
+                <span class="step-number">1</span>
+                <span class="step-label">Account</span>
+              </button>
+              <button class="wizard-step" data-tab="step2" role="tab">
+                <span class="step-number">2</span>
+                <span class="step-label">Profile</span>
+              </button>
+              <button class="wizard-step" data-tab="step3" role="tab">
+                <span class="step-number">3</span>
+                <span class="step-label">Confirm</span>
+              </button>
+            </div>
+            <div class="wizard-content">
+              <div class="wizard-panel" data-tab="step1" role="tabpanel">
+                <h4>Step 1: Create Account</h4>
+                <p>Enter your email and password to create an account.</p>
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" placeholder="your@email.com">
+                </div>
+              </div>
+              <div class="wizard-panel" data-tab="step2" role="tabpanel">
+                <h4>Step 2: Complete Profile</h4>
+                <p>Tell us a bit about yourself.</p>
+                <div class="form-group">
+                  <label>Full Name</label>
+                  <input type="text" placeholder="John Doe">
+                </div>
+              </div>
+              <div class="wizard-panel" data-tab="step3" role="tabpanel">
+                <h4>Step 3: Confirmation</h4>
+                <p>Review your information and confirm.</p>
+                <button class="btn btn-primary">Complete Setup</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Features Section -->
+      <section class="section">
+        <h2 class="icon-list" data-i18n>Key Features</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3 class="icon-power" data-i18n>Auto-initialization</h3>
+            <p data-i18n>Simply add data-component="tabs" and the component automatically initializes with all features.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-users" data-i18n>Full Accessibility</h3>
+            <p data-i18n>Complete ARIA attributes for screen readers and keyboard navigation support.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-keyboard" data-i18n>Keyboard Navigation</h3>
+            <p data-i18n>Navigate tabs using Arrow keys, Home, and End keys for better accessibility.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-cog" data-i18n>Configurable</h3>
+            <p data-i18n>Configure behavior through data attributes or JavaScript API with event callbacks.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-exchange" data-i18n>Dynamic Management</h3>
+            <p data-i18n>Add, remove, or update tabs dynamically with automatic re-initialization.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-compare" data-i18n>Orientations</h3>
+            <p data-i18n>Support both horizontal and vertical tab layouts for different use cases.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Source Code Section -->
+      <section>
+        <h2 class="icon-code" data-i18n>Source Code</h2>
+
+        <div class="code-tabs" data-component="tabs">
+          <div class="tab-buttons">
+            <button class="tab-button active" data-tab="html-basic">Basic HTML</button>
+            <button class="tab-button" data-tab="html-vertical">Vertical Tabs</button>
+            <button class="tab-button" data-tab="javascript">JavaScript API</button>
+            <button class="tab-button" data-tab="events">Event Handling</button>
+          </div>
+
+          <div class="tab-content">
+            <!-- Basic HTML -->
+            <div class="tab-pane active" data-tab="html-basic">
+              <pre><code data-component="syntaxhighlighter" data-language="html">
+                  &lt;!-- Basic Tabs Example --&gt;
+                  &lt;div data-component=&quot;tabs&quot; data-default-tab=&quot;profile&quot;&gt;
+                  &lt;div class=&quot;tab-buttons&quot; role=&quot;tablist&quot;&gt;
+                  &lt;button class=&quot;tab-button&quot; data-tab=&quot;home&quot; role=&quot;tab&quot;&gt;
+                  &lt;span class=&quot;icon-home&quot;&gt;Home&lt;/span&gt;
+                  &lt;/button&gt;
+                  &lt;button class=&quot;tab-button&quot; data-tab=&quot;profile&quot; role=&quot;tab&quot;&gt;
+                  &lt;span class=&quot;icon-user&quot;&gt;Profile&lt;/span&gt;
+                  &lt;/button&gt;
+                  &lt;button class=&quot;tab-button&quot; data-tab=&quot;settings&quot; role=&quot;tab&quot;&gt;
+                  &lt;span class=&quot;icon-cog&quot;&gt;Settings&lt;/span&gt;
+                  &lt;/button&gt;
+                  &lt;/div&gt;
+                  &lt;div class=&quot;tab-content&quot;&gt;
+                  &lt;div class=&quot;tab-pane&quot; data-tab=&quot;home&quot; role=&quot;tabpanel&quot;&gt;
+                  ....
+                  &lt;/div&gt;
+                  &lt;div class=&quot;tab-pane&quot; data-tab=&quot;profile&quot; role=&quot;tabpanel&quot;&gt;
+                  ....
+                  &lt;/div&gt;
+                  &lt;div class=&quot;tab-pane&quot; data-tab=&quot;settings&quot; role=&quot;tabpanel&quot;&gt;
+                  ....
+                  &lt;/div&gt;
+                  &lt;/div&gt;
+                  &lt;/div&gt;
+                </code></pre>
+            </div>
+
+            <!-- Vertical Tabs -->
+            <div class="tab-pane" data-tab="html-vertical">
+              <pre><code data-component="syntaxhighlighter" data-language="html">
+                  &lt;!-- Vertical Tabs Example --&gt;
+                  &lt;div data-component=&quot;tabs&quot; data-orientation=&quot;vertical&quot; class=&quot;vertical-tabs-demo&quot;&gt;
+                  &lt;div class=&quot;tab-buttons vertical&quot; role=&quot;tablist&quot;&gt;
+                  &lt;button class=&quot;tab-button&quot; data-tab=&quot;general&quot; role=&quot;tab&quot;&gt;General&lt;/button&gt;
+                  &lt;button class=&quot;tab-button&quot; data-tab=&quot;security&quot; role=&quot;tab&quot;&gt;Security&lt;/button&gt;
+                  &lt;button class=&quot;tab-button&quot; data-tab=&quot;privacy&quot; role=&quot;tab&quot;&gt;Privacy&lt;/button&gt;
+                  &lt;button class=&quot;tab-button&quot; data-tab=&quot;notifications&quot; role=&quot;tab&quot;&gt;Notifications&lt;/button&gt;
+                  &lt;/div&gt;
+                  &lt;div class=&quot;tab-content&quot;&gt;
+                  &lt;div class=&quot;tab-pane&quot; data-tab=&quot;general&quot; role=&quot;tabpanel&quot;&gt;
+                  ....
+                  &lt;/div&gt;
+                  &lt;div class=&quot;tab-pane&quot; data-tab=&quot;security&quot; role=&quot;tabpanel&quot;&gt;
+                  ....
+                  &lt;/div&gt;
+                  &lt;div class=&quot;tab-pane&quot; data-tab=&quot;privacy&quot; role=&quot;tabpanel&quot;&gt;
+                  ....
+                  &lt;/div&gt;
+                  &lt;div class=&quot;tab-pane&quot; data-tab=&quot;notifications&quot; role=&quot;tabpanel&quot;&gt;
+                  ....
+                  &lt;/div&gt;
+                  &lt;/div&gt;
+                  &lt;/div&gt;
+                </code></pre>
+            </div>
+
+            <!-- JavaScript API -->
+            <div class="tab-pane" data-tab="javascript">
+              <pre><code data-component="syntaxhighlighter" data-language="javascript">// Initialize tabs programmatically
+                  const element = document.querySelector('#my-tabs');
+
+                  const tabs = TabsComponent.create(element, {
+                  defaultTab: 'profile',
+                  keyboard: true,
+                  animation: true,
+                  animationDuration: 300,
+
+                  // Event callbacks
+                  onInit() {
+                  console.log('Tabs initialized!');
+                  },
+
+                  beforeTabChange(tabId, previousTab) {
+                  console.log(`Changing from ${previousTab} to ${tabId}`);
+                  // Return false to cancel the change
+                  if (tabId === 'restricted') {
+                  alert('This tab is restricted!');
+                  return false;
+                  }
+                  return true;
+                  },
+
+                  onTabChange(tabId, previousTab) {
+                  console.log(`Tab changed to: ${tabId}`);
+                  // Update URL
+                  window.history.pushState({}, '', `#${tabId}`);
+                  },
+
+                  onDestroy() {
+                  console.log('Tabs destroyed!');
+                  }
+                  });
+
+                  // Use the instance
+                  tabs.switchTab('settings');
+                  const activeTab = tabs.getActiveTab();
+                  console.log('Current tab:', activeTab);
+
+                  // Refresh after adding new tabs
+                  tabs.refresh();
+
+                  // Get instance from element
+                  const instance = TabsComponent.getInstance(element);
+                  if (instance) {
+                  instance.switchTab('home');
+                  }</code></pre>
+            </div>
+
+            <!-- Event Handling -->
+            <div class="tab-pane" data-tab="events">
+              <pre><code data-component="syntaxhighlighter" data-language="javascript">// Listen to tab change events
+                  const tabsElement = document.querySelector('[data-component="tabs"]');
+
+                  tabsElement.addEventListener('tabs:tabchange', (event) => {
+                  const { tabId, previousTab, button, panel } = event.detail;
+
+                  console.log('Tab changed!');
+                  console.log('Previous:', previousTab);
+                  console.log('Current:', tabId);
+                  console.log('Button:', button);
+                  console.log('Panel:', panel);
+
+                  // Load content dynamically
+                  if (tabId === 'dynamic' && !panel.dataset.loaded) {
+                  fetch(`/api/content/${tabId}`)
+                  .then(response => response.text())
+                  .then(html => {
+                  panel.innerHTML = html;
+                  panel.dataset.loaded = 'true';
+                  });
+                  }
+
+                  // Track analytics
+                  if (window.gtag) {
+                  gtag('event', 'tab_view', {
+                  tab_name: tabId
+                  });
+                  }
+                  });
+
+                  // Handle browser back/forward
+                  window.addEventListener('popstate', () => {
+                  const tabId = window.location.hash.slice(1) || 'home';
+                  const tabs = TabsComponent.getInstance(tabsElement);
+                  if (tabs) {
+                  tabs.switchTab(tabId);
+                  }
+                  });</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it Works Section -->
+      <section class="section">
+        <h2 class="icon-search" data-i18n>How It Works</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3 data-i18n>1. Automatic Initialization</h3>
+            <p data-i18n>TabsComponent scans for elements with <code>data-component="tabs"</code> and automatically initializes them with all features enabled.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>2. ARIA Accessibility</h3>
+            <p data-i18n>The component automatically adds proper ARIA attributes including <code>role="tab"</code>, <code>role="tabpanel"</code>, <code>aria-selected</code>, and <code>aria-controls</code> for screen reader support.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>3. Keyboard Navigation</h3>
+            <p data-i18n>Users can navigate tabs using Arrow keys (left/right or up/down depending on orientation), Home to jump to the first tab, and End to jump to the last tab.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>4. Data Attributes</h3>
+            <p data-i18n>Configure tabs using HTML data attributes like <code>data-default-tab</code>, <code>data-orientation</code>, and <code>data-keyboard</code> without writing JavaScript.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>5. Event System</h3>
+            <p data-i18n>Listen to <code>tabs:tabchange</code> events or use callback options like <code>onTabChange</code> and <code>beforeTabChange</code> to react to tab changes.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>6. Dynamic Updates</h3>
+            <p data-i18n>Add or remove tabs dynamically and call <code>refresh()</code> to update the component. The MutationObserver automatically detects new tabs added to the DOM.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Configuration Options Section -->
+      <section class="section">
+        <h2 class="icon-cog" data-i18n>Configuration Options</h2>
+        <div class="config-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Option</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>defaultTab</code></td>
+                <td>string</td>
+                <td>null</td>
+                <td>ID of the default active tab (null = first tab)</td>
+              </tr>
+              <tr>
+                <td><code>keyboard</code></td>
+                <td>boolean</td>
+                <td>true</td>
+                <td>Enable keyboard navigation</td>
+              </tr>
+              <tr>
+                <td><code>animation</code></td>
+                <td>boolean</td>
+                <td>true</td>
+                <td>Enable transition animations</td>
+              </tr>
+              <tr>
+                <td><code>animationDuration</code></td>
+                <td>number</td>
+                <td>300</td>
+                <td>Animation duration in milliseconds</td>
+              </tr>
+              <tr>
+                <td><code>orientation</code></td>
+                <td>string</td>
+                <td>'horizontal'</td>
+                <td>Tab orientation: 'horizontal' or 'vertical'</td>
+              </tr>
+              <tr>
+                <td><code>ariaLabel</code></td>
+                <td>string</td>
+                <td>'Tabs'</td>
+                <td>ARIA label for the tablist</td>
+              </tr>
+              <tr>
+                <td><code>lazy</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Lazy load tab content</td>
+              </tr>
+              <tr>
+                <td><code>debug</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Enable debug logging</td>
+              </tr>
+              <tr>
+                <td><code>data-style</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>When set (e.g., "custom", "wizard"), disables default CSS. Leave empty or use "default" for framework styles.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Next Steps Section -->
+      <section class="section">
+        <h2 class="icon-next" data-i18n>Next Steps</h2>
+        <div class="next-steps">
+          <a href="/docs/en/TabsComponent.html" class="next-step-card">
+            <h3 data-i18n>Full Documentation</h3>
+            <p data-i18n>Read the complete TabsComponent documentation with all API methods and options</p>
+          </a>
+
+          <a href="/examples/modal" class="next-step-card">
+            <h3 data-i18n>Modal Component</h3>
+            <p data-i18n>Explore another UI component with similar patterns and features</p>
+          </a>
+
+          <a href="/examples" class="next-step-card">
+            <h3 data-i18n>More Examples</h3>
+            <p data-i18n>Browse all Now.js component examples and use cases</p>
+          </a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

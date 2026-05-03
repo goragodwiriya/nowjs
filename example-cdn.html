@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Now.js - jsDelivr CDN Example</title>
+
+  <!-- Performance Optimization -->
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Google Fonts - Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Preload Critical Resources -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/goragodwiriya/nowjs@main/Now/dist/now.core.min.css" as="style">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/goragodwiriya/nowjs@main/Now/dist/now.core.min.js" as="script">
+
+  <!-- Now.js Core CSS from jsDelivr -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/goragodwiriya/nowjs@main/Now/dist/now.core.min.css">
+
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .status {
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status.info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🚀 Now.js - jsDelivr CDN Example</h1>
+
+  <div class="card">
+    <h2>Core Framework</h2>
+    <p>Now.js core loaded from jsDelivr CDN</p>
+    <div id="core-status" class="status"></div>
+  </div>
+
+  <div class="card">
+    <h2>Optional Modules (Lazy Loading)</h2>
+    <p>Click buttons to load modules on-demand from CDN:</p>
+
+    <div class="flex gap center wrap">
+      <button class="btn btn-primary" onclick="loadTableModule()">Load Table Module</button>
+      <button class="btn btn-primary" onclick="loadGraphModule()">Load Graph Module</button>
+      <button class="btn btn-primary" onclick="loadQueueModule()">Load Queue Module</button>
+    </div>
+
+    <div id="module-status" class="status"></div>
+  </div>
+
+  <div class="card">
+    <h2>Framework Info</h2>
+    <pre id="framework-info"></pre>
+  </div>
+
+  <!-- Now.js Core from jsDelivr -->
+  <script src="https://cdn.jsdelivr.net/gh/goragodwiriya/nowjs@main/Now/dist/now.core.min.js"></script>
+
+  <script>
+    // Initialize Now.js
+    // Note: i18n is disabled because translation files are not available on CDN
+    Now.init({
+      environment: 'production',
+      debug: true,
+      i18n: {
+        enabled: false
+      }
+    });
+
+    // Show core status
+    const coreStatus = document.getElementById('core-status');
+    coreStatus.textContent = '✅ Core framework loaded successfully from jsDelivr CDN';
+    coreStatus.className = 'status success';
+    coreStatus.style.display = 'block';
+
+    // Display framework info
+    const info = document.getElementById('framework-info');
+    info.textContent = JSON.stringify({
+      version: Now.version || '1.0.0',
+      environment: Now.config.environment,
+      managers: Object.keys(Now.managers || {}),
+      loadedFrom: 'jsDelivr CDN'
+    }, null, 2);
+
+    // Helper function to load module
+    async function loadModule(name, url, cssUrl = null) {
+      const status = document.getElementById('module-status');
+      status.textContent = `⏳ Loading ${name} module...`;
+      status.className = 'status info';
+      status.style.display = 'block';
+
+      try {
+        // Load CSS if provided
+        if (cssUrl) {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = cssUrl;
+          document.head.appendChild(link);
+        }
+
+        // Load JS
+        const script = document.createElement('script');
+        script.src = url;
+        await new Promise((resolve, reject) => {
+          script.onload = resolve;
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+
+        status.textContent = `✅ ${name} module loaded successfully!`;
+        status.className = 'status success';
+
+        console.log(`${name} module loaded:`, window[name + 'Manager'] || window[name]);
+      } catch (error) {
+        status.textContent = `❌ Failed to load ${name} module: ${error.message}`;
+        status.className = 'status error';
+        console.error(error);
+      }
+    }
+
+    // Load Table Module
+    async function loadTableModule() {
+      await loadModule(
+        'Table',
+        'https://cdn.jsdelivr.net/gh/goragodwiriya/nowjs@main/Now/dist/now.table.min.js'
+      );
+    }
+
+    // Load Graph Module
+    async function loadGraphModule() {
+      await loadModule(
+        'Graph',
+        'https://cdn.jsdelivr.net/gh/goragodwiriya/nowjs@main/Now/dist/now.graph.min.js'
+      );
+    }
+
+    // Load Queue Module
+    async function loadQueueModule() {
+      await loadModule(
+        'Queue',
+        'https://cdn.jsdelivr.net/gh/goragodwiriya/nowjs@main/Now/dist/now.queue.min.js'
+      );
+    }
+  </script>
+</body>
+
+</html>

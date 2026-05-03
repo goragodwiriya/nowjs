@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnimationManager - Now.js Examples</title>
+  <meta name="description" content="Complete animation examples with Now.js AnimationManager - Data Attributes, Stagger, Parallel, Queue">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body data-animation-auto>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>AnimationManager Examples</h1>
+        <p class="text-gradient" data-i18n>Comprehensive animation examples using Data Attributes and JavaScript API</p>
+      </div>
+    </section>
+
+    <article class="container content">
+
+      <!-- Example 1: Basic Animations with Data Attributes -->
+      <section class="section">
+        <h2 data-i18n>Example 1: Basic Animations (Data Attributes)</h2>
+        <p>ใช้ data attributes เพื่อสร้าง animation โดยไม่ต้องเขียน JavaScript</p>
+
+        <div class="demo-section">
+          <div class="demo-grid">
+            <!-- Fade Animation -->
+            <div class="demo-card">
+              <h3>Fade</h3>
+              <div class="animation-box" id="fadeBox">Fade Animation</div>
+              <button class="button primary" data-animate="fadeBox" data-animation="fade">Animate</button>
+            </div>
+
+            <!-- Slide Up Animation -->
+            <div class="demo-card">
+              <h3>Slide Up</h3>
+              <div class="animation-box" id="slideUpBox">Slide Up</div>
+              <button class="button primary" data-animate="slideUpBox" data-animation="slideUp">Animate</button>
+            </div>
+
+            <!-- Scale Animation -->
+            <div class="demo-card">
+              <h3>Scale</h3>
+              <div class="animation-box" id="scaleBox">Scale</div>
+              <button class="button primary" data-animate="scaleBox" data-animation="scale">Animate</button>
+            </div>
+
+            <!-- Bounce Animation -->
+            <div class="demo-card">
+              <h3>Bounce</h3>
+              <div class="animation-box" id="bounceBox">Bounce</div>
+              <button class="button primary" data-animate="bounceBox" data-animation="bounce">Animate</button>
+            </div>
+
+            <!-- Shake Animation -->
+            <div class="demo-card">
+              <h3>Shake</h3>
+              <div class="animation-box" id="shakeBox">Shake</div>
+              <button class="button primary" data-animate="shakeBox" data-animation="shake">Animate</button>
+            </div>
+
+            <!-- Flip Animation -->
+            <div class="demo-card">
+              <h3>Flip</h3>
+              <div class="animation-box" id="flipBox">Flip</div>
+              <button class="button primary" data-animate="flipBox" data-animation="flip">Animate</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-section">
+          <h3>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;!-- Fade Animation Button --&gt;
+              &lt;div class="animation-box" id="fadeBox"&gt;Fade Animation&lt;/div&gt;
+              &lt;button class="button"
+              data-animate="fadeBox"
+              data-animation="fade"&gt;Animate&lt;/button&gt;
+
+              &lt;!-- Bounce Animation Button --&gt;
+              &lt;div class="animation-box" id="bounceBox"&gt;Bounce&lt;/div&gt;
+              &lt;button class="button"
+              data-animate="bounceBox"
+              data-animation="bounce"&gt;Animate&lt;/button&gt;</code></pre>
+
+          <h3>JavaScript (Auto-setup):</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">// Setup animation triggers using data attributes
+              document.querySelectorAll('[data-animate]').forEach(button => {
+              button.addEventListener('click', () => {
+              const targetId = button.dataset.animate;
+              const animation = button.dataset.animation || 'fade';
+              const element = document.getElementById(targetId);
+
+              AnimationManager.animate(element, animation, {
+              duration: 500
+              });
+              });
+              });</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 2: Show/Hide with Animation -->
+      <section class="section">
+        <h2 data-i18n>Example 2: Show/Hide with data-show</h2>
+        <p>ใช้ <code>data-show</code> เพื่อแสดง/ซ่อน element พร้อม animation โดยอัตโนมัติ</p>
+
+        <div class="demo-section">
+          <div class="controls">
+            <button id="togglePanel" class="button primary">Toggle Panel</button>
+            <select id="showAnimation" class="select">
+              <option value="fade">Fade</option>
+              <option value="slideUp">Slide Up</option>
+              <option value="slideDown">Slide Down</option>
+              <option value="scale">Scale</option>
+              <option value="bounce">Bounce</option>
+            </select>
+          </div>
+
+          <div id="animatedPanel" class="animated-panel" data-show="isVisible" data-show-animation="fade" data-show-duration="300">
+            <h3>Animated Panel</h3>
+            <p>This panel shows and hides with smooth animation.</p>
+            <p>Try different animations using the dropdown!</p>
+          </div>
+        </div>
+
+        <div class="code-section">
+          <h3>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;!-- Animated Panel with data-show --&gt;
+              &lt;div id="animatedPanel"
+              data-show="isVisible"
+              data-show-animation="fade"
+              data-show-duration="300"&gt;
+              &lt;h3&gt;Animated Panel&lt;/h3&gt;
+              &lt;p&gt;This panel shows and hides with smooth animation.&lt;/p&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Toggle Button --&gt;
+              &lt;button id="togglePanel"&gt;Toggle Panel&lt;/button&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 3: Enter Animation (Intersection Observer) -->
+      <section class="section">
+        <h2 data-i18n>Example 3: Enter Animation (Scroll Reveal)</h2>
+        <p>ใช้ <code>data-enter</code> เพื่อ animate elements เมื่อเข้ามาใน viewport</p>
+
+        <div class="demo-section">
+          <p class="help-text">Scroll down to see elements animate in:</p>
+
+          <div class="scroll-demo">
+            <div class="reveal-card" data-enter="slideUp" data-enter-duration="500" data-enter-threshold="0.2">
+              <h3>Card 1</h3>
+              <p>Slides up when entering viewport</p>
+            </div>
+
+            <div class="reveal-card" data-enter="slideRight" data-enter-duration="500">
+              <h3>Card 2</h3>
+              <p>Slides from right</p>
+            </div>
+
+            <div class="reveal-card" data-enter="scale" data-enter-duration="600">
+              <h3>Card 3</h3>
+              <p>Scales in smoothly</p>
+            </div>
+
+            <div class="reveal-card" data-enter="bounce" data-enter-duration="700">
+              <h3>Card 4</h3>
+              <p>Bounces into view</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-section">
+          <h3>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;!-- Reveal on Scroll --&gt;
+              &lt;div class="card"
+              data-enter="slideUp"
+              data-enter-duration="500"
+              data-enter-threshold="0.2"&gt;
+              &lt;h3&gt;Card 1&lt;/h3&gt;
+              &lt;p&gt;Slides up when entering viewport&lt;/p&gt;
+              &lt;/div&gt;
+
+              &lt;div class="card"
+              data-enter="bounce"
+              data-enter-duration="700"&gt;
+              &lt;h3&gt;Card 2&lt;/h3&gt;
+              &lt;p&gt;Bounces into view&lt;/p&gt;
+              &lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 4: Stagger Animation -->
+      <section class="section">
+        <h2 data-i18n>Example 4: Stagger Animation (List Items)</h2>
+        <p>ใช้ <code>AnimationManager.stagger()</code> เพื่อ animate หลาย elements พร้อมกันแบบมี delay</p>
+
+        <div class="demo-section">
+          <div class="controls">
+            <button id="staggerList" class="button primary">Animate List</button>
+            <button id="resetList" class="button">Reset</button>
+            <label>
+              Delay:
+              <input type="range" id="staggerDelay" min="50" max="200" value="100">
+              <span id="delayValue">100ms</span>
+            </label>
+          </div>
+
+          <ul id="staggerItems" class="stagger-list">
+            <li class="stagger-item">Item 1</li>
+            <li class="stagger-item">Item 2</li>
+            <li class="stagger-item">Item 3</li>
+            <li class="stagger-item">Item 4</li>
+            <li class="stagger-item">Item 5</li>
+            <li class="stagger-item">Item 6</li>
+          </ul>
+        </div>
+
+        <div class="code-section">
+          <h3>JavaScript Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">// Stagger animation for list items
+              document.getElementById('staggerList').addEventListener('click', () => {
+              const items = document.querySelectorAll('.stagger-item');
+              const delay = document.getElementById('staggerDelay').value;
+
+              // Reset visibility first
+              items.forEach(item => {
+              item.style.opacity = '0';
+              item.style.transform = 'translateX(-20px)';
+              });
+
+              // Animate with stagger
+              AnimationManager.stagger(items, 'slideRight', {
+              stagger: parseInt(delay),
+              duration: 400
+              });
+              });</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 5: Parallel Animations -->
+      <section class="section">
+        <h2 data-i18n>Example 5: Parallel Animations</h2>
+        <p>ใช้ <code>AnimationManager.parallel()</code> เพื่อรัน animations หลายตัวพร้อมกัน</p>
+
+        <div class="demo-section">
+          <div class="controls">
+            <button id="parallelAnimate" class="button primary">Run Parallel Animations</button>
+          </div>
+
+          <div id="parallelBox" class="parallel-box">
+            <span>Parallel</span>
+          </div>
+        </div>
+
+        <div class="code-section">
+          <h3>JavaScript Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">// Run multiple animations in parallel
+              document.getElementById('parallelAnimate').addEventListener('click', () => {
+              const box = document.getElementById('parallelBox');
+
+              AnimationManager.parallel(box, [
+              'scale',
+              'rotate'
+              ], {
+              duration: 800
+              });
+              });</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 6: Animation Chain -->
+      <section class="section">
+        <h2 data-i18n>Example 6: Animation Chain (Sequential)</h2>
+        <p>ใช้ <code>AnimationManager.chain()</code> เพื่อรัน animations ต่อเนื่องตามลำดับ</p>
+
+        <div class="demo-section">
+          <div class="controls">
+            <button id="chainAnimate" class="button primary">Run Chain</button>
+          </div>
+
+          <div id="chainBox" class="chain-box">
+            <span>Sequence</span>
+          </div>
+        </div>
+
+        <div class="code-section">
+          <h3>JavaScript Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">// Chain animations sequentially
+              document.getElementById('chainAnimate').addEventListener('click', async () => {
+              const box = document.getElementById('chainBox');
+
+              await AnimationManager.chain(box, [
+              { name: 'slideUp', options: { duration: 400 } },
+              { name: 'shake', options: { duration: 500 } },
+              { name: 'scale', options: { duration: 300 } },
+              { name: 'pulse', options: { duration: 400, iterations: 2 } }
+              ]);
+
+              console.log('Chain complete!');
+              });</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 7: Pause/Resume Controls -->
+      <section class="section">
+        <h2 data-i18n>Example 7: Pause/Resume Controls</h2>
+        <p>ใช้ <code>pause()</code> และ <code>resume()</code> เพื่อควบคุม animation</p>
+
+        <div class="demo-section">
+          <div class="controls">
+            <button id="startLong" class="button primary">Start Animation</button>
+            <button id="pauseBtn" class="button">Pause</button>
+            <button id="resumeBtn" class="button">Resume</button>
+            <button id="stopBtn" class="button danger">Stop</button>
+          </div>
+
+          <div id="controlBox" class="control-box">
+            <span>Control Me</span>
+          </div>
+        </div>
+
+        <div class="code-section">
+          <h3>JavaScript Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">const box = document.getElementById('controlBox');
+
+              // Start long animation
+              document.getElementById('startLong').addEventListener('click', () => {
+              AnimationManager.animate(box, 'rotate', {
+              duration: 5000,
+              iterations: Infinity
+              });
+              });
+
+              // Pause animation
+              document.getElementById('pauseBtn').addEventListener('click', () => {
+              AnimationManager.pause(box);
+              });
+
+              // Resume animation
+              document.getElementById('resumeBtn').addEventListener('click', () => {
+              AnimationManager.resume(box);
+              });
+
+              // Stop animation
+              document.getElementById('stopBtn').addEventListener('click', () => {
+              AnimationManager.stop(box);
+              });</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 8: Animation Queue -->
+      <section class="section">
+        <h2 data-i18n>Example 8: Animation Queue</h2>
+        <p>ใช้ <code>AnimationManager.queue()</code> เพื่อเพิ่ม animations เข้าคิว</p>
+
+        <div class="demo-section">
+          <div class="controls">
+            <button id="addBounce" class="button">Add Bounce</button>
+            <button id="addShake" class="button">Add Shake</button>
+            <button id="addFlip" class="button">Add Flip</button>
+            <button id="clearQueue" class="button danger">Clear Queue</button>
+          </div>
+
+          <div id="queueBox" class="queue-box">
+            <span>Queue Box</span>
+          </div>
+
+          <div id="queueInfo" class="queue-info">
+            Queue: <span id="queueCount">0</span> animations pending
+          </div>
+        </div>
+
+        <div class="code-section">
+          <h3>JavaScript Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">const queueBox = document.getElementById('queueBox');
+              let queueCount = 0;
+
+              function updateQueueCount() {
+              document.getElementById('queueCount').textContent = queueCount;
+              }
+
+              // Add bounce to queue
+              document.getElementById('addBounce').addEventListener('click', () => {
+              queueCount++;
+              updateQueueCount();
+
+              AnimationManager.queue(queueBox, 'bounce', { duration: 500 })
+              .then(() => {
+              queueCount--;
+              updateQueueCount();
+              });
+              });
+
+              // Add shake to queue
+              document.getElementById('addShake').addEventListener('click', () => {
+              queueCount++;
+              updateQueueCount();
+
+              AnimationManager.queue(queueBox, 'shake', { duration: 600 })
+              .then(() => {
+              queueCount--;
+              updateQueueCount();
+              });
+              });
+
+              // Clear queue
+              document.getElementById('clearQueue').addEventListener('click', () => {
+              AnimationManager.clearQueue(queueBox);
+              queueCount = 0;
+              updateQueueCount();
+              });</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 9: Easing Presets -->
+      <section class="section">
+        <h2 data-i18n>Example 9: Easing Presets</h2>
+        <p>AnimationManager มี easing presets หลากหลายให้เลือกใช้</p>
+
+        <div class="demo-section">
+          <div class="controls">
+            <select id="easingSelect" class="select">
+              <option value="ease">ease</option>
+              <option value="easeIn">easeIn</option>
+              <option value="easeOut">easeOut</option>
+              <option value="easeInOut">easeInOut</option>
+              <option value="easeInQuad">easeInQuad</option>
+              <option value="easeOutQuad">easeOutQuad</option>
+              <option value="easeInOutQuad">easeInOutQuad</option>
+              <option value="easeInCubic">easeInCubic</option>
+              <option value="easeOutCubic">easeOutCubic</option>
+              <option value="easeInBack">easeInBack</option>
+              <option value="easeOutBack">easeOutBack</option>
+              <option value="easeOutBounce">easeOutBounce</option>
+              <option value="spring">spring</option>
+            </select>
+            <button id="testEasing" class="button primary">Test Easing</button>
+          </div>
+
+          <div class="easing-track">
+            <div id="easingBall" class="easing-ball"></div>
+          </div>
+        </div>
+
+        <div class="code-section">
+          <h3>JavaScript Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">document.getElementById('testEasing').addEventListener('click', () => {
+              const ball = document.getElementById('easingBall');
+              const easing = document.getElementById('easingSelect').value;
+
+              // Reset position
+              ball.style.transform = 'translateX(0)';
+
+              // Animate with selected easing
+              AnimationManager.animate(ball, {
+              from: { transform: 'translateX(0)' },
+              to: { transform: 'translateX(400px)' }
+              }, {
+              duration: 1000,
+              easing: easing
+              });
+              });</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 10: Custom Animation -->
+      <section class="section">
+        <h2 data-i18n>Example 10: Custom Animation & Registration</h2>
+        <p>สร้าง animation แบบ custom และลงทะเบียนเป็น preset</p>
+
+        <div class="demo-section">
+          <div class="controls">
+            <button id="customAnimate" class="button primary">Run Custom Animation</button>
+            <button id="registerCustom" class="button">Register Custom</button>
+            <button id="useRegistered" class="button">Use Registered</button>
+          </div>
+
+          <div id="customBox" class="custom-box">
+            <span>Custom</span>
+          </div>
+        </div>
+
+        <div class="code-section">
+          <h3>JavaScript Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">// Custom inline animation
+              document.getElementById('customAnimate').addEventListener('click', () => {
+              const box = document.getElementById('customBox');
+
+              AnimationManager.animate(box, {
+              from: {
+              transform: 'rotate(0) scale(1)',
+              backgroundColor: '#3498db',
+              borderRadius: '0'
+              },
+              steps: [
+              { transform: 'rotate(180deg) scale(1.2)', backgroundColor: '#e74c3c', borderRadius: '50%', offset: 0.5 }
+              ],
+              to: {
+              transform: 'rotate(360deg) scale(1)',
+              backgroundColor: '#2ecc71',
+              borderRadius: '0'
+              }
+              }, {
+              duration: 1500
+              });
+              });
+
+              // Register custom animation as preset
+              document.getElementById('registerCustom').addEventListener('click', () => {
+              AnimationManager.registerAnimation('myCustomAnim', {
+              in: {
+              from: { transform: 'translateY(-100%) rotate(-45deg)', opacity: 0 },
+              to: { transform: 'translateY(0) rotate(0)', opacity: 1 }
+              },
+              out: {
+              from: { transform: 'translateY(0) rotate(0)', opacity: 1 },
+              to: { transform: 'translateY(100%) rotate(45deg)', opacity: 0 }
+              }
+              });
+
+              alert('Custom animation "myCustomAnim" registered!');
+              });
+
+              // Use registered animation
+              document.getElementById('useRegistered').addEventListener('click', () => {
+              const box = document.getElementById('customBox');
+
+              AnimationManager.animate(box, 'myCustomAnim', {
+              direction: 'in',
+              duration: 600
+              });
+              });</code></pre>
+        </div>
+      </section>
+
+      <!-- All Available Animations -->
+      <section class="section">
+        <h2 data-i18n>All Available Animations</h2>
+        <p>รายการ animations ทั้งหมดที่มีให้ใช้งาน:</p>
+
+        <div class="animation-gallery">
+          <div class="gallery-item" data-anim="fade">
+            <div class="gallery-box" id="gal-fade"></div>
+            <span>fade</span>
+          </div>
+          <div class="gallery-item" data-anim="slideUp">
+            <div class="gallery-box" id="gal-slideUp"></div>
+            <span>slideUp</span>
+          </div>
+          <div class="gallery-item" data-anim="slideDown">
+            <div class="gallery-box" id="gal-slideDown"></div>
+            <span>slideDown</span>
+          </div>
+          <div class="gallery-item" data-anim="slideLeft">
+            <div class="gallery-box" id="gal-slideLeft"></div>
+            <span>slideLeft</span>
+          </div>
+          <div class="gallery-item" data-anim="slideRight">
+            <div class="gallery-box" id="gal-slideRight"></div>
+            <span>slideRight</span>
+          </div>
+          <div class="gallery-item" data-anim="scale">
+            <div class="gallery-box" id="gal-scale"></div>
+            <span>scale</span>
+          </div>
+          <div class="gallery-item" data-anim="scaleUp">
+            <div class="gallery-box" id="gal-scaleUp"></div>
+            <span>scaleUp</span>
+          </div>
+          <div class="gallery-item" data-anim="rotate">
+            <div class="gallery-box" id="gal-rotate"></div>
+            <span>rotate</span>
+          </div>
+          <div class="gallery-item" data-anim="bounce">
+            <div class="gallery-box" id="gal-bounce"></div>
+            <span>bounce</span>
+          </div>
+          <div class="gallery-item" data-anim="shake">
+            <div class="gallery-box" id="gal-shake"></div>
+            <span>shake</span>
+          </div>
+          <div class="gallery-item" data-anim="pulse">
+            <div class="gallery-box" id="gal-pulse"></div>
+            <span>pulse</span>
+          </div>
+          <div class="gallery-item" data-anim="flip">
+            <div class="gallery-box" id="gal-flip"></div>
+            <span>flip</span>
+          </div>
+          <div class="gallery-item" data-anim="flipX">
+            <div class="gallery-box" id="gal-flipX"></div>
+            <span>flipX</span>
+          </div>
+          <div class="gallery-item" data-anim="zoomIn">
+            <div class="gallery-box" id="gal-zoomIn"></div>
+            <span>zoomIn</span>
+          </div>
+          <div class="gallery-item" data-anim="swing">
+            <div class="gallery-box" id="gal-swing"></div>
+            <span>swing</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- API Reference Quick -->
+      <section class="section">
+        <h2 data-i18n>API Reference (Quick)</h2>
+        <div class="tablebody">
+          <table class="fullwidth border">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Description</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>animate(el, anim, opts)</code></td>
+                <td>Animate single element</td>
+                <td><code>AnimationManager.animate(el, 'fade', {duration: 300})</code></td>
+              </tr>
+              <tr>
+                <td><code>chain(el, anims)</code></td>
+                <td>Run animations sequentially</td>
+                <td><code>AnimationManager.chain(el, ['fade', 'scale'])</code></td>
+              </tr>
+              <tr>
+                <td><code>parallel(el, anims)</code></td>
+                <td>Run animations simultaneously</td>
+                <td><code>AnimationManager.parallel(el, ['fade', 'rotate'])</code></td>
+              </tr>
+              <tr>
+                <td><code>stagger(els, anim, opts)</code></td>
+                <td>Animate list with delay</td>
+                <td><code>AnimationManager.stagger(items, 'slideUp', {stagger: 100})</code></td>
+              </tr>
+              <tr>
+                <td><code>queue(el, anim)</code></td>
+                <td>Add to animation queue</td>
+                <td><code>AnimationManager.queue(el, 'bounce')</code></td>
+              </tr>
+              <tr>
+                <td><code>pause(el)</code></td>
+                <td>Pause running animations</td>
+                <td><code>AnimationManager.pause(el)</code></td>
+              </tr>
+              <tr>
+                <td><code>resume(el)</code></td>
+                <td>Resume paused animations</td>
+                <td><code>AnimationManager.resume(el)</code></td>
+              </tr>
+              <tr>
+                <td><code>stop(el)</code></td>
+                <td>Cancel animations</td>
+                <td><code>AnimationManager.stop(el)</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 data-i18n>Data Attributes</h2>
+        <div class="tablebody">
+          <table class="fullwidth border">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Description</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>data-show</code></td>
+                <td>Show/hide with animation based on expression</td>
+                <td><code>data-show="isVisible"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-show-animation</code></td>
+                <td>Animation to use for show/hide</td>
+                <td><code>data-show-animation="fade"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-show-duration</code></td>
+                <td>Duration in milliseconds</td>
+                <td><code>data-show-duration="300"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-enter</code></td>
+                <td>Animation when entering viewport</td>
+                <td><code>data-enter="slideUp"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-enter-threshold</code></td>
+                <td>Intersection threshold (0-1)</td>
+                <td><code>data-enter-threshold="0.2"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-leave</code></td>
+                <td>Animation when leaving viewport</td>
+                <td><code>data-leave="fade"</code></td>
+              </tr>
+              <tr>
+                <td><code>data-transition</code></td>
+                <td>Animate on value change</td>
+                <td><code>data-transition="currentTab"</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

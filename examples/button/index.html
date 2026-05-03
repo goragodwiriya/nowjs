@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation - Now.js Example</title>
+  <meta name="description" content="Form validation example with Now.js - Coming Soon">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>Advanced Button Gallery</h1>
+        <p class="text-gradient" data-i18n>Beautiful and modern buttons for Now.js Framework.</p>
+      </div>
+    </section>
+
+    <article class="container content components">
+      <!-- Basic Buttons -->
+      <section class="section">
+        <h2>Basic button</h2>
+        <div class="button-row flex wrap gap middle demo-section">
+          <button class="btn">Default</button>
+          <button class="btn btn-primary">Primary</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-success">Success</button>
+          <button class="btn btn-warning">Warning</button>
+          <button class="btn btn-danger">Danger</button>
+          <button class="btn btn-info">Info</button>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;button class=&quot;btn&quot;&gt;Default&lt;/button&gt;
+          &lt;button class=&quot;btn btn-primary&quot;&gt;Primary&lt;/button&gt;
+          &lt;button class=&quot;btn btn-secondary&quot;&gt;Secondary&lt;/button&gt;
+          &lt;button class=&quot;btn btn-success&quot;&gt;Success&lt;/button&gt;
+          &lt;button class=&quot;btn btn-warning&quot;&gt;Warning&lt;/button&gt;
+          &lt;button class=&quot;btn btn-danger&quot;&gt;Danger&lt;/button&gt;
+          &lt;button class=&quot;btn btn-info&quot;&gt;Info&lt;/button&gt;
+        </code></pre>
+      </section>
+
+      <!-- Text Buttons -->
+      <section class="section">
+        <h2>Text Buttons</h2>
+        <div class="button-row flex wrap gap middle demo-section">
+          <button class="btn text">Default Text</button>
+          <button class="btn text btn-primary">Text Primary</button>
+          <button class="btn text btn-success">Text Success</button>
+          <button class="btn text btn-danger">Text Danger</button>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;button class=&quot;btn text&quot;&gt;Default Text&lt;/button&gt;
+          &lt;button class=&quot;btn text btn-primary&quot;&gt;Text Primary&lt;/button&gt;
+          &lt;button class=&quot;btn text btn-success&quot;&gt;Text Success&lt;/button&gt;
+          &lt;button class=&quot;btn text btn-danger&quot;&gt;Text Danger&lt;/button&gt;
+        </code></pre>
+      </section>
+
+      <!-- Outlined Buttons -->
+      <section class="section">
+        <h2>ปุ่มแบบมีกรอบ (Outlined Buttons)</h2>
+        <div class="button-row flex wrap gap middle demo-section">
+          <button class="btn outline">Default Outline</button>
+          <button class="btn outline btn-primary">Primary Outline</button>
+          <button class="btn outline btn-success">Success Outline</button>
+          <button class="btn outline btn-danger">Danger Outline</button>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;button class=&quot;btn outline&quot;&gt;Default Outline&lt;/button&gt;
+          &lt;button class=&quot;btn outline btn-primary&quot;&gt;Primary Outline&lt;/button&gt;
+          &lt;button class=&quot;btn outline btn-success&quot;&gt;Success Outline&lt;/button&gt;
+          &lt;button class=&quot;btn outline btn-danger&quot;&gt;Danger Outline&lt;/button&gt;
+        </code></pre>
+      </section>
+
+      <!-- Rounded and Circle Buttons -->
+      <section class="section">
+        <h2>ปุ่มแบบกลม (Rounded & Circle)</h2>
+        <div class="button-row flex wrap gap middle demo-section">
+          <button class="btn btn-primary rounded">Rounded Button</button>
+          <button class="btn btn-success pill">Pill Button</button>
+          <button class="btn circle btn-primary icon-heart"></button>
+          <button class="btn circle btn-danger icon-delete"></button>
+          <button class="btn circle btn-info icon-info"></button>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;button class=&quot;btn btn-primary rounded&quot;&gt;Rounded Button&lt;/button&gt;
+          &lt;button class=&quot;btn btn-success pill&quot;&gt;Pill Button&lt;/button&gt;
+          &lt;button class=&quot;btn circle btn-primary icon-heart&quot;&gt;&lt;/button&gt;
+          &lt;button class=&quot;btn circle btn-danger icon-delete&quot;&gt;&lt;/button&gt;
+          &lt;button class=&quot;btn circle btn-info icon-info&quot;&gt;&lt;/button&gt;
+        </code></pre>
+      </section>
+
+      <!-- Size Variants -->
+      <section class="section">
+        <h2>ขนาดต่างๆ (Size Variants)</h2>
+        <div class="button-row flex wrap gap middle center demo-section">
+          <button class="btn btn-primary small">Small</button>
+          <button class="btn btn-primary">Normal</button>
+          <button class="btn btn-primary large">Large</button>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;button class=&quot;btn btn-primary small&quot;&gt;Small&lt;/button&gt;
+          &lt;button class=&quot;btn btn-primary&quot;&gt;Normal&lt;/button&gt;
+          &lt;button class=&quot;btn btn-primary large&quot;&gt;Large&lt;/button&gt;
+        </code></pre>
+      </section>
+
+      <!-- Button Groups -->
+      <section class="section">
+        <h2>ปุ่มกลุ่ม (Button Groups)</h2>
+        <div class="button-row flex wrap gap demo-section">
+          <div class="btn-group">
+            <input type="radio" id="group1-left" name="group1" value="left" checked>
+            <label for="group1-left" class="btn">Left</label>
+            <input type="radio" id="group1-center" name="group1" value="center">
+            <label for="group1-center" class="btn">Center</label>
+            <input type="radio" id="group1-right" name="group1" value="right">
+            <label for="group1-right" class="btn">Right</label>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-success">Success</button>
+            <button class="btn btn-danger">Danger</button>
+          </div>
+
+          <div class="btn-group vertical">
+            <input type="radio" id="group2-top" name="group2" value="top" checked>
+            <label for="group2-top" class="btn">Top</label>
+            <input type="radio" id="group2-middle" name="group2" value="middle">
+            <label for="group2-middle" class="btn">Middle</label>
+            <input type="radio" id="group2-bottom" name="group2" value="bottom">
+            <label for="group2-bottom" class="btn">Bottom</label>
+          </div>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html" data-auto-indent="false">
+&lt;div class=&quot;btn-group&quot;&gt;
+  &lt;input type=&quot;radio&quot; id=&quot;group1-left&quot; name=&quot;group1&quot; value=&quot;left&quot; checked&gt;
+  &lt;label for=&quot;group1-left&quot; class=&quot;btn&quot;&gt;Left&lt;/label&gt;
+  &lt;input type=&quot;radio&quot; id=&quot;group1-center&quot; name=&quot;group1&quot; value=&quot;center&quot;&gt;
+  &lt;label for=&quot;group1-center&quot; class=&quot;btn&quot;&gt;Center&lt;/label&gt;
+  &lt;input type=&quot;radio&quot; id=&quot;group1-right&quot; name=&quot;group1&quot; value=&quot;right&quot;&gt;
+  &lt;label for=&quot;group1-right&quot; class=&quot;btn&quot;&gt;Right&lt;/label&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;btn-group&quot;&gt;
+  &lt;button class=&quot;btn btn-primary&quot;&gt;Primary&lt;/button&gt;
+  &lt;button class=&quot;btn btn-success&quot;&gt;Success&lt;/button&gt;
+  &lt;button class=&quot;btn btn-danger&quot;&gt;Danger&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;btn-group vertical&quot;&gt;
+  &lt;input type=&quot;radio&quot; id=&quot;group2-top&quot; name=&quot;group2&quot; value=&quot;top&quot; checked&gt;
+  &lt;label for=&quot;group2-top&quot; class=&quot;btn&quot;&gt;Top&lt;/label&gt;
+  &lt;input type=&quot;radio&quot; id=&quot;group2-middle&quot; name=&quot;group2&quot; value=&quot;middle&quot;&gt;
+  &lt;label for=&quot;group2-middle&quot; class=&quot;btn&quot;&gt;Middle&lt;/label&gt;
+  &lt;input type=&quot;radio&quot; id=&quot;group2-bottom&quot; name=&quot;group2&quot; value=&quot;bottom&quot;&gt;
+  &lt;label for=&quot;group2-bottom&quot; class=&quot;btn&quot;&gt;Bottom&lt;/label&gt;
+&lt;/div&gt;
+        </code></pre>
+      </section>
+
+      <!-- Dropdown Buttons -->
+      <section class="section">
+        <h2>ปุ่มแบบ Dropdown</h2>
+        <div class="button-row flex wrap gap middle demo-section">
+          <button class="btn btn-primary dropdown icon-print">Print
+            <ul>
+              <li><a href="#" class="icon-edit">แก้ไข</a></li>
+              <li><a href="#" class="icon-copy">คัดลอก</a></li>
+              <li>
+                <hr class="divider">
+              </li>
+              <li><a href="#" class="color-red icon-delete">ลบ</a></li>
+            </ul>
+          </button>
+
+          <div class="btn-group">
+            <button class="btn btn-success icon-edit">Edit</button>
+            <button class="btn btn-primary dropdown icon-print">Print
+              <ul>
+                <li><a href="#" class="icon-edit">แก้ไข</a></li>
+                <li><a href="#" class="icon-copy">คัดลอก</a></li>
+                <li>
+                  <hr class="divider">
+                </li>
+                <li><a href="#" class="color-red icon-delete">ลบ</a></li>
+              </ul>
+            </button>
+            <button class="btn btn-info icon-info">Info</button>
+          </div>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html" data-auto-indent="false">
+&lt;button class=&quot;btn btn-primary dropdown icon-print&quot;&gt;Print
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;icon-edit&quot;&gt;แก้ไข&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;icon-copy&quot;&gt;คัดลอก&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;
+      &lt;hr class=&quot;divider&quot;&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;color-red icon-delete&quot;&gt;ลบ&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/button&gt;
+
+&lt;div class=&quot;btn-group&quot;&gt;
+  &lt;button class=&quot;btn btn-success icon-edit&quot;&gt;Edit&lt;/button&gt;
+  &lt;button class=&quot;btn btn-primary dropdown icon-print&quot;&gt;Print
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;icon-edit&quot;&gt;แก้ไข&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;icon-copy&quot;&gt;คัดลอก&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;
+        &lt;hr class=&quot;divider&quot;&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;color-red icon-delete&quot;&gt;ลบ&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/button&gt;
+  &lt;button class=&quot;btn btn-info icon-info&quot;&gt;Info&lt;/button&gt;
+&lt;/div&gt;
+        </code></pre>
+      </section>
+
+      <!-- Icon Buttons -->
+      <section class="section">
+        <h2>ปุ่มไอคอน (Icon Buttons)</h2>
+        <div class="button-row flex wrap gap middle demo-section">
+          <button class="btn btn-primary icon-download">ดาวน์โหลด</button>
+          <button class="btn btn-success icon-save">บันทึก</button>
+          <button class="btn btn-warning icon-warning">เตือน</button>
+          <button class="btn btn-danger icon-invalid">ยกเลิก</button>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;button class=&quot;btn btn-primary icon-download&quot;&gt;ดาวน์โหลด&lt;/button&gt;
+          &lt;button class=&quot;btn btn-success icon-save&quot;&gt;บันทึก&lt;/button&gt;
+          &lt;button class=&quot;btn btn-warning icon-warning&quot;&gt;เตือน&lt;/button&gt;
+          &lt;button class=&quot;btn btn-danger icon-invalid&quot;&gt;ยกเลิก&lt;/button&gt;
+        </code></pre>
+      </section>
+
+      <!-- Loading and Disabled States -->
+      <section class="section">
+        <h2>สถานะต่างๆ (Loading & Disabled)</h2>
+        <div class="button-row flex wrap gap middle demo-section">
+          <button class="btn btn-primary loading">กำลังโหลด...</button>
+          <button class="btn btn-success loading">บันทึกข้อมูล</button>
+          <button class="btn btn-secondary" disabled>ปิดใช้งาน</button>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;button class=&quot;btn btn-primary loading&quot;&gt;กำลังโหลด...&lt;/button&gt;
+          &lt;button class=&quot;btn btn-success loading&quot;&gt;บันทึกข้อมูล&lt;/button&gt;
+          &lt;button class=&quot;btn btn-secondary&quot; disabled&gt;ปิดใช้งาน&lt;/button&gt;
+        </code></pre>
+      </section>
+
+      <!-- Toggle Buttons -->
+      <section class="section">
+        <h2>ปุ่มสลับ (Toggle Buttons)</h2>
+        <div class="button-row flex wrap gap middle demo-section">
+          <div class="btn-toggle">
+            <input type="checkbox" id="toggle1" class="toggle-input">
+            <label for="toggle1" class="btn">
+              <span class="toggle-off">ปิด</span>
+              <span class="toggle-on">เปิด</span>
+            </label>
+          </div>
+          <div class="btn-toggle">
+            <input type="checkbox" id="toggle2" class="toggle-input">
+            <label for="toggle2" class="btn btn-success">
+              <span class="toggle-off icon-published0">ซ่อน</span>
+              <span class="toggle-on icon-published1">แสดง</span>
+            </label>
+          </div>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html" data-auto-indent="false">
+&lt;div class=&quot;btn-toggle&quot;&gt;
+  &lt;input type=&quot;checkbox&quot; id=&quot;toggle1&quot; class=&quot;toggle-input&quot;&gt;
+  &lt;label for=&quot;toggle1&quot; class=&quot;btn&quot;&gt;
+    &lt;span class=&quot;toggle-off&quot;&gt;ปิด&lt;/span&gt;
+    &lt;span class=&quot;toggle-on&quot;&gt;เปิด&lt;/span&gt;
+  &lt;/label&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;btn-toggle&quot;&gt;
+  &lt;input type=&quot;checkbox&quot; id=&quot;toggle2&quot; class=&quot;toggle-input&quot;&gt;
+  &lt;label for=&quot;toggle2&quot; class=&quot;btn btn-success&quot;&gt;
+    &lt;span class=&quot;toggle-off icon-published0&quot;&gt;ซ่อน&lt;/span&gt;
+    &lt;span class=&quot;toggle-on icon-published1&quot;&gt;แสดง&lt;/span&gt;
+  &lt;/label&gt;
+&lt;/div&gt;
+        </code></pre>
+      </section>
+
+      <!-- Gradient Buttons -->
+      <section class="section">
+        <h2>ปุ่มไล่สี (Gradient Buttons)</h2>
+        <div class="button-row demo-section">
+          <button class="btn btn-gradient btn-gradient-blue">Blue Gradient</button>
+          <button class="btn btn-gradient btn-gradient-purple">Purple Gradient</button>
+          <button class="btn btn-gradient btn-gradient-pink">Pink Gradient</button>
+          <button class="btn btn-gradient btn-gradient-orange">Orange Gradient</button>
+          <button class="btn btn-gradient btn-gradient-green">Green Gradient</button>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;button class=&quot;btn btn-gradient btn-gradient-blue&quot;&gt;Blue Gradient&lt;/button&gt;
+          &lt;button class=&quot;btn btn-gradient btn-gradient-purple&quot;&gt;Purple Gradient&lt;/button&gt;
+          &lt;button class=&quot;btn btn-gradient btn-gradient-pink&quot;&gt;Pink Gradient&lt;/button&gt;
+          &lt;button class=&quot;btn btn-gradient btn-gradient-orange&quot;&gt;Orange Gradient&lt;/button&gt;
+          &lt;button class=&quot;btn btn-gradient btn-gradient-green&quot;&gt;Green Gradient&lt;/button&gt;
+        </code></pre>
+      </section>
+
+      <!-- Social Media Buttons -->
+      <section class="section">
+        <h2>ปุ่มโซเชียลมีเดีย</h2>
+        <div class="button-row flex wrap gap middle demo-section">
+          <button class="btn btn-facebook icon-facebook">Facebook</button>
+          <button class="btn btn-twitter icon-twitter">Twitter</button>
+          <button class="btn btn-line icon-line">Line</button>
+          <button class="btn btn-instagram icon-instagram">Instagram</button>
+          <button class="btn btn-youtube icon-youtube">YouTube</button>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;button class=&quot;btn btn-facebook icon-facebook&quot;&gt;Facebook&lt;/button&gt;
+          &lt;button class=&quot;btn btn-twitter icon-twitter&quot;&gt;Twitter&lt;/button&gt;
+          &lt;button class=&quot;btn btn-line icon-line&quot;&gt;Line&lt;/button&gt;
+          &lt;button class=&quot;btn btn-instagram icon-instagram&quot;&gt;Instagram&lt;/button&gt;
+          &lt;button class=&quot;btn btn-youtube icon-youtube&quot;&gt;YouTube&lt;/button&gt;
+        </code></pre>
+      </section>
+
+      <!-- Floating Action Buttons -->
+      <section class="section">
+        <h2>ปุ่มลอย (Floating Action Buttons)</h2>
+        <div class="button-row demo-section">
+          <div>ปุ่มลอยจะแสดงที่มุมล่างขวาของหน้าจอ</div>
+          <button class="btn float btn-primary circle icon-new"></button>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;button class=&quot;btn float btn-primary circle icon-new&quot;&gt;&lt;/button&gt;
+        </code></pre>
+      </section>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+  <script src="main.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</body>
+
+</html>

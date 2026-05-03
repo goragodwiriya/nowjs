@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediaViewer Component - Now.js Example</title>
+  <meta name="description" content="Complete guide to using MediaViewer for images, videos, and galleries">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>MediaViewer Component</h1>
+        <p class="text-gradient" data-i18n>Unified media viewer with slideshow, zoom, and gallery features</p>
+      </div>
+    </section>
+
+    <div class="container content">
+
+      <!-- 1. Basic Image Gallery -->
+      <section class="section">
+        <h2>1. Basic Image Gallery</h2>
+        <p>Click any image to open it in the MediaViewer with navigation.</p>
+
+        <div class="example-box">
+          <div class="gallery-grid" id="basicGallery">
+            <div class="gallery-item">
+              <img src="https://picsum.photos/id/10/400/300" alt="Nature 1">
+            </div>
+            <div class="gallery-item">
+              <img src="https://picsum.photos/id/11/400/300" alt="Nature 2">
+            </div>
+            <div class="gallery-item">
+              <img src="https://picsum.photos/id/12/400/300" alt="Nature 3">
+            </div>
+            <div class="gallery-item">
+              <img src="https://picsum.photos/id/13/400/300" alt="Nature 4">
+            </div>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              // Create basic viewer
+              const viewer = new MediaViewer();
+
+              // Define images
+              const images = [
+              'https://picsum.photos/id/10/800/600',
+              'https://picsum.photos/id/11/800/600',
+              'https://picsum.photos/id/12/800/600',
+              'https://picsum.photos/id/13/800/600'
+              ];
+
+              // Open gallery on image click
+              document.querySelectorAll('#basicGallery .gallery-item').forEach((item, index) => {
+              item.onclick = () => viewer.show(images, index);
+              });
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 2. Gallery with Thumbnails -->
+      <section class="section">
+        <h2>2. Gallery with Thumbnails</h2>
+        <p>Enable thumbnail strip for easier navigation.</p>
+
+        <div class="example-box">
+          <button class="btn btn-primary" id="openWithThumbnails">
+            Open Gallery with Thumbnails
+          </button>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              const thumbViewer = new MediaViewer({
+              showThumbnails: true,
+              showControls: true
+              });
+
+              const galleryImages = [
+              { url: 'photo1.jpg', caption: 'Mountain View' },
+              { url: 'photo2.jpg', caption: 'Ocean Sunset' },
+              { url: 'photo3.jpg', caption: 'Forest Trail' }
+              ];
+
+              thumbViewer.show(galleryImages);
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 3. Slideshow -->
+      <section class="section">
+        <h2>3. Auto-play Slideshow</h2>
+        <p>Start an automatic slideshow with customizable interval.</p>
+
+        <div class="example-box">
+          <div class="button-group">
+            <button class="btn btn-primary" id="startSlideshow">Start Slideshow</button>
+            <button class="btn btn-secondary" id="stopSlideshow" disabled>Stop</button>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              const slideshowViewer = new MediaViewer({
+              autoplay: true,
+              interval: 3000, // 3 seconds
+              loop: true,
+              showThumbnails: true
+              });
+
+              slideshowViewer.show(images);
+
+              // Manual control
+              slideshowViewer.play(); // Start
+              slideshowViewer.stop(); // Stop
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 4. Mixed Media -->
+      <section class="section">
+        <h2>4. Mixed Media (Images + YouTube)</h2>
+        <p>Combine different media types in one viewer.</p>
+
+        <div class="example-box">
+          <button class="btn btn-primary" id="openMixedMedia">
+            Open Mixed Media Gallery
+          </button>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              const mixedViewer = new MediaViewer({
+              showThumbnails: true,
+              showControls: false // No zoom for mixed content
+              });
+
+              mixedViewer.show([
+              { type: 'image', url: 'product.jpg', caption: 'Product Photo' },
+              { type: 'youtube', url: 'https://www.youtube.com/watch?v=VIDEO_ID' },
+              { type: 'image', url: 'detail.jpg', caption: 'Product Detail' }
+              ]);
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 5. Zoom Controls -->
+      <section class="section">
+        <h2>5. Zoom and Pan</h2>
+        <p>Enable zoom for detailed image inspection.</p>
+
+        <div class="example-box">
+          <div class="gallery-grid small" id="zoomGallery">
+            <div class="gallery-item">
+              <img src="https://picsum.photos/id/20/400/300" alt="Detail 1">
+              <span class="zoom-hint">Click to zoom</span>
+            </div>
+            <div class="gallery-item">
+              <img src="https://picsum.photos/id/21/400/300" alt="Detail 2">
+              <span class="zoom-hint">Click to zoom</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="zoom-info">
+          <h4>Controls:</h4>
+          <ul>
+            <li><strong>Mouse Wheel:</strong> Scroll to zoom in/out</li>
+            <li><strong>Keyboard:</strong> + to zoom in, - to zoom out, 0 to reset</li>
+            <li><strong>Drag:</strong> Click and drag to pan when zoomed</li>
+          </ul>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              const zoomViewer = new MediaViewer({
+              enableZoom: true,
+              maxZoom: 4, // Maximum 400%
+              zoomStep: 0.5, // 50% per step
+              showControls: true
+              });
+
+              // Programmatic zoom
+              zoomViewer.zoomIn();
+              zoomViewer.zoomOut();
+              zoomViewer.resetZoom();
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 6. Event Callbacks -->
+      <section class="section">
+        <h2>6. Event Callbacks</h2>
+        <p>Track user interactions with callback functions.</p>
+
+        <div class="example-box">
+          <button class="btn btn-primary" id="openWithCallbacks">Open with Callbacks</button>
+          <div id="eventLog" class="event-log mt-3">
+            <div class="log-header">Event Log:</div>
+            <div class="log-content"></div>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              const callbackViewer = new MediaViewer({
+              showThumbnails: true,
+
+              onShow: (item) => {
+              console.log('Viewer opened with:', item);
+              },
+
+              onHide: () => {
+              console.log('Viewer closed');
+              },
+
+              onChange: (item, index) => {
+              console.log('Changed to item', index, ':', item);
+              }
+              });
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 7. Declarative Gallery -->
+      <section class="section">
+        <h2>7. Declarative Gallery (Data Attributes)</h2>
+        <p>No JavaScript required - just add data attributes to your HTML!</p>
+
+        <div class="example-box">
+          <div class="gallery-grid"
+               data-media-viewer
+               data-show-thumbnails="true"
+               data-enable-zoom="true"
+               data-max-zoom="4">
+            <div class="gallery-item">
+              <img src="https://picsum.photos/id/25/400/300"
+                   data-src="https://picsum.photos/id/25/800/600"
+                   data-caption="Scenic Mountain View"
+                   alt="Mountain">
+            </div>
+            <div class="gallery-item">
+              <img src="https://picsum.photos/id/26/400/300"
+                   data-src="https://picsum.photos/id/26/800/600"
+                   data-caption="Peaceful Lake"
+                   alt="Lake">
+            </div>
+            <div class="gallery-item">
+              <img src="https://picsum.photos/id/27/400/300"
+                   data-src="https://picsum.photos/id/27/800/600"
+                   data-caption="Green Forest"
+                   alt="Forest">
+            </div>
+            <div class="gallery-item">
+              <img src="https://picsum.photos/id/28/400/300"
+                   data-src="https://picsum.photos/id/28/800/600"
+                   data-caption="Desert Sunset"
+                   alt="Desert">
+            </div>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="html">
+&lt;!-- No JavaScript required! --&gt;
+&lt;div class="gallery-grid"
+     data-media-viewer
+     data-show-thumbnails="true"
+     data-enable-zoom="true"
+     data-max-zoom="4"&gt;
+
+  &lt;div class="gallery-item"&gt;
+    &lt;img src="thumbnail.jpg"
+         data-src="full-size.jpg"
+         data-caption="Image Description"
+         alt="Alt text"&gt;
+  &lt;/div&gt;
+  &lt;!-- More items... --&gt;
+&lt;/div&gt;
+            </code></pre>
+        </div>
+
+        <h3>Data Attributes Reference</h3>
+        <div class="tablebody">
+          <table class="fullwidth border data">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>data-media-viewer</code></td>
+                <td>marker</td>
+                <td>Enable MediaViewer on this container</td>
+              </tr>
+              <tr>
+                <td><code>data-show-thumbnails</code></td>
+                <td>boolean</td>
+                <td>Show thumbnail navigation strip</td>
+              </tr>
+              <tr>
+                <td><code>data-show-controls</code></td>
+                <td>boolean</td>
+                <td>Show zoom control buttons</td>
+              </tr>
+              <tr>
+                <td><code>data-enable-zoom</code></td>
+                <td>boolean</td>
+                <td>Enable zoom functionality</td>
+              </tr>
+              <tr>
+                <td><code>data-max-zoom</code></td>
+                <td>number</td>
+                <td>Maximum zoom level (e.g., "4" for 400%)</td>
+              </tr>
+              <tr>
+                <td><code>data-autoplay</code></td>
+                <td>boolean</td>
+                <td>Auto-start slideshow</td>
+              </tr>
+              <tr>
+                <td><code>data-interval</code></td>
+                <td>number</td>
+                <td>Slideshow interval in milliseconds</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Image Element Attributes</h3>
+        <div class="tablebody">
+          <table class="fullwidth border data">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>data-src</code></td>
+                <td>Full-size image URL (falls back to src)</td>
+              </tr>
+              <tr>
+                <td><code>data-caption</code></td>
+                <td>Caption text (falls back to alt)</td>
+              </tr>
+              <tr>
+                <td><code>data-type</code></td>
+                <td>Media type: image, video, youtube, iframe</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 8. Text/HTML Content -->
+      <section class="section">
+        <h2>8. Text/HTML Content</h2>
+        <p>MediaViewer supports displaying text and HTML content alongside images and videos.</p>
+
+        <div class="example-box">
+          <button class="btn btn-primary" id="textHtmlDemo">
+            Open Mixed Content Viewer
+          </button>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+const viewer = new MediaViewer({ showThumbnails: true });
+viewer.show([
+  { type: 'image', url: 'photo.jpg', caption: 'Photo' },
+  { type: 'text', title: 'About', content: 'This is plain text content...' },
+  { type: 'html', content: '&lt;h2&gt;Rich HTML&lt;/h2&gt;&lt;p&gt;With formatting!&lt;/p&gt;' }
+]);
+          </code></pre>
+        </div>
+
+        <h3>Content Types</h3>
+        <div class="tablebody">
+          <table class="fullwidth border data">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Properties</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>text</code></td>
+                <td><code>title</code>, <code>content</code></td>
+                <td>Plain text display with optional title</td>
+              </tr>
+              <tr>
+                <td><code>html</code></td>
+                <td><code>content</code></td>
+                <td>Rich HTML content (sanitized automatically)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 9. API Loading -->
+      <section class="section">
+        <h2>9. API Loading (Demo)</h2>
+        <p>Load media items directly from an API endpoint using data attributes.</p>
+
+        <div class="example-box">
+          <div class="gallery-grid"
+               data-media-viewer
+               data-api=""
+               data-show-thumbnails="true"
+               id="apiDemo">
+            <p style="padding: 2rem; text-align: center; color: var(--color-text-secondary);">
+              <em>API loading demo - Click button below to test with mock data</em>
+            </p>
+          </div>
+          <button class="btn btn-secondary" id="apiLoadBtn" style="margin-top: 1rem;">
+            Load from Mock API
+          </button>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="html">
+&lt;!-- Automatic API loading --&gt;
+&lt;div data-media-viewer
+     data-api="/api/gallery"
+     data-api-method="GET"
+     data-show-thumbnails="true"&gt;
+  &lt;button class="btn"&gt;Open Gallery&lt;/button&gt;
+&lt;/div&gt;
+          </code></pre>
+        </div>
+
+        <h3>API Data Attributes</h3>
+        <div class="tablebody">
+          <table class="fullwidth border data">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>data-api</code></td>
+                <td>string</td>
+                <td>API endpoint URL</td>
+              </tr>
+              <tr>
+                <td><code>data-api-method</code></td>
+                <td>string</td>
+                <td>HTTP method (default: GET)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>API Events</h3>
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+const container = document.querySelector('[data-media-viewer]');
+
+container.addEventListener('mediaviewer:loaded', (e) => {
+  console.log('Loaded:', e.detail.items);
+});
+
+container.addEventListener('mediaviewer:error', (e) => {
+  console.log('Error:', e.detail.error);
+});
+          </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- API Reference -->
+      <section class="section">
+        <h2>API Reference</h2>
+
+        <div class="tablebody">
+          <table class="fullwidth border data">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>show(items, startIndex)</code></td>
+                <td>Open viewer with media items array</td>
+              </tr>
+              <tr>
+                <td><code>hide()</code></td>
+                <td>Close the viewer</td>
+              </tr>
+              <tr>
+                <td><code>next()</code> / <code>prev()</code></td>
+                <td>Navigate to next/previous item</td>
+              </tr>
+              <tr>
+                <td><code>goTo(index)</code></td>
+                <td>Go to specific item by index</td>
+              </tr>
+              <tr>
+                <td><code>play()</code> / <code>stop()</code></td>
+                <td>Start/stop slideshow auto-play</td>
+              </tr>
+              <tr>
+                <td><code>zoomIn()</code> / <code>zoomOut()</code></td>
+                <td>Zoom in/out by one step</td>
+              </tr>
+              <tr>
+                <td><code>resetZoom()</code></td>
+                <td>Reset zoom to 100%</td>
+              </tr>
+              <tr>
+                <td><code>getCurrentItem()</code></td>
+                <td>Get current media item object</td>
+              </tr>
+              <tr>
+                <td><code>setOptions(options)</code></td>
+                <td>Update viewer options</td>
+              </tr>
+              <tr>
+                <td><code>destroy()</code></td>
+                <td>Clean up and remove viewer</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

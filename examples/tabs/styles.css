@@ -1,0 +1,265 @@
+/* Profile Info */
+.profile-info {
+  background: var(--color-surface-light);
+  padding: var(--space-4);
+  border-radius: var(--border-radius);
+  margin-top: var(--space-3);
+}
+.profile-info p {
+  margin: var(--space-2) 0;
+}
+/* Settings Options */
+.settings-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+.settings-options label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  padding: var(--space-2);
+  border-radius: var(--border-radius);
+  transition: background 0.2s;
+}
+.settings-options label:hover {
+  background: var(--color-surface-light);
+}
+.settings-options input[type="checkbox"] {
+  cursor: pointer;
+}
+/* Configuration Table */
+.config-table {
+  overflow-x: auto;
+  margin: var(--space-4) 0;
+}
+.config-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-surface);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+.config-table th,
+.config-table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+.config-table th {
+  background: var(--color-primary);
+  color: white;
+  font-weight: 600;
+}
+.config-table tr:last-child td {
+  border-bottom: none;
+}
+.config-table tr:nth-child(even) {
+  background: var(--color-surface-light);
+}
+.config-table code {
+  background: var(--color-surface-dark);
+  padding: 0.2em 0.5em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+/* Code Tabs */
+.code-tabs {
+  margin: var(--space-4) 0;
+}
+/* Next Steps */
+.next-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+.next-step-card {
+  background: var(--color-surface);
+  padding: var(--space-5);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--color-border);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: block;
+}
+.next-step-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.next-step-card h3 {
+  color: var(--color-primary);
+  margin-top: 0;
+  margin-bottom: var(--space-2);
+}
+.next-step-card p {
+  color: var(--color-text-muted);
+  margin: 0;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .config-table {
+    font-size: 0.9em;
+  }
+  .config-table th,
+  .config-table td {
+    padding: var(--space-2) var(--space-3);
+  }
+}
+@media (max-width: 480px) {
+  .next-steps {
+    grid-template-columns: 1fr;
+  }
+}
+/* ============================================
+   Custom Wizard-Style Tabs (data-style="wizard")
+   Demonstrates using custom CSS instead of default
+   ============================================ */
+.wizard-content {
+  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-light) 100%);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  padding: var(--space-6);
+}
+/* Wizard Navigation */
+.wizard-nav {
+  display: flex;
+  padding: var(--space-4);
+  gap: var(--space-2);
+  position: relative;
+}
+/* Progress line between steps */
+.wizard-nav::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(var(--space-4) + 24px);
+  right: calc(var(--space-4) + 24px);
+  height: 2px;
+  background: var(--color-border);
+  transform: translateY(-50%);
+  z-index: 0;
+  margin-top: -1em;
+}
+/* Wizard Step Button */
+.wizard-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+  height: auto;
+}
+.wizard-step:hover .step-number {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+/* Step Number Circle */
+.step-number {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 3px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  transition: all 0.3s ease;
+}
+/* Step Label */
+.step-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: color 0.3s ease;
+}
+/* Active Step */
+.wizard-step[aria-selected="true"] .step-number {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border-color: #6366f1;
+  color: white;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+.wizard-step[aria-selected="true"] .step-label {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+/* Wizard Panels */
+.wizard-panel {
+  display: none;
+  animation: wizardFadeIn 0.4s ease;
+}
+.wizard-panel:not([hidden]) {
+  display: block;
+}
+.wizard-panel h4 {
+  margin-top: 0;
+  color: var(--color-primary);
+  font-size: 1.25rem;
+}
+.wizard-panel .form-group {
+  margin-top: var(--space-4);
+}
+.wizard-panel .form-group label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-weight: 500;
+  color: var(--color-text);
+}
+.wizard-panel .form-group input {
+  width: 100%;
+  max-width: 400px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.wizard-panel .form-group input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+@keyframes wizardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* Responsive Wizard */
+@media (max-width: 600px) {
+  .wizard-nav {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .wizard-nav::before {
+    display: none;
+  }
+  .wizard-step {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: var(--space-3);
+  }
+  .step-number {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}

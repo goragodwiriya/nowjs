@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reactive Counter - Now.js Example</title>
+  <meta name="description" content="Learn how to build a reactive counter component with Now.js. Explore state management, event handling, and data binding in action.">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>Reactive Counter</h1>
+        <p class="text-gradient" data-i18n>A simple yet powerful demonstration of reactive state management, event handling, and data binding in Now.js</p>
+      </div>
+    </section>
+    <article class="container content" data-component="reactivecounter">
+      <!-- Live Demo Section -->
+      <section class="section">
+        <h2 class="icon-published1" data-i18n>Live Demo</h2>
+        <div class="demo-section">
+          <div class="counter-app">
+            <div class="counter-display">
+              <span class="counter-number" data-text="count">0</span>
+            </div>
+            <div class="counter-controls">
+              <button class="btn btn-primary" data-on="click:decrement" aria-label="Decrease">−</button>
+              <button class="btn btn-primary" data-on="click:increment" aria-label="Increase">+</button>
+            </div>
+            <button class="btn outline" data-on="click:reset">Reset Counter</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Features Section -->
+      <section class="section">
+        <h2 class="icon-list" data-i18n>Key Features</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3 class="icon-power" data-i18n>Reactive State</h3>
+            <p data-i18n>Automatic UI updates when state changes. No manual DOM manipulation required.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-cog" data-i18n>Event Binding</h3>
+            <p data-i18n>Declarative event handling using data-on attributes. Clean and intuitive.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-compare" data-i18n>Data Binding</h3>
+            <p data-i18n>Two-way data binding keeps your UI in sync with component state automatically.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-exchange" data-i18n>Component Lifecycle</h3>
+            <p>Full lifecycle hooks for initialization, updates, and cleanup.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Source Code Section -->
+      <section>
+        <h2 class="icon-code" data-i18n>Source Code</h2>
+
+        <div class="code-tabs" data-component="tabs">
+          <div class="tab-buttons">
+            <button class="tab-button active" data-tab="component">Component</button>
+            <button class="tab-button" data-tab="template">Template</button>
+            <button class="tab-button" data-tab="styles">Styles</button>
+          </div>
+
+          <div class="tab-content">
+            <!-- Component Code -->
+            <div class="tab-pane active" data-tab="component">
+              <pre><code data-component="syntaxhighlighter" data-language="javascript">// Reactive Counter Component
+                  Now.getManager('component').define('reactivecounter', {
+                  // Enable reactive state management
+                  reactive: true,
+
+                  // Component state
+                  state: {
+                  title: 'Reactive Counter',
+                  count: 0
+                  },
+
+                  // Component methods
+                  methods: {
+                  increment() {
+                  this.state.count++;
+                  console.log('Count:', this.state.count);
+                  },
+
+                  decrement() {
+                  this.state.count--;
+                  console.log('Count:', this.state.count);
+                  },
+
+                  reset() {
+                  this.state.count = 0;
+                  console.log('Counter reset');
+                  }
+                  },
+
+                  // Lifecycle hooks
+                  mounted() {
+                  console.log('Counter component mounted');
+                  },
+
+                  // Global event handlers
+                  events: {
+                  'app:cleanup:end': function() {
+                  this.state.count = 0;
+                  console.log('Counter cleaned up');
+                  }
+                  }
+                  });</code></pre>
+            </div>
+
+            <!-- Template Code -->
+            <div class="tab-pane" data-tab="template">
+              <pre><code data-component="syntaxhighlighter" data-language="html">&lt;div class="counter-app" data-component="reactivecounter"&gt;
+                  &lt;!-- Display current count --&gt;
+                  &lt;div class="counter-display"&gt;
+                  &lt;span class="counter-number" data-text="count"&gt;0&lt;/span&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Control buttons --&gt;
+                  &lt;div class="counter-controls"&gt;
+                  &lt;button data-on="click:decrement" aria-label="Decrease"&gt;−&lt;/button&gt;
+                  &lt;button data-on="click:increment" aria-label="Increase"&gt;+&lt;/button&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Reset button --&gt;
+                  &lt;button data-on="click:reset"&gt;Reset Counter&lt;/button&gt;
+                  &lt;/div&gt;</code></pre>
+            </div>
+
+            <!-- Styles Code -->
+            <div class="tab-pane" data-tab="styles">
+              <pre><code data-component="syntaxhighlighter" data-language="css">
+                  .counter-app {
+                  text-align: center;
+                  padding: var(--space-8);
+                  }
+                  .counter-display {
+                  font-size: 4rem;
+                  font-weight: bold;
+                  }
+                  .counter-controls {
+                  display: flex;
+                  gap: var(--space-4);
+                  justify-content: center;
+                  margin-bottom: var(--space-4);
+                  }
+                  .counter-controls button {
+                  font-size: 1.5em;
+                  }
+                  .counter-number {
+                  font-family: var(--font-family-mono);
+                  color: var(--color-primary);
+                  }
+                </code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it Works Section -->
+      <section class="section">
+        <h2 class="icon-search" data-i18n>How It Works</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3 data-i18n>1. State Management</h3>
+            <p data-i18n>The counter uses Now.js reactive state to track the count value. When the state changes, the component automatically updates the display without manual DOM manipulation.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>2. Event Handling</h3>
+            <p data-i18n>Click events are handled using <code>data-on</code> attributes that map directly to component methods. This provides a clean, declarative way to bind events.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>3. Data Binding</h3>
+            <p data-i18n>The <code>data-text</code> directive creates a binding between the state and the DOM. When <code>state.count</code> changes, the display updates automatically.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>4. Lifecycle Management</h3>
+            <p data-i18n>The component properly manages its lifecycle with hooks like <code>mounted()</code> and event cleanup, ensuring no memory leaks or orphaned listeners.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Next Steps Section -->
+      <section class="section">
+        <h2 class="icon-next" data-i18n>Next Steps</h2>
+        <div class="next-steps">
+          <a href="/docs/components/state" class="next-step-card">
+            <h3 data-i18n>Learn About State</h3>
+            <p data-i18n>Dive deeper into Now.js reactive state management and computed properties</p>
+          </a>
+
+          <a href="/docs/components/events" class="next-step-card">
+            <h3 data-i18n>Event Handling</h3>
+            <p data-i18n>Explore advanced event handling patterns and custom events in Now.js</p>
+          </a>
+
+          <a href="/examples/todo" class="next-step-card">
+            <h3 data-i18n>Todo App Example</h3>
+            <p data-i18n>See a more complex application with lists, forms, and data persistence</p>
+          </a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

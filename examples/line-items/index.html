@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LineItemsManager - Now.js Examples</title>
+  <meta name="description" content="Complete LineItemsManager examples with Now.js - purchase orders, invoices, receipts, and more">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>LineItemsManager Examples</h1>
+        <p class="text-gradient" data-i18n>Complete examples of Now.js LineItemsManager for purchase orders, invoices, and document line items</p>
+      </div>
+    </section>
+
+    <article class="container content">
+
+      <!-- Example 1: Basic Purchase Order -->
+      <section class="section">
+        <h2 data-i18n>Example 1: Basic Purchase Order</h2>
+        <p>ตัวอย่าง Purchase Order พื้นฐาน - เพิ่มสินค้าผ่าน autocomplete แล้วคำนวณยอดรวมอัตโนมัติ</p>
+
+        <form id="po-form" class="form">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Product <span class="required">*</span></label>
+              <input type="text" name="product_text" data-role="product"
+                     data-autocomplete="true"
+                     data-source="data/products.json"
+                     data-display="name"
+                     data-value="id"
+                     placeholder="Search product...">
+            </div>
+            <div class="col-md-3">
+              <label>Quantity</label>
+              <input type="number" name="qty" data-role="qty" value="1" min="1">
+            </div>
+          </div>
+
+          <div class="tablebody">
+            <table class="table border fullwidth"
+                   data-line-items="items"
+                   data-detail-api="data/products.json"
+                   data-listen-select="[data-role='product']"
+                   data-api-params="[data-role]"
+                   data-on-calculate="calculatePO">
+              <thead>
+                <tr>
+                  <th data-field="sku" data-display-only="true">SKU</th>
+                  <th data-field="name" data-display-only="true">Product</th>
+                  <th data-field="unit_name" data-display-only="true">Unit</th>
+                  <th data-field="quantity" data-type="number" data-min="1" data-step="1" class="center">Quantity</th>
+                  <th data-field="unit_price" data-type="currency" data-step="0.01" class="right">Price</th>
+                  <th data-field="subtotal" data-type="currency" data-readonly="true" class="right">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 offset-md-6">
+              <div class="summary-box">
+                <div class="summary-row">
+                  <label>Total Amount:</label>
+                  <input type="text" id="po_total" readonly class="right text-large">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button type="button" class="button" onclick="clearPO()">Clear</button>
+            <button type="submit" class="button primary">Save</button>
+          </div>
+        </form>
+
+        <div class="code-section">
+          <h3>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;input type="text" data-role="product"
+       data-autocomplete="true"
+       data-source="data/products.json"&gt;
+
+&lt;table data-line-items="items"
+       data-detail-api="data/products.json"
+       data-listen-select="[data-role='product']"
+       data-on-calculate="calculatePO"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th data-field="sku" data-display-only="true"&gt;SKU&lt;/th&gt;
+      &lt;th data-field="quantity" data-type="number"&gt;Quantity&lt;/th&gt;
+      &lt;th data-field="unit_price" data-type="currency"&gt;Price&lt;/th&gt;
+      &lt;th data-field="subtotal" data-readonly="true"&gt;Subtotal&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+&lt;/table&gt;</code></pre>
+
+          <h3>JavaScript:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">function calculatePO({items}) {
+  let total = 0;
+
+  const updatedItems = items.map(item => {
+    const qty = parseFloat(item.quantity) || 0;
+    const price = parseFloat(item.unit_price) || 0;
+    const subtotal = qty * price;
+    total += subtotal;
+
+    return {subtotal: subtotal.toFixed(2)};
+  });
+
+  return {
+    items: updatedItems,
+    '#po_total': total.toFixed(2)
+  };
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 2: Invoice with VAT and Discount -->
+      <section class="section">
+        <h2 data-i18n>Example 2: Invoice with VAT and Discount</h2>
+        <p>ใบแจ้งหนี้พร้อม VAT 7% และส่วนลด</p>
+
+        <form id="invoice-form" class="form">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Product</label>
+              <input type="text" data-role="product-inv"
+                     data-autocomplete="true"
+                     data-source="data/products.json"
+                     data-display="name"
+                     data-value="id"
+                     placeholder="Search product...">
+            </div>
+          </div>
+
+          <div class="tablebody">
+            <table class="table border fullwidth"
+                   data-line-items="invoice_items"
+                   data-detail-api="data/products.json"
+                   data-listen-select="[data-role='product-inv']"
+                   data-api-params="[data-role]"
+                   data-on-calculate="calculateInvoice">
+              <thead>
+                <tr>
+                  <th data-field="sku" data-display-only="true">SKU</th>
+                  <th data-field="name" data-display-only="true">Product</th>
+                  <th data-field="quantity" data-type="number" data-min="1" class="center">Qty</th>
+                  <th data-field="unit_price" data-type="currency"
+                      data-button-click="addVat"
+                      data-button-class="icon-plus"
+                      data-button-title="+ VAT 7%" class="right">Price</th>
+                  <th data-field="subtotal" data-type="currency" data-readonly="true" class="right">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 offset-md-6">
+              <div class="summary-box">
+                <div class="summary-row">
+                  <label>Subtotal:</label>
+                  <input type="text" id="inv_subtotal" readonly class="right">
+                </div>
+                <div class="summary-row">
+                  <label>Discount (%):</label>
+                  <input type="number" id="inv_discount_percent" value="0" min="0" max="100"
+                         data-on="input:LineItemsManager.recalculate">
+                </div>
+                <div class="summary-row">
+                  <label>Discount Amount:</label>
+                  <input type="text" id="inv_discount_amount" readonly class="right">
+                </div>
+                <div class="summary-row">
+                  <label>After Discount:</label>
+                  <input type="text" id="inv_after_discount" readonly class="right">
+                </div>
+                <div class="summary-row">
+                  <label>VAT 7%:</label>
+                  <input type="text" id="inv_vat" readonly class="right">
+                </div>
+                <div class="summary-row total">
+                  <label>Grand Total:</label>
+                  <input type="text" id="inv_total" readonly class="right text-large">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button type="button" class="button" onclick="clearInvoice()">Clear</button>
+            <button type="submit" class="button primary">Save</button>
+          </div>
+        </form>
+
+        <div class="code-section">
+          <h3>Cell Button (VAT):</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;th data-field="unit_price" data-type="currency"
+    data-button-click="addVat"
+    data-button-class="icon-plus"
+    data-button-title="+ VAT 7%"&gt;Price&lt;/th&gt;</code></pre>
+
+          <h3>JavaScript:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">// Button handler
+function addVat(currentValue) {
+  const price = parseFloat(currentValue) || 0;
+  return (price * 1.07).toFixed(2);
+}
+
+// Calculation
+function calculateInvoice({items}) {
+  let subtotal = 0;
+
+  const updatedItems = items.map(item => {
+    const qty = parseFloat(item.quantity) || 0;
+    const price = parseFloat(item.unit_price) || 0;
+    const itemSubtotal = qty * price;
+    subtotal += itemSubtotal;
+    return {subtotal: itemSubtotal.toFixed(2)};
+  });
+
+  const discountPercent = parseFloat(
+    document.getElementById('inv_discount_percent')?.value
+  ) || 0;
+  const discount = subtotal * (discountPercent / 100);
+  const afterDiscount = subtotal - discount;
+  const vat = afterDiscount * 0.07;
+  const total = afterDiscount + vat;
+
+  return {
+    items: updatedItems,
+    '#inv_subtotal': subtotal.toFixed(2),
+    '#inv_discount_amount': discount.toFixed(2),
+    '#inv_after_discount': afterDiscount.toFixed(2),
+    '#inv_vat': vat.toFixed(2),
+    '#inv_total': total.toFixed(2)
+  };
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 3: Load from PO -->
+      <section class="section">
+        <h2 data-i18n>Example 3: Goods Receipt - Load from PO</h2>
+        <p>ใบรับสินค้า - โหลดรายการจาก Purchase Order อัตโนมัติ</p>
+
+        <form id="gr-form" class="form">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Purchase Order</label>
+              <select id="po_id" name="po_id">
+                <option value="">-- Select PO --</option>
+                <option value="1">PO-2024-001</option>
+                <option value="2">PO-2024-002</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="tablebody">
+            <table class="table border fullwidth"
+                   data-line-items="gr_items"
+                   data-load-from="#po_id"
+                   data-load-api="data/po-items.json"
+                   data-load-param="po_id"
+                   data-on-calculate="calculateGR">
+              <thead>
+                <tr>
+                  <th data-field="sku" data-display-only="true">SKU</th>
+                  <th data-field="name" data-display-only="true">Product</th>
+                  <th data-field="quantity" data-display-only="true" class="center">Ordered</th>
+                  <th data-field="received_qty" data-type="number" data-min="0" class="center">Received</th>
+                  <th data-field="unit_name" data-display-only="true">Unit</th>
+                  <th data-field="remarks" data-type="text" data-maxlength="200">Remarks</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 offset-md-6">
+              <div class="summary-box">
+                <div class="summary-row">
+                  <label>Total Ordered:</label>
+                  <input type="text" id="gr_total_ordered" readonly class="right">
+                </div>
+                <div class="summary-row">
+                  <label>Total Received:</label>
+                  <input type="text" id="gr_total_received" readonly class="right">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button type="submit" class="button primary">Save</button>
+          </div>
+        </form>
+
+        <div class="code-section">
+          <h3>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;select id="po_id" name="po_id"&gt;
+  &lt;option value=""&gt;-- Select PO --&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;table data-line-items="gr_items"
+       data-load-from="#po_id"
+       data-load-api="data/po-items.json"
+       data-load-param="po_id"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th data-field="quantity" data-display-only="true"&gt;Ordered&lt;/th&gt;
+      &lt;th data-field="received_qty" data-type="number"&gt;Received&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+&lt;/table&gt;</code></pre>
+
+          <h3>API Response:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="json">{
+  "success": true,
+  "data": {
+    "items": [
+      {"sku": "P001", "name": "Product A", "quantity": 10},
+      {"sku": "P002", "name": "Product B", "quantity": 5}
+    ]
+  }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 4: Merge Duplicates -->
+      <section class="section">
+        <h2 data-i18n>Example 4: Auto-Merge Duplicates</h2>
+        <p>เพิ่มสินค้าซ้ำจะรวมจำนวนอัตโนมัติ</p>
+
+        <form id="merge-form" class="form">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Product</label>
+              <input type="text" data-role="product-merge"
+                     data-autocomplete="true"
+                     data-source="data/products.json"
+                     data-display="name"
+                     data-value="id"
+                     placeholder="Try adding same product multiple times...">
+            </div>
+            <div class="col-md-3">
+              <label>Quantity</label>
+              <input type="number" data-role="qty" value="1" min="1">
+            </div>
+          </div>
+
+          <div class="alert alert-info">
+            <strong>Try it:</strong> เลือกสินค้าเดิมมากกว่า 1 ครั้ง - จำนวนจะรวมกันอัตโนมัติแทนการสร้างแถวใหม่
+          </div>
+
+          <div class="tablebody">
+            <table class="table border fullwidth"
+                   data-line-items="merge_items"
+                   data-detail-api="data/products.json"
+                   data-listen-select="[data-role='product-merge']"
+                   data-api-params="[data-role]"
+                   data-merge="true"
+                   data-merge-key="sku"
+                   data-on-calculate="calculateMerge">
+              <thead>
+                <tr>
+                  <th data-field="sku" data-display-only="true">SKU</th>
+                  <th data-field="name" data-display-only="true">Product</th>
+                  <th data-field="quantity" data-type="number" data-min="1" class="center">Quantity</th>
+                  <th data-field="unit_price" data-type="currency" class="right">Price</th>
+                  <th data-field="subtotal" data-type="currency" data-readonly="true" class="right">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 offset-md-6">
+              <div class="summary-box">
+                <div class="summary-row">
+                  <label>Total Items:</label>
+                  <input type="text" id="merge_count" readonly class="right">
+                </div>
+                <div class="summary-row">
+                  <label>Total Amount:</label>
+                  <input type="text" id="merge_total" readonly class="right">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="code-section">
+          <h3>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;table data-line-items="items"
+       data-merge="true"
+       data-merge-key="sku"&gt;
+  &lt;!-- When adding duplicate SKU, quantity will be added --&gt;
+&lt;/table&gt;</code></pre>
+
+          <h3>Event Listener:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">table.addEventListener('lineitems:merge', (e) => {
+  console.log('Merged duplicate:', e.detail.row);
+  console.log('New quantity:', e.detail.row.quantity);
+});</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 5: JavaScript API -->
+      <section class="section">
+        <h2 data-i18n>Example 5: JavaScript API</h2>
+        <p>ควบคุม LineItemsManager ผ่าน JavaScript API</p>
+
+        <div class="controls">
+          <button id="addItem" class="button">Add Item</button>
+          <button id="updateItem" class="button">Update First Item</button>
+          <button id="removeItem" class="button danger">Remove First Item</button>
+          <button id="getData" class="button">Get All Data</button>
+          <button id="setData" class="button">Set Sample Data</button>
+          <button id="clearData" class="button">Clear All</button>
+        </div>
+
+        <div class="tablebody">
+          <table class="table border fullwidth"
+                 data-line-items="api_items"
+                 data-on-calculate="calculateAPI">
+            <thead>
+              <tr>
+                <th data-field="sku" data-display-only="true">SKU</th>
+                <th data-field="name" data-display-only="true">Product</th>
+                <th data-field="quantity" data-type="number" class="center">Qty</th>
+                <th data-field="unit_price" data-type="currency" class="right">Price</th>
+                <th data-field="subtotal" data-type="currency" data-readonly="true" class="right">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 offset-md-6">
+            <div class="summary-box">
+              <div class="summary-row">
+                <label>Total:</label>
+                <input type="text" id="api_total" readonly class="right">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-section">
+          <h3>JavaScript API:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">const instance = LineItemsManager.getInstance('#api-table');
+
+// Add item
+instance.addItem({
+  sku: 'P001',
+  name: 'Product A',
+  quantity: 1,
+  unit_price: 100
+});
+
+// Update row
+instance.updateRow(0, {quantity: 5});
+
+// Remove row
+instance.removeRow(0);
+
+// Get all data
+const data = instance.getData();
+
+// Set data
+instance.setData([...]);
+
+// Clear all
+instance.clear();</code></pre>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Framework JS -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <!-- Application JS -->
+  <script src="main.js"></script>
+
+</body>
+</html>
