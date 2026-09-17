@@ -1,0 +1,157 @@
+/**
+ * Graph Component Example Styles
+ */
+/* Chart containers - the renderer reads background/color
+   from computed styles, so charts follow the site theme */
+.graph-box {
+  height: 320px;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--bg-card, #f8fafc);
+  color: var(--text-main, #333333);
+  border: 1px solid var(--border-active, #e2e8f0);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.graph-box--gauge {
+  height: 260px;
+}
+/* Dark theme - the renderer bakes colors into SVG attributes at creation
+   (text fill #333333, axis stroke #333333, grid stroke #E0E0E0).
+   CSS rules override presentation attributes, so charts follow the theme */
+[data-theme='dark'] .graph-box svg text[fill='#333333'] {
+  fill: #e2e8f0;
+}
+[data-theme='dark'] .graph-box svg line[stroke='#333333'],
+[data-theme='dark'] .graph-box svg path[stroke='#333333'] {
+  stroke: #8093a7;
+}
+[data-theme='dark'] .graph-box svg line[stroke='#E0E0E0'] {
+  stroke: #334155;
+}
+/* Two-column layout (table + chart, side-by-side charts) */
+.graph-demo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+.graph-demo-grid .graph-box {
+  margin: 0;
+  height: auto;
+  min-height: 320px;
+}
+/* Demo source table */
+.graph-demo-grid table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  align-self: start;
+}
+.graph-demo-grid table th,
+.graph-demo-grid table td {
+  padding: 0.6rem 0.75rem;
+  text-align: right;
+  border-bottom: 1px solid var(--border-active, #e2e8f0);
+}
+.graph-demo-grid table th:first-child,
+.graph-demo-grid table td:first-child {
+  text-align: left;
+}
+.graph-demo-grid table thead th {
+  font-weight: 600;
+  color: var(--text-accent, #3b82f6);
+}
+/* Toolbar above charts */
+.graph-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+.graph-toolbar .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+/* Type switcher */
+.btn-group .switcher.active {
+  background: var(--primary, #3b82f6);
+  border-color: var(--primary, #3b82f6);
+  color: #ffffff;
+}
+/* Playground layout - chart + event log */
+.graph-playground {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+.graph-playground .graph-box {
+  margin: 0;
+  height: auto;
+  min-height: 360px;
+}
+.graph-log {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: var(--bg-code, #0f172a);
+  border-radius: 12px;
+  min-height: 360px;
+}
+.graph-log h4 {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+  color: var(--text-accent, #60a5fa);
+}
+.graph-log ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+  font-family: monospace;
+  overflow-y: auto;
+}
+.graph-log li {
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed rgba(128, 147, 167, 0.3);
+  color: #cbd5e1;
+  animation: log-in 0.3s ease;
+}
+.graph-log li time {
+  color: #64748b;
+  margin-right: 0.5rem;
+}
+.graph-log li strong {
+  color: #60a5fa;
+}
+.graph-log li span {
+  color: #94a3b8;
+}
+.graph-log-hint {
+  color: #64748b !important;
+  font-style: italic;
+}
+@keyframes log-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .graph-demo-grid,
+  .graph-playground {
+    grid-template-columns: 1fr;
+  }
+}
+.tab-pane > div {
+  width: 100%;
+}

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NotificationManager - Now.js Example</title>
+  <meta name="description" content="Complete guide to using NotificationManager in Now.js">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>NotificationManager</h1>
+        <p class="text-gradient" data-i18n>Toast notifications with smart auto-dismiss and replacement</p>
+      </div>
+    </section>
+
+    <div class="container content">
+
+      <!-- 1. Basic Notification Types -->
+      <section class="section">
+        <h2>1. Basic Notification Types</h2>
+        <p>Display different types of notifications with appropriate durations and icons.</p>
+
+        <div class="example-box">
+          <div class="button-group">
+            <button class="btn btn-success" onclick="NotificationManager.success('Data saved successfully!')">
+              <span class="icon-valid"></span> Success (3s)
+            </button>
+            <button class="btn btn-danger" onclick="NotificationManager.error('An error occurred. Please try again')">
+              <span class="icon-ban"></span> Error (8s)
+            </button>
+            <button class="btn btn-warning" onclick="NotificationManager.warning('You have unsaved changes')">
+              <span class="icon-warning"></span> Warning (8s)
+            </button>
+            <button class="btn btn-primary" onclick="NotificationManager.info('You have 3 new messages')">
+              <span class="icon-info"></span> Info (3s)
+            </button>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              // Success - auto-dismiss in 3 seconds
+              NotificationManager.success('Data saved successfully!');
+
+              // Error - auto-dismiss in 8 seconds (more time to read)
+              NotificationManager.error('An error occurred. Please try again');
+
+              // Warning - auto-dismiss in 8 seconds
+              NotificationManager.warning('You have unsaved changes');
+
+              // Info - auto-dismiss in 3 seconds
+              NotificationManager.info('You have 3 new messages');
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 2. Loading Notification -->
+      <section class="section">
+        <h2>2. Loading Notification</h2>
+        <p>Show loading state during async operations and dismiss when complete.</p>
+
+        <div class="example-box">
+          <button class="btn btn-primary" onclick="simulateLoading()">
+            <span class="icon-loader"></span> Simulate Loading (3s)
+          </button>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              async function simulateLoading() {
+              // Show loading
+              const loadingId = NotificationManager.loading('Processing...');
+
+              // Wait 3 seconds
+              await new Promise(resolve => setTimeout(resolve, 3000));
+
+              // Dismiss loading
+              NotificationManager.dismiss(loadingId);
+
+              // Show result
+              NotificationManager.success('Processing complete!');
+              }
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 3. Custom Duration & Progress Bar -->
+      <section class="section">
+        <h2>3. Custom Duration & Progress Bar</h2>
+        <p>Adjust duration based on message length and show progress bar for better UX.</p>
+
+        <div class="example-box">
+          <div class="button-group">
+            <button class="btn btn-success" onclick="NotificationManager.success('Saved', { duration: 2000 })">
+              Short (2s)
+            </button>
+            <button class="btn btn-success" onclick="NotificationManager.success('5 files uploaded successfully', { duration: 10000 })">
+              Long (10s)
+            </button>
+            <button class="btn btn-primary" onclick="NotificationManager.success('Upload complete!', { duration: 5000, progressBar: true })">
+              With Progress Bar
+            </button>
+            <button class="btn btn-danger" onclick="NotificationManager.error('Critical error - click X to close', { duration: 0 })">
+              Permanent (0)
+            </button>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              // Short message - short duration
+              NotificationManager.success('Saved', { duration: 2000 });
+
+              // Long message - long duration
+              NotificationManager.success('5 files uploaded successfully', {
+              duration: 10000
+              });
+
+              // With progress bar
+              NotificationManager.success('Upload complete!', {
+              duration: 5000,
+              progressBar: true
+              });
+
+              // Permanent - must close manually
+              NotificationManager.error('Critical error', { duration: 0 });
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 4. Smart Replacement -->
+      <section class="section">
+        <h2>4. Smart Replacement</h2>
+        <p>System automatically replaces notifications of the same type to prevent overflow.</p>
+
+        <div class="example-box">
+          <div class="button-group">
+            <button class="btn btn-danger" onclick="showMultipleErrors()">
+              Show Multiple Errors
+            </button>
+            <button class="btn btn-success" onclick="showMultipleSuccess()">
+              Show Multiple Success
+            </button>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              // Show multiple errors - will replace each other
+              NotificationManager.error('Error 1');
+              setTimeout(() => {
+              NotificationManager.error('Error 2'); // Replaces Error 1
+              }, 500);
+              setTimeout(() => {
+              NotificationManager.error('Error 3'); // Replaces Error 2
+              }, 1000);
+
+              // Result: Only see "Error 3"
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 5. Form Submission Example -->
+      <section class="section">
+        <h2>5. Form Submission Example</h2>
+        <p>Real-world example showing loading, success, and error states.</p>
+
+        <div class="example-box">
+          <form id="demoForm" class="demo-form">
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <span class="form-control">
+                <input type="text" id="username" name="username" value="admin" required>
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <span class="form-control">
+                <input type="email" id="email" name="email" value="admin@demo.com" required>
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label>Result:</label>
+              <div class="radio-group">
+                <label>
+                  <input type="radio" name="result" value="success" checked>
+                  <span>Success</span>
+                </label>
+                <label>
+                  <input type="radio" name="result" value="error">
+                  <span>Error</span>
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              <span class="icon-save"></span> Submit Form
+            </button>
+          </form>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              document.getElementById('demoForm').addEventListener('submit', async (e) => {
+              e.preventDefault();
+
+              // Show loading
+              const loadingId = NotificationManager.loading('Saving data...');
+
+              try {
+              // Simulate API call
+              await new Promise(resolve => setTimeout(resolve, 2000));
+
+              // Dismiss loading
+              NotificationManager.dismiss(loadingId);
+
+              // Show result
+              const result = new FormData(e.target).get('result');
+              if (result === 'success') {
+              NotificationManager.success('Data saved successfully!');
+              e.target.reset();
+              } else {
+              NotificationManager.error('Unable to save data');
+              }
+              } catch (error) {
+              NotificationManager.dismiss(loadingId);
+              NotificationManager.error('Error: ' + error.message);
+              }
+              });
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 6. File Upload Simulation -->
+      <section class="section">
+        <h2>6. File Upload Simulation</h2>
+        <p>Simulate file upload with loading and progress bar.</p>
+
+        <div class="example-box">
+          <div class="upload-demo">
+            <input type="file" id="fileInput" accept="image/*" multiple>
+            <button class="btn btn-primary" onclick="simulateUpload()">
+              <span class="icon-upload"></span> Upload Files
+            </button>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              async function simulateUpload() {
+              const files = document.getElementById('fileInput').files;
+
+              if (files.length === 0) {
+              NotificationManager.warning('Please select files first');
+              return;
+              }
+
+              const loadingId = NotificationManager.loading(
+              `Uploading ${files.length} file(s)...`,
+              { progressBar: true }
+              );
+
+              // Simulate upload
+              await new Promise(resolve => setTimeout(resolve, 3000));
+
+              NotificationManager.dismiss(loadingId);
+              NotificationManager.success(
+              `${files.length} file(s) uploaded successfully!`
+              );
+              }
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 7. Position Control -->
+      <section class="section">
+        <h2>7. Position Control</h2>
+        <p>Change notification position to any corner of the screen.</p>
+
+        <div class="example-box">
+          <div class="position-grid">
+            <button class="btn btn-primary" onclick="showAtPosition('top-left')">
+              Top Left
+            </button>
+            <button class="btn btn-primary" onclick="showAtPosition('top-right')">
+              Top Right
+            </button>
+            <button class="btn btn-primary" onclick="showAtPosition('bottom-left')">
+              Bottom Left
+            </button>
+            <button class="btn btn-primary" onclick="showAtPosition('bottom-right')">
+              Bottom Right
+            </button>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              // Change position globally
+              await NotificationManager.init({
+              position: 'top-left' // top-right, top-left, bottom-right, bottom-left
+              });
+
+              NotificationManager.success('Displayed at top-left');
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 8. Clear All Notifications -->
+      <section class="section">
+        <h2>8. Clear All Notifications</h2>
+        <p>Dismiss all visible notifications at once.</p>
+
+        <div class="example-box">
+          <div class="button-group">
+            <button class="btn btn-primary" onclick="showMultiple()">
+              Show Multiple
+            </button>
+            <button class="btn btn-danger" onclick="clearAll()">
+              Clear All
+            </button>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              // Show multiple notifications
+              NotificationManager.info('Message 1');
+              NotificationManager.info('Message 2');
+              NotificationManager.info('Message 3');
+
+              // Clear all
+              NotificationManager.clear();
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 9. Duration Comparison Table -->
+      <section class="section">
+        <h2>9. Duration Guidelines</h2>
+        <p>Recommended durations for each notification type based on UX best practices.</p>
+
+        <div class="duration-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Duration</th>
+                <th>Reason</th>
+                <th>Test</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge badge-success">Success</span></td>
+                <td>3000ms (3s)</td>
+                <td>Confirms successful action, no further action needed</td>
+                <td><button class="btn btn-success" onclick="NotificationManager.success('Success!')">Test</button></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-danger">Error</span></td>
+                <td>8000ms (8s)</td>
+                <td>Gives time to read and understand the problem</td>
+                <td><button class="btn btn-danger" onclick="NotificationManager.error('Error!')">Test</button></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-warning">Warning</span></td>
+                <td>8000ms (8s)</td>
+                <td>Important information to be aware of</td>
+                <td><button class="btn btn-warning" onclick="NotificationManager.warning('Warning!')">Test</button></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-primary">Info</span></td>
+                <td>3000ms (3s)</td>
+                <td>General info, not critical</td>
+                <td><button class="btn btn-primary" onclick="NotificationManager.info('Info!')">Test</button></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-secondary">Loading</span></td>
+                <td>0 (no auto-dismiss)</td>
+                <td>Shows working status</td>
+                <td><button class="btn btn-secondary" onclick="simulateLoading()">Test</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,396 @@
+/**
+ * Standard Print Stylesheet
+ * Reusable classes for printing documents
+ * Now.js Framework
+ */
+@page {
+  size: A4;
+  margin: 10mm;
+}
+body {
+  background-color: #ccc !important;
+}
+@media print {
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+/* ========================================
+   Print Container
+   ======================================== */
+.print-container {
+  max-width: 210mm;
+  margin: 10mm auto;
+  padding: 10mm;
+  font-family: 'Sarabun', 'TH Sarabun New', Tahoma, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #000;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.print-header,
+.print-info-section,
+.print-notes,
+.print-summary,
+.print-stamp,
+.print-keep {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+@media print {
+  .print-container {
+    margin: 0 auto;
+    padding: 0;
+    max-width: none;
+    box-shadow: none;
+  }
+}
+/* ========================================
+   Document Header
+   ======================================== */
+.print-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #333;
+}
+.print-company {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+.print-logo {
+  max-width: 80px;
+  max-height: 80px;
+  object-fit: contain;
+}
+.print-company-info {
+  font-size: 12px;
+}
+.print-company-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+  color: #1a365d;
+}
+.print-company-info p {
+  margin: 2px 0;
+}
+.print-doc-title {
+  text-align: right;
+}
+.print-doc-title h2 {
+  font-size: 20px;
+  margin: 0 0 10px 0;
+  color: #1a365d;
+}
+.print-doc-code {
+  margin: 8px 0 10px;
+  text-align: right;
+}
+.print-barcode {
+  max-width: 180px;
+  width: 100%;
+  height: auto;
+}
+/* ========================================
+   Document Meta Info
+   ======================================== */
+.print-meta {
+  font-size: 12px;
+  border-collapse: collapse;
+  margin-left: auto;
+}
+.print-meta th {
+  text-align: right;
+  padding: 2px 10px 2px 0;
+  font-weight: normal;
+  white-space: nowrap;
+}
+.print-meta td {
+  text-align: left;
+  padding: 2px 0;
+  font-weight: bold;
+}
+/* ========================================
+   Info Sections (Vendor, Customer, etc.)
+   ======================================== */
+.print-info-section {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+}
+.print-info-section h3 {
+  font-size: 14px;
+  margin: 0 0 10px 0;
+  color: #2d3748;
+}
+.print-info-table {
+  font-size: 13px;
+  border-collapse: collapse;
+  width: 100%;
+}
+.print-info-table th {
+  text-align: left;
+  padding: 3px 15px 3px 0;
+  font-weight: normal;
+  width: 180px;
+  color: #4a5568;
+}
+.print-info-table td {
+  padding: 3px 0;
+}
+/* ========================================
+   Content Section
+   ======================================== */
+.print-content {
+  margin-bottom: 15px;
+}
+.print-content h3 {
+  font-size: 16px;
+  margin: 0 0 5px 0;
+}
+.print-content p {
+  font-size: 13px;
+  color: #4a5568;
+  margin: 0;
+}
+.print-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+/* ========================================
+   Data Table (Items, Products, etc.)
+   ======================================== */
+.print-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 20px;
+  table-layout: fixed;
+}
+.print-table th,
+.print-table td {
+  border: 1px solid #999;
+  padding: 8px 6px;
+  position: static;
+  word-break: break-word;
+}
+.print-table th {
+  font-weight: bold;
+  text-align: center;
+  background-color: #ddd;
+}
+.print-table tbody tr:nth-child(even) {
+  background-color: #f7fafc;
+}
+/* ========================================
+   Summary Section
+   ======================================== */
+.print-summary {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+.print-summary-table {
+  width: 300px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.print-summary-table th,
+.print-summary-table td {
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  position: static;
+}
+.print-summary-table th {
+  text-align: right;
+  font-weight: normal;
+  background-color: #f7fafc;
+}
+.print-summary-table td {
+  text-align: right;
+  width: 120px;
+}
+.print-summary-table .total-row th,
+.print-summary-table .total-row td {
+  font-weight: bold;
+  font-size: 15px;
+  background-color: #edf2f7;
+}
+/* ========================================
+   Notes & Remarks
+   ======================================== */
+.print-notes {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #fffbeb;
+  border: 1px solid #fbbf24;
+  border-radius: 4px;
+}
+.print-notes h4 {
+  font-size: 13px;
+  margin: 0 0 5px 0;
+  color: #92400e;
+}
+.print-notes p {
+  font-size: 13px;
+  margin: 0;
+}
+.print-list {
+  margin: 0;
+  padding-left: 18px;
+}
+.print-list li {
+  line-height: 1.5;
+}
+.print-list li + li {
+  margin-top: 4px;
+}
+/* ========================================
+   Signature Section
+   ======================================== */
+.print-signatures {
+  margin-top: 40px;
+  page-break-inside: avoid;
+}
+.print-signature-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-end;
+}
+.print-signature-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.print-signature-box p {
+  margin: 0;
+  line-height: 1;
+}
+.print-signature-image {
+  height: 60px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+.print-signature-image img {
+  max-height: 60px;
+  max-width: 150px;
+  object-fit: contain;
+}
+.print-signature-line {
+  width: 80%;
+  height: 1px;
+  border-bottom: 1px dotted #333;
+}
+.print-signature-name {
+  display: inline-flex;
+  border-bottom: 1px dotted #333;
+  min-width: 7rem;
+  justify-content: center;
+}
+.print-signature-date .line {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  text-decoration-style: dotted;
+  text-decoration-color: #333;
+}
+/* ========================================
+   Stamp Section
+   ======================================== */
+.print-stamp {
+  text-align: center;
+  margin-top: 30px;
+}
+.print-stamp img {
+  max-width: 140px;
+  max-height: 140px;
+  object-fit: contain;
+  opacity: 0.9;
+}
+/* ========================================
+   Print Controls (Screen Only)
+   ======================================== */
+.print-controls {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 7;
+}
+.print-controls .btn {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 1.5em;
+  box-shadow: 0 15px 10px rgba(0, 0, 0, 0.4) !important;
+  border-radius: var(--border-radius-full);
+}
+.print-controls .btn:hover {
+  transform: scale(1.1) translateY(-2px);
+}
+/* ========================================
+   Utility Classes
+   ======================================== */
+.center {
+  text-align: center !important;
+  justify-content: center;
+}
+.right {
+  text-align: right !important;
+}
+@media (max-width: 900px) {
+  .print-grid {
+    grid-template-columns: 1fr;
+  }
+  .print-signature-row {
+    flex-direction: column;
+  }
+}
+.right {
+  text-align: right !important;
+}
+.left {
+  text-align: left !important;
+}
+.bold {
+  font-weight: bold !important;
+}
+.text-sm {
+  font-size: 12px !important;
+}
+.text-lg {
+  font-size: 16px !important;
+}
+.mt-10 {
+  margin-top: 10px !important;
+}
+.mb-10 {
+  margin-bottom: 10px !important;
+}
+.page-break {
+  page-break-before: always;
+}
+.no-break {
+  page-break-inside: avoid;
+}

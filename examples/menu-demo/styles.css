@@ -1,0 +1,15 @@
+.sidemenu {
+  width: var(--menu-width);
+}
+/* Method cards */
+.method-card {
+  background: var(--color-surface);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border: 1px solid var(--color-border, #e2e8f0);
+}
+.method-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}

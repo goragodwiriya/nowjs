@@ -1,0 +1,185 @@
+/* LineItemsManager Example Styles */
+
+/* Summary Box */
+.summary-box {
+  background: var(--color-background-secondary, #f8f9fa);
+  border: 1px solid var(--color-border, #e0e0e0);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-border-light, #f0f0f0);
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.summary-row.total {
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--color-border, #e0e0e0);
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.summary-row label {
+  margin: 0;
+  font-weight: 500;
+}
+
+.summary-row input {
+  max-width: 200px;
+  font-weight: inherit;
+  text-align: right;
+}
+
+/* Table Styles */
+.tablebody {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+
+.table th.center,
+.table td.center {
+  text-align: center;
+}
+
+.table th.right,
+.table td.right,
+.table input.right {
+  text-align: right;
+}
+
+/* Text Sizes */
+.text-large {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* Controls */
+.controls {
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Button Group */
+.button-group {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+/* Form Sections */
+.form {
+  margin-bottom: 2rem;
+}
+
+.form .row {
+  margin-bottom: 1rem;
+}
+
+/* Code Section */
+.code-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px dashed var(--color-border, #e0e0e0);
+}
+
+.code-section h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-primary, #007bff);
+}
+
+.code-section pre {
+  margin-top: 0.5rem;
+}
+
+/* Alert */
+.alert {
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  border-left: 4px solid;
+}
+
+.alert-info {
+  background-color: #e7f3ff;
+  border-color: #2196f3;
+  color: #0d47a1;
+}
+
+.alert strong {
+  font-weight: 600;
+}
+
+/* Section Spacing */
+.section {
+  margin-bottom: 4rem;
+  padding-bottom: 2rem;
+}
+
+.section:last-child {
+  margin-bottom: 2rem;
+}
+
+/* Required Field */
+.required {
+  color: #f44336;
+  margin-left: 0.25rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .summary-row input {
+    max-width: 150px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .controls button {
+    width: 100%;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .summary-box {
+    background: var(--color-background-secondary, #2a2a2a);
+    border-color: var(--color-border, #404040);
+  }
+
+  .summary-row {
+    border-color: var(--color-border-light, #303030);
+  }
+
+  .summary-row.total {
+    border-color: var(--color-border, #404040);
+  }
+
+  .alert-info {
+    background-color: #1a237e;
+    border-color: #2196f3;
+    color: #90caf9;
+  }
+}
