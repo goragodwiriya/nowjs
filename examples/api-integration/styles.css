@@ -1,0 +1,579 @@
+/* API Integration Examples - Styles */
+/* ============================================
+   Card Grid Layout
+   ============================================ */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.card {
+  background: var(--color-background-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.card-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.card-body p {
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+.card-body p [class^="icon-"] {
+  color: var(--color-primary);
+}
+/* ============================================
+   Skeleton Loading States
+   ============================================ */
+.skeleton {
+  pointer-events: none;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+.skeleton-header {
+  height: 48px;
+  background: var(--color-border);
+  border-radius: 24px;
+  margin-bottom: 1rem;
+}
+.skeleton-line {
+  height: 16px;
+  background: var(--color-border);
+  border-radius: 4px;
+  margin: 0.75rem 0;
+}
+.skeleton-line.short {
+  width: 60%;
+}
+/* ============================================
+   Loading States
+   ============================================ */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+.spinner-small {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.loading-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  gap: 1rem;
+}
+/* ============================================
+   Error States
+   ============================================ */
+.error-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 2rem;
+}
+.error-icon {
+  font-size: 4rem;
+  color: var(--color-error);
+  margin-bottom: 1rem;
+}
+.error-state h3 {
+  color: var(--color-error);
+  margin-bottom: 0.5rem;
+}
+.error-message {
+  color: var(--color-text-secondary);
+  margin-bottom: 1.5rem;
+}
+/* ============================================
+   Weather Widget
+   ============================================ */
+.weather-widget {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  color: white;
+  margin: 2rem 0;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.weather-loading {
+  text-align: center;
+}
+.weather-loading .spinner {
+  border-color: rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  margin: 0 auto 1rem;
+}
+.weather-content {
+  width: 100%;
+  text-align: center;
+}
+.weather-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.weather-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.weather-temp {
+  font-size: 4rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+.weather-desc {
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+.weather-details {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.weather-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.weather-updated {
+  opacity: 0.7;
+  font-size: 0.85rem;
+}
+/* ============================================
+   Product Search
+   ============================================ */
+.search-container {
+  margin: 2rem 0;
+}
+.input-group {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.input-group .input {
+  width: 100%;
+  padding-right: 3rem;
+}
+.search-loading {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.product-card {
+  background: var(--color-background-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.product-info {
+  padding: 1rem;
+}
+.product-info h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  line-height: 1.4;
+  height: 2.8em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.product-brand {
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.price {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+.rating {
+  font-size: 0.9rem;
+}
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: var(--color-text-secondary);
+}
+/* ============================================
+   Form Styles
+   ============================================ */
+.form-container {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+.form {
+  background: var(--color-background-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+}
+.form-group {
+  margin-bottom: 1.5rem;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.form-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.btn-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.feedback-container {
+  margin-top: 1.5rem;
+}
+/* ============================================
+   Dashboard Grid
+   ============================================ */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.dashboard-card {
+  background: var(--color-background-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  min-height: 250px;
+}
+.dashboard-card h3 {
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--color-border);
+}
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--color-background);
+  border-radius: var(--border-radius);
+}
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+.stat-content {
+  display: flex;
+  flex-direction: column;
+}
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-top: 0.25rem;
+}
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.post-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.post-item:last-child {
+  border-bottom: none;
+}
+.post-item strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+.post-item p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background: var(--color-background);
+  border-radius: var(--border-radius);
+  transition: all 0.2s ease;
+}
+.todo-item:hover {
+  background: var(--color-border);
+}
+.todo-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.todo-checkbox.checked {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: white;
+}
+.todo-text {
+  flex: 1;
+}
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+/* ============================================
+   Retry Log
+   ============================================ */
+.log-container {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-top: 2rem;
+  max-height: 400px;
+  overflow-y: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+.log-container h4 {
+  margin: 0 0 1rem 0;
+  color: #fff;
+}
+.log-entry {
+  padding: 0.5rem 0;
+  border-left: 3px solid transparent;
+  padding-left: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+.log-time {
+  color: #858585;
+  margin-right: 0.5rem;
+}
+.log-info {
+  border-left-color: #3b82f6;
+}
+.log-success {
+  border-left-color: #22c55e;
+  color: #86efac;
+}
+.log-error {
+  border-left-color: #ef4444;
+  color: #fca5a5;
+}
+.log-warning {
+  border-left-color: #f59e0b;
+  color: #fcd34d;
+}
+/* ============================================
+   Best Practices Section
+   ============================================ */
+.best-practices {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.practice-item {
+  background: var(--color-background-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+}
+.practice-item h3 {
+  margin: 0 0 1rem 0;
+}
+.practice-item pre {
+  margin: 0;
+}
+/* ============================================
+   Controls
+   ============================================ */
+.controls {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+.button.active {
+  background: var(--color-success);
+  border-color: var(--color-success);
+}
+/* ============================================
+   Animations
+   ============================================ */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ============================================
+   Code Section
+   ============================================ */
+.code-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--color-border);
+}
+.code-section h3 {
+  margin: 1.5rem 0 1rem 0;
+}
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 768px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .weather-temp {
+    font-size: 3rem;
+  }
+  .weather-details {
+    gap: 1rem;
+  }
+  .form-actions {
+    flex-direction: column;
+  }
+  .form-actions .button {
+    width: 100%;
+  }
+  .controls {
+    flex-direction: column;
+  }
+  .controls .button {
+    width: 100%;
+  }
+}

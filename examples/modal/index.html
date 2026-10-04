@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal Component - Now.js Example</title>
+  <meta name="description" content="Complete guide to using Modals in Now.js">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>Modal Component</h1>
+        <p class="text-gradient" data-i18n>Flexible dialogs for alerts, data binding, and galleries</p>
+      </div>
+    </section>
+
+    <div class="container content">
+
+      <!-- 1. Dynamic Modal -->
+      <section class="section">
+        <h2>1. Dynamic Modal</h2>
+        <p>Create modals programmatically using the <code>Modal</code> class.</p>
+
+        <div class="example-box">
+          <div class="button-group">
+            <button class="btn btn-primary" id="btn-basic-modal">Basic Modal</button>
+            <button class="btn btn-secondary" id="btn-confirm-modal">Confirmation</button>
+            <button class="btn outline" id="btn-custom-modal">Custom Content</button>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              // Basic Usage
+              const modal = new Modal({
+              title: &apos;Hello World&apos;,
+              content: &apos;This is a dynamically created modal.&apos;,
+              footer: &apos;&lt;button class=&quot;btn btn-primary modal-close&quot;&gt;Close&lt;/button&gt;&apos;
+              });
+              modal.show();
+
+              // Confirmation Dialog
+              const confirmModal = new Modal({
+              title: &apos;Are you sure?&apos;,
+              content: &apos;Do you want to proceed with this action?&apos;,
+              closeButton: false, // Hide default close &apos;x&apos;
+              backdrop: &apos;static&apos; // Prevent closing by clicking backdrop
+              });
+              // Custom footer with actions
+              confirmModal.dialog.querySelector(&apos;.modal-body&apos;).insertAdjacentHTML(&apos;afterend&apos;, `
+              &lt;div class=&quot;modal-footer&quot;&gt;
+              &lt;button class=&quot;btn text modal-close&quot;&gt;Cancel&lt;/button&gt;
+              &lt;button class=&quot;btn btn-danger&quot; onclick=&quot;alert(&apos;Deleted!&apos;); this.closest(&apos;.modal&apos;).remove()&quot;&gt;Delete&lt;/button&gt;
+              &lt;/div&gt;
+              `);
+              confirmModal.show();
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 2. Data Binding -->
+      <section class="section">
+        <h2>2. Data Binding</h2>
+        <p>Bind data from your HTML elements directly to a modal using <code>data-modal-bind</code>.</p>
+
+        <div class="example-box">
+          <div class="grid-3">
+            <!-- User Card 1 -->
+            <div class="card" data-id="1" data-name="John Doe" data-role="Software Engineer" data-email="john@example.com" data-bio="Passionate about building scalable web applications." data-avatar="https://api.dicebear.com/7.x/avataaars/svg?seed=John">
+              <div class="card-body center">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" class="avatar-sm mb-2" alt="John">
+                <h3>John Doe</h3>
+                <p class="text-muted">Software Engineer</p>
+                <button class="btn btn-primary mt-2" data-modal="user-modal" data-modal-bind="name:name, role:role, email:email, bio:bio, avatar:avatar">
+                  View Profile
+                </button>
+              </div>
+            </div>
+
+            <!-- User Card 2 -->
+            <div class="card" data-id="2" data-name="Jane Smith" data-role="Product Designer" data-email="jane@example.com" data-bio="Designing intuitive and beautiful user experiences." data-avatar="https://api.dicebear.com/7.x/avataaars/svg?seed=Jane">
+              <div class="card-body center">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jane" class="avatar-sm mb-2" alt="Jane">
+                <h3>Jane Smith</h3>
+                <p class="text-muted">Product Designer</p>
+                <button class="btn btn-primary mt-2" data-modal="user-modal" data-modal-bind="name:name, role:role, email:email, bio:bio, avatar:avatar">
+                  View Profile
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Template Modal for Data Binding -->
+        <div id="user-modal" class="modal">
+          <div class="modal-dialog">
+            <div class="modal-header">
+              <h4 class="modal-title" data-modal-target="name">User Profile</h4>
+              <button type="button" class="modal-close btn-close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="profile-view center">
+                <img src="" alt="Avatar" class="avatar-lg mb-3" data-modal-target="avatar">
+                <h2 data-modal-target="name"></h2>
+                <div class="badge badge-primary mb-2" data-modal-target="role"></div>
+                <p class="text-muted" data-modal-target="email"></p>
+                <hr>
+                <p data-modal-target="bio"></p>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary modal-close">Close</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="html">
+              &lt;!-- Trigger Button --&gt;
+              &lt;button class=&quot;btn&quot; data-modal=&quot;user-modal&quot; data-modal-bind=&quot;name:name, role:role, avatar:avatar&quot;&gt;
+              View Profile
+              &lt;/button&gt;
+
+              &lt;!-- Target Modal --&gt;
+              &lt;div id=&quot;user-modal&quot; class=&quot;modal&quot;&gt;
+              ...
+              &lt;h2 data-modal-target=&quot;name&quot;&gt;&lt;/h2&gt;
+              &lt;img data-modal-target=&quot;avatar&quot; src=&quot;&quot;&gt;
+              ...
+              &lt;/div&gt;
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 3. Gallery Mode -->
+      <section class="section">
+        <h2>3. Gallery Mode</h2>
+        <p>Create a navigable gallery with <code>data-modal-gallery="true"</code>. Add transition effects using <code>data-modal-effect</code>.</p>
+
+        <h3 class="mt-3">Available Effects</h3>
+        <div class="example-box">
+          <div class="grid-3">
+            <div>
+              <h4>Fade (Default)</h4>
+              <div class="gallery-grid">
+                <div class="gallery-item" data-modal="lightbox-fade" data-modal-bind="src:full, caption:caption" data-modal-gallery="true" data-modal-effect="fade" data-full="https://picsum.photos/id/10/800/600" data-caption="Misty Forest">
+                  <img src="https://picsum.photos/id/10/300/200" alt="Image 1">
+                </div>
+                <div class="gallery-item" data-modal="lightbox-fade" data-modal-bind="src:full, caption:caption" data-modal-gallery="true" data-modal-effect="fade" data-full="https://picsum.photos/id/11/800/600" data-caption="Classic Car">
+                  <img src="https://picsum.photos/id/11/300/200" alt="Image 2">
+                </div>
+                <div class="gallery-item" data-modal="lightbox-fade" data-modal-bind="src:full, caption:caption" data-modal-gallery="true" data-modal-effect="fade" data-full="https://picsum.photos/id/12/800/600" data-caption="Village Path">
+                  <img src="https://picsum.photos/id/12/300/200" alt="Image 3">
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4>Slide</h4>
+              <div class="gallery-grid">
+                <div class="gallery-item" data-modal="lightbox-slide" data-modal-bind="src:full, caption:caption" data-modal-gallery="true" data-modal-effect="slide" data-full="https://picsum.photos/id/101/800/600" data-caption="Building Architecture">
+                  <img src="https://picsum.photos/id/101/300/200" alt="Image 1">
+                </div>
+                <div class="gallery-item" data-modal="lightbox-slide" data-modal-bind="src:full, caption:caption" data-modal-gallery="true" data-modal-effect="slide" data-full="https://picsum.photos/id/102/800/600" data-caption="Fresh Raspberries">
+                  <img src="https://picsum.photos/id/102/300/200" alt="Image 2">
+                </div>
+                <div class="gallery-item" data-modal="lightbox-slide" data-modal-bind="src:full, caption:caption" data-modal-gallery="true" data-modal-effect="slide" data-full="https://picsum.photos/id/103/800/600" data-caption="Relaxing Park">
+                  <img src="https://picsum.photos/id/103/300/200" alt="Image 3">
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4>Zoom</h4>
+              <div class="gallery-grid">
+                <div class="gallery-item" data-modal="lightbox-zoom" data-modal-bind="src:full, caption:caption" data-modal-gallery="true" data-modal-effect="zoom" data-full="https://picsum.photos/id/201/800/600" data-caption="Mountain View">
+                  <img src="https://picsum.photos/id/201/300/200" alt="Image 1">
+                </div>
+                <div class="gallery-item" data-modal="lightbox-zoom" data-modal-bind="src:full, caption:caption" data-modal-gallery="true" data-modal-effect="zoom" data-full="https://picsum.photos/id/202/800/600" data-caption="City Skyline">
+                  <img src="https://picsum.photos/id/202/300/200" alt="Image 2">
+                </div>
+                <div class="gallery-item" data-modal="lightbox-zoom" data-modal-bind="src:full, caption:caption" data-modal-gallery="true" data-modal-effect="zoom" data-full="https://picsum.photos/id/203/800/600" data-caption="Ocean Sunset">
+                  <img src="https://picsum.photos/id/203/300/200" alt="Image 3">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lightbox Modals for Different Effects -->
+        <div class="modal modal-lightbox" id="lightbox-fade" aria-hidden="true">
+          <div class="modal-content">
+            <button class="modal-close btn-close" aria-label="Close"></button>
+            <div class="lightbox-body">
+              <img data-modal-target="src" src="" alt="">
+              <div class="lightbox-caption">
+                <h3 data-modal-target="caption"></h3>
+              </div>
+            </div>
+            <button class="modal-prev" data-modal-nav="prev" aria-label="Previous">&lsaquo;</button>
+            <button class="modal-next" data-modal-nav="next" aria-label="Next">&rsaquo;</button>
+          </div>
+        </div>
+
+        <div class="modal modal-lightbox" id="lightbox-slide" aria-hidden="true">
+          <div class="modal-content">
+            <button class="modal-close btn-close" aria-label="Close"></button>
+            <div class="lightbox-body">
+              <img data-modal-target="src" src="" alt="">
+              <div class="lightbox-caption">
+                <h3 data-modal-target="caption"></h3>
+              </div>
+            </div>
+            <button class="modal-prev" data-modal-nav="prev" aria-label="Previous">&lsaquo;</button>
+            <button class="modal-next" data-modal-nav="next" aria-label="Next">&rsaquo;</button>
+          </div>
+        </div>
+
+        <div class="modal modal-lightbox" id="lightbox-zoom" aria-hidden="true">
+          <div class="modal-content">
+            <button class="modal-close btn-close" aria-label="Close"></button>
+            <div class="lightbox-body">
+              <img data-modal-target="src" src="" alt="">
+              <div class="lightbox-caption">
+                <h3 data-modal-target="caption"></h3>
+              </div>
+            </div>
+            <button class="modal-prev" data-modal-nav="prev" aria-label="Previous">&lsaquo;</button>
+            <button class="modal-next" data-modal-nav="next" aria-label="Next">&rsaquo;</button>
+          </div>
+        </div>
+
+        <!-- Code Snippet with Tabs -->
+        <div class="code-tabs mt-3" data-component="tabs">
+          <div class="tab-buttons">
+            <button class="tab-button active" data-tab="gallery-html">HTML</button>
+            <button class="tab-button" data-tab="gallery-effects">Effects</button>
+          </div>
+          <div class="tab-content">
+            <div class="tab-pane active" data-tab="gallery-html">
+              <pre><code data-component="syntaxhighlighter" data-language="html">
+                  &lt;!-- Gallery Item with Effect --&gt;
+                  &lt;div class="gallery-item"
+                  data-modal="lightbox-modal"
+                  data-modal-bind="src:full, caption:caption"
+                  data-modal-gallery="true"
+                  data-modal-effect="slide"
+                  data-full="image.jpg"
+                  data-caption="Description"&gt;
+                  &lt;img src="thumb.jpg"&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Lightbox Modal --&gt;
+                  &lt;div class="modal modal-lightbox" id="lightbox-modal" aria-hidden="true"&gt;
+                  &lt;div class="modal-content"&gt;
+                  &lt;button class="modal-close btn-close" aria-label="Close"&gt;&lt;/button&gt;
+                  &lt;div class="lightbox-body"&gt;
+                  &lt;img data-modal-target="src" src="" alt=""&gt;
+                  &lt;div class="lightbox-caption"&gt;
+                  &lt;h3 data-modal-target="caption"&gt;&lt;/h3&gt;
+                  &lt;/div&gt;
+                  &lt;/div&gt;
+                  &lt;button class="modal-prev" data-modal-nav="prev"&gt;&lsaquo;&lt;/button&gt;
+                  &lt;button class="modal-next" data-modal-nav="next"&gt;&rsaquo;&lt;/button&gt;
+                  &lt;/div&gt;
+                  &lt;/div&gt;
+                </code></pre>
+            </div>
+            <div class="tab-pane" data-tab="gallery-effects">
+              <pre><code data-component="syntaxhighlighter" data-language="javascript">
+                  // Available effects (animates content only, not frame/buttons):
+                  // - fade (default): Smooth opacity transition
+                  // - slide: Slide horizontally based on direction
+                  // - slide-horizontal: Same as slide
+                  // - slide-vertical: Slide up/down based on direction
+                  // - slide-left: Always slide from left
+                  // - slide-right: Always slide from right
+                  // - slide-up: Always slide from top
+                  // - slide-down: Always slide from bottom
+                  // - zoom: Scale in/out effect
+
+                  // Usage:
+                  data-modal-effect="fade"
+                  data-modal-effect="slide"
+                  data-modal-effect="zoom"
+
+                  // Touch Support:
+                  // - Swipe left = Next image
+                  // - Swipe right = Previous image
+                  // - Works on all touch devices automatically
+                </code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 4. Zero JavaScript -->
+      <section class="section">
+        <h2>4. Zero JavaScript</h2>
+        <p>Open any modal just by referencing its ID in <code>data-modal</code>. No JavaScript required.</p>
+
+        <div class="example-box">
+          <button class="btn btn-primary" data-modal="simple-modal">Open Simple Modal</button>
+        </div>
+
+        <!-- Simple Modal -->
+        <div id="simple-modal" class="modal">
+          <div class="modal-dialog">
+            <div class="modal-header">
+              <h4 class="modal-title">Simple Modal</h4>
+              <button type="button" class="modal-close btn-close"></button>
+            </div>
+            <div class="modal-body">
+              <p>This modal opens without writing a single line of JavaScript!</p>
+              <p>Just use <code>data-modal="simple-modal"</code> on your button.</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary modal-close">Awesome</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="html">
+              &lt;!-- Trigger --&gt;
+              &lt;button class=&quot;btn&quot; data-modal=&quot;simple-modal&quot;&gt;Open Simple Modal&lt;/button&gt;
+
+              &lt;!-- Modal --&gt;
+              &lt;div id=&quot;simple-modal&quot; class=&quot;modal&quot;&gt;
+              &lt;div class=&quot;modal-dialog&quot;&gt;
+              &lt;div class=&quot;modal-header&quot;&gt;
+              &lt;h4 class=&quot;modal-title&quot;&gt;Simple Modal&lt;/h4&gt;
+              &lt;button type=&quot;button&quot; class=&quot;modal-close btn-close&quot;&gt;&lt;/button&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;modal-body&quot;&gt;
+              &lt;p&gt;This modal opens without writing a single line of JavaScript!&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;/div&gt;
+            </code></pre>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

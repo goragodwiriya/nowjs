@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graph Component - Now.js Example</title>
+  <meta name="description"
+        content="Learn how to use GraphComponent with Now.js. Line, bar, pie, donut and gauge charts rendered as SVG from plain HTML data attributes, HTML tables, APIs or JavaScript.">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>Graph Component</h1>
+        <p class="text-gradient" data-i18n>SVG-based charts with zero configuration - line, bar, pie, donut and gauge from plain HTML data attributes</p>
+      </div>
+    </section>
+
+    <article class="container content">
+      <!-- Live Demo Section -->
+      <section class="section">
+        <h2 class="icon-published1" data-i18n>Live Demo</h2>
+
+        <!-- Line Chart -->
+        <h3 data-i18n>Line Chart</h3>
+        <p class="text-muted" data-i18n>Data provided inline with <code>data-props</code> (JSON). Supports smooth curves, filled areas and per-series colors.</p>
+        <div class="graph-box" data-component="graph" data-props='{
+            "type": "line",
+            "curve": true,
+            "fillArea": true,
+            "showLegend": true,
+            "data": [
+              {"name": "2025", "color": "#3b82f6", "data": [
+                {"label": "Jan", "value": 65}, {"label": "Feb", "value": 59}, {"label": "Mar", "value": 80},
+                {"label": "Apr", "value": 81}, {"label": "May", "value": 76}, {"label": "Jun", "value": 90}
+              ]},
+              {"name": "2024", "color": "#a855f7", "data": [
+                {"label": "Jan", "value": 45}, {"label": "Feb", "value": 52}, {"label": "Mar", "value": 58},
+                {"label": "Apr", "value": 61}, {"label": "May", "value": 70}, {"label": "Jun", "value": 72}
+              ]}
+            ]
+          }'>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">&lt;div data-component="graph"
+            data-props='{
+            "type": "line",
+            "curve": true,
+            "fillArea": true,
+            "data": [
+            {"name": "2025", "color": "#3b82f6", "data": [
+            {"label": "Jan", "value": 65}, {"label": "Feb", "value": 59},
+            {"label": "Mar", "value": 80}, {"label": "Apr", "value": 81},
+            {"label": "May", "value": 76}, {"label": "Jun", "value": 90}
+            ]},
+            {"name": "2024", "color": "#a855f7", "data": [
+            {"label": "Jan", "value": 45}, {"label": "Feb", "value": 52},
+            {"label": "Mar", "value": 58}, {"label": "Apr", "value": 61},
+            {"label": "May", "value": 70}, {"label": "Jun", "value": 72}
+            ]}
+            ]
+            }' style="height: 320px;"&gt;
+            &lt;/div&gt;</code></pre>
+
+        <!-- Bar Chart from Table -->
+        <h3 data-i18n style="margin-top: 3rem;">Bar Chart from HTML Table</h3>
+        <p class="text-muted" data-i18n>Point <code>data-table</code> to any table ID - the data is read directly from the table below (no JavaScript needed).</p>
+        <div>
+          <table id="quarterly-table" class="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Q1</th>
+                <th>Q2</th>
+                <th>Q3</th>
+                <th>Q4</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Sales</th>
+                <td>120</td>
+                <td>150</td>
+                <td>135</td>
+                <td>180</td>
+              </tr>
+              <tr>
+                <th>Expenses</th>
+                <td>80</td>
+                <td>90</td>
+                <td>85</td>
+                <td>95</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="graph-box" data-component="graph" data-type="bar" data-table="quarterly-table" data-gap="4"></div>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">&lt;table id="quarterly-table"&gt;
+            &lt;thead&gt;
+            &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Q1&lt;/th&gt;&lt;th&gt;Q2&lt;/th&gt;&lt;th&gt;Q3&lt;/th&gt;&lt;th&gt;Q4&lt;/th&gt;&lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+            &lt;tr&gt;&lt;th&gt;Sales&lt;/th&gt;&lt;td&gt;120&lt;/td&gt;&lt;td&gt;150&lt;/td&gt;&lt;td&gt;135&lt;/td&gt;&lt;td&gt;180&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;th&gt;Expenses&lt;/th&gt;&lt;td&gt;80&lt;/td&gt;&lt;td&gt;90&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;td&gt;95&lt;/td&gt;&lt;/tr&gt;
+            &lt;/tbody&gt;
+            &lt;/table&gt;
+
+            &lt;!-- Renders a bar chart from the table above --&gt;
+            &lt;div data-component="graph"
+            data-type="bar"
+            data-table="quarterly-table"
+            style="height: 320px;"&gt;
+            &lt;/div&gt;</code></pre>
+
+        <!-- Pie Chart -->
+        <h3 data-i18n style="margin-top: 3rem;">Pie Chart</h3>
+        <p class="text-muted" data-i18n>Shows proportions with data labels. Use <code>data-show-value-instead-of-percent</code> to toggle between values and percentages.</p>
+        <div class="graph-box" data-component="graph" data-type="pie" data-show-value-instead-of-percent="false" data-props='{
+            "data": [
+              {"name": "Traffic", "data": [
+                {"label": "Desktop", "value": 45},
+                {"label": "Mobile", "value": 38},
+                {"label": "Tablet", "value": 10},
+                {"label": "Others", "value": 7}
+              ]}
+            ]
+          }'>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">&lt;div data-component="graph"
+            data-type="pie"
+            data-show-value-instead-of-percent="false"
+            data-props='{
+            "data": [
+            {"name": "Traffic", "data": [
+            {"label": "Desktop", "value": 45},
+            {"label": "Mobile", "value": 38},
+            {"label": "Tablet", "value": 10},
+            {"label": "Others", "value": 7}
+            ]}
+            ]
+            }' style="height: 320px;"&gt;
+            &lt;/div&gt;</code></pre>
+
+        <!-- Donut Chart -->
+        <h3 data-i18n style="margin-top: 3rem;">Donut Chart</h3>
+        <p class="text-muted" data-i18n>A ring chart with customizable thickness and center text - perfect for budgets and allocation.</p>
+        <div class="graph-box" data-component="graph" data-type="donut" data-donut-thickness="40" data-center-text="Budget" data-props='{
+            "data": [
+              {"name": "Budget", "data": [
+                {"label": "Housing", "value": 30},
+                {"label": "Food", "value": 25},
+                {"label": "Savings", "value": 20},
+                {"label": "Transport", "value": 15},
+                {"label": "Others", "value": 10}
+              ]}
+            ]
+          }'>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">&lt;div data-component="graph"
+            data-type="donut"
+            data-donut-thickness="40"
+            data-center-text="Budget"
+            data-props='{
+            "data": [
+            {"name": "Budget", "data": [
+            {"label": "Housing", "value": 30},
+            {"label": "Food", "value": 25},
+            {"label": "Savings", "value": 20},
+            {"label": "Transport", "value": 15},
+            {"label": "Others", "value": 10}
+            ]}
+            ]
+            }' style="height: 320px;"&gt;
+            &lt;/div&gt;</code></pre>
+
+        <!-- Gauge Chart -->
+        <h3 data-i18n style="margin-top: 3rem;">Gauge Chart</h3>
+        <p class="text-muted" data-i18n>A single value in a range - great for KPIs and scores. Takes one series with one data point.</p>
+        <div class="graph-box graph-box--gauge" data-component="graph" data-type="gauge" data-max-gauge-value="100" data-gauge-curve-width="24" data-props='{
+            "data": [
+              {"name": "Performance", "data": [
+                {"label": "Score", "value": 78}
+              ]}
+            ]
+          }'>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">&lt;div data-component="graph"
+            data-type="gauge"
+            data-max-gauge-value="100"
+            data-gauge-curve-width="24"
+            data-props='{
+            "data": [
+            {"name": "Performance", "data": [
+            {"label": "Score", "value": 78}
+            ]}
+            ]
+            }' style="height: 260px;"&gt;
+            &lt;/div&gt;</code></pre>
+      </section>
+
+      <!-- Data Sources Section -->
+      <section class="section">
+        <h2 class="icon-cloud" data-i18n>Loading Data</h2>
+
+        <!-- From API -->
+        <h3 data-i18n>From API URL</h3>
+        <p class="text-muted" data-i18n>Set <code>data-url</code> to load data from a server endpoint. This chart fetches from <code>api/sales.php</code> which returns random
+          values on every request.</p>
+        <div class="graph-toolbar">
+          <button type="button" class="btn btn-primary" id="btn-refresh-url">
+            <span class="icon-refresh"></span> <span data-i18n>Refresh</span>
+          </button>
+        </div>
+        <div class="graph-box" id="url-graph" data-component="graph" data-type="line" data-url="api/sales.php" data-curve="true"></div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">&lt;div data-component="graph"
+            data-type="line"
+            data-url="api/sales.php"
+            style="height: 320px;"&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Refresh manually from JavaScript --&gt;
+            &lt;script&gt;
+            const element = document.querySelector('#url-graph');
+            const instance = GraphComponent.getInstance(element);
+            instance.refresh();
+            &lt;/script&gt;</code></pre>
+
+        <!-- Polling -->
+        <h3 data-i18n style="margin-top: 3rem;">Auto Refresh (Polling)</h3>
+        <p class="text-muted" data-i18n>Set <code>data-polling-interval</code> (ms) together with <code>data-url</code> to reload automatically. This chart polls every 5 seconds -
+          watch the values change.</p>
+        <div class="graph-box" data-component="graph" data-type="bar" data-url="api/sales.php" data-polling-interval="5000"></div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">&lt;div data-component="graph"
+            data-type="bar"
+            data-url="api/sales.php"
+            data-polling-interval="5000"
+            style="height: 320px;"&gt;
+            &lt;/div&gt;</code></pre>
+
+        <!-- Refresh Event -->
+        <h3 data-i18n style="margin-top: 3rem;">Event-based Refresh</h3>
+        <p class="text-muted" data-i18n>Charts sharing the same <code>data-refresh-event</code> all refresh together when that event is emitted through the EventManager.</p>
+        <div class="graph-toolbar">
+          <button type="button" class="btn btn-primary" id="btn-emit-refresh">
+            <span class="icon-bell"></span> <span data-i18n>Trigger "graph:refresh-demo"</span>
+          </button>
+        </div>
+        <div class="graph-demo-grid">
+          <div class="graph-box" data-component="graph" data-type="line" data-url="api/sales.php" data-refresh-event="graph:refresh-demo" data-curve="true"></div>
+          <div class="graph-box" data-component="graph" data-type="bar" data-url="api/sales.php" data-refresh-event="graph:refresh-demo"></div>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">&lt;!-- Both charts listen for the same event --&gt;
+            &lt;div data-component="graph"
+            data-type="line"
+            data-url="api/sales.php"
+            data-refresh-event="graph:refresh-demo"&gt;
+            &lt;/div&gt;
+            &lt;div data-component="graph"
+            data-type="bar"
+            data-url="api/sales.php"
+            data-refresh-event="graph:refresh-demo"&gt;
+            &lt;/div&gt;
+
+            &lt;script&gt;
+            // Emitting the event refreshes every listener at once
+            EventManager.emit('graph:refresh-demo');
+            &lt;/script&gt;</code></pre>
+      </section>
+
+      <!-- JavaScript API Section -->
+      <section class="section">
+        <h2 class="icon-cog" data-i18n>JavaScript API</h2>
+        <p class="text-muted" data-i18n>This chart is created entirely from JavaScript. Use the controls to call the API methods - every action is logged in the event log below.
+        </p>
+
+        <div class="graph-toolbar">
+          <div class="btn-group" role="group" aria-label="Chart type">
+            <button type="button" class="btn switcher active" data-type="line">Line</button>
+            <button type="button" class="btn switcher" data-type="bar">Bar</button>
+            <button type="button" class="btn switcher" data-type="pie">Pie</button>
+            <button type="button" class="btn switcher" data-type="donut">Donut</button>
+          </div>
+          <button type="button" class="btn" id="btn-randomize">
+            <span class="icon-refresh"></span> <span data-i18n>Randomize (setData)</span>
+          </button>
+          <button type="button" class="btn" id="btn-add-point">
+            <span class="icon-plus"></span> <span data-i18n>Add point</span>
+          </button>
+          <button type="button" class="btn" id="btn-export">
+            <span class="icon-download"></span> <span data-i18n>Export PNG</span>
+          </button>
+        </div>
+
+        <div class="graph-playground">
+          <div class="graph-box" id="api-playground"></div>
+          <div class="graph-log">
+            <h4 data-i18n>Event Log</h4>
+            <ul id="graph-event-log">
+              <li class="graph-log-hint" data-i18n>Interact with the chart or buttons to see events...</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="code-tabs" data-component="tabs">
+          <div class="tab-buttons">
+            <button class="tab-button active" data-tab="js-create">Create</button>
+            <button class="tab-button" data-tab="js-methods">Methods</button>
+            <button class="tab-button" data-tab="js-events">Events</button>
+          </div>
+          <div class="tab-content">
+            <div class="tab-pane active" data-tab="js-create">
+              <div>
+                <pre><code data-component="syntaxhighlighter" data-language="javascript">// Create a graph entirely from JavaScript
+                    const playground = await GraphComponent.create('#api-playground', {
+                    type: 'line',
+                    curve: true,
+                    showLegend: true,
+                    animation: true,
+                    animationDuration: 800,
+                    data: [
+                    {name: 'Visitors', data: [
+                    {label: 'Mon', value: 120},
+                    {label: 'Tue', value: 150},
+                    {label: 'Wed', value: 135}
+                    ]}
+                    ],
+
+                    // Callbacks work too
+                    onClick(dataPoint, seriesIndex) {
+                    console.log('Clicked:', dataPoint.label, dataPoint.value);
+                    },
+
+                    onDataChange(data) {
+                    console.log('Data updated:', data);
+                    }
+                    });
+
+                    // Or grab an existing instance from an element / ID
+                    const instance = GraphComponent.getInstance(element);
+                    const same = GraphComponent.getInstance(instance.id);</code></pre>
+              </div>
+            </div>
+            <div class="tab-pane" data-tab="js-methods">
+              <div>
+                <pre><code data-component="syntaxhighlighter" data-language="javascript">// Replace the whole dataset
+                    instance.setData([
+                    {name: 'Visitors', data: [
+                    {label: 'Mon', value: 200},
+                    {label: 'Tue', value: 180},
+                    {label: 'Wed', value: 220}
+                    ]}
+                    ]);
+
+                    // Append a single point to a series (index 0 = first series)
+                    instance.addDataPoint({label: 'Thu', value: 195}, 0);
+
+                    // Switch chart type without recreating the chart
+                    instance.setType('bar'); // line | bar | pie | donut | gauge
+
+                    // Reload from the configured data-url (bypasses cache)
+                    await instance.loadData();
+
+                    // Refresh (same as loadData with force)
+                    instance.refresh();
+
+                    // Export as image (png, jpeg or svg)
+                    instance.exportToImage('my-chart', 'png');
+
+                    // Clean up when done
+                    instance.destroy();</code></pre>
+              </div>
+            </div>
+            <div class="tab-pane" data-tab="js-events">
+              <div>
+                <pre><code data-component="syntaxhighlighter" data-language="javascript">// DOM events are dispatched on the container element
+                    const element = document.querySelector('#api-playground');
+
+                    element.addEventListener('graph:created', e => {
+                    console.log('Created:', e.detail.instance.id);
+                    });
+
+                    element.addEventListener('graph:loaded', e => {
+                    console.log('Loaded from cache?', e.detail.fromCache);
+                    });
+
+                    element.addEventListener('graph:data-changed', e => {
+                    console.log('New data:', e.detail.data);
+                    });
+
+                    element.addEventListener('graph:type-changed', e => {
+                    console.log('Type changed to:', e.detail.type);
+                    });
+
+                    element.addEventListener('graph:error', e => {
+                    console.error('Loading failed:', e.detail.error);
+                    });
+
+                    // The same events are also available through the EventManager
+                    EventManager.on('graph:loaded', payload => {
+                    console.log('Loaded:', payload.data);
+                    });</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Styling Section -->
+      <section class="section">
+        <h2 class="icon-color" data-i18n>Styling</h2>
+
+        <h3 data-i18n>Custom Colors &amp; Legend Position</h3>
+        <p class="text-muted" data-i18n>Pass a JSON array to <code>data-colors</code> for a custom palette and use <code>data-legend-position</code> (top, bottom, left, right) to
+          place the legend.</p>
+        <div class="graph-demo-grid">
+          <div class="graph-box" data-component="graph" data-type="donut" data-colors='["#3b82f6", "#22c55e", "#f59e0b", "#ef4444"]' data-props='{
+              "data": [
+                {"name": "Browser", "data": [
+                  {"label": "Chrome", "value": 48},
+                  {"label": "Safari", "value": 22},
+                  {"label": "Firefox", "value": 18},
+                  {"label": "Edge", "value": 12}
+                ]}
+              ]
+            }'>
+          </div>
+          <div class="graph-box" data-component="graph" data-type="line" data-legend-position="right" data-curve="true" data-props='{
+              "data": [
+                {"name": "Series A", "data": [
+                  {"label": "1", "value": 30}, {"label": "2", "value": 45}, {"label": "3", "value": 38},
+                  {"label": "4", "value": 55}, {"label": "5", "value": 48}
+                ]},
+                {"name": "Series B", "data": [
+                  {"label": "1", "value": 20}, {"label": "2", "value": 35}, {"label": "3", "value": 42},
+                  {"label": "4", "value": 36}, {"label": "5", "value": 50}
+                ]}
+              ]
+            }'>
+          </div>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">&lt;!-- Custom color palette --&gt;
+            &lt;div data-component="graph"
+            data-type="donut"
+            data-colors='["#3b82f6", "#22c55e", "#f59e0b", "#ef4444"]'
+            data-props='{...}'&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Legend on the right --&gt;
+            &lt;div data-component="graph"
+            data-type="line"
+            data-legend-position="right"
+            data-curve="true"
+            data-props='{...}'&gt;
+            &lt;/div&gt;</code></pre>
+
+        <h3 data-i18n style="margin-top: 3rem;">Grid &amp; Axis Options</h3>
+        <p class="text-muted" data-i18n>Toggle the grid and axis with <code>data-show-grid</code> and <code>data-show-axis</code>, or restyle everything through container CSS.</p>
+        <div class="graph-box" data-component="graph" data-type="line" data-curve="true" data-show-grid="false" data-show-axis="false" data-fill-area="true" data-props='{
+            "data": [
+              {"name": "Minimal", "data": [
+                {"label": "1", "value": 25}, {"label": "2", "value": 40}, {"label": "3", "value": 32},
+                {"label": "4", "value": 55}, {"label": "5", "value": 48}, {"label": "6", "value": 60}
+              ]}
+            ]
+          }'>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">&lt;div data-component="graph"
+            data-type="line"
+            data-curve="true"
+            data-show-grid="false"
+            data-show-axis="false"
+            data-fill-area="true"
+            data-props='{...}'&gt;
+            &lt;/div&gt;</code></pre>
+      </section>
+
+      <!-- Key Features Section -->
+      <section class="section">
+        <h2 class="icon-list" data-i18n>Key Features</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3 class="icon-power" data-i18n>Auto-initialization</h3>
+            <p data-i18n>Add <code>data-component="graph"</code> and the chart initializes itself - no JavaScript required.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-chart" data-i18n>5 Chart Types</h3>
+            <p data-i18n>Line, bar, pie, donut and gauge charts, all rendered as crisp SVG.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-cloud" data-i18n>Multiple Data Sources</h3>
+            <p data-i18n>Inline data (<code>data-props</code>), HTML tables (<code>data-table</code>) or APIs (<code>data-url</code>).</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-refresh" data-i18n>Auto Refresh</h3>
+            <p data-i18n>Time-based polling and event-based refresh keep charts up to date.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-fullscreen" data-i18n>Responsive</h3>
+            <p data-i18n>Charts redraw automatically when the container resizes.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-download" data-i18n>Export</h3>
+            <p data-i18n>Export any chart as PNG, JPEG or SVG image with one call.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-cog" data-i18n>Interactive</h3>
+            <p data-i18n>Tooltips, legends and click handlers on every data point.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-bell" data-i18n>Event System</h3>
+            <p data-i18n>Rich lifecycle events via DOM events and the EventManager.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Configuration Options Section -->
+      <section class="section">
+        <h2 class="icon-cog" data-i18n>Configuration Options</h2>
+        <div class="tablebody">
+          <table class="table border fullwidth">
+            <thead>
+              <tr>
+                <th>Option</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>data-type</code></td>
+                <td>string</td>
+                <td>'line'</td>
+                <td>Chart type: line, bar, pie, donut, gauge</td>
+              </tr>
+              <tr>
+                <td><code>data-url</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>API endpoint to load data from</td>
+              </tr>
+              <tr>
+                <td><code>data-table</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>ID of an HTML table to read data from</td>
+              </tr>
+              <tr>
+                <td><code>data-props</code></td>
+                <td>object</td>
+                <td>-</td>
+                <td>All options as inline JSON (including data)</td>
+              </tr>
+              <tr>
+                <td><code>data-colors</code></td>
+                <td>array</td>
+                <td>[...]</td>
+                <td>Custom color palette (JSON array)</td>
+              </tr>
+              <tr>
+                <td><code>data-curve</code></td>
+                <td>boolean</td>
+                <td>true</td>
+                <td>Smooth curve lines (line chart)</td>
+              </tr>
+              <tr>
+                <td><code>data-fill-area</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Fill the area under the line (line chart)</td>
+              </tr>
+              <tr>
+                <td><code>data-donut-thickness</code></td>
+                <td>number</td>
+                <td>30</td>
+                <td>Ring thickness (donut chart)</td>
+              </tr>
+              <tr>
+                <td><code>data-max-gauge-value</code></td>
+                <td>number</td>
+                <td>100</td>
+                <td>Maximum value of the gauge range (gauge chart)</td>
+              </tr>
+              <tr>
+                <td><code>data-gauge-curve-width</code></td>
+                <td>number</td>
+                <td>30</td>
+                <td>Gauge arc thickness (gauge chart)</td>
+              </tr>
+              <tr>
+                <td><code>data-center-text</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>Text in the center (donut/gauge)</td>
+              </tr>
+              <tr>
+                <td><code>data-show-grid</code></td>
+                <td>boolean</td>
+                <td>true</td>
+                <td>Show grid lines</td>
+              </tr>
+              <tr>
+                <td><code>data-show-axis</code></td>
+                <td>boolean</td>
+                <td>true</td>
+                <td>Show axis lines</td>
+              </tr>
+              <tr>
+                <td><code>data-show-legend</code></td>
+                <td>boolean</td>
+                <td>true</td>
+                <td>Show legend</td>
+              </tr>
+              <tr>
+                <td><code>data-legend-position</code></td>
+                <td>string</td>
+                <td>'bottom'</td>
+                <td>Legend position: top, bottom, left, right</td>
+              </tr>
+              <tr>
+                <td><code>data-show-tooltip</code></td>
+                <td>boolean</td>
+                <td>true</td>
+                <td>Show tooltips on hover</td>
+              </tr>
+              <tr>
+                <td><code>data-show-data-labels</code></td>
+                <td>boolean</td>
+                <td>true</td>
+                <td>Show labels on data points</td>
+              </tr>
+              <tr>
+                <td><code>data-show-value-instead-of-percent</code></td>
+                <td>boolean</td>
+                <td>true</td>
+                <td>Label style for pie/donut</td>
+              </tr>
+              <tr>
+                <td><code>data-animation</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Enable draw animation</td>
+              </tr>
+              <tr>
+                <td><code>data-animation-duration</code></td>
+                <td>number</td>
+                <td>1000</td>
+                <td>Animation duration (ms)</td>
+              </tr>
+              <tr>
+                <td><code>data-polling-interval</code></td>
+                <td>number</td>
+                <td>0</td>
+                <td>Auto reload interval in ms (0 = off)</td>
+              </tr>
+              <tr>
+                <td><code>data-refresh-event</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>EventManager event(s) that trigger a refresh</td>
+              </tr>
+              <tr>
+                <td><code>data-cache</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Cache data-url responses</td>
+              </tr>
+              <tr>
+                <td><code>data-cache-time</code></td>
+                <td>number</td>
+                <td>60000</td>
+                <td>Cache TTL in ms</td>
+              </tr>
+              <tr>
+                <td><code>data-max-data-points</code></td>
+                <td>number</td>
+                <td>20</td>
+                <td>Maximum visible data points</td>
+              </tr>
+              <tr>
+                <td><code>data-autoload</code></td>
+                <td>boolean</td>
+                <td>true</td>
+                <td>Load data on initialization</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- How it Works Section -->
+      <section class="section">
+        <h2 class="icon-search" data-i18n>How It Works</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3 data-i18n>1. Declarative HTML</h3>
+            <p data-i18n>Every option can be set with <code>data-*</code> attributes. Values are parsed automatically - booleans, numbers, arrays and JSON objects all work.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>2. Data Sources</h3>
+            <p data-i18n>Data comes from <code>data-props</code>, an HTML table via <code>data-table</code>, or a server endpoint via <code>data-url</code> - with optional caching.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>3. SVG Rendering</h3>
+            <p data-i18n>The GraphRenderer draws pure SVG - sharp on every screen, themeable with CSS and exportable to image files.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>4. Stays in Sync</h3>
+            <p data-i18n>ResizeObserver redraws on container changes, the MutationObserver picks up charts added to the DOM later, and locale changes trigger a refresh.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>5. Events Everywhere</h3>
+            <p data-i18n>Each instance dispatches <code>graph:*</code> DOM events and mirrors them on the EventManager, so any part of your app can react.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>6. Clean Lifecycle</h3>
+            <p data-i18n>Instances clean up their timers, observers and DOM references on <code>destroy()</code> - ready for SPA navigation.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Next Steps Section -->
+      <section class="section">
+        <h2 class="icon-next" data-i18n>Next Steps</h2>
+        <div class="next-steps">
+          <a href="/docs/en/GraphComponent.html" class="next-step-card">
+            <h3 data-i18n>Full Documentation</h3>
+            <p data-i18n>Read the complete GraphComponent documentation with all API methods and options</p>
+          </a>
+
+          <a href="/examples/data-table" class="next-step-card">
+            <h3 data-i18n>Data Table</h3>
+            <p data-i18n>Combine charts with sortable, paginated data tables</p>
+          </a>
+
+          <a href="/examples" class="next-step-card">
+            <h3 data-i18n>More Examples</h3>
+            <p data-i18n>Browse all Now.js component examples and use cases</p>
+          </a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+  <script src="../../Now/dist/now.graph.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

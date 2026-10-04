@@ -1,0 +1,258 @@
+/* Modal Example Styles */
+/* Layout Utilities */
+.example-box {
+  background: var(--color-surface-dark, #f8f9fa);
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border, #dee2e6);
+  margin-bottom: 1.5rem;
+}
+.button-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+.center {
+  text-align: center;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-3 {
+  margin-bottom: 1rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-3 {
+  margin-top: 1rem;
+}
+.p-0 {
+  padding: 0 !important;
+}
+/* Card Styles */
+.card {
+  background: var(--bg-body, #fff);
+  border: 1px solid var(--color-border, #e9ecef);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.card-body {
+  padding: 1.5rem;
+}
+.avatar-sm {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.avatar-lg {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--color-secondary, #f8f9fa);
+}
+/* Gallery Styles */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.gallery-item {
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 3/2;
+}
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+/* Modal Specific Overrides */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid var(--color-border, #e9ecef);
+}
+/* Gallery Modal Styles */
+.modal-gallery .modal-dialog {
+  max-width: 900px;
+  width: 90%;
+}
+.modal-gallery .modal-content-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  box-shadow: none;
+}
+.modal-gallery .modal-body {
+  position: relative;
+  background: black;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.modal-gallery img {
+  display: block;
+  max-height: 80vh;
+  margin: 0 auto;
+}
+.gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+.gallery-nav {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  padding: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+.gallery-nav:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+.gallery-nav.prev {
+  left: -60px;
+}
+.gallery-nav.next {
+  right: -60px;
+}
+.gallery-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  color: white;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+/* Lightbox Modal Style */
+.modal-lightbox {
+  background-color: rgba(0, 0, 0, 0.95) !important;
+}
+.modal-lightbox .modal-content {
+  background: transparent;
+  box-shadow: none;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+.modal-lightbox .lightbox-body {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-lightbox img[data-modal-target="src"] {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+.modal-lightbox .lightbox-caption {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+}
+.modal-lightbox .lightbox-caption h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+.modal-lightbox .lightbox-caption p {
+  font-size: 1rem;
+  opacity: 0.8;
+  color: #ddd;
+}
+.modal-lightbox .modal-close {
+  top: 20px;
+  right: 20px;
+}
+.modal-lightbox .modal-close:before {
+  background-color: white;
+}
+.modal-lightbox .modal-prev,
+.modal-lightbox .modal-next {
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  border-radius: 50%;
+  font-size: 32px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-lightbox .modal-close:hover,
+.modal-lightbox .modal-prev:hover,
+.modal-lightbox .modal-next:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+.modal-lightbox .modal-prev:hover,
+.modal-lightbox .modal-next:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+.modal-lightbox .modal-prev {
+  left: 30px;
+}
+.modal-lightbox .modal-next {
+  right: 30px;
+}
+.modal-lightbox .modal-close,
+.modal-lightbox .modal-prev,
+.modal-lightbox .modal-next {
+  position: absolute;
+  z-index: 1050;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: monospace;
+}

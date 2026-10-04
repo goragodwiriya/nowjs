@@ -1,0 +1,116 @@
+/* EditInPlaceManager Example Styles */
+/*
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border, #333);
+}
+header h1 {
+  margin-bottom: 0.5rem;
+  color: var(--color-primary, #4f46e5);
+}
+header p {
+  color: var(--text-secondary, #888);
+  font-size: 1.1rem;
+}
+.demo-section {
+  background: var(--card-bg, #1e1e2e);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--color-border, #333);
+}
+.demo-section h2 {
+  margin-bottom: 0.5rem;
+  color: var(--heading-color, #fff);
+}
+.demo-section .description {
+  color: var(--text-secondary, #888);
+  margin-bottom: 1.5rem;
+}
+  */
+.demo-area {
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+.demo-card {
+  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+}
+.demo-card.wide {
+  grid-column: 1 / -1;
+}
+.demo-card label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.editable-value {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  background: var(--input-bg);
+  border: 1px dashed var(--color-border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+}
+.editable-value:hover {
+  border-color: var(--color-primary);
+  background: var(--input-hover-bg);
+}
+.editable-value:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.status-active {
+  color: #10b981;
+  border-color: #10b981;
+}
+.status-inactive {
+  color: #ef4444;
+  border-color: #ef4444;
+}
+.priority-high {
+  color: #f59e0b;
+  border-color: #f59e0b;
+}
+.edit-in-place-editor {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  background: var(--input-bg);
+  border: 2px solid var(--color-primary);
+  color: var(--color-text);
+  font-size: inherit;
+  font-family: inherit;
+  width: 100%;
+}
+.edit-in-place-editor:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+}
+.edit-in-place-editor.error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+}
+textarea.edit-in-place-editor {
+  min-height: 80px;
+  resize: vertical;
+}
+select.edit-in-place-editor {
+  cursor: pointer;
+}

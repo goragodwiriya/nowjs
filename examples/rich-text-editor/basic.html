@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rich Text Editor - Basic Example</title>
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+  <!-- Single bundled CSS -->
+  <link rel="stylesheet" href="../../Now/dist/richtext-editor.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 20px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    .demo-section {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .demo-section h2 {
+      margin: 0 0 16px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: #4285f4;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #3367d6;
+    }
+
+    .btn-secondary {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background: #eee;
+    }
+
+    #output {
+      margin-top: 20px;
+      padding: 16px;
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-break: break-all;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .info-box {
+      background: #e3f2fd;
+      border: 1px solid #90caf9;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #1565c0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🖊️ Rich Text Editor - Basic Example</h1>
+
+    <div class="info-box">
+      Using the <strong>bundled version</strong> - single JS + CSS file with all plugins included!
+    </div>
+
+    <div class="demo-section">
+      <h2>Editor (Basic Profile)</h2>
+
+      <div id="editor">
+        <h2>Welcome to Rich Text Editor!</h2>
+        <p>This is a <strong>powerful</strong> and <em>flexible</em> WYSIWYG editor built with vanilla JavaScript.</p>
+        <h3>Features:</h3>
+        <ul>
+          <li>Text formatting (bold, italic, underline, strikethrough)</li>
+          <li>Headings (H1-H6)</li>
+          <li>Lists (ordered and unordered)</li>
+          <li>Text alignment</li>
+          <li>Links and images</li>
+          <li>Tables with context menu</li>
+          <li>Undo/Redo history</li>
+          <li>Keyboard shortcuts</li>
+        </ul>
+        <p>Try editing this content or start fresh!</p>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" onclick="getContent()">Get HTML Content</button>
+        <button class="btn btn-secondary" onclick="clearContent()">Clear</button>
+        <button class="btn btn-secondary" onclick="toggleReadOnly()">Toggle Read-Only</button>
+      </div>
+
+      <pre id="output"></pre>
+    </div>
+
+    <div class="demo-section">
+      <h2>With Textarea (Form Integration)</h2>
+
+      <form id="myForm" onsubmit="handleSubmit(event)">
+        <textarea id="editor2" name="content" rows="6">
+          <p>This editor syncs with a hidden textarea for form submission.</p>
+        </textarea>
+
+        <div class="actions">
+          <button type="submit" class="btn btn-primary">Submit Form</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="demo-section">
+      <h2>Keyboard Shortcuts</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Shortcut</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Ctrl+B</code></td>
+            <td>Bold</td>
+          </tr>
+          <tr>
+            <td><code>Ctrl+I</code></td>
+            <td>Italic</td>
+          </tr>
+          <tr>
+            <td><code>Ctrl+U</code></td>
+            <td>Underline</td>
+          </tr>
+          <tr>
+            <td><code>Ctrl+Z</code></td>
+            <td>Undo</td>
+          </tr>
+          <tr>
+            <td><code>Ctrl+Y</code></td>
+            <td>Redo</td>
+          </tr>
+          <tr>
+            <td><code>Ctrl+K</code></td>
+            <td>Insert Link</td>
+          </tr>
+          <tr>
+            <td><code>Tab</code></td>
+            <td>Indent</td>
+          </tr>
+          <tr>
+            <td><code>Shift+Tab</code></td>
+            <td>Outdent</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Single bundled JS -->
+  <script src="/Now/Now/dist/richtext-editor.min.js"></script>
+
+  <script>
+    // Create first editor with 'basic' profile
+    const editor1 = RichTextEditor.create('#editor', {
+      profile: 'basic',
+      placeholder: 'Start typing',
+      minHeight: 300
+    });
+
+    // Listen for content changes
+    editor1.on('content:change', (content) => {
+      console.log('Content changed:', content.substring(0, 100) + '...');
+    });
+
+    // Create second editor (minimal profile for form)
+    const editor2 = RichTextEditor.create('#editor2', 'minimal');
+
+    // Button handlers
+    function getContent() {
+      const html = editor1.getContent();
+      document.getElementById('output').textContent = html;
+    }
+
+    function clearContent() {
+      editor1.clear();
+      document.getElementById('output').textContent = '';
+    }
+
+    function toggleReadOnly() {
+      const isReadOnly = editor1.isReadOnly();
+      editor1.setReadOnly(!isReadOnly);
+      alert(isReadOnly ? 'Editor is now editable' : 'Editor is now read-only');
+    }
+
+    function handleSubmit(event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      alert('Form submitted!\n\nContent:\n' + formData.get('content'));
+    }
+  </script>
+</body>
+
+</html>
