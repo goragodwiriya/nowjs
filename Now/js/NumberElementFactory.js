@@ -429,6 +429,12 @@ class NumberElementFactory extends ElementFactory {
         state.formatting = false;
       }
 
+      // A native number input fires 'input' on ArrowUp/ArrowDown. Setting value from
+      // script fires nothing, so listeners that recalculate (LineItemsManager row totals,
+      // form calculators) kept the old figures and the form saved a quantity that no
+      // longer matched its line total.
+      element.dispatchEvent(new Event('input', {bubbles: true}));
+
       return true;
     }
 
