@@ -1339,6 +1339,19 @@ const TemplateManager = {
           }
         });
       }
+
+      // A false data-if detaches its (non-animated) element synchronously and
+      // leaves a comment in its place. A TreeWalker cannot climb out of a
+      // detached node, so the walk would stop here and every element after it
+      // would be skipped — resume from the comment, which also skips the
+      // hidden subtree (processDataIf renders it when it is shown again)
+      const ifBinding = el._ifBinding;
+      if (ifBinding && ifBinding.condition === false && !el.parentNode) {
+        if (el === element || !ifBinding.comment?.parentNode || !element.contains(ifBinding.comment)) {
+          break;
+        }
+        walker.currentNode = ifBinding.comment;
+      }
       el = walker.nextNode();
     }
 
@@ -1696,7 +1709,10 @@ const TemplateManager = {
                 binding.parent.appendChild(el);
               }
 
-              await handleAnimation(el, true);
+              // Only animated elements wait — see the hide branch below
+              if (binding.animated) {
+                await handleAnimation(el, true);
+              }
 
               el.style.display = binding.originalStyles.display;
 
@@ -1734,7 +1750,18 @@ const TemplateManager = {
             }
           } else {
             if (el.parentNode) {
-              await handleAnimation(el, false);
+              /*
+               * Remove a non-animated element synchronously. data-for appends the
+               * clone to the document *before* it processes data-if, which queues
+               * ComponentManager's MutationObserver callback; awaiting even an
+               * already-resolved promise here let that callback run first, so a
+               * `data-component` inside a false data-if (e.g. a dashboard graph
+               * slot in a table or calendar block) was created and fetched its
+               * data-url before being removed ("Invalid series" in the console).
+               */
+              if (binding.animated) {
+                await handleAnimation(el, false);
+              }
 
               cleanupElement(el, true);
 

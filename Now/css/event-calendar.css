@@ -385,6 +385,11 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+/* Icon of the event's source (event.icon) in front of the title */
+.ec-event-icon {
+  margin-inline-end: 4px;
+  vertical-align: -0.125em;
+}
 /* ========================================
    Week View
    ======================================== */

@@ -5903,6 +5903,13 @@ const TableManager = {
           // Ignore i18n errors and fall back to raw template
         }
 
+        // 2.4) data-if inside a cell is decided against the row in step 3.5. Keep
+        //      it away from TemplateManager: it would evaluate the expression
+        //      against the slot tokens (never the row) and, since it removes a
+        //      false non-animated element synchronously, drop it on every row.
+        //      The template here is author markup plus opaque tokens only.
+        template = template.replace(/(\s)data-if=/g, '$1data-cell-if=');
+
         // 2.5) If TemplateManager is available, process the template string so it can use
         // its directives/interpolation and sanitization with the current row context
         try {
@@ -5936,18 +5943,16 @@ const TableManager = {
         // 3) Put the row values back (already escaped) and insert the HTML
         cell.innerHTML = fillSlots(template);
 
-        // 3.5) data-if inside a cell. TemplateManager hides an element
-        //      asynchronously (it awaits the hide animation before removing it),
-        //      so when the container's innerHTML was read back above the element
-        //      was still there and every conditional button showed on every row.
-        //      Decide it here, synchronously, against the row. `${field}` values
-        //      have been substituted by now, so both `data-if="${id != 1}"` and
+        // 3.5) data-if inside a cell (renamed data-cell-if in step 2.4 so
+        //      TemplateManager never decides it against the wrong data). Decide
+        //      it here, synchronously, against the row. `${field}` values have
+        //      been substituted by now, so both `data-if="${id != 1}"` and
         //      `data-if="can_edit"` work.
-        cell.querySelectorAll('[data-if]').forEach((el) => {
+        cell.querySelectorAll('[data-cell-if]').forEach((el) => {
           // A `${flag}` that held null/'' has become an empty expression by now:
           // that is a falsy row value, not "no condition" — hide.
-          const expression = (el.getAttribute('data-if') || '').trim();
-          el.removeAttribute('data-if');
+          const expression = (el.getAttribute('data-cell-if') || '').trim();
+          el.removeAttribute('data-cell-if');
           if (expression === '' || !this.evaluateTableCondition(expression, rowData)) {
             el.remove();
           }

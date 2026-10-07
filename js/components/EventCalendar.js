@@ -1089,6 +1089,48 @@ const EventCalendar = {
   },
 
   /**
+   * Icon class of an event. The value comes from the API and ends up in a
+   * class attribute, so only class names made of letters, digits, '-' and '_'
+   * are kept.
+   *
+   * @param {*} value - e.g. 'icon-car'
+   * @returns {string|null}
+   */
+  normalizeIconClass(value) {
+    if (typeof value !== 'string') {
+      return null;
+    }
+    const classes = value.trim().split(/\s+/).filter(name => /^[A-Za-z0-9_-]+$/.test(name));
+    return classes.length ? classes.join(' ') : null;
+  },
+
+  /**
+   * Icon markup placed in front of an event title ('' when the event has none).
+   *
+   * @param {Object} event - Normalized event
+   * @returns {string}
+   */
+  eventIconHtml(event) {
+    return event?.icon ? `<span class="ec-event-icon ${event.icon}" aria-hidden="true"></span>` : '';
+  },
+
+  /**
+   * Put the event icon in front of the text of a title element built with the DOM API.
+   *
+   * @param {HTMLElement} titleEl
+   * @param {Object} event - Normalized event
+   */
+  prependEventIcon(titleEl, event) {
+    if (!event?.icon) {
+      return;
+    }
+    const icon = document.createElement('span');
+    icon.className = `ec-event-icon ${event.icon}`;
+    icon.setAttribute('aria-hidden', 'true');
+    titleEl.prepend(icon);
+  },
+
+  /**
    * Normalize events data
    */
   normalizeEvents(events, config = this.config) {
@@ -1180,6 +1222,10 @@ const EventCalendar = {
         category: event.category || null,
         description: event.description || null,
         location: event.location || null,
+        // Calendars that merge several sources tell them apart with an icon,
+        // and each source opens its own record on click (overrides onEventClickApi)
+        icon: this.normalizeIconClass(event.icon),
+        clickApi: typeof event.clickApi === 'string' && event.clickApi !== '' ? event.clickApi : null,
         data: event // Keep original data
       };
     }).filter(event => event !== null); // Remove null events
@@ -1464,6 +1510,7 @@ const EventCalendar = {
     const titleEl = document.createElement('span');
     titleEl.className = 'ec-day-event-title';
     titleEl.textContent = this.getMonthCellEventLabel(event, date);
+    this.prependEventIcon(titleEl, event);
 
     eventEl.title = this.getMonthCellEventTitle(event, date, instance.config.locale);
     eventEl.appendChild(titleEl);
@@ -2167,6 +2214,7 @@ const EventCalendar = {
       const title = document.createElement('span');
       title.className = 'ec-event-title';
       title.textContent = segment.event.title;
+      this.prependEventIcon(title, segment.event);
       bar.appendChild(title);
 
       container.appendChild(bar);
@@ -2321,7 +2369,7 @@ const EventCalendar = {
 
       eventEl.innerHTML = `
         <div class="ec-event-time">${this.formatTime(start)} - ${this.formatTime(end)}</div>
-        <div class="ec-event-title">${this.escapeHtml(event.title)}</div>
+        <div class="ec-event-title">${this.eventIconHtml(event)}${this.escapeHtml(event.title)}</div>
       `;
 
       // Click handler now handled by delegation
@@ -2364,7 +2412,7 @@ const EventCalendar = {
         eventEl.className = 'ec-allday-event';
         eventEl.dataset.eventId = event.id; // Add event ID for delegation
         eventEl.style.backgroundColor = event.color;
-        eventEl.innerHTML = `<div class="ec-event-title">${this.escapeHtml(event.title)}</div>`;
+        eventEl.innerHTML = `<div class="ec-event-title">${this.eventIconHtml(event)}${this.escapeHtml(event.title)}</div>`;
         eventEl.title = event.title;
         // Click handler now handled by delegation
         allDaySection.appendChild(eventEl);
@@ -2442,8 +2490,10 @@ const EventCalendar = {
       element: instance.element
     });
 
-    if (config.onEventClickApi) {
-      this.processEventClickApi(instance, eventData);
+    // An event's own clickApi wins over the calendar-wide one (merged calendars)
+    const clickApi = eventData?.clickApi || config.onEventClickApi;
+    if (clickApi) {
+      this.processEventClickApi(instance, eventData, clickApi);
     }
 
     // Custom callback
@@ -2452,17 +2502,21 @@ const EventCalendar = {
       return;
     }
 
-    if (!config.onEventClickApi) {
+    if (!clickApi) {
       this.showEventDetailModal(instance, eventData);
     }
   },
 
   /**
-   * Execute the configured event click API and pass the payload to ResponseHandler.
+   * Execute the event click API and pass the payload to ResponseHandler.
+   *
+   * @param {Object} instance
+   * @param {Object} eventData
+   * @param {string} [template] - URL template, default config.onEventClickApi
    */
-  async processEventClickApi(instance, eventData) {
+  async processEventClickApi(instance, eventData, template = instance.config.onEventClickApi) {
     try {
-      const url = this.buildEventActionUrl(instance.config.onEventClickApi, eventData);
+      const url = this.buildEventActionUrl(template, eventData);
       const context = {
         element: instance.element,
         data: eventData,
@@ -3239,7 +3293,7 @@ const EventCalendar = {
 
     return `
       <div class="ec-modal-event${staticClass}"${eventIdAttr} style="border-left-color: ${event.color || this.config.eventColors[0]}">
-        <div class="ec-modal-event-title">${title}</div>
+        <div class="ec-modal-event-title">${this.eventIconHtml(event)}${title}</div>
         ${timeText ? `<div class="ec-modal-event-time">${this.escapeHtml(timeText)}</div>` : ''}
         ${description}
       </div>
