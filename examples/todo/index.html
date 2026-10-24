@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo Application - Now.js Example</title>
+  <meta name="description" content="Learn how to build a complete todo application with Now.js. Explore state management, computed properties, data persistence, and advanced event handling.">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>Todo Application</h1>
+        <p class="text-gradient" data-i18n>A complete demonstration of state management, computed properties, data persistence, and advanced event handling in Now.js</p>
+      </div>
+    </section>
+    <article class="container content" data-component="todo">
+      <!-- Live Demo Section -->
+      <section class="section">
+        <h2 class="icon-published1" data-i18n>Live Demo</h2>
+        <div class="demo-section">
+          <div class="todo-app">
+            <div class="todo-header">
+              <div class="todo-input">
+                <input type="text" data-model="newTodo" placeholder="What needs to be done?" data-on="keyup.enter:addTodo">
+                <button class="btn btn-primary icon-add" data-on="click:addTodo">Add Todo</button>
+              </div>
+            </div>
+
+            <div class="todo-filters">
+              <button data-class="active:filter === 'all'" data-on="click:setFilter('all')">All</button>
+              <button data-class="active:filter === 'active'" data-on="click:setFilter('active')">Active</button>
+              <button data-class="active:filter === 'completed'" data-on="click:setFilter('completed')">Completed</button>
+            </div>
+
+            <div class="todo-list" data-for="todo of filteredTodos">
+              <template>
+                <label class="todo-item">
+                  <input type="checkbox" data-checked="todo.completed" data-on="change:toggleTodo(todo.id)">
+                  <span data-text="todo.text"></span>
+                  <button class="btn btn-danger icon-delete" data-on="click:removeTodo(todo.id)" aria-label="Delete"></button>
+                </label>
+              </template>
+            </div>
+
+            <div class="todo-footer">
+              <span data-text="remaining + ' items left'"></span>
+              <button class="btn outline" data-on="click:clearCompleted">Clear Completed</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Features Section -->
+      <section class="section">
+        <h2 class="icon-list" data-i18n>Key Features</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3 class="icon-power" data-i18n>Reactive State</h3>
+            <p data-i18n>Automatic UI updates when todos change. No manual DOM manipulation required.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-cog" data-i18n>Computed Properties</h3>
+            <p data-i18n>Filtered todo lists that automatically update based on state changes.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-compare" data-i18n>Data Persistence</h3>
+            <p data-i18n>LocalStorage integration keeps your todos saved between sessions.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="icon-exchange" data-i18n>Advanced Events</h3>
+            <p data-i18n>Keyboard shortcuts, method parameters, and declarative event binding.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Source Code Section -->
+      <section>
+        <h2 class="icon-code" data-i18n>Source Code</h2>
+
+        <div class="code-tabs" data-component="tabs">
+          <div class="tab-buttons">
+            <button class="tab-button active" data-tab="component">Component</button>
+            <button class="tab-button" data-tab="template">Template</button>
+            <button class="tab-button" data-tab="styles">Styles</button>
+          </div>
+
+          <div class="tab-content">
+            <!-- Component Code -->
+            <div class="tab-pane active" data-tab="component">
+              <pre><code data-component="syntaxhighlighter" data-language="javascript">// Todo Application Component
+                  Now.getManager('component').define('todo', {
+                  // Enable reactive state management
+                  reactive: true,
+
+                  // Component state
+                  state: {
+                  title: 'Todo Application',
+                  todos: [],
+                  remaining: 0,
+                  newTodo: '',
+                  filter: 'all'
+                  },
+
+                  // Computed properties - automatically update when dependencies change
+                  computed: {
+                  filteredTodos() {
+                  const {todos, filter} = this.state;
+                  if (filter === 'all') return todos;
+                  return todos.filter(todo =>
+                  filter === 'completed' ? todo.completed : !todo.completed
+                  );
+                  }
+                  },
+
+                  // Component methods
+                  methods: {
+                  addTodo() {
+                  if (!this.state.newTodo.trim()) return;
+
+                  this.state.todos.push({
+                  id: Utils.generateUUID(),
+                  text: this.state.newTodo,
+                  completed: false
+                  });
+
+                  this.state.newTodo = '';
+                  this.methods.saveTodos();
+                  },
+
+                  toggleTodo(id) {
+                  const todo = this.state.todos.find(t => t.id === id);
+                  if (todo) {
+                  todo.completed = !todo.completed;
+                  this.methods.saveTodos();
+                  }
+                  },
+
+                  removeTodo(id) {
+                  this.state.todos = this.state.todos.filter(t => t.id !== id);
+                  this.methods.saveTodos();
+                  },
+
+                  clearCompleted() {
+                  this.state.todos = this.state.todos.filter(t => !t.completed);
+                  this.methods.saveTodos();
+                  },
+
+                  setFilter(filter) {
+                  this.state.filter = filter;
+                  },
+
+                  loadTodos() {
+                  const stored = localStorage.getItem('todos');
+                  if (stored) {
+                  this.state.todos = JSON.parse(stored);
+                  this.methods.updateRemaining();
+                  }
+                  },
+
+                  saveTodos() {
+                  localStorage.setItem('todos', JSON.stringify(this.state.todos));
+                  this.methods.updateRemaining();
+                  },
+
+                  updateRemaining() {
+                  this.state.remaining = this.state.todos.filter(
+                  todo => !todo.completed
+                  ).length;
+                  }
+                  },
+
+                  // Lifecycle hooks
+                  mounted() {
+                  this.methods.loadTodos();
+                  console.log('Todo component mounted');
+                  },
+
+                  // Global event handlers
+                  events: {
+                  'app:cleanup:end': function() {
+                  this.methods.saveTodos();
+                  console.log('Todos saved on cleanup');
+                  }
+                  }
+                  });</code></pre>
+            </div>
+
+            <!-- Template Code -->
+            <div class="tab-pane" data-tab="template">
+              <pre><code data-component="syntaxhighlighter" data-language="html">&lt;div class="todo-app" data-component="todo"&gt;
+                  &lt;!-- Input section --&gt;
+                  &lt;div class="todo-header"&gt;
+                  &lt;div class="todo-input"&gt;
+                  &lt;input type="text"
+                  data-model="newTodo"
+                  placeholder="What needs to be done?"
+                  data-on="keyup.enter:addTodo"&gt;
+                  &lt;button data-on="click:addTodo"&gt;Add Todo&lt;/button&gt;
+                  &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Filter buttons --&gt;
+                  &lt;div class="todo-filters"&gt;
+                  &lt;button data-class="active:filter === 'all'"
+                  data-on="click:setFilter('all')"&gt;All&lt;/button&gt;
+                  &lt;button data-class="active:filter === 'active'"
+                  data-on="click:setFilter('active')"&gt;Active&lt;/button&gt;
+                  &lt;button data-class="active:filter === 'completed'"
+                  data-on="click:setFilter('completed')"&gt;Completed&lt;/button&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Todo list --&gt;
+                  &lt;div class="todo-list" data-for="todo of filteredTodos"&gt;
+                  &lt;template&gt;
+                  &lt;label class="todo-item"&gt;
+                  &lt;input type="checkbox"
+                  data-checked="todo.completed"
+                  data-on="change:toggleTodo(todo.id)"&gt;
+                  &lt;span data-text="todo.text"&gt;&lt;/span&gt;
+                  &lt;button data-on="click:removeTodo(todo.id)"&gt;Delete&lt;/button&gt;
+                  &lt;/label&gt;
+                  &lt;/template&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Footer --&gt;
+                  &lt;div class="todo-footer"&gt;
+                  &lt;span data-text="remaining + ' items left'"&gt;&lt;/span&gt;
+                  &lt;button data-on="click:clearCompleted"&gt;Clear Completed&lt;/button&gt;
+                  &lt;/div&gt;
+                  &lt;/div&gt;</code></pre>
+            </div>
+
+            <!-- Styles Code -->
+            <div class="tab-pane" data-tab="styles">
+              <pre><code data-component="syntaxhighlighter" data-language="css">
+                  .todo-app {
+                  max-width: 600px;
+                  margin: 0 auto;
+                  display: flex;
+                  flex-direction: column;
+                  gap: var(--space-2);
+                  }
+                  .todo-input {
+                  display: flex;
+                  gap: var(--space-2);
+                  }
+                  .todo-input input {
+                  flex: 1;
+                  }
+                  .todo-filters {
+                  display: flex;
+                  gap: var(--space-2);
+                  }
+                  .todo-filters button {
+                  flex: 1;
+                  padding: var(--space-2) var(--space-4);
+                  background: var(--color-surface-light);
+                  border: 1px solid var(--color-border);
+                  border-radius: var(--border-radius);
+                  color: var(--color-text-muted);
+                  }
+                  .todo-filters button.active {
+                  background: var(--color-primary);
+                  color: white;
+                  border-color: var(--color-primary);
+                  }
+                  .todo-item {
+                  display: flex;
+                  align-items: center;
+                  gap: var(--space-3);
+                  padding: var(--space-3);
+                  border-bottom: 1px solid var(--color-border);
+                  }
+                  .todo-item:last-child {
+                  border-bottom: none;
+                  }
+                  .todo-item input[type="checkbox"]:checked + span {
+                  text-decoration: line-through;
+                  color: var(--color-text-muted);
+                  }
+                  .todo-item span {
+                  flex: 1;
+                  }
+                  .todo-footer {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  color: var(--color-text-muted);
+                  font-size: var(--font-size-sm);
+                  }
+                </code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it Works Section -->
+      <section class="section">
+        <h2 class="icon-search" data-i18n>How It Works</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3 data-i18n>1. State Management</h3>
+            <p data-i18n>The todo app uses Now.js reactive state to track todos, filters, and input. When state changes, the UI automatically updates without manual DOM manipulation.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>2. Computed Properties</h3>
+            <p data-i18n>The <code>filteredTodos</code> computed property automatically recalculates when todos or filter changes, providing efficient reactive filtering.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>3. Event Handling</h3>
+            <p data-i18n>Click and keyboard events are handled using <code>data-on</code> attributes with method parameters, providing a clean, declarative way to bind events.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>4. Data Persistence</h3>
+            <p data-i18n>LocalStorage integration automatically saves and loads todos. The component uses lifecycle hooks to ensure data is persisted correctly.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>5. List Rendering</h3>
+            <p data-i18n>The <code>data-for</code> directive efficiently renders todo items, automatically updating the list when items are added, removed, or filtered.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3 data-i18n>6. Two-Way Binding</h3>
+            <p data-i18n>The <code>data-model</code> directive creates two-way binding for the input field, keeping the state and UI in perfect sync.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Next Steps Section -->
+      <section class="section">
+        <h2 class="icon-next" data-i18n>Next Steps</h2>
+        <div class="next-steps">
+          <a href="/docs/components/computed" class="next-step-card">
+            <h3 data-i18n>Computed Properties</h3>
+            <p data-i18n>Learn how to create efficient computed properties in Now.js</p>
+          </a>
+
+          <a href="/docs/components/lifecycle" class="next-step-card">
+            <h3 data-i18n>Component Lifecycle</h3>
+            <p data-i18n>Explore lifecycle hooks for initialization and cleanup</p>
+          </a>
+
+          <a href="/examples/counter" class="next-step-card">
+            <h3 data-i18n>Counter Example</h3>
+            <p data-i18n>See a simpler example focusing on basic reactive state</p>
+          </a>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

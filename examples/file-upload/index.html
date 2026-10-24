@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Upload - Now.js Example</title>
+  <meta name="description" content="Complete file upload examples with preview, drag & drop, sorting, and validation using Now.js Form component">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>File Upload</h1>
+        <p class="text-gradient" data-i18n>Complete file upload solution with preview, drag & drop, sorting, and validation</p>
+      </div>
+    </section>
+
+    <article class="container content">
+
+      <!-- Features Overview -->
+      <section class="section">
+        <h2 class="icon-info">Features Overview</h2>
+        <p>Now.js provides a powerful file upload component with the following capabilities:</p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>📤 Single & Multiple Upload</h3>
+            <p>Support for both single file and multiple file uploads</p>
+            <code>multiple</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>👁️ Live Preview</h3>
+            <p>Real-time preview of uploaded images and files</p>
+            <code>data-preview="true"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>🎯 Drag & Drop</h3>
+            <p>Intuitive drag and drop interface for file uploads</p>
+            <code>data-drag-drop="true"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>🔄 Sortable Files</h3>
+            <p>Reorder uploaded files by dragging</p>
+            <code>data-sortable="true"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>🗑️ Remove Files</h3>
+            <p>Delete uploaded files before submission</p>
+            <code>data-allow-remove-existing="true"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>✅ File Validation</h3>
+            <p>Validate file types using accept attribute</p>
+            <code>accept="image/*, application/pdf"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>🔗 File References</h3>
+            <p>Load existing files from URLs</p>
+            <code>data-file-reference="url"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>📊 Form Integration</h3>
+            <p>Seamless integration with Now.js Form component</p>
+            <code>data-form="settings"</code>
+          </div>
+        </div>
+      </section>
+
+      <!-- API Reference -->
+      <section class="section">
+        <h2 class="icon-code">API Reference</h2>
+        <p>File upload input attributes for customization:</p>
+
+        <div class="api-example">
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>data-preview</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Enable live preview of uploaded files</td>
+              </tr>
+              <tr>
+                <td><code>data-drag-drop</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Enable drag and drop functionality</td>
+              </tr>
+              <tr>
+                <td><code>data-sortable</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Allow reordering of uploaded files</td>
+              </tr>
+              <tr>
+                <td><code>data-allow-remove-existing</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Allow removal of existing uploaded files</td>
+              </tr>
+              <tr>
+                <td><code>data-file-reference</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>Field name for file URL reference (e.g., "url")</td>
+              </tr>
+              <tr>
+                <td><code>data-attr</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>Bind to data source (e.g., "value:files")</td>
+              </tr>
+              <tr>
+                <td><code>accept</code></td>
+                <td>string</td>
+                <td>*</td>
+                <td>Allowed file types (e.g., "image/*,application/pdf")</td>
+              </tr>
+              <tr>
+                <td><code>multiple</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Allow multiple file selection</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Code Examples -->
+      <section class="section">
+        <h2 class="icon-code">Code Examples</h2>
+
+        <h3>Example 1: Single File Upload with Preview</h3>
+        <p>Upload a single image file with live preview:</p>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+            &lt;input type="file"
+            name="avatar"
+            data-preview="true"
+            data-allow-remove-existing="true"
+            data-file-reference="url"
+            accept="image/*"&gt;
+          </code></pre>
+
+        <h3>Example 2: Multiple Files with Drag & Drop</h3>
+        <p>Upload multiple files with drag and drop support:</p>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+            &lt;input type="file"
+            name="files"
+            multiple
+            data-preview="true"
+            data-drag-drop="true"
+            data-allow-remove-existing="true"
+            accept="image/*,application/pdf"&gt;
+          </code></pre>
+
+        <h3>Example 3: Sortable File Upload</h3>
+        <p>Upload multiple files with sorting capability:</p>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+            &lt;input type="file"
+            name="files"
+            multiple
+            data-preview="true"
+            data-drag-drop="true"
+            data-sortable="true"
+            data-allow-remove-existing="true"
+            data-file-reference="url"&gt;
+          </code></pre>
+
+        <h3>Example 4: Loading Existing Files</h3>
+        <p>Load existing files from API using data binding:</p>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+            &lt;!-- HTML --&gt;
+            &lt;form data-form="settings"
+            data-load-api="settings.php"&gt;
+            &lt;input type="file"
+            name="files"
+            multiple
+            data-preview="true"
+            data-attr="value:files"
+            data-file-reference="url"&gt;
+            &lt;/form&gt;
+          </code></pre>
+        <pre><code data-component="syntaxhighlighter" data-language="javascript">
+            // API Response Format (settings.php)
+            {
+            "data": {
+            "files": [
+            {
+            "url": "files/sample.jpg",
+            "name": "sample.jpg"
+            },
+            {
+            "url": "files/document.pdf",
+            "name": "document.pdf"
+            }
+            ]
+            }
+            }
+          </code></pre>
+
+        <h3>Example 5: Form Submission</h3>
+        <p>Complete form with AJAX submission:</p>
+        <pre><code data-component="syntaxhighlighter" data-language="javascript">
+            &lt;form method="POST"
+            action="save-settings.php"
+            data-form="settings"
+            data-validate="true"
+            data-ajax-submit="true"
+            data-load-api="settings.php"&gt;
+
+            &lt;input type="text" name="name" required&gt;
+
+            &lt;input type="file"
+            name="avatar"
+            data-preview="true"
+            data-attr="value:avatar"
+            data-file-reference="url"
+            accept="image/*"&gt;
+
+            &lt;button type="submit"&gt;Submit&lt;/button&gt;
+            &lt;/form&gt;
+          </code></pre>
+      </section>
+
+      <!-- Live Demo Section -->
+      <section class="section">
+        <h2 class="icon-published1">Live Demo</h2>
+        <p>Try the complete file upload form with all features enabled:</p>
+        <div class="demo-section">
+          <form method="POST" action="save-settings.php" data-form="settings" data-validate="true" data-csrf="false" data-reset="false" data-ajax-submit="true" data-load-api="settings.php" data-confirm="Save settings?">
+            <fieldset>
+              <legend>
+                <h3>User Details</h3>
+              </legend>
+              <div>
+                <label for="register_name">Name Surname</label>
+                <span class="form-control icon-customer">
+                  <input type="text" id="register_name" name="name" data-attr="value:name" required>
+                </span>
+              </div>
+              <div class="item">
+                <label for="register_avatar">Avatar (Single File)</label>
+                <span class="form-control icon-image">
+                  <input type="file" id="register_avatar" name="avatar" data-files="avatar" data-preview="true" data-allow-remove-existing="true" data-file-reference="url" accept="image/*" placeholder="Browse image uploaded, type jpg, jpeg, png, webp">
+                </span>
+                <div id="result_register_avatar" class="comment">Browse image uploaded, type jpg, jpeg, png, webp (resized automatically)</div>
+              </div>
+              <div class="item">
+                <label for="register_files">Other Files (Multiple Files with Drag & Drop + Sortable)</label>
+                <span class="form-control icon-upload">
+                  <input type="file" id="register_files" name="files" multiple data-preview="true" data-drag-drop="true" data-allow-remove-existing="true" data-file-reference="url" data-sortable="true" data-files="files" accept="image/*,application/pdf" placeholder="Browse files, type jpg, jpeg, png, webp, pdf">
+                </span>
+                <div id="result_register_files" class="comment">Browse files, type jpg, jpeg, png, webp, pdf. You can drag & drop and reorder files.</div>
+              </div>
+            </fieldset>
+            <fieldset class="submit right">
+              <button type="submit" class="btn btn-primary large icon-save">Submit Form</button>
+              <input type="hidden" name="id" id="register_id" value="1">
+            </fieldset>
+          </form>
+
+          <!-- Output Display (ResponseHandler will update this) -->
+          <div id="upload-output" class="output-section"></div>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
