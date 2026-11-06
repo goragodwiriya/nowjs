@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Manager Demo - Now.js Examples</title>
+  <meta name="description" content="Dynamic menu rendering from API data with Now.js MenuManager">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>MenuManager Demo</h1>
+        <p class="text-gradient" data-i18n>Dynamic menu rendering from API data with 2-level nested support</p>
+      </div>
+    </section>
+
+    <article class="container content">
+
+      <!-- Example 1: Static Menu -->
+      <section class="section">
+        <h2>Example 1: Static Menu (HTML)</h2>
+        <p>เมนูแบบ static ที่เขียน HTML โดยตรง ใช้ <code>data-component="menu"</code></p>
+
+        <div class="demo-section">
+          <nav class="topmenu" data-component="menu">
+            <ul>
+              <li><a href="#dashboard" class="icon-dashboard"><span>Dashboard</span></a></li>
+              <li>
+                <button type="button" class="icon-grid"><span>Sales</span></button>
+                <ul>
+                  <li><a href="#pipeline"><span>Pipeline</span></a></li>
+                  <li><a href="#deals"><span>Deals</span></a></li>
+                </ul>
+              </li>
+              <li><a href="#customers" class="icon-users"><span>Customers</span></a></li>
+              <li><a href="#settings" class="icon-settings"><span>Settings</span></a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="code-section">
+          <h3>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;nav class="topmenu" data-component="menu"&gt;
+              &lt;ul&gt;
+              &lt;li&gt;&lt;a href="#dashboard" class="icon-dashboard"&gt;&lt;span&gt;Dashboard&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;
+              &lt;button type="button" class="icon-grid"&gt;&lt;span&gt;Sales&lt;/span&gt;&lt;/button&gt;
+              &lt;ul&gt;
+              &lt;li&gt;&lt;a href="#pipeline"&gt;&lt;span&gt;Pipeline&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href="#deals"&gt;&lt;span&gt;Deals&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;&lt;a href="#customers"&gt;&lt;i class="icon-users"&gt;&lt;/i&gt;&lt;span&gt;Customers&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+              &lt;/nav&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 2: Dynamic Menu with JavaScript -->
+      <section class="section">
+        <h2>Example 2: Dynamic Menu with JavaScript</h2>
+        <p>ใช้ <code>MenuManager.renderFromData()</code> ในการ render เมนูจาก JavaScript</p>
+
+        <div class="controls">
+          <button id="renderMenu" class="button primary">Render Menu</button>
+          <button id="clearMenu" class="button">Clear</button>
+        </div>
+
+        <div class="demo-section">
+          <nav class="sidemenu" id="dynamicMenu"></nav>
+        </div>
+
+        <div class="code-section">
+          <h3>JavaScript Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">// Menu data structure
+              const menuData = [
+              { title: 'Dashboard', url: '/', icon: 'icon-dashboard' },
+              {
+              title: 'Sales',
+              icon: 'icon-grid',
+              children: [
+              { title: 'Pipeline', url: '/pipeline', icon: 'icon-chart' },
+              { title: 'Deals', url: '/deals', icon: 'icon-wallet' }
+              ]
+              },
+              { title: 'Customers', url: '/customers', icon: 'icon-users' },
+              { title: 'Settings', url: '/settings', icon: 'icon-settings' }
+              ];
+
+              // Render menu from data
+              MenuManager.renderFromData('#dynamicMenu', menuData);</code></pre>
+        </div>
+      </section>
+
+      <!-- Example 3: Dynamic Menu from API with data-source -->
+      <section class="section">
+        <h2>Example 3: Dynamic Menu from API (Declarative)</h2>
+        <p>ใช้ <code>data-component="api"</code> ร่วมกับ <code>data-source="path.to.menus"</code> เพื่อโหลดเมนูจาก API แบบ declarative</p>
+
+        <div class="demo-section" id="apiMenuContainer">
+          <div data-component="api" data-endpoint="api/menu.json" data-cache="true">
+            <div class="header-info">
+              <h3>App: <span data-text="data.app_name">Loading...</span></h3>
+            </div>
+            <nav class="sidemenu" data-component="menu" data-source="data.menus"></nav>
+          </div>
+        </div>
+
+        <div class="code-section">
+          <h3>HTML Code:</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="html">&lt;div data-component="api" data-endpoint="api/menu.json" data-cache="true"&gt;
+              &lt;div class="header-info"&gt;
+              &lt;h3&gt;App: &lt;span data-text="data.app_name"&gt;Loading...&lt;/span&gt;&lt;/h3&gt;
+              &lt;/div&gt;
+              &lt;!-- MenuManager auto-renders when API data arrives --&gt;
+              &lt;nav class="sidemenu" data-component="menu" data-source="data.menus"&gt;&lt;/nav&gt;
+              &lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="code-section">
+          <h3>API Response (api/menu.json):</h3>
+          <pre><code data-component="syntaxhighlighter" data-language="json">{
+              "app_name": "CRM System",
+              "logo": "CR",
+              "menus": [
+              { "title": "Dashboard", "url": "/", "icon": "icon-dashboard" },
+              {
+              "title": "Sales",
+              "icon": "icon-grid",
+              "children": [
+              { "title": "Pipeline", "url": "/pipeline", "icon": "icon-chart" },
+              { "title": "Deals", "url": "/deals", "icon": "icon-wallet" }
+              ]
+              },
+              { "title": "Customers", "url": "/customers", "icon": "icon-users" },
+              { "title": "Settings", "url": "/settings", "icon": "icon-settings" }
+              ]
+              }</code></pre>
+        </div>
+      </section>
+
+      <!-- Menu Data Structure Reference -->
+      <section class="section">
+        <h2>Menu Data Structure Reference</h2>
+        <p>โครงสร้างข้อมูลเมนูที่รองรับโดย <code>MenuManager.renderFromData()</code></p>
+
+        <div class="tablebody">
+          <table class="fullwidth border data">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Required</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>title</code></td>
+                <td>string</td>
+                <td>Yes</td>
+                <td>ข้อความที่แสดงในเมนู</td>
+              </tr>
+              <tr>
+                <td><code>url</code></td>
+                <td>string</td>
+                <td>No*</td>
+                <td>URL ปลายทาง (จำเป็นถ้าไม่มี children)</td>
+              </tr>
+              <tr>
+                <td><code>icon</code></td>
+                <td>string</td>
+                <td>No</td>
+                <td>CSS class ของ icon</td>
+              </tr>
+              <tr>
+                <td><code>children</code></td>
+                <td>array</td>
+                <td>No</td>
+                <td>รายการ submenu (รองรับสูงสุด 2 ระดับ)</td>
+              </tr>
+              <tr>
+                <td><code>badge</code></td>
+                <td>string</td>
+                <td>No</td>
+                <td>Badge text เช่น "New", "5"</td>
+              </tr>
+              <tr>
+                <td><code>badgeClass</code></td>
+                <td>string</td>
+                <td>No</td>
+                <td>CSS class สำหรับ badge</td>
+              </tr>
+              <tr>
+                <td><code>id</code></td>
+                <td>string</td>
+                <td>No</td>
+                <td>ID ของ li element</td>
+              </tr>
+              <tr>
+                <td><code>class</code></td>
+                <td>string</td>
+                <td>No</td>
+                <td>CSS class ของ li element</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- API Methods -->
+      <section class="section">
+        <h2>MenuManager API</h2>
+
+        <div class="method-card">
+          <h3><code>MenuManager.renderFromData(container, data, options)</code></h3>
+          <p>Render menu จาก array ของ menu items</p>
+          <div class="tablebody">
+            <table class="fullwidth border data">
+              <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>container</td>
+                <td>Element | string</td>
+                <td>Container element หรือ CSS selector</td>
+              </tr>
+              <tr>
+                <td>data</td>
+                <td>Array</td>
+                <td>Array ของ menu items</td>
+              </tr>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td>Options เพิ่มเติม (เช่น arrowIcon)</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="method-card">
+          <h3><code>MenuManager.setData(container, data, options)</code></h3>
+          <p>Alias ของ <code>renderFromData()</code></p>
+        </div>
+
+        <div class="method-card">
+          <h3><code>MenuManager.createMenu(element)</code></h3>
+          <p>Initialize เมนูที่มี HTML อยู่แล้ว พร้อม accessibility และ event handlers</p>
+        </div>
+
+        <div class="method-card">
+          <h3><code>MenuManager.updateActiveMenu(path)</code></h3>
+          <p>อัพเดท active state ตาม URL path ปัจจุบัน</p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

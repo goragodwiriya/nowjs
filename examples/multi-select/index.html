@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi Select - Now.js Example</title>
+  <meta name="description" content="Multiple selection dropdown examples with custom UI, keyboard navigation, and form integration using Now.js">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>Multi Select</h1>
+        <p class="text-gradient" data-i18n>Custom multiple selection dropdown with keyboard navigation and form integration</p>
+      </div>
+    </section>
+
+    <article class="container content">
+
+      <!-- Features Overview -->
+      <section class="section">
+        <h2 class="icon-info">Features Overview</h2>
+        <p>Now.js provides a powerful multi-select component that transforms native <code>&lt;select multiple&gt;</code> elements into beautiful, accessible dropdowns:</p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>🎯 Custom UI</h3>
+            <p>Beautiful dropdown with check/uncheck icons</p>
+            <code>&lt;select multiple&gt;</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>⌨️ Keyboard Navigation</h3>
+            <p>Full keyboard support with Arrow keys, Space, Tab, Escape</p>
+            <code>ArrowUp/Down, Space, Enter</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>📱 Accessible</h3>
+            <p>ARIA attributes for screen readers</p>
+            <code>role="listbox"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>🏷️ Smart Display</h3>
+            <p>Shows selected items with "+n items" overflow</p>
+            <code>data-max-display="2"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>📊 Form Integration</h3>
+            <p>Seamless integration with FormManager</p>
+            <code>data-form="myForm"</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>🔗 Dynamic Options</h3>
+            <p>Load options from API or JavaScript</p>
+            <code>data-options-key="items"</code>
+          </div>
+        </div>
+      </section>
+
+      <!-- API Reference -->
+      <section class="section">
+        <h2 class="icon-code">API Reference</h2>
+        <p>Multi-select attributes for customization:</p>
+
+        <div class="api-example">
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>multiple</code></td>
+                <td>boolean</td>
+                <td>-</td>
+                <td>Required. Enables multiple selection mode</td>
+              </tr>
+              <tr>
+                <td><code>data-placeholder</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>Placeholder text when no items selected</td>
+              </tr>
+              <tr>
+                <td><code>data-max-display</code></td>
+                <td>number</td>
+                <td>2</td>
+                <td>Max items to show before "+n items"</td>
+              </tr>
+              <tr>
+                <td><code>data-options-key</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>Key to extract options from API response</td>
+              </tr>
+              <tr>
+                <td><code>data-attr</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>Data binding (e.g., "value:selectedItems")</td>
+              </tr>
+              <tr>
+                <td><code>required</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Require at least one selection</td>
+              </tr>
+              <tr>
+                <td><code>disabled</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Disable the select element</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Code Examples -->
+      <section class="section">
+        <h2 class="icon-code">Code Examples</h2>
+
+        <h3>Example 1: Basic Multi Select</h3>
+        <p>Simple multiple selection with static options:</p>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+            &lt;select name="colors" multiple data-placeholder="Select colors..."&gt;
+            &lt;option value="red"&gt;Red&lt;/option&gt;
+            &lt;option value="green"&gt;Green&lt;/option&gt;
+            &lt;option value="blue"&gt;Blue&lt;/option&gt;
+            &lt;/select&gt;
+          </code></pre>
+
+        <h3>Example 2: With Form Integration</h3>
+        <p>Multi-select inside a form with validation:</p>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+            &lt;form data-form="myForm" data-validate="true"&gt;
+            &lt;label&gt;Select Categories&lt;/label&gt;
+            &lt;select name="categories" multiple required
+            data-placeholder="Choose categories..."&gt;
+            &lt;option value="tech"&gt;Technology&lt;/option&gt;
+            &lt;option value="health"&gt;Health&lt;/option&gt;
+            &lt;option value="sports"&gt;Sports&lt;/option&gt;
+            &lt;/select&gt;
+            &lt;button type="submit"&gt;Submit&lt;/button&gt;
+            &lt;/form&gt;
+          </code></pre>
+
+        <h3>Example 3: Dynamic Options from API</h3>
+        <p>Load options from API response:</p>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+            &lt;!-- HTML --&gt;
+            &lt;form data-form="locationForm" data-load-api="get-options.php"&gt;
+            &lt;select name="provinces" multiple
+            data-options-key="provinces"
+            data-placeholder="Select provinces..."&gt;
+            &lt;/select&gt;
+            &lt;/form&gt;
+          </code></pre>
+        <pre><code data-component="syntaxhighlighter" data-language="javascript">
+            // API Response Format (get-options.php)
+            {
+            "data": {
+            "provinces": [
+            {"value": "10", "text": "กรุงเทพมหานคร"},
+            {"value": "11", "text": "สมุทรปราการ"},
+            {"value": "12", "text": "นนทบุรี"}
+            ]
+            }
+            }
+          </code></pre>
+
+        <h3>Example 4: JavaScript API</h3>
+        <p>Programmatic control of multi-select:</p>
+        <pre><code data-component="syntaxhighlighter" data-language="javascript">
+            // Get instance
+            const selectEl = document.querySelector('select[name="colors"]');
+            const instance = ElementManager.getInstanceByElement(selectEl);
+
+            // Set values
+            instance.setValue(['red', 'blue']);
+
+            // Get selected values
+            const values = instance.getValue(); // ['red', 'blue']
+
+            // Update options dynamically
+            instance.updateOptions([
+            {value: 'purple', text: 'Purple'},
+            {value: 'orange', text: 'Orange'}
+            ]);
+
+            // Clear selection
+            instance.clear();
+          </code></pre>
+      </section>
+
+      <!-- Live Demo Section -->
+      <section class="section">
+        <h2 class="icon-published1">Live Demo</h2>
+        <p>Try the multi-select component with different configurations:</p>
+
+        <!-- Demo 1: Province Selection (Thailand) -->
+        <div class="demo-section">
+          <h3>Demo 1: Thai Address Selection</h3>
+          <p>Select multiple provinces, districts, and subdistricts from Thailand:</p>
+          <form method="POST" action="save-address.php" data-form="addressForm" data-validate="true" data-csrf="false" data-reset="false" data-ajax-submit="true"
+                data-load-api="get-options.php">
+            <fieldset>
+              <legend>
+                <h4>Select Locations</h4>
+              </legend>
+              <div>
+                <label for="addr_provinces">Provinces (จังหวัด)</label>
+                <span class="form-control icon-location">
+                  <select id="addr_provinces" name="provinces" multiple required data-options-key="provinces" data-attr="value:provinces" data-placeholder="Select provinces...">
+                  </select>
+                </span>
+                <div class="comment">Select one or more provinces</div>
+              </div>
+              <div>
+                <label for="addr_districts">Districts (อำเภอ/เขต)</label>
+                <span class="form-control icon-location">
+                  <select id="addr_districts" name="districts" multiple data-options-key="districts" data-attr="value:districts" data-placeholder="Select districts...">
+                  </select>
+                </span>
+                <div class="comment">Select one or more districts</div>
+              </div>
+              <div>
+                <label for="addr_subdistricts">Subdistricts (ตำบล/แขวง)</label>
+                <span class="form-control icon-location">
+                  <select id="addr_subdistricts" name="subdistricts" multiple data-options-key="subdistricts" data-attr="value:subdistricts"
+                          data-placeholder="Select subdistricts...">
+                  </select>
+                </span>
+                <div class="comment">Select one or more subdistricts</div>
+              </div>
+            </fieldset>
+            <fieldset class="submit right">
+              <button type="submit" class="btn btn-primary large icon-save">Save Selection</button>
+            </fieldset>
+          </form <div id="address-output" class="output-section">
+        </div>
+        </div>
+
+        <!-- Demo 2: Skills Selection -->
+        <div class="demo-section">
+          <h3>Demo 2: Skills Selection with Validation</h3>
+          <form id="skillsForm" data-form="skills" data-validate="true">
+            <fieldset>
+              <legend>
+                <h4>Select Your Skills</h4>
+              </legend>
+              <div>
+                <label for="demo3_skills">Programming Languages (required)</label>
+                <span class="form-control icon-code">
+                  <select id="demo3_skills" name="skills" multiple required data-placeholder="Select at least one skill...">
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                    <option value="java">Java</option>
+                    <option value="csharp">C#</option>
+                    <option value="php">PHP</option>
+                    <option value="ruby">Ruby</option>
+                    <option value="go">Go</option>
+                    <option value="rust">Rust</option>
+                    <option value="swift">Swift</option>
+                    <option value="kotlin">Kotlin</option>
+                  </select>
+                </span>
+                <div class="comment">Select at least one programming language</div>
+              </div>
+              <div>
+                <label for="demo3_frameworks">Frameworks (optional)</label>
+                <span class="form-control icon-stack">
+                  <select id="demo3_frameworks" name="frameworks" multiple data-placeholder="Select frameworks...">
+                    <option value="react">React</option>
+                    <option value="vue">Vue.js</option>
+                    <option value="angular">Angular</option>
+                    <option value="svelte">Svelte</option>
+                    <option value="nextjs">Next.js</option>
+                    <option value="nuxt">Nuxt.js</option>
+                    <option value="express">Express.js</option>
+                    <option value="django">Django</option>
+                    <option value="laravel">Laravel</option>
+                    <option value="spring">Spring Boot</option>
+                  </select>
+                </span>
+                <div class="comment">Optional: Select frameworks you know</div>
+              </div>
+            </fieldset>
+            <fieldset class="submit right">
+              <button type="submit" class="btn btn-primary icon-save">Validate & Submit</button>
+            </fieldset>
+          </form>
+        </div>
+      </section>
+
+      <!-- Keyboard Navigation -->
+      <section class="section">
+        <h2 class="icon-keyboard">Keyboard Navigation</h2>
+        <p>The multi-select component supports full keyboard navigation:</p>
+
+        <div class="keyboard-guide">
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><kbd>Enter</kbd> / <kbd>Space</kbd></td>
+                <td>Open dropdown (when trigger is focused)</td>
+              </tr>
+              <tr>
+                <td><kbd>↓</kbd> Arrow Down</td>
+                <td>Move highlight to next item</td>
+              </tr>
+              <tr>
+                <td><kbd>↑</kbd> Arrow Up</td>
+                <td>Move highlight to previous item</td>
+              </tr>
+              <tr>
+                <td><kbd>Space</kbd></td>
+                <td>Toggle selection of highlighted item</td>
+              </tr>
+              <tr>
+                <td><kbd>Tab</kbd> / <kbd>Escape</kbd></td>
+                <td>Close dropdown</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

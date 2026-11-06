@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DialogManager - Now.js Example</title>
+  <meta name="description" content="Complete guide to using DialogManager in Now.js">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>DialogManager</h1>
+        <p class="text-gradient" data-i18n>Powerful dialog system for alerts, confirmations, and prompts</p>
+      </div>
+    </section>
+
+    <div class="container content">
+
+      <!-- 1. Alert Dialog -->
+      <section class="section">
+        <h2>1. Alert Dialog</h2>
+        <p>Simple alert dialogs to notify users about important information.</p>
+
+        <div class="example-box">
+          <div class="button-group">
+            <button class="btn btn-primary" id="btn-alert-basic">Basic Alert</button>
+            <button class="btn btn-success" id="btn-alert-success">Success Alert</button>
+            <button class="btn btn-danger" id="btn-alert-error">Error Alert</button>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              // Basic Alert
+              await DialogManager.alert('This is a basic alert message', 'Alert');
+
+              // Success Alert
+              await DialogManager.alert(
+                'Operation completed successfully!',
+                'Success',
+                { customClass: 'dialog-success' }
+              );
+
+              // Error Alert
+              await DialogManager.alert(
+                'An error occurred. Please try again.',
+                'Error',
+                { customClass: 'dialog-error' }
+              );
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 2. Confirm Dialog -->
+      <section class="section">
+        <h2>2. Confirm Dialog</h2>
+        <p>Ask users to confirm actions before proceeding.</p>
+
+        <div class="example-box">
+          <div class="button-group">
+            <button class="btn btn-primary" id="btn-confirm-basic">Basic Confirm</button>
+            <button class="btn btn-danger" id="btn-confirm-delete">Delete Confirm</button>
+            <button class="btn btn-secondary" id="btn-confirm-unsaved">Unsaved Changes</button>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              // Basic Confirm
+              const confirmed = await DialogManager.confirm(
+                'Are you sure you want to proceed?',
+                'Confirm Action'
+              );
+
+              if (confirmed) {
+                console.log('User confirmed');
+              }
+
+              // Delete Confirmation
+              const deleteConfirmed = await DialogManager.confirm(
+                'This action cannot be undone. Are you sure?',
+                'Delete Item',
+                { customClass: 'dialog-danger' }
+              );
+
+              // Unsaved Changes
+              const saveConfirm = await DialogManager.confirm(
+                'You have unsaved changes. Do you want to save before leaving?',
+                'Unsaved Changes',
+                {
+                  buttons: {
+                    cancel: { text: 'Discard', class: 'text' },
+                    confirm: { text: 'Save Changes', class: 'btn-primary' }
+                  }
+                }
+              );
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 3. Prompt Dialog -->
+      <section class="section">
+        <h2>3. Prompt Dialog</h2>
+        <p>Get input from users with a simple dialog.</p>
+
+        <div class="example-box">
+          <div class="button-group">
+            <button class="btn btn-primary" id="btn-prompt-name">Ask Name</button>
+            <button class="btn btn-secondary" id="btn-prompt-email">Ask Email</button>
+            <button class="btn outline" id="btn-prompt-custom">Custom Prompt</button>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              // Ask Name
+              const name = await DialogManager.prompt(
+                'Please enter your name:',
+                'Guest',
+                'Welcome'
+              );
+
+              if (name !== null) {
+                console.log('Name:', name);
+              }
+
+              // Ask Email
+              const email = await DialogManager.prompt(
+                'Enter your email address:',
+                '',
+                'Email'
+              );
+
+              // Custom Prompt with Validation
+              const age = await DialogManager.prompt(
+                'Please enter your age:',
+                '18',
+                'Age Verification'
+              );
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 4. Custom Dialog -->
+      <section class="section">
+        <h2>4. Custom Dialog</h2>
+        <p>Create fully customized dialogs with HTML content, custom buttons, and callbacks.</p>
+
+        <div class="example-box">
+          <div class="button-group">
+            <button class="btn btn-primary" id="btn-custom-html">HTML Content</button>
+            <button class="btn btn-secondary" id="btn-custom-form">Form Dialog</button>
+            <button class="btn outline" id="btn-custom-loading">Loading Dialog</button>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              // HTML Content Dialog
+              DialogManager.custom({
+                title: 'Rich HTML Content',
+                message: `
+                  &lt;div class="custom-content"&gt;
+                    &lt;h3&gt;Welcome!&lt;/h3&gt;
+                    &lt;p&gt;This dialog supports &lt;strong&gt;HTML&lt;/strong&gt; content.&lt;/p&gt;
+                    &lt;ul&gt;
+                      &lt;li&gt;Bullet points&lt;/li&gt;
+                      &lt;li&gt;Formatted text&lt;/li&gt;
+                      &lt;li&gt;And more!&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/div&gt;
+                `,
+                buttons: {
+                  close: { text: 'Close', class: 'btn-primary' }
+                }
+              });
+
+              // Form Dialog
+              const formDialog = DialogManager.custom({
+                title: 'User Information',
+                message: `
+                  &lt;form id="user-form"&gt;
+                    &lt;div class="form-group"&gt;
+                      &lt;label&gt;Name&lt;/label&gt;
+                      &lt;input type="text" name="name" class="form-control"&gt;
+                    &lt;/div&gt;
+                    &lt;div class="form-group"&gt;
+                      &lt;label&gt;Email&lt;/label&gt;
+                      &lt;input type="email" name="email" class="form-control"&gt;
+                    &lt;/div&gt;
+                  &lt;/form&gt;
+                `,
+                buttons: {
+                  cancel: { text: 'Cancel', class: 'text' },
+                  submit: {
+                    text: 'Submit',
+                    class: 'btn-primary',
+                    callback: (dialog) => {
+                      const form = dialog.querySelector('#user-form');
+                      const data = new FormData(form);
+                      console.log('Form data:', Object.fromEntries(data));
+                    }
+                  }
+                }
+              });
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 5. Multiple Dialogs -->
+      <section class="section">
+        <h2>5. Multiple Dialogs</h2>
+        <p>Open multiple dialogs at the same time. Each new dialog stacks on top.</p>
+
+        <div class="example-box">
+          <div class="button-group">
+            <button class="btn btn-primary" id="btn-multi-stack">Stack Dialogs</button>
+            <button class="btn btn-secondary" id="btn-multi-cascade">Cascade Dialogs</button>
+            <button class="btn btn-danger" id="btn-close-all">Close All</button>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              // Stack multiple dialogs
+              DialogManager.alert('First dialog', 'Dialog 1');
+              setTimeout(() => {
+                DialogManager.alert('Second dialog', 'Dialog 2');
+              }, 500);
+              setTimeout(() => {
+                DialogManager.alert('Third dialog', 'Dialog 3');
+              }, 1000);
+
+              // Close all dialogs at once
+              DialogManager.closeAll();
+
+              // Bring specific dialog to front
+              DialogManager.bringToFront(dialog);
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 6. Draggable & Features -->
+      <section class="section">
+        <h2>6. Features Demo</h2>
+        <p>DialogManager comes with built-in features like dragging, keyboard support, and focus trap.</p>
+
+        <div class="example-box">
+          <div class="button-group">
+            <button class="btn btn-primary" id="btn-draggable">Draggable Dialog</button>
+            <button class="btn btn-secondary" id="btn-no-backdrop">No Backdrop Click</button>
+            <button class="btn outline" id="btn-custom-class">Custom Styling</button>
+          </div>
+        </div>
+
+        <div class="feature-list">
+          <h3>Built-in Features:</h3>
+          <ul>
+            <li><strong>Draggable:</strong> Drag dialogs by their header</li>
+            <li><strong>Focus Trap:</strong> Tab navigation stays within dialog</li>
+            <li><strong>Keyboard Support:</strong> ESC to close, Tab/Shift+Tab navigation</li>
+            <li><strong>Backdrop:</strong> Optional backdrop with click-to-close</li>
+            <li><strong>Multiple Dialogs:</strong> Stack multiple dialogs with proper z-index</li>
+            <li><strong>Animations:</strong> Smooth fade-in/out effects</li>
+            <li><strong>Accessibility:</strong> ARIA attributes and focus management</li>
+            <li><strong>Responsive:</strong> Works on all screen sizes</li>
+          </ul>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              // Draggable dialog
+              DialogManager.custom({
+                title: 'Drag Me!',
+                message: 'Try dragging this dialog by the header',
+                draggable: true,  // default is true
+                buttons: { close: { text: 'Close', class: 'btn-primary' } }
+              });
+
+              // Prevent closing by backdrop click
+              DialogManager.confirm(
+                'You must choose an option',
+                'Important',
+                { closeOnBackdrop: false }
+              );
+
+              // Custom styling
+              DialogManager.alert(
+                'This dialog has custom CSS',
+                'Styled Dialog',
+                { customClass: 'my-custom-dialog rainbow-border' }
+              );
+            </code></pre>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- 7. Events & Callbacks -->
+      <section class="section">
+        <h2>7. Events & Callbacks</h2>
+        <p>Listen to dialog events and use callbacks for custom behavior.</p>
+
+        <div class="example-box">
+          <button class="btn btn-primary" id="btn-events">Dialog with Events</button>
+        </div>
+
+        <div class="code-block">
+          <pre><code data-component="syntaxhighlighter" data-language="javascript">
+              // Using callbacks
+              const dialog = DialogManager.custom({
+                title: 'Event Demo',
+                message: 'Check the console for event logs',
+                onShow: (event) => {
+                  console.log('Dialog shown:', event.detail.dialog);
+                },
+                onClose: (event) => {
+                  console.log('Dialog closed:', event.detail.dialog);
+                },
+                buttons: {
+                  action: {
+                    text: 'Action',
+                    class: 'btn-primary',
+                    callback: (dialog) => {
+                      console.log('Action button clicked!');
+                    }
+                  }
+                }
+              });
+
+              // Using addEventListener
+              dialog.addEventListener('dialog:shown', (event) => {
+                console.log('Shown event fired');
+              });
+
+              dialog.addEventListener('dialog:closed', (event) => {
+                console.log('Closed event fired');
+              });
+            </code></pre>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
