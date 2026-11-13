@@ -1,0 +1,358 @@
+/**
+ * DialogManager Example Styles
+ */
+
+/* Custom Dialog Styles */
+.dialog-success .dialog-header {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.dialog-success .dialog-title {
+  color: white;
+}
+
+.dialog-success .dialog-close {
+  color: white;
+  opacity: 0.9;
+}
+
+.dialog-success .dialog-close:hover {
+  opacity: 1;
+}
+
+.dialog-error .dialog-header {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+}
+
+.dialog-error .dialog-title {
+  color: white;
+}
+
+.dialog-error .dialog-close {
+  color: white;
+  opacity: 0.9;
+}
+
+.dialog-error .dialog-close:hover {
+  opacity: 1;
+}
+
+.dialog-danger .dialog-header {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  color: white;
+}
+
+.dialog-danger .dialog-title {
+  color: white;
+}
+
+.dialog-danger .dialog-close {
+  color: white;
+  opacity: 0.9;
+}
+
+/* Rich Content Dialog */
+.dialog-rich-content .dialog-body {
+  padding: 2rem;
+}
+
+.custom-content h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.custom-content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.custom-content ul li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.custom-content ul li:last-child {
+  border-bottom: none;
+}
+
+.alert-info {
+  background: #dbeafe;
+  border-left: 4px solid #3b82f6;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 4px;
+}
+
+[data-theme="dark"] .alert-info {
+  background: rgba(59, 130, 246, 0.15);
+  border-left-color: #60a5fa;
+}
+
+/* Loading Dialog */
+.dialog-loading .dialog-body {
+  padding: 0;
+}
+
+.loading-content {
+  text-align: center;
+  padding: 2rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Custom Styled Dialog */
+.my-custom-dialog .dialog-header {
+  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+  color: white;
+}
+
+.my-custom-dialog .dialog-title {
+  color: white;
+}
+
+.my-custom-dialog .dialog-close {
+  color: white;
+  opacity: 0.9;
+}
+
+.rainbow-border {
+  border: 3px solid;
+  border-image: linear-gradient(
+    135deg,
+    #f97316,
+    #f59e0b,
+    #10b981,
+    #3b82f6,
+    #8b5cf6,
+    #ec4899
+  ) 1;
+  animation: rainbow 3s linear infinite;
+}
+
+@keyframes rainbow {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Feature List Styling */
+.feature-list {
+  background: var(--card-bg, #f9fafb);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  border: 1px solid var(--border-color, #e5e7eb);
+}
+
+.feature-list h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.feature-list ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.feature-list li {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.feature-list li:last-child {
+  margin-bottom: 0;
+}
+
+.feature-list strong {
+  color: var(--primary-color);
+}
+
+[data-theme="dark"] .feature-list {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Example Box Enhancements */
+.example-box {
+  background: var(--card-bg, #ffffff);
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  margin: 1.5rem 0;
+}
+
+[data-theme="dark"] .example-box {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.button-group {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Form Styling inside Dialogs */
+.dialog .form-control {
+  width: 100%;
+  padding: 0.625rem;
+  border: 1px solid var(--border-color, #d1d5db);
+  border-radius: 4px;
+  font-size: 1rem;
+  background: var(--input-bg, #ffffff);
+  color: var(--text-color);
+  transition: border-color 0.2s;
+}
+
+.dialog .form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+[data-theme="dark"] .dialog .form-control {
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.dialog .form-group {
+  margin-bottom: 1rem;
+}
+
+.dialog .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .button-group {
+    flex-direction: column;
+  }
+
+  .button-group .btn {
+    width: 100%;
+  }
+
+  .feature-list {
+    padding: 1rem;
+  }
+
+  .example-box {
+    padding: 1.5rem;
+  }
+}
+
+/* Dialog Dragging State */
+.dialog.dragging {
+  cursor: move;
+  opacity: 0.9;
+  transition: none;
+}
+
+.dialog.dragging .dialog-header {
+  cursor: move;
+}
+
+/* Dialog Animation States */
+.dialog {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.dialog.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.dialog.hiding {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+/* Additional Input Styles */
+.dialog-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--border-color, #e5e7eb);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: var(--input-bg, #ffffff);
+  color: var(--text-color);
+}
+
+.dialog-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+[data-theme="dark"] .dialog-input {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* Code Block Improvements */
+.code-block {
+  margin: 1.5rem 0;
+}
+
+.code-block pre {
+  margin: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Divider */
+.divider {
+  margin: 3rem 0;
+  border: none;
+  border-top: 1px solid var(--border-color, #e5e7eb);
+}
+
+[data-theme="dark"] .divider {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Section Spacing */
+.section {
+  margin-bottom: 3rem;
+}
+
+.section h2 {
+  margin-bottom: 0.75rem;
+  color: var(--heading-color);
+}
+
+.section > p {
+  margin-bottom: 1.5rem;
+  color: var(--text-muted);
+}

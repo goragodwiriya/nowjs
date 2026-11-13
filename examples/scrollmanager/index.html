@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One-Page Scrolling - Now.js Example</title>
+  <meta name="description" content="Explore ScrollManager features including smooth scrolling, parallax effects, waypoints, scroll progress, and section navigation in Now.js">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress"></div>
+
+  <!-- Fixed Navigation -->
+  <nav class="one-page-nav" data-scroll-nav>
+    <div class="nav-container">
+      <div class="nav-brand">
+        <span class="icon-rocket"></span>
+        <span>ScrollManager</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#hero" class="active">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#parallax">Parallax</a></li>
+        <li><a href="#waypoints">Waypoints</a></li>
+        <li><a href="#sections">Sections</a></li>
+        <li><a href="#demo">Demo</a></li>
+        <li><a href="#code">Code</a></li>
+      </ul>
+      <button class="nav-toggle icon-menu" aria-label="Toggle navigation"></button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <!-- Hero Section with Parallax -->
+    <section id="hero" class="hero-section" data-scroll-section data-scroll-reveal>
+      <div class="parallax-bg" data-parallax data-parallax-speed="0.5"></div>
+      <div class="hero-content">
+        <h1 class="hero-title" data-scroll-reveal data-scroll-reveal-delay="0">
+          One-Page Scrolling
+        </h1>
+        <p class="hero-subtitle" data-scroll-reveal data-scroll-reveal-delay="200">
+          Explore the powerful ScrollManager features in Now.js
+        </p>
+        <div class="hero-buttons" data-scroll-reveal data-scroll-reveal-delay="400">
+          <a href="#features" class="btn btn-primary large">
+            <span class="icon-search"></span> Explore Features
+          </a>
+          <a href="#demo" class="btn outline large">
+            <span class="icon-code"></span> View Demo
+          </a>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span class="icon-arrow-down"></span>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section" data-scroll-section>
+      <div class="container">
+        <h2 class="section-title" data-scroll-reveal>
+          <span class="icon-star"></span> Key Features
+        </h2>
+        <p class="section-subtitle" data-scroll-reveal data-scroll-reveal-delay="100">
+          Everything you need for modern scrolling experiences
+        </p>
+
+        <div class="feature-grid">
+          <div class="feature-card" data-scroll-reveal data-scroll-reveal-delay="0" data-scroll-waypoint>
+            <div class="feature-icon icon-move"></div>
+            <h3>Smooth Scrolling</h3>
+            <p>Customizable smooth scrolling with multiple easing functions and animation support.</p>
+          </div>
+
+          <div class="feature-card" data-scroll-reveal data-scroll-reveal-delay="100" data-scroll-waypoint>
+            <div class="feature-icon icon-published1"></div>
+            <h3>Waypoints</h3>
+            <p>Trigger actions when elements enter the viewport using Intersection Observer.</p>
+          </div>
+
+          <div class="feature-card" data-scroll-reveal data-scroll-reveal-delay="200" data-scroll-waypoint>
+            <div class="feature-icon icon-image"></div>
+            <h3>Parallax Effects</h3>
+            <p>Create depth and visual interest with configurable parallax backgrounds.</p>
+          </div>
+
+          <div class="feature-card" data-scroll-reveal data-scroll-reveal-delay="300" data-scroll-waypoint>
+            <div class="feature-icon icon-support"></div>
+            <h3>Scroll Progress</h3>
+            <p>Visual progress indicator showing scroll position in the page.</p>
+          </div>
+
+          <div class="feature-card" data-scroll-reveal data-scroll-reveal-delay="400" data-scroll-waypoint>
+            <div class="feature-icon icon-link"></div>
+            <h3>Section Navigation</h3>
+            <p>Automatic section highlighting and hash updates during scrolling.</p>
+          </div>
+
+          <div class="feature-card" data-scroll-reveal data-scroll-reveal-delay="500" data-scroll-waypoint>
+            <div class="feature-icon icon-mobile"></div>
+            <h3>Mobile Support</h3>
+            <p>Touch-optimized with momentum scrolling and mobile-specific features.</p>
+          </div>
+
+          <div class="feature-card" data-scroll-reveal data-scroll-reveal-delay="600" data-scroll-waypoint>
+            <div class="feature-icon icon-users"></div>
+            <h3>Accessibility</h3>
+            <p>ARIA support, keyboard navigation, and screen reader announcements.</p>
+          </div>
+
+          <div class="feature-card" data-scroll-reveal data-scroll-reveal-delay="700" data-scroll-waypoint>
+            <div class="feature-icon icon-power"></div>
+            <h3>Performance</h3>
+            <p>Optimized with RAF, throttling, debouncing, and efficient event handling.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Parallax Showcase Section -->
+    <section id="parallax" class="parallax-section" data-scroll-section>
+      <div class="parallax-layer parallax-bg-1" data-parallax data-parallax-speed="0.3"></div>
+      <div class="parallax-layer parallax-bg-2" data-parallax data-parallax-speed="0.6"></div>
+      <div class="container parallax-content">
+        <h2 class="section-title light" data-scroll-reveal>
+          <span class="icon-image"></span> Parallax Effects
+        </h2>
+        <p class="section-subtitle light" data-scroll-reveal data-scroll-reveal-delay="100">
+          Create stunning depth and visual interest
+        </p>
+        <div class="parallax-demo" data-scroll-reveal data-scroll-reveal-delay="200">
+          <div class="parallax-card" data-parallax data-parallax-speed="0.2">
+            <div class="parallax-card-inner">
+              <h3>Layer 1</h3>
+              <p>Speed: 0.2</p>
+            </div>
+          </div>
+          <div class="parallax-card" data-parallax data-parallax-speed="0.5">
+            <div class="parallax-card-inner">
+              <h3>Layer 2</h3>
+              <p>Speed: 0.5</p>
+            </div>
+          </div>
+          <div class="parallax-card" data-parallax data-parallax-speed="0.8">
+            <div class="parallax-card-inner">
+              <h3>Layer 3</h3>
+              <p>Speed: 0.8</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Waypoints Section -->
+    <section id="waypoints" class="waypoints-section" data-scroll-section>
+      <div class="container">
+        <h2 class="section-title" data-scroll-reveal>
+          <span class="icon-published1"></span> Waypoints Demo
+        </h2>
+        <p class="section-subtitle" data-scroll-reveal data-scroll-reveal-delay="100">
+          Elements animate when they enter the viewport
+        </p>
+
+        <div class="waypoints-demo">
+          <div class="waypoint-item fade-in-up" data-scroll-waypoint data-waypoint-animation="fade-in-up">
+            <span class="waypoint-number">01</span>
+            <h3>Fade In Up</h3>
+            <p>This element fades in and slides up when you scroll to it.</p>
+          </div>
+
+          <div class="waypoint-item fade-in-left" data-scroll-waypoint data-waypoint-animation="fade-in-left">
+            <span class="waypoint-number">02</span>
+            <h3>Fade In Left</h3>
+            <p>This element fades in from the left side.</p>
+          </div>
+
+          <div class="waypoint-item fade-in-right" data-scroll-waypoint data-waypoint-animation="fade-in-right">
+            <span class="waypoint-number">03</span>
+            <h3>Fade In Right</h3>
+            <p>This element fades in from the right side.</p>
+          </div>
+
+          <div class="waypoint-item scale-in" data-scroll-waypoint data-waypoint-animation="scale-in">
+            <span class="waypoint-number">04</span>
+            <h3>Scale In</h3>
+            <p>This element scales up from the center.</p>
+          </div>
+
+          <div class="waypoint-item rotate-in" data-scroll-waypoint data-waypoint-animation="rotate-in">
+            <span class="waypoint-number">05</span>
+            <h3>Rotate In</h3>
+            <p>This element rotates as it appears.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sections Highlight -->
+    <section id="sections" class="sections-demo" data-scroll-section>
+      <div class="container">
+        <h2 class="section-title" data-scroll-reveal>
+          <span class="icon-list"></span> Section Navigation
+        </h2>
+        <p class="section-subtitle" data-scroll-reveal data-scroll-reveal-delay="100">
+          Navigation highlights automatically as you scroll through sections
+        </p>
+
+        <div class="sections-info" data-scroll-reveal data-scroll-reveal-delay="200">
+          <div class="info-card">
+            <h3>Auto Hash Updates</h3>
+            <p>The URL hash updates automatically as you scroll through different sections.</p>
+          </div>
+          <div class="info-card">
+            <h3>Nav Highlighting</h3>
+            <p>Navigation links highlight to show which section is currently active.</p>
+          </div>
+          <div class="info-card">
+            <h3>Smooth Transitions</h3>
+            <p>Clicking navigation links smoothly scrolls to the target section.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Demo Section -->
+    <section id="demo" class="demo-section" data-scroll-section>
+      <div class="container">
+        <h2 class="section-title" data-scroll-reveal>
+          <span class="icon-play"></span> Interactive Demo
+        </h2>
+        <p class="section-subtitle" data-scroll-reveal data-scroll-reveal-delay="100">
+          Try the ScrollManager features yourself
+        </p>
+
+        <div class="demo-controls" data-scroll-reveal data-scroll-reveal-delay="200">
+          <div class="control-group">
+            <h3>Scroll Actions</h3>
+            <button class="btn btn-primary" onclick="ScrollManager.scrollToTop()">
+              <span class="icon-arrow-up"></span> Scroll to Top
+            </button>
+            <button class="btn btn-primary" onclick="ScrollManager.scrollToBottom()">
+              <span class="icon-arrow-down"></span> Scroll to Bottom
+            </button>
+            <button class="btn btn-primary" onclick="ScrollManager.scrollTo(document.getElementById('features'))">
+              <span class="icon-star"></span> Go to Features
+            </button>
+          </div>
+
+          <div class="control-group">
+            <h3>Progress Info</h3>
+            <div class="progress-info">
+              <div class="info-item">
+                <label>Scroll Position:</label>
+                <span id="scroll-position">0px</span>
+              </div>
+              <div class="info-item">
+                <label>Scroll Percent:</label>
+                <span id="scroll-percent">0%</span>
+              </div>
+              <div class="info-item">
+                <label>Active Section:</label>
+                <span id="active-section">hero</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h3>Events Log</h3>
+            <div class="events-log" id="events-log">
+              <div class="log-item">Scroll events will appear here...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code Examples Section -->
+    <section id="code" class="code-section" data-scroll-section>
+      <div class="container">
+        <h2 class="section-title" data-scroll-reveal>
+          <span class="icon-code"></span> Implementation
+        </h2>
+        <p class="section-subtitle" data-scroll-reveal data-scroll-reveal-delay="100">
+          Learn how to implement these features
+        </p>
+
+        <div class="code-tabs" data-component="tabs">
+          <div class="tab-buttons">
+            <button class="tab-button active" data-tab="basic">Basic Setup</button>
+            <button class="tab-button" data-tab="parallax-code">Parallax</button>
+            <button class="tab-button" data-tab="waypoints-code">Waypoints</button>
+            <button class="tab-button" data-tab="navigation">Navigation</button>
+            <button class="tab-button" data-tab="events">Events</button>
+          </div>
+
+          <div class="tab-content">
+            <!-- Basic Setup -->
+            <div class="tab-pane active" data-tab="basic">
+              <pre><code data-component="syntaxhighlighter" data-language="javascript">// Initialize ScrollManager with configuration
+                  ScrollManager.init({
+                  enabled: true,
+
+                  // Core settings
+                  core: {
+                  offset: 80, // Offset for fixed header
+                  duration: 800, // Animation duration
+                  easing: 'easeInOutCubic'
+                  },
+
+                  // Enable smooth scrolling
+                  smoothScroll: {
+                  enabled: true,
+                  selector: 'a[href^="#"]',
+                  hashChangeEnabled: true,
+                  autoScroll: true
+                  },
+
+                  // Scroll progress bar
+                  scroll: {
+                  progress: {
+                  enabled: true,
+                  color: 'var(--color-primary)',
+                  height: '3px'
+                  },
+
+                  // Section highlighting
+                  section: {
+                  highlight: true,
+                  threshold: 0.5,
+                  activeClass: 'active'
+                  },
+
+                  // Navigation updates
+                  nav: {
+                  updateHash: true,
+                  highlightClass: 'active',
+                  smoothScroll: true
+                  }
+                  }
+                  });</code></pre>
+            </div>
+
+            <!-- Parallax Code -->
+            <div class="tab-pane" data-tab="parallax-code">
+              <pre><code data-component="syntaxhighlighter" data-language="html">&lt;!-- HTML: Add data-parallax attribute --&gt;
+                  &lt;div class="parallax-bg"
+                  data-parallax
+                  data-parallax-speed="0.5"&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Multiple layers with different speeds --&gt;
+                  &lt;div class="layer-1" data-parallax data-parallax-speed="0.3"&gt;&lt;/div&gt;
+                  &lt;div class="layer-2" data-parallax data-parallax-speed="0.6"&gt;&lt;/div&gt;
+                  &lt;div class="layer-3" data-parallax data-parallax-speed="0.9"&gt;&lt;/div&gt;</code></pre>
+              <pre><code data-component="syntaxhighlighter" data-language="javascript">// JavaScript: Enable parallax in configuration
+                  ScrollManager.init({
+                  scroll: {
+                  parallax: {
+                  enabled: true,
+                  speed: 0.5 // Default speed
+                  }
+                  }
+                  });
+
+                  // Or initialize manually
+                  ScrollManager.initParallax();</code></pre>
+            </div>
+
+            <!-- Waypoints Code -->
+            <div class="tab-pane" data-tab="waypoints-code">
+              <pre><code data-component="syntaxhighlighter" data-language="html">&lt;!-- HTML: Add waypoint attributes --&gt;
+                  &lt;div data-scroll-waypoint
+                  data-waypoint-animation="fade-in-up"&gt;
+                  Content appears when scrolled into view
+                  &lt;/div&gt;
+
+                  &lt;!-- Reveal effect --&gt;
+                  &lt;div data-scroll-reveal
+                  data-scroll-reveal-delay="200"&gt;
+                  Revealed with delay
+                  &lt;/div&gt;</code></pre>
+              <pre><code data-component="syntaxhighlighter" data-language="javascript">// JavaScript: Add waypoint programmatically
+                  ScrollManager.addWaypoint(element, {
+                  offset: 0,
+                  threshold: 0.5,
+                  once: true,
+                  callback: (entry) => {
+                  console.log('Element is visible!', entry);
+                  element.classList.add('animated');
+                  }
+                  });
+
+                  // Listen to waypoint events
+                  ScrollManager.on('waypoint:trigger', ({ id, entry }) => {
+                  console.log(`Waypoint ${id} triggered`, entry);
+                  });</code></pre>
+            </div>
+
+            <!-- Navigation Code -->
+            <div class="tab-pane" data-tab="navigation">
+              <pre><code data-component="syntaxhighlighter" data-language="html">&lt;!-- HTML: Setup navigation --&gt;
+                  &lt;nav data-scroll-nav&gt;
+                  &lt;a href="#section1"&gt;Section 1&lt;/a&gt;
+                  &lt;a href="#section2"&gt;Section 2&lt;/a&gt;
+                  &lt;a href="#section3"&gt;Section 3&lt;/a&gt;
+                  &lt;/nav&gt;
+
+                  &lt;!-- Mark sections --&gt;
+                  &lt;section id="section1" data-scroll-section&gt;
+                  Section 1 content
+                  &lt;/section&gt;
+
+                  &lt;section id="section2" data-scroll-section&gt;
+                  Section 2 content
+                  &lt;/section&gt;</code></pre>
+              <pre><code data-component="syntaxhighlighter" data-language="javascript">// JavaScript: Programmatic scrolling
+                  // Scroll to element
+                  ScrollManager.scrollTo(element, {
+                  offset: 80,
+                  duration: 800,
+                  easing: 'easeInOutCubic'
+                  });
+
+                  // Scroll to top
+                  ScrollManager.scrollToTop();
+
+                  // Scroll to bottom
+                  ScrollManager.scrollToBottom();
+
+                  // Get current position
+                  const position = ScrollManager.getScrollPosition();</code></pre>
+            </div>
+
+            <!-- Events Code -->
+            <div class="tab-pane" data-tab="events">
+              <pre><code data-component="syntaxhighlighter" data-language="javascript">// Listen to scroll events
+                  ScrollManager.on('scroll:start', () => {
+                  console.log('Scrolling started');
+                  });
+
+                  ScrollManager.on('scroll:end', () => {
+                  console.log('Scrolling ended');
+                  });
+
+                  ScrollManager.on('section:active', ({ id }) => {
+                  console.log('Active section:', id);
+                  });
+
+                  ScrollManager.on('waypoint:trigger', ({ id, entry }) => {
+                  console.log('Waypoint triggered:', id, entry);
+                  });
+
+                  ScrollManager.on('scroll:progress', ({ percent, position }) => {
+                  console.log(`Scrolled ${percent}% (${position}px)`);
+                  });
+
+                  // Custom scroll tracking
+                  ScrollManager.on('scroll:update', ({
+                  position,
+                  direction,
+                  percent
+                  }) => {
+                  // Update UI based on scroll
+                  updateScrollIndicator(percent);
+                  });</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section" data-scroll-section>
+      <div class="container">
+        <div class="cta-content" data-scroll-reveal>
+          <h2>Ready to Build Amazing Scrolling Experiences?</h2>
+          <p>Explore the full documentation and start using ScrollManager in your projects</p>
+          <div class="cta-buttons">
+            <a href="/docs/en/ScrollManager.html" class="btn btn-primary large">
+              <span class="icon-book"></span> Read Documentation
+            </a>
+            <a href="/examples" class="btn outline large">
+              <span class="icon-grid"></span> More Examples
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <span class="icon-arrow-up"></span>
+  </button>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

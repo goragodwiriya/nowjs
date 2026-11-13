@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="โรงเรียนต้นแบบแห่งการเรียนรู้ - โรงเรียนที่มุ่งพัฒนาผู้เรียนให้มีคุณภาพครบทั้งด้านวิชาการและคุณธรรม">
+  <meta name="keywords" content="โรงเรียน, การศึกษา, ต้นแบบ, พัฒนาผู้เรียน, วิชาการ, คุณธรรม">
+  <!-- เพิ่ม CSRF token สำหรับระบบความปลอดภัย -->
+  <meta name="csrf-token" content="YOUR_CSRF_TOKEN_HERE">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <title>โรงเรียนต้นแบบแห่งการเรียนรู้</title>
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+  <link rel="stylesheet" href="../../Now/css/slideshow.css">
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="responsive wide">
+  <header class="site-header" data-scroll-section id="home">
+    <div class="backdrop"></div>
+    <div class="header-container container">
+      <div class="logo-container">
+        <img src="img/logo.png" alt="โรงเรียนต้นแบบแห่งการเรียนรู้" class="logo">
+        <div class="school-name">
+          <h1>โรงเรียนต้นแบบแห่งการเรียนรู้</h1>
+          <p>Excellence in Education</p>
+        </div>
+      </div>
+      <nav class="main-nav" id="main-nav">
+        <button class="menu-toggle" id="menu-toggle" aria-label="เปิด/ปิดเมนู">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" data-scroll-nav>
+          <li><a href="#home" class="active">หน้าหลัก</a></li>
+          <li><a href="#about">เกี่ยวกับเรา</a></li>
+          <li><a href="#programs">หลักสูตร</a></li>
+          <li><a href="#news">ข่าวสาร</a></li>
+          <li><a href="#activities">กิจกรรม</a></li>
+          <li><a href="#gallery">แกลเลอรี</a></li>
+          <li><a href="#contact">ติดต่อเรา</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" data-scroll-section>
+      <div class="hero-slider" data-component="slideshow" data-effect="fade" data-duration="5000" data-speed="1000" data-controls="true" data-indicators="true" data-autoplay="true" data-loop="true" data-adaptive-height="false">
+        <!-- สไลด์ที่ 1 -->
+        <div class="slideshow-bg slide slide-1">
+          <div class="container">
+            <div class="slide-content animate-in">
+              <h2>สร้างอนาคตที่สดใส</h2>
+              <p>พัฒนาทักษะแห่งศตวรรษที่ 21 เพื่อความสำเร็จในโลกที่เปลี่ยนแปลงไป</p>
+              <a href="#about" class="btn btn-primary large">เรียนรู้เพิ่มเติม</a>
+            </div>
+          </div>
+        </div>
+        `
+        <!-- สไลด์ที่ 2 -->
+        <div class="slideshow-bg slide slide-2">
+          <div class="container">
+            <div class="slide-content animate-in">
+              <h2>เรียนรู้ไปด้วยกัน</h2>
+              <p>ค้นพบการเรียนรู้ที่เต็มไปด้วยความสนุกและความท้าทาย</p>
+              <a href="#programs" class="btn btn-primary large">หลักสูตรของเรา</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- สไลด์ที่ 3 -->
+        <div class="slideshow-bg slide slide-3">
+          <div class="container">
+            <div class="slide-content animate-in">
+              <h2>สร้างพลเมืองคุณภาพ</h2>
+              <p>พัฒนาทั้งความรู้ ทักษะ และคุณธรรมอย่างสมดุล</p>
+              <a href="#contact" class="btn btn-primary large">สมัครเรียน</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="announcement">
+      <marquee class="announcement-wrapper" behavior="scroll" direction="both" scrollamount="5" onmouseover="this.stop();" onmouseout="this.start();">
+        <div class="announcement-list" data-component="api" data-endpoint="api/announcements" data-method="GET" data-cache="true" data-cache-time="60000" data-for="item of data">
+          <template>
+            <a data-attr="class:'announcement-link ' + item.priority">
+              <span class="announcement-icon icon-news" data-text="item.date">DATE</span>
+              <span class="announcement-text" data-text="item.title">TITLE</span>
+            </a>
+          </template>
+        </div>
+      </marquee>
+    </section>
+
+    <section id="about" class="about" data-scroll-section>
+      <div class="container">
+        <div class="section-header">
+          <h2>เกี่ยวกับเรา</h2>
+          <p class="subtitle">โรงเรียนต้นแบบแห่งการเรียนรู้ - โรงเรียนแห่งคุณภาพ</p>
+        </div>
+
+        <div class="about-content flex">
+          <div class="about-image" data-scroll-reveal="fade-right">
+            <img src="img/3.webp" alt="อาคารเรียน" class="rounded shadow">
+          </div>
+          <div class="about-text" data-scroll-reveal="fade-left">
+            <h3>ประวัติโรงเรียน</h3>
+            <p>โรงเรียนต้นแบบแห่งการเรียนรู้ก่อตั้งขึ้นเมื่อปี พ.ศ. 2530 ด้วยปณิธานอันแน่วแน่ที่จะพัฒนาการศึกษาของไทยให้ก้าวหน้าทัดเทียมนานาชาติ</p>
+            <p>ตลอดระยะเวลากว่า 30 ปี โรงเรียนของเราได้มุ่งมั่นสร้างสรรค์และพัฒนานวัตกรรมทางการศึกษา เพื่อให้นักเรียนทุกคนได้รับการศึกษาที่มีคุณภาพสูงสุด</p>
+
+            <h3>วิสัยทัศน์</h3>
+            <p>"มุ่งสร้างพลเมืองที่มีความรู้คู่คุณธรรม นำนวัตกรรม พร้อมเป็นพลโลกที่มีคุณภาพในศตวรรษที่ 21"</p>
+
+            <h3>พันธกิจ</h3>
+            <ul>
+              <li>พัฒนาผู้เรียนให้มีทักษะวิชาการและทักษะชีวิตอย่างสมดุล</li>
+              <li>ส่งเสริมคุณธรรม จริยธรรม และค่านิยมที่พึงประสงค์</li>
+              <li>สร้างสภาพแวดล้อมที่เอื้อต่อการเรียนรู้อย่างมีความสุข</li>
+              <li>สนับสนุนการพัฒนานวัตกรรมทางการศึกษาอย่างต่อเนื่อง</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="stats-container">
+          <div class="stat-card bg-gradient-blue" data-scroll-reveal="scale-in">
+            <div class="stat-icon icon-customer notext"></div>
+            <div class="stat-value" data-component="counter" data-scroll-trigger="true" data-end="1250"></div>
+            <div class="stat-label">นักเรียน</div>
+          </div>
+          <div class="stat-card bg-gradient-green" data-scroll-reveal="scale-in" data-delay="200">
+            <div class="stat-icon icon-doctor notext"></div>
+            <div class="stat-value" data-component="counter" data-scroll-trigger="true" data-end="85"></div>
+            <div class="stat-label">คณาจารย์</div>
+          </div>
+          <div class="stat-card bg-gradient-purple" data-scroll-reveal="scale-in" data-delay="400">
+            <div class="stat-icon icon-win notext"></div>
+            <div class="stat-value" data-component="counter" data-scroll-trigger="true" data-end="120"></div>
+            <div class="stat-label">รางวัลความสำเร็จ</div>
+          </div>
+          <div class="stat-card bg-gradient-orange" data-scroll-reveal="scale-in" data-delay="600">
+            <div class="stat-icon icon-heart notext"></div>
+            <div class="stat-value" data-component="counter" data-scroll-trigger="true" data-end="30"></div>
+            <div class="stat-label">ปีแห่งความเป็นเลิศ</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="programs" class="programs-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <h2 class="section-title">หลักสูตรการเรียน</h2>
+          <p class="section-subtitle">เรียนรู้หลักสูตรพิเศษที่เรามุ่งเน้นพัฒนาศักยภาพนักเรียน</p>
+        </div>
+
+        <div class="tab-container" id="program-tabs">
+          <div class="filter-controls" data-filter-scope=".news-grid" data-filter-attr="data-category">
+            <button class="filter-btn active" data-filter-value="*">ทั้งหมด</button>
+            <button class="filter-btn" data-filter-value="middle">มัธยมศึกษาตอนต้น</button>
+            <button class="filter-btn" data-filter-value="high">มัธยมศึกษาตอนปลาย</button>
+            <button class="filter-btn" data-filter-value="special">หลักสูตรพิเศษ</button>
+          </div>
+
+          <div data-component="api" data-endpoint="api/programs.json" data-method="GET" data-cache="true" data-cache-time="60000">
+            <div class="news-grid" data-for="item of data">
+              <template>
+                <article class="news-card" data-attr="data-category:item.category" data-scroll-reveal>
+                  <div class="news-image">
+                    <img data-attr="src:item.image,alt:item.title">
+                  </div>
+                  <div class="news-content">
+                    <h3 class="news-title" data-text="item.title"></h3>
+                    <p class="news-excerpt" data-text="item.description"></p>
+                    <a class="button small outline" data-attr="href:item.link || '#'">อ่านเพิ่มเติม</a>
+                  </div>
+                </article>
+              </template>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="cta parallax-section">
+      <div class="container">
+        <div class="cta-content" data-scroll-reveal="fade-up">
+          <h2>ร่วมเป็นส่วนหนึ่งของชุมชนการเรียนรู้ของเรา</h2>
+          <p>เปิดรับสมัครนักเรียนใหม่ประจำปีการศึกษา 2568 แล้ววันนี้</p>
+          <div class="cta-buttons">
+            <a href="#contact" class="button blue large">สมัครเรียน</a>
+            <a href="#" class="button orange outline large" data-modal="download-brochure">ดาวน์โหลดแผ่นพับ</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="news" class="news" data-scroll-section>
+      <div class="container">
+        <div class="section-header">
+          <h2>ข่าวสารและประชาสัมพันธ์</h2>
+          <p class="subtitle">ติดตามข่าวสารและกิจกรรมล่าสุดของโรงเรียน</p>
+        </div>
+
+        <div data-component="api" data-endpoint="api/news" data-method="GET" data-cache="true" data-cache-time="60000">
+          <div class="news-grid" data-for="item of data">
+            <template>
+              <article class="news-card" data-scroll-reveal>
+                <div class="news-image">
+                  <img data-attr="src:item.image,alt:item.title">
+                </div>
+                <div class="news-content">
+                  <div class="news-date">
+                    <i class="icon-calendar"></i>
+                    <span data-text="item.date"></span>
+                  </div>
+                  <h3 class="news-title" data-text="item.title"></h3>
+                  <p class="news-excerpt" data-text="item.excerpt"></p>
+                  <a class="button small outline" data-attr="href:item.link || '#'">อ่านเพิ่มเติม</a>
+                </div>
+              </article>
+            </template>
+          </div>
+
+        </div>
+
+        <div class="text-center">
+          <button class="btn outline" data-load-more data-target="news-grid" data-page-size="3">โหลดเพิ่มเติม</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="activities" class="activities" data-scroll-section>
+      <div class="container">
+        <div class="section-header">
+          <h2>กิจกรรมเด่น</h2>
+          <p class="subtitle">กิจกรรมหลากหลายเพื่อพัฒนาผู้เรียนรอบด้าน</p>
+        </div>
+
+        <div class="activities-tabs" data-event-target="tab-panel">
+          <div class="filter-controls" data-filter-scope=".activity-grid" data-filter-attr="data-category" data-filter-animation="fade">
+            <button class="filter-btn active" data-filter-value="*">ทั้งหมด</button>
+            <button class="filter-btn" data-filter-value="academic">วิชาการ</button>
+            <button class="filter-btn" data-filter-value="sports">กีฬา</button>
+            <button class="filter-btn" data-filter-value="arts">ศิลปะ</button>
+            <button class="filter-btn" data-filter-value="clubs">ชมรม</button>
+            <button class="filter-btn" data-filter-value="social">จิตอาสา</button>
+          </div>
+
+          <div class="tabs-content">
+            <div class="tab-panel" id="social-panel" data-component="api" data-endpoint="api/activities.json" data-method="GET" data-filter='{"category":"social"}' data-cache="true" data-cache-time="60000" data-lazy-load="true">
+              <div class="activity-grid" data-for="item of data">
+                <template>
+                  <div class="activity-card" data-attr="data-category:item.category" data-scroll-reveal>
+                    <div class="activity-image">
+                      <img data-attr="src:item.image,alt:item.title">
+                    </div>
+                    <div class="activity-content">
+                      <h3 class="activity-title" data-text="item.title"></h3>
+                      <div class="activity-date">
+                        <i class="icon-calendar"></i>
+                        <span data-text="item.date"></span>
+                      </div>
+                      <p class="activity-description" data-text="item.description"></p>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="gallery" data-scroll-section>
+      <div class="container">
+        <div class="section-header">
+          <h2>แกลเลอรี</h2>
+          <p class="subtitle">ภาพบรรยากาศและกิจกรรมต่างๆ ของโรงเรียน</p>
+        </div>
+
+        <div data-component="api" data-endpoint="api/gallery.json" data-method="GET" data-cache="true" data-cache-time="60000">
+          <!-- Filter Controls -->
+          <div class="filter-controls" data-filter-scope=".gallery-grid" data-filter-attr="data-category" data-filter-animation="fade">
+            <button class="filter-btn active" data-filter-value="*">ทั้งหมด</button>
+            <button class="filter-btn" data-filter-value="events">กิจกรรมพิเศษ</button>
+            <button class="filter-btn" data-filter-value="culture">วัฒนธรรม</button>
+            <button class="filter-btn" data-filter-value="sports">กีฬา</button>
+            <button class="filter-btn" data-filter-value="academic">วิชาการ</button>
+            <button class="filter-btn" data-filter-value="activities">กิจกรรมเสริม</button>
+            <button class="filter-btn" data-filter-value="trips">ทัศนศึกษา</button>
+          </div>
+
+          <!-- Gallery Grid -->
+          <div class="gallery-grid" data-for="item of data">
+            <template>
+              <div class="gallery-item" data-attr="data-category:item.category,data-image:item.image,data-title:item.title,data-description:item.description" data-scroll-reveal>
+                <img data-attr="src:item.thumbnail,alt:item.title" class="gallery-image">
+                <div class="gallery-overlay">
+                  <button type="button" class="gallery-view-btn icon-search" data-modal="lightbox-modal" data-modal-bind="image:item.image, title:item.title, desc:item.description" data-modal-gallery="true" aria-label="ดูรูปภาพ">
+                  </button>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image Modal -->
+      <div class="modal" id="image-modal" aria-hidden="true">
+        <div class="modal-content">
+          <button class="modal-close btn-close" aria-label="ปิด"></button>
+          <div class="modal-body">
+            <img data-modal-target="image" src="" alt="" id="modal-image">
+            <div class="modal-caption">
+              <h3 data-modal-target="title"></h3>
+              <p data-modal-target="desc"></p>
+            </div>
+          </div>
+          <div class="modal-controls">
+            <button class="modal-prev" data-modal-nav="prev" aria-label="รูปก่อนหน้า">&lsaquo;</button>
+            <button class="modal-next" data-modal-nav="next" aria-label="รูปถัดไป">&rsaquo;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="testimonials" data-scroll-section>
+      <div class="container">
+        <div class="section-header">
+          <h2>เสียงจากผู้ปกครองและนักเรียน</h2>
+          <p class="subtitle">ความประทับใจจากครอบครัวของเรา</p>
+        </div>
+
+        <div class="testimonial-slider" data-component="slideshow" data-effect="slide" data-controls="false" data-autoplay="true" data-duration="6000">
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-quote">"โรงเรียนนี้เป็นมากกว่าสถานที่เรียนหนังสือ แต่เป็นบ้านหลังที่สองที่ช่วยหล่อหลอมลูกของเราให้เติบโตอย่างมีคุณภาพ ครูทุกคนใส่ใจดูแลเด็กๆ อย่างดีเยี่ยม"</div>
+              <div class="testimonial-author">
+                <img src="img/1.webp" alt="คุณแม่น้ำใจ" class="testimonial-avatar">
+                <div class="author-info">
+                  <div class="author-name">คุณแม่น้ำใจ</div>
+                  <div class="author-role">ผู้ปกครองนักเรียนชั้น ป.4</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-quote">"ผมได้เรียนรู้และพัฒนาตัวเองมากมายจากกิจกรรมหลากหลายที่โรงเรียนจัดให้ ครูทุกท่านเปิดโอกาสให้เราได้แสดงความคิดเห็นและลงมือปฏิบัติจริง"</div>
+              <div class="testimonial-author">
+                <img src="img/2.webp" alt="นายภูมิ" class="testimonial-avatar">
+                <div class="author-info">
+                  <div class="author-name">นายภูมิ</div>
+                  <div class="author-role">นักเรียนชั้น ม.5</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-quote">"เป็นโรงเรียนที่สร้างสมดุลระหว่างวิชาการและกิจกรรมได้ดีมาก ลูกของเราเรียนอย่างมีความสุข มีเพื่อนดี และมีพัฒนาการที่น่าภูมิใจ"</div>
+              <div class="testimonial-author">
+                <img src="img/3.webp" alt="คุณพ่อประเสริฐ" class="testimonial-avatar">
+                <div class="author-info">
+                  <div class="author-name">คุณพ่อประเสริฐ</div>
+                  <div class="author-role">ผู้ปกครองนักเรียนชั้น ม.2</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact" data-scroll-section>
+      <div class="container">
+        <div class="section-header">
+          <h2>ติดต่อเรา</h2>
+          <p class="subtitle">สอบถามข้อมูลเพิ่มเติมหรือนัดหมายเข้าเยี่ยมชมโรงเรียน</p>
+        </div>
+
+        <div class="contact-content">
+          <div class="contact-info">
+            <div class="contact-card">
+              <div class="contact-card-header">
+                <div class="contact-icon icon-map"></div>
+                <h3>ที่อยู่</h3>
+              </div>
+              <div class="contact-card-content">
+                <p>123 ถนนสุขุมวิท แขวงพระโขนง</p>
+                <p>เขตคลองเตย กรุงเทพฯ 10110</p>
+              </div>
+            </div>
+
+            <div class="contact-card">
+              <div class="contact-card-header">
+                <div class="contact-icon icon-phone notext"></div>
+                <h3>โทรศัพท์</h3>
+              </div>
+              <div class="contact-card-content">
+                <p>02-123-4567</p>
+                <p>02-123-4568</p>
+              </div>
+            </div>
+
+            <div class="contact-card">
+              <div class="contact-card-header">
+                <div class="contact-icon icon-email notext"></div>
+                <h3>อีเมล</h3>
+              </div>
+              <div class="contact-card-content">
+                <p>info@schoolexample.ac.th</p>
+                <p>admission@schoolexample.ac.th</p>
+              </div>
+            </div>
+
+            <div class="contact-card">
+              <div class="contact-card-header">
+                <div class="contact-icon icon-clock notext"></div>
+                <h3>เวลาทำการ</h3>
+              </div>
+              <div class="contact-card-content">
+                <p>จันทร์-ศุกร์: 7:30 - 16:30 น.</p>
+                <p>เสาร์: 8:30 - 12:00 น. (เฉพาะฝ่ายธุรการ)</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form-container">
+            <form class="contact-form" data-form="contact" data-csrf="false" data-reset-after-submit="true" method="POST" action="api/contact">
+              <h3>ส่งข้อความถึงเรา</h3>
+
+              <div class="form-group">
+                <label for="contact_name" data-i18n>Name <span class="required">*</span></label>
+                <span class="form-control icon-customer">
+                  <input type="text" id="contact_name" name="name">
+                </span>
+              </div>
+
+              <div class="form-group">
+                <label for="contact_email" data-i18n>Email <span class="required">*</span></label>
+                <span class="form-control icon-email">
+                  <input type="email" id="contact_email" name="email">
+                </span>
+              </div>
+
+              <div class="form-group">
+                <label for="contact_phone" data-i18n>Phone</label>
+                <span class="form-control icon-phone">
+                  <input type="tel" id="contact_phone" name="phone">
+                </span>
+              </div>
+
+              <div class="form-group">
+                <label for="contact_subject">เรื่องที่ติดต่อ <span class="required">*</span></label>
+                <span class="form-control icon-menus">
+                  <select id="contact_subject" name="subject" required>
+                    <option value="">-- โปรดเลือก --</option>
+                    <option value="admission">สอบถามการรับสมัคร</option>
+                    <option value="curriculum">สอบถามหลักสูตร</option>
+                    <option value="visit">นัดหมายเยี่ยมชมโรงเรียน</option>
+                    <option value="other">อื่นๆ</option>
+                  </select>
+                </span>
+              </div>
+
+              <div class="form-group">
+                <label for="contact_message" data-i18n>Message <span class="required">*</span></label>
+                <span class="form-control">
+                  <textarea id="contact_message" name="message" rows="5"></textarea>
+                </span>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary large" data-i18n>Send Message</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="school-map">
+          <h3>แผนที่โรงเรียน</h3>
+          <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.7275126426675!2d100.56724481483097!3d13.722478290355112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29f0b5553da97%3A0xe0afb0a2b51d6a48!2sClinic%20Building%2C%20Faculty%20of%20Medicine%2C%20Chulalongkorn%20University!5e0!3m2!1sen!2sth!4v1621835913050!5m2!1sen!2sth" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-widgets">
+          <div class="footer-widget">
+            <div class="footer-logo">
+              <img src="img/logo.png" alt="โรงเรียนต้นแบบแห่งการเรียนรู้" class="logo-footer">
+              <h3>โรงเรียนต้นแบบแห่งการเรียนรู้</h3>
+            </div>
+            <p class="footer-description">โรงเรียนคุณภาพที่มุ่งพัฒนาผู้เรียนให้มีความสามารถทั้งด้านวิชาการและคุณธรรม พร้อมก้าวสู่โลกในศตวรรษที่ 21</p>
+            <div class="social-links">
+              <a href="#" class="social-link notext icon-facebook" aria-label="Facebook"></a>
+              <a href="#" class="social-link notext icon-youtube" aria-label="YouTube"></a>
+              <a href="#" class="social-link notext icon-line" aria-label="LINE"></a>
+              <a href="#" class="social-link notext icon-instagram" aria-label="Instagram"></a>
+            </div>
+          </div>
+
+          <div class="footer-widget">
+            <h4>เมนูลัด</h4>
+            <ul class="footer-links">
+              <li><a href="#home">หน้าหลัก</a></li>
+              <li><a href="#about">เกี่ยวกับเรา</a></li>
+              <li><a href="#programs">หลักสูตร</a></li>
+              <li><a href="#news">ข่าวสาร</a></li>
+              <li><a href="#activities">กิจกรรม</a></li>
+              <li><a href="#gallery">แกลเลอรี</a></li>
+              <li><a href="#contact">ติดต่อเรา</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-widget">
+            <h4>บริการ</h4>
+            <ul class="footer-links">
+              <li><a href="#">ตารางเรียน</a></li>
+              <li><a href="#">ปฏิทินกิจกรรม</a></li>
+              <li><a href="#">ระบบบริหารการศึกษา</a></li>
+              <li><a href="#">สมัครเรียน</a></li>
+              <li><a href="#">ร้องเรียน/แนะนำ</a></li>
+              <li><a href="#">นโยบายความเป็นส่วนตัว</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-widget">
+            <h4>ข่าวสารล่าสุด</h4>
+            <ul class="footer-news" data-component="api" data-endpoint="api/news" data-method="GET" data-cache="true" data-cache-time="60000">
+              <li data-for="item of data.slice(0, 3)">
+                <template>
+                  <a href="#" data-attr="href:item.link || '#'">
+                    <span class="footer-news-date" data-text="item.date"></span>
+                    <span class="footer-news-title" data-text="item.title"></span>
+                  </a>
+                </template>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="copyright">
+          <p>&copy; 2568 โรงเรียนต้นแบบแห่งการเรียนรู้ สงวนลิขสิทธิ์</p>
+        </div>
+      </div>
+    </div>
+
+    <button id="scroll-top" aria-label="เลื่อนขึ้นด้านบน" class="scroll-top-button">
+      <span class="arrow-up">↑</span>
+    </button>
+  </footer>
+
+  <!-- Modals -->
+  <div class="modal" id="download-brochure" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close btn-close" aria-label="ปิด"></button>
+      <div class="modal-header">
+        <h3>ดาวน์โหลดแผ่นพับ</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form" id="brochure-form" data-form="brochure" data-validate="true">
+          <div class="form-group">
+            <label for="brochure_name">ชื่อ-นามสกุล <span class="required">*</span></label>
+            <span class="form-control icon-customer">
+              <input type="text" id="brochure_name" name="brochure_name" required>
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="brochure_email">อีเมล <span class="required">*</span></label>
+            <span class="form-control icon-email">
+              <input type="email" id="brochure_email" name="brochure_email" required>
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="brochure_phone">เบอร์โทรศัพท์</label>
+            <span class="form-control icon-phone">
+              <input type="tel" id="brochure_phone" name="brochure_phone">
+            </span>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="button blue">ดาวน์โหลดเอกสาร</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Lightbox Modal (Demonstrating Custom Design) -->
+  <div class="modal modal-lightbox" id="lightbox-modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close btn-close" aria-label="ปิด"></button>
+      <div class="lightbox-body">
+        <img data-modal-target="image" src="" alt="">
+        <div class="lightbox-caption">
+          <h3 data-modal-target="title"></h3>
+          <p data-modal-target="desc"></p>
+        </div>
+      </div>
+      <button class="modal-prev" data-modal-nav="prev" aria-label="รูปก่อนหน้า">&lsaquo;</button>
+      <button class="modal-next" data-modal-nav="next" aria-label="รูปถัดไป">&rsaquo;</button>
+    </div>
+  </div>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <!-- Custom application script -->
+  <script src="js/app.js"></script>
+</body>
+
+</html>

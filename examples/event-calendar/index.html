@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EventCalendar Example | Now.js</title>
+  <meta name="description" content="EventCalendar Example">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+  <link rel="stylesheet" href="../../Now/dist/eventcalendar.min.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/styles.css">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>EventCalendar</h1>
+        <p class="text-gradient" data-i18n>Full-featured event calendar with multi-day spanning events</p>
+      </div>
+    </section>
+    <div class="container">
+      <!-- Basic Example -->
+      <section class="demo-section">
+        <h2>Basic Example</h2>
+        <p>A simple calendar with inline events data.</p>
+
+        <div id="basic-calendar" data-event-calendar data-view="month" data-locale="th" data-first-day="0">
+        </div>
+      </section>
+
+      <!-- With API -->
+      <section class="demo-section">
+        <h2>API Integration</h2>
+        <p>Load events from API endpoint.</p>
+
+        <div id="api-calendar" data-event-calendar data-view="month" data-locale="en" data-api="api/events.php" data-show-view-switcher="true" data-views="month,week,day">
+        </div>
+
+        <div class="note">
+          <strong>Note:</strong> This example uses mock data. Configure <code>data-api</code> to your events API.
+        </div>
+      </section>
+
+      <!-- Controls -->
+      <section class="demo-section">
+        <h2>Programmatic Control</h2>
+
+        <div class="controls">
+          <button id="btn-add-event" class="btn btn-primary">Add Event</button>
+          <button id="btn-today" class="btn">Go to Today</button>
+          <button id="btn-refresh" class="btn">Refresh Events</button>
+          <select id="view-select">
+            <option value="month">Month View</option>
+            <option value="week">Week View</option>
+            <option value="day">Day View</option>
+          </select>
+          <select id="locale-select">
+            <option value="th">ไทย</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+
+        <div id="controlled-calendar"></div>
+      </section>
+
+      <!-- Event Listeners -->
+      <section class="demo-section">
+        <h2>Event Log</h2>
+        <div id="event-log" class="event-log">
+          <div class="log-entry">Waiting for events...</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <!-- EventCalendar Component -->
+  <script src="../../Now/dist/eventcalendar.min.js"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
