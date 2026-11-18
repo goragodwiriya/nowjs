@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern SPA - Now.js Example</title>
+  <meta name="description" content="Beautiful modern Single Page Application built with Now.js - No custom JavaScript required">
+
+  <!-- SEO -->
+  <meta name="keywords" content="Now.js, SPA, Single Page Application, JavaScript Framework, Data Attributes">
+  <meta name="author" content="Now.js Framework">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Modern SPA - Now.js Example">
+  <meta property="og:description" content="Beautiful modern Single Page Application built with Now.js">
+  <meta property="og:type" content="website">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar" data-component="menu">
+    <div class="nav-container">
+      <a href="/" class="nav-logo" data-route="/">
+        <span class="logo-icon icon-clock"></span>
+        <span class="logo-text">Now<span class="logo-accent">.js</span></span>
+      </a>
+
+      <nav class="topmenu responsive-menu" data-component="menu">
+        <ul>
+          <li><a href="" class="nav-link" data-route="/"><span class="icon-home">Home</span></a></li>
+          <li><a href="about" class="nav-link" data-route="/about"><span class="icon-user">About</span></a></li>
+          <li><a href="portfolio" class="nav-link" data-route="/portfolio"><span class="icon-profile">Portfolio</span></a></li>
+          <li><a href="contact" class="nav-link" data-route="/contact"><span class="icon-addressbook">Contact</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/goragodwiriya/nowjs" target="_blank" class="nav-link"><span class="icon-github">GitHub</span></a>
+        <button class="menu-toggle topmenu-toggle" aria-label="Toggle menu">
+          <span class="toggle-icon">
+            <span class="toggle-bar"></span>
+            <span class="toggle-bar"></span>
+            <span class="toggle-bar"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main" role="main" class="main-content">
+    <!-- Router will inject content here -->
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3 class="footer-title">Now.js Framework</h3>
+          <p class="footer-description">
+            Build modern web applications without writing JavaScript.
+            Use data attributes to create powerful, interactive experiences.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="/" data-route="/">Home</a></li>
+            <li><a href="/about" data-route="/about">About</a></li>
+            <li><a href="/portfolio" data-route="/portfolio">Portfolio</a></li>
+            <li><a href="/contact" data-route="/contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Connect</h4>
+          <div class="social-links">
+            <a href="https://github.com" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
+              <span>📦</span>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" class="social-link" aria-label="Twitter">
+              <span>🐦</span>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+              <span>💼</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Now.js Framework. Built with ❤️ using data attributes.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <!-- Custom application script -->
+  <script src="main.js"></script>
+</body>
+
+</html>

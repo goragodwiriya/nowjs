@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cascading Select - Now.js Example</title>
+  <meta name="description" content="Cascading dropdown select for Thai address (Province → District → Subdistrict) using Now.js SelectElementFactory">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <!-- Header Section -->
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>Cascading Select</h1>
+        <p class="text-gradient" data-i18n>Thai address selection with cascading dropdowns (Province → District → Subdistrict)</p>
+      </div>
+    </section>
+
+    <article class="container content">
+
+      <!-- Features Overview -->
+      <section class="section">
+        <h2 class="icon-info">Features Overview</h2>
+        <p>Cascading Select provides dependent dropdown selection where choosing a parent option updates child options:</p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>🔗 Dependent Selection</h3>
+            <p>Child select updates when parent changes</p>
+            <code>onChange → loadOptions</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>📦 Dynamic Loading</h3>
+            <p>Load options from API based on parent value</p>
+            <code>api/v1/address/amphurs?province=10</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>⌨️ Type-to-Filter</h3>
+            <p>Type to quickly find options in long lists</p>
+            <code>typeToFilter: true</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>🏷️ Placeholder Support</h3>
+            <p>Show placeholder when no selection made</p>
+            <code>data-placeholder="Select..."</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>📱 Responsive</h3>
+            <p>Works well on mobile and desktop</p>
+            <code>Native select behavior</code>
+          </div>
+
+          <div class="feature-card">
+            <h3>🔄 Auto-Clear</h3>
+            <p>Child selects are cleared when parent changes</p>
+            <code>Automatic cascade reset</code>
+          </div>
+        </div>
+      </section>
+
+      <!-- API Reference -->
+      <section class="section">
+        <h2 class="icon-code">API Reference</h2>
+        <p>Select element attributes for cascading behavior:</p>
+
+        <div class="api-example">
+          <table class="api-table border fullwidth">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Element</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>data-cascade-api</code></td>
+                <td><code>&lt;form&gt;</code></td>
+                <td>Centralized API endpoint for all cascade updates</td>
+              </tr>
+              <tr>
+                <td><code>data-load-api</code></td>
+                <td><code>&lt;form&gt;</code></td>
+                <td>API endpoint to load initial form data and options</td>
+              </tr>
+              <tr>
+                <td><code>data-cascade-source</code></td>
+                <td><code>&lt;select&gt;</code></td>
+                <td>Field identifier sent to API when changed (e.g. "province")</td>
+              </tr>
+              <tr>
+                <td><code>data-options-key</code></td>
+                <td><code>&lt;select&gt;</code></td>
+                <td>Key in API response <code>options</code> object to populate this select</td>
+              </tr>
+              <tr>
+                <td><code>name</code></td>
+                <td>string</td>
+                <td>Form field name</td>
+              </tr>
+              <tr>
+                <td><code>data-placeholder</code></td>
+                <td>string</td>
+                <td>Placeholder text (creates disabled first option)</td>
+              </tr>
+              <tr>
+                <td><code>data-cascade-parent</code></td>
+                <td><code>&lt;select&gt;</code></td>
+                <td>(Legacy) Name of parent select element for direct linking</td>
+              </tr>
+              <tr>
+                <td><code>data-cascade-url</code></td>
+                <td><code>&lt;select&gt;</code></td>
+                <td>(Legacy) URL to load options for individual select</td>
+              </tr>
+              <tr>
+                <td><code>data-cascade-param</code></td>
+                <td>string</td>
+                <td>Parameter name for parent value (default: parent name)</td>
+              </tr>
+              <tr>
+                <td><code>required</code></td>
+                <td>boolean</td>
+                <td>Make field required</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>REST Endpoints</h3>
+        <p>The demo API needs no database: provinces come from <code>Kotchasan\Province</code>, districts and subdistricts from a JSON file. Every response uses the standard envelope <code>{success, message, code, data, errors, request_id}</code> with a matching HTTP status.</p>
+        <div class="api-example">
+          <table class="api-table border fullwidth">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Endpoint</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>GET</code></td>
+                <td><code>api/v1/address</code></td>
+                <td>Sample record with all options (<code>data-load-api</code>)</td>
+              </tr>
+              <tr>
+                <td><code>POST</code></td>
+                <td><code>api/v1/address</code></td>
+                <td>Validate and save an address (form submit) &mdash; <code>422</code> with field <code>errors</code> when invalid</td>
+              </tr>
+              <tr>
+                <td><code>POST</code></td>
+                <td><code>api/v1/address/cascade</code></td>
+                <td>Options and values after a select changes (<code>data-cascade-api</code>)</td>
+              </tr>
+              <tr>
+                <td><code>GET</code></td>
+                <td><code>api/v1/address/provinces</code></td>
+                <td>All provinces</td>
+              </tr>
+              <tr>
+                <td><code>GET</code></td>
+                <td><code>api/v1/address/amphurs?province=71</code></td>
+                <td>Districts of a province &mdash; <code>400</code> without <code>province</code>, <code>404</code> unknown id</td>
+              </tr>
+              <tr>
+                <td><code>GET</code></td>
+                <td><code>api/v1/address/districts?amphur=7101</code></td>
+                <td>Subdistricts of a district &mdash; <code>400</code> / <code>404</code></td>
+              </tr>
+              <tr>
+                <td><code>GET</code></td>
+                <td><code>api/v1/address/zipcode?district=710107</code></td>
+                <td>Zipcode of a subdistrict &mdash; <code>400</code> / <code>404</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>API Response Format</h3>
+        <p>The complete address API returns current data and all available options:</p>
+        <pre><code data-component="syntaxhighlighter" data-language="javascript">
+            {
+            "success": true,
+            "message": "Address data retrieved successfully",
+            "code": 200,
+            "data": {
+            "data": {
+            "province": "71",
+            "amphur": "7101",
+            "district": "710107",
+            "zipcode": "71190",
+            "address_detail": "999/9 moo 9"
+            },
+            "options": {
+            "provinces": [
+            {"value": 10, "text": "กรุงเทพมหานคร"},
+            {"value": 11, "text": "สมุทรปราการ"},
+            {"value": 12, "text": "นนทบุรี"},
+            {"value": 71, "text": "กาญจนบุรี"}
+            // ... all 77 provinces
+            ],
+            "amphurs": [
+            {"value": 7101, "text": "เมืองกาญจนบุรี"},
+            {"value": 7102, "text": "ไทรโยค"},
+            {"value": 7103, "text": "บ่อพลอย"}
+            // ... districts for selected province
+            ],
+            "districts": [
+            {"value": 710101, "text": "บ้านเหนือ"},
+            {"value": 710102, "text": "บ้านใต้"},
+            {"value": 710107, "text": "ลาดหญ้า"}
+            // ... sub-districts for selected amphur
+            ]
+            }
+            }
+            }
+          </code></pre>
+
+        <h4>Cascade API Response</h4>
+        <p>When a parent select changes, the cascade API returns updated data and options:</p>
+        <pre><code data-component="syntaxhighlighter" data-language="javascript">
+            // POST /v1/address/cascade
+            // Body (FormData): source=province, province=71, amphur=7101, district=710107
+
+            {
+            "success": true,
+            "message": "Cascade options loaded successfully",
+            "code": 200,
+            "data": {
+            "data": {
+            "province": "71",
+            "amphur": "",
+            "district": "",
+            "zipcode": ""
+            },
+            "options": {
+            "amphurs": [
+            {"value": 7101, "text": "เมืองกาญจนบุรี"},
+            {"value": 7102, "text": "ไทรโยค"}
+            ],
+            "districts": []
+            }
+            }
+            }
+          </code></pre>
+      </section>
+
+      <!-- Code Examples -->
+      <section class="section">
+        <h2 class="icon-code">Code Examples</h2>
+
+        <h3>Example 1: Centralized Cascade (Recommended)</h3>
+        <p>Use a single API endpoint to handle all cascade logic. This is cleaner and easier to maintain.</p>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+            &lt;form data-form="addressForm"
+            data-load-api="api/v1/address"
+            data-cascade-api="api/v1/address/cascade"&gt;
+
+            &lt;!-- Province --&gt;
+            &lt;select name="province"
+            data-cascade-source="province"
+            data-options-key="provinces"&gt;
+            &lt;option value="" data-placeholder="true" disabled selected&gt;-- เลือกจังหวัด --&lt;/option&gt;
+            &lt;/select&gt;
+
+            &lt;!-- District (Amphur) --&gt;
+            &lt;select name="amphur"
+            data-cascade-source="amphur"
+            data-options-key="amphurs"&gt;
+            &lt;option value="" data-placeholder="true" disabled selected&gt;-- เลือกอำเภอ --&lt;/option&gt;
+            &lt;/select&gt;
+
+            &lt;!-- Subdistrict (District) --&gt;
+            &lt;select name="district"
+            data-cascade-source="district"
+            data-options-key="districts"&gt;
+            &lt;option value="" data-placeholder="true" disabled selected&gt;-- เลือกตำบล --&lt;/option&gt;
+            &lt;/select&gt;
+            &lt;/form&gt;
+          </code></pre>
+
+        <h3>Example 2: Each Child with Own URL</h3>
+        <p>Each child can have its own cascade URL for different endpoints:</p>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+            &lt;!-- District loads from different endpoint --&gt;
+            &lt;select name="district"
+            data-cascade-parent="province"
+            data-cascade-url="api/get-districts.php"&gt;
+            &lt;/select&gt;
+
+            &lt;!-- Subdistrict loads from another endpoint --&gt;
+            &lt;select name="subdistrict"
+            data-cascade-parent="district"
+            data-cascade-url="api/get-subdistricts.php"&gt;
+            &lt;/select&gt;
+          </code></pre>
+
+        <h3>Example 3: JavaScript Manual Control</h3>
+        <p>Programmatically control cascading selects (optional - for advanced use):</p>
+        <pre><code data-component="syntaxhighlighter" data-language="javascript">
+            // Get CascadingSelectManager instance
+            const manager = CascadingSelectManager.getInstance('province');
+
+            // Trigger reload of children
+            manager.triggerChange();
+
+            // Access individual select elements
+            const districtSelect = document.querySelector('select[name="district"]');
+
+            // Or manually create cascade group
+            CascadingSelectManager.create({
+            selects: [
+            { element: '#province', children: ['#district'] },
+            { element: '#district', children: ['#subdistrict'] }
+            ],
+            url: 'get-address.php',
+            method: 'GET'
+            });
+          </code></pre>
+      </section>
+
+      <!-- Live Demo Section -->
+      <section class="section">
+        <h2 class="icon-published1">Live Demo</h2>
+        <p>Try the cascading select component:</p>
+
+        <!-- Thai Address Selection -->
+        <div class="demo-section">
+          <h3>Thai Address Selection</h3>
+          <p>Select province first, then district and subdistrict will be available.</p>
+
+          <form method="POST" action="api/v1/address" data-load-api="api/v1/address" data-form="addressForm" data-validate="true" data-csrf="false" data-ajax-submit="true" data-cascade-api="api/v1/address/cascade">
+            <fieldset>
+              <legend>
+                <h4>Select Address</h4>
+              </legend>
+              <div class="form-group">
+                <div class="width33">
+                  <label for="addr_province">Province (จังหวัด)</label>
+                  <span class="form-control icon-location">
+                    <select id="addr_province" name="province" data-cascade-source="province" data-options-key="provinces" data-attr="value:province">
+                      <option value="" data-placeholder="true" disabled selected>-- เลือกจังหวัด --</option>
+                    </select>
+                  </span>
+                  <div class="comment">Select province first</div>
+                </div>
+                <div class="width33">
+                  <label for="addr_amphur">District (อำเภอ/เขต)</label>
+                  <span class="form-control icon-location">
+                    <select id="addr_amphur" name="amphur" data-cascade-source="amphur" data-options-key="amphurs" data-attr="value:amphur">
+                      <option value="" data-placeholder="true" disabled selected>-- เลือกอำเภอ --</option>
+                    </select>
+                  </span>
+                  <div class="comment">Select province first</div>
+                </div>
+                <div class="width33">
+                  <label for="addr_district">Subdistrict (ตำบล/แขวง)</label>
+                  <span class="form-control icon-location">
+                    <select id="addr_district" name="district" data-cascade-source="district" data-options-key="districts" data-attr="value:district">
+                      <option value="" data-placeholder="true" disabled selected>-- เลือกตำบล --</option>
+                    </select>
+                  </span>
+                  <div class="comment">Select district first</div>
+                </div>
+              </div>
+              <div>
+                <label for="addr_zipcode">Zipcode (รหัสไปรษณีย์)</label>
+                <span class="form-control icon-mail">
+                  <input type="text" id="addr_zipcode" name="zipcode" placeholder="รหัสไปรษณีย์" maxlength="5" inputmode="numeric">
+                </span>
+              </div>
+              <div>
+                <label for="addr_detail">Address Detail (รายละเอียดที่อยู่)</label>
+                <span class="form-control icon-home">
+                  <textarea id="addr_detail" name="address_detail" rows="3" placeholder="บ้านเลขที่ ซอย ถนน..."></textarea>
+                </span>
+              </div>
+            </fieldset>
+            <fieldset class="submit right">
+              <button type="submit" class="btn btn-primary large icon-save">Save Address</button>
+            </fieldset>
+          </form>
+          <div id="address-output" class="output-section"></div>
+        </div>
+      </section>
+
+      <!-- How It Works -->
+      <section class="section">
+        <h2 class="icon-tip">How It Works</h2>
+
+        <div class="how-it-works">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Form Enhancement</h4>
+              <p>FormManager enhances forms with <code>data-form</code> attribute and registers select elements with ElementManager.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Setup Cascade Listeners</h4>
+              <p>Child selects with <code>data-cascade-parent</code> listen to parent's change event.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Load Options on Change</h4>
+              <p>When parent changes, child calls <code>data-cascade-url</code> with parent value as parameter.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h4>Update Child Options</h4>
+              <p>API response populates child select. Further children are cleared to maintain cascade integrity.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Comparison -->
+      <section class="section">
+        <h2 class="icon-compare">Cascading Select vs Hierarchical Text</h2>
+        <p>Choose the right component for your use case:</p>
+
+        <div class="comparison-table">
+          <table class="api-table border fullwidth">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Cascading Select</th>
+                <th>Hierarchical Text</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>UI Type</td>
+                <td>Native <code>&lt;select&gt;</code> dropdowns</td>
+                <td>Autocomplete text inputs</td>
+              </tr>
+              <tr>
+                <td>Data Loading</td>
+                <td>API call per level</td>
+                <td>Single JSON file</td>
+              </tr>
+              <tr>
+                <td>Best For</td>
+                <td>Large datasets, server-side filtering</td>
+                <td>Small-medium datasets, client-side</td>
+              </tr>
+              <tr>
+                <td>Reverse Search</td>
+                <td>Not supported</td>
+                <td>Supported</td>
+              </tr>
+              <tr>
+                <td>Mobile UX</td>
+                <td>Native picker on mobile</td>
+                <td>Custom dropdown</td>
+              </tr>
+              <tr>
+                <td>Accessibility</td>
+                <td>Native support</td>
+                <td>ARIA attributes needed</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+  <!-- Website Scripts -->
+  <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typography - Now.js Example</title>
+  <meta name="description" content="Typography in Now.js: headings, font tokens, alignment, inline text, code, lists, colors, status messages, badges, truncation and icons">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Website CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet">
+  <link rel="stylesheet" href="../../Now/css/syntaxhighlightercomponent.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header data-component="header"></header>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    <section class="hero center">
+      <div class="container">
+        <h1 data-i18n>Typography</h1>
+        <p class="text-gradient" data-i18n>Text styles, colors and helpers built into Now.js Framework.</p>
+      </div>
+    </section>
+
+    <article class="container content">
+
+      <!-- Headings -->
+      <section class="section">
+        <h2>Heading Levels</h2>
+        <div class="demo-section">
+          <div class="flex bottom gap">
+            <h1 style="margin-bottom: 0;">H1 Heading</h1> <span class=comment>ไม่สามารถนำไปใช้ได้ (ถูกใช้งานโดย Theme)</span>
+          </div>
+          <div class="flex bottom gap">
+            <h2 style="margin-bottom: 0;">H2 Heading</h2> <span class=comment>ไม่สามารถนำไปใช้ได้ (ถูกใช้งานในส่วนของ Header)</span>
+          </div>
+          <div class="flex bottom gap">
+            <h3 style="margin-bottom: 0;">H3 Heading</h3> <span class=comment>สำหรับใช้เป็นหัวข้อของฟอร์มหรือตาราง</span>
+          </div>
+          <h4 style="margin-bottom: 0;">H4 Heading</h4>
+          <h5 style="margin-bottom: 0;">H5 Heading</h5>
+          <h6 style="margin-bottom: 0;">H6 Heading</h6>
+          <p class="comment">ขนาดมาจากตัวแปร h1 = --font-size-4xl, h2 = 3xl, h3 = 2xl, h4 = xl, h5 = lg, h6 = base · ฟอนต์ --font-family-heading · น้ำหนัก --font-weight-heading (600)</p>
+        </div>
+      </section>
+
+      <!-- Font tokens -->
+      <section class="section">
+        <h2>Font Size Tokens</h2>
+        <div class="demo-section">
+          <p style="font-size: var(--font-size-xs);">--font-size-xs (0.75rem)</p>
+          <p style="font-size: var(--font-size-sm);">--font-size-sm (0.875rem)</p>
+          <p style="font-size: var(--font-size-base);">--font-size-base (1rem)</p>
+          <p style="font-size: var(--font-size-lg);">--font-size-lg (1.125rem)</p>
+          <p style="font-size: var(--font-size-xl);">--font-size-xl (1.25rem)</p>
+          <p style="font-size: var(--font-size-2xl);">--font-size-2xl (1.5rem)</p>
+          <p style="font-size: var(--font-size-3xl);">--font-size-3xl (1.875rem)</p>
+          <p style="font-size: var(--font-size-4xl);">--font-size-4xl (2.25rem)</p>
+          <p style="font-size: var(--font-size-5xl);">--font-size-5xl (3rem)</p>
+          <p class="comment">ไม่มี class ขนาดตัวอักษร ใช้ตัวแปรเหล่านี้ใน CSS ของหน้า หรือใช้ class big / small สำหรับปรับขนาดสัมพัทธ์</p>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="css">
+          .price { font-size: var(--font-size-2xl); }
+        </code></pre>
+      </section>
+
+      <section class="section">
+        <h2>Font Weight &amp; Line Height</h2>
+        <div class="demo-section">
+          <p style="font-weight: var(--font-weight-normal);">--font-weight-normal (400) น้ำหนักปกติ</p>
+          <p style="font-weight: var(--font-weight-semibold);">--font-weight-semibold (600) กึ่งหนา</p>
+          <p style="font-weight: var(--font-weight-bold);">--font-weight-bold (700) ตัวหนา</p>
+          <p class="comment">มีตัวแปร --font-weight-light (300) และ --font-weight-medium (500) ด้วย แต่ฟอนต์ Sarabun ที่โหลดมามีเฉพาะ 400 / 600 / 700 จึงแสดงเป็นน้ำหนักที่ใกล้ที่สุด</p>
+          <div class="grid gap" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+            <p style="line-height: var(--line-height-tight);"><b>--line-height-tight (1.25)</b><br>ระยะบรรทัดชิด เหมาะกับหัวข้อหลายบรรทัด ข้อความภาษาไทยที่มีสระบนล่าง</p>
+            <p style="line-height: var(--line-height-base);"><b>--line-height-base (1.5)</b><br>ระยะบรรทัดปกติของ body ใช้กับเนื้อหาทั่วไปของหน้าเว็บ</p>
+            <p style="line-height: var(--line-height-loose);"><b>--line-height-loose (2)</b><br>ระยะบรรทัดห่าง เหมาะกับข้อความที่ต้องการให้อ่านง่าย</p>
+          </div>
+          <p class="comment">ตัวแปรทั้งหมด --line-height-none (1), tight (1.25), snug (1.375), base (1.5), relaxed (1.625), loose (2)</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Font Families</h2>
+        <div class="demo-section">
+          <p style="font-family: var(--font-family-base);">--font-family-base: Sarabun ภาษาไทย ABC 0123</p>
+          <p style="font-family: 'Kanit', var(--font-family-base);">font-family: 'Kanit' ภาษาไทย ABC 0123</p>
+          <p style="font-family: var(--font-family-mono);">--font-family-mono: monospace ABC 0123</p>
+          <p class="comment">Sarabun และ Kanit เก็บไว้ในโปรเจ็ค (Now/css/fonts.css) ใช้งานได้แบบออฟไลน์ · เปลี่ยนฟอนต์ทั้งเว็บโดยกำหนด --font-family-base หรือเฉพาะหัวข้อด้วย --font-family-heading</p>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="css">
+          :root {
+            --font-family-heading: 'Kanit', var(--font-family-base);
+          }
+        </code></pre>
+      </section>
+
+      <!-- Alignment -->
+      <section class="section">
+        <h2>Paragraphs &amp; Alignment</h2>
+        <div class="demo-section">
+          <p>นี่คือย่อหน้าที่เกิดจาก tag &lt;p&gt;....&lt;/p&gt; คุณสามารถใส่เนื้อหาต่างๆได้ภายใต้ tag นี้</p>
+          <p class="left">จัดตัวอักษรชิดซ้ายด้วย &lt;p class=left&gt;...&lt;/p&gt;</p>
+          <p class="center">จัดตัวอักษรกึ่งกลางด้วย &lt;p class=center&gt;...&lt;/p&gt;</p>
+          <p class="right">จัดตัวอักษรชิดขวาด้วย &lt;p class=right&gt;...&lt;/p&gt;</p>
+          <p class="justify">จัดตัวอักษรเต็มบรรทัดด้วย &lt;p class=justify&gt;...&lt;/p&gt; ข้อความจะถูกกระจายให้ชิดทั้งซ้ายและขวา เมื่อข้อความยาวเกินหนึ่งบรรทัดจะเห็นผลชัดเจน ข้อความจะถูกกระจายให้ชิดทั้งซ้ายและขวา เมื่อข้อความยาวเกินหนึ่งบรรทัดจะเห็นผลชัดเจน</p>
+          <p class="comment">ใช้ text-left / text-center / text-right / text-justify ได้ผลเหมือนกัน · class left / right / center บน element ที่เป็น .flex จะหมายถึงการจัดวาง flex แทน</p>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;p class=&quot;left&quot;&gt;...&lt;/p&gt;      &lt;!-- หรือ text-left --&gt;
+          &lt;p class=&quot;center&quot;&gt;...&lt;/p&gt;    &lt;!-- หรือ text-center --&gt;
+          &lt;p class=&quot;right&quot;&gt;...&lt;/p&gt;     &lt;!-- หรือ text-right --&gt;
+          &lt;p class=&quot;justify&quot;&gt;...&lt;/p&gt;   &lt;!-- หรือ text-justify --&gt;
+        </code></pre>
+      </section>
+
+      <!-- Inline text -->
+      <section class="section">
+        <h2>Inline Text</h2>
+        <div class="demo-section">
+          <p>Tag <em>&lt;em&gt;</em> ใช้เน้นข้อความสำคัญ แสดงเป็นตัวสีแดง (ไม่เอียง)</p>
+          <p>Tag <strong>&lt;strong&gt;</strong> และ <b>&lt;b&gt;</b> แสดงเป็นตัวหนา</p>
+          <p>Tag <i>&lt;i&gt;</i> และ <dfn>&lt;dfn&gt;</dfn> แสดงเป็นตัวเอียง</p>
+          <p>Tag <ins>&lt;ins&gt;</ins> และ <u>&lt;u&gt;</u> แสดงเป็นขีดเส้นใต้</p>
+          <p>Tag <del>&lt;del&gt;</del> และ <s>&lt;s&gt;</s> แสดงเป็นขีดฆ่า</p>
+          <p>Tag <mark>&lt;mark&gt;</mark> ไฮไลต์ข้อความด้วยสีพื้นหลังเหลืองอ่อน</p>
+          <p>Tag <abbr title="HyperText Markup Language">&lt;abbr title="..."&gt;</abbr> ตัวย่อ (ไม่มีเส้นใต้ ชี้เพื่อดู title)</p>
+          <p>Tag <sub>&lt;sub&gt;</sub> และ <sup>&lt;sup&gt;</sup> ตัวห้อยและตัวยก เช่น H<sub>2</sub>O, m<sup>2</sup></p>
+          <p>Tag <small>&lt;small&gt;</small> และ <big>&lt;big&gt;</big> ปรับขนาดตัวอักษร หรือใช้ <span class="small">class small</span> และ <span class="big">class big</span> กับ element อื่น</p>
+          <p class="comment">ข้อความหมายเหตุ &lt;p class=comment&gt;...&lt;/p&gt; สีเขียว ขนาดเล็กกว่าปกติเล็กน้อย</p>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;em&gt;สีแดง&lt;/em&gt; &lt;strong&gt;หนา&lt;/strong&gt; &lt;i&gt;เอียง&lt;/i&gt; &lt;u&gt;เส้นใต้&lt;/u&gt; &lt;del&gt;ขีดฆ่า&lt;/del&gt;
+          &lt;mark&gt;ไฮไลต์&lt;/mark&gt; H&lt;sub&gt;2&lt;/sub&gt;O m&lt;sup&gt;2&lt;/sup&gt;
+          &lt;span class=&quot;small&quot;&gt;เล็ก&lt;/span&gt; &lt;span class=&quot;big&quot;&gt;ใหญ่&lt;/span&gt;
+          &lt;p class=&quot;comment&quot;&gt;หมายเหตุ&lt;/p&gt;
+        </code></pre>
+      </section>
+
+      <!-- Code -->
+      <section class="section">
+        <h2>Code, Keyboard &amp; Blockquote</h2>
+        <div class="demo-section">
+          <p>&lt;code&gt; ใช้สำหรับระบุส่วนที่เป็นโค้ด <code>Now.init({...})</code></p>
+          <p>&lt;kbd&gt; ปุ่มบนแป้นพิมพ์ กด <kbd>Ctrl</kbd> + <kbd>S</kbd> เพื่อบันทึก</p>
+          <p>&lt;samp&gt; ผลลัพธ์จากโปรแกรม <samp>Application initialized</samp></p>
+          <pre>&lt;pre&gt; ข้อความที่จัดรูปแบบไว้แล้ว
+    รักษาช่องว่างและการขึ้นบรรทัด
+    และตัดบรรทัดเมื่อยาวเกิน (pre-wrap)</pre>
+          <blockquote>ใช้สำหรับการอ้างอิงไปยังคำพูด &lt;blockquote&gt;...&lt;/blockquote&gt; มีเส้นสีหลักด้านซ้ายและเครื่องหมายคำพูด</blockquote>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;code&gt;Now.init()&lt;/code&gt;
+          &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;
+          &lt;samp&gt;output&lt;/samp&gt;
+          &lt;pre&gt;preformatted text&lt;/pre&gt;
+          &lt;blockquote&gt;quote&lt;/blockquote&gt;
+        </code></pre>
+      </section>
+
+      <!-- Lists -->
+      <section class="section">
+        <h2>Lists</h2>
+        <div class="demo-section grid gap" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+          <div>
+            <h4>&lt;ul&gt;</h4>
+            <ul>
+              <li>รายการที่ 1</li>
+              <li>รายการที่ 2
+                <ul>
+                  <li>รายการย่อย</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4>&lt;ol&gt;</h4>
+            <ol>
+              <li>ขั้นตอนแรก</li>
+              <li>ขั้นตอนที่สอง</li>
+              <li>ขั้นตอนที่สาม</li>
+            </ol>
+          </div>
+          <div>
+            <h4>.list-style-none</h4>
+            <ul class="list-style-none">
+              <li><span class="icon-valid">ไม่มีสัญลักษณ์</span></li>
+              <li><span class="icon-valid">ไม่มีระยะเยื้อง</span></li>
+              <li><span class="icon-valid">ใส่ไอคอนเองได้</span></li>
+            </ul>
+          </div>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;
+          &lt;ol&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ol&gt;
+          &lt;ul class=&quot;list-style-none&quot;&gt;&lt;li&gt;&lt;span class=&quot;icon-valid&quot;&gt;...&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;
+        </code></pre>
+      </section>
+
+      <!-- Text color -->
+      <section class="section">
+        <h2>Text Color</h2>
+        <div class="demo-section">
+          <p class="color-primary">สีสำหรับข้อความ &lt;p class=color-primary&gt;...&lt;/p&gt; (สีหลักของธีม)</p>
+          <p class="color-black">สีสำหรับข้อความ &lt;p class=color-black&gt;...&lt;/p&gt;</p>
+          <p class="color-blue">สีสำหรับข้อความ &lt;p class=color-blue&gt;...&lt;/p&gt;</p>
+          <p class="color-brown">สีสำหรับข้อความ &lt;p class=color-brown&gt;...&lt;/p&gt;</p>
+          <p class="color-cyan">สีสำหรับข้อความ &lt;p class=color-cyan&gt;...&lt;/p&gt;</p>
+          <p class="color-dark">สีสำหรับข้อความ &lt;p class=color-dark&gt;...&lt;/p&gt;</p>
+          <p class="color-dark-gray">สีสำหรับข้อความ &lt;p class=color-dark-gray&gt;...&lt;/p&gt;</p>
+          <p class="color-gold">สีสำหรับข้อความ &lt;p class=color-gold&gt;...&lt;/p&gt;</p>
+          <p class="color-gray">สีสำหรับข้อความ &lt;p class=color-gray&gt;...&lt;/p&gt;</p>
+          <p class="color-green">สีสำหรับข้อความ &lt;p class=color-green&gt;...&lt;/p&gt;</p>
+          <p class="color-magenta">สีสำหรับข้อความ &lt;p class=color-magenta&gt;...&lt;/p&gt;</p>
+          <p class="color-orange">สีสำหรับข้อความ &lt;p class=color-orange&gt;...&lt;/p&gt;</p>
+          <p class="color-pink">สีสำหรับข้อความ &lt;p class=color-pink&gt;...&lt;/p&gt;</p>
+          <p class="color-purple">สีสำหรับข้อความ &lt;p class=color-purple&gt;...&lt;/p&gt;</p>
+          <p class="color-red">สีสำหรับข้อความ &lt;p class=color-red&gt;...&lt;/p&gt;</p>
+          <p class="color-rosy">สีสำหรับข้อความ &lt;p class=color-rosy&gt;...&lt;/p&gt;</p>
+          <p class="color-silver">สีสำหรับข้อความ &lt;p class=color-silver&gt;...&lt;/p&gt;</p>
+          <p class="color-light bg-dark-gray">สีสำหรับข้อความ &lt;p class=color-light&gt;...&lt;/p&gt;</p>
+          <p class="color-white bg-black">สีสำหรับข้อความ &lt;p class=color-white&gt;...&lt;/p&gt;</p>
+          <p class="comment">class color-* ใช้ !important จึงทับสีของ component ได้ · สีพื้นหลังในสองบรรทัดสุดท้ายใช้เพื่อให้มองเห็นตัวอักษรเท่านั้น</p>
+        </div>
+      </section>
+
+      <!-- Background color -->
+      <section class="section">
+        <h2>Background Color</h2>
+        <div class="demo-section">
+          <p class="bg-primary color-white">สีพื้นหลัง &lt;p class=bg-primary&gt;...&lt;/p&gt;</p>
+          <p class="bg-black color-white">สีพื้นหลัง &lt;p class=bg-black&gt;...&lt;/p&gt;</p>
+          <p class="bg-blue color-white">สีพื้นหลัง &lt;p class=bg-blue&gt;...&lt;/p&gt;</p>
+          <p class="bg-brown color-white">สีพื้นหลัง &lt;p class=bg-brown&gt;...&lt;/p&gt;</p>
+          <p class="bg-cyan color-white">สีพื้นหลัง &lt;p class=bg-cyan&gt;...&lt;/p&gt;</p>
+          <p class="bg-dark color-white">สีพื้นหลัง &lt;p class=bg-dark&gt;...&lt;/p&gt;</p>
+          <p class="bg-dark-gray color-white">สีพื้นหลัง &lt;p class=bg-dark-gray&gt;...&lt;/p&gt;</p>
+          <p class="bg-gold color-black">สีพื้นหลัง &lt;p class=bg-gold&gt;...&lt;/p&gt;</p>
+          <p class="bg-gray color-white">สีพื้นหลัง &lt;p class=bg-gray&gt;...&lt;/p&gt;</p>
+          <p class="bg-green color-white">สีพื้นหลัง &lt;p class=bg-green&gt;...&lt;/p&gt;</p>
+          <p class="bg-light color-black">สีพื้นหลัง &lt;p class=bg-light&gt;...&lt;/p&gt;</p>
+          <p class="bg-magenta color-white">สีพื้นหลัง &lt;p class=bg-magenta&gt;...&lt;/p&gt;</p>
+          <p class="bg-orange color-white">สีพื้นหลัง &lt;p class=bg-orange&gt;...&lt;/p&gt;</p>
+          <p class="bg-pink color-white">สีพื้นหลัง &lt;p class=bg-pink&gt;...&lt;/p&gt;</p>
+          <p class="bg-purple color-white">สีพื้นหลัง &lt;p class=bg-purple&gt;...&lt;/p&gt;</p>
+          <p class="bg-red color-white">สีพื้นหลัง &lt;p class=bg-red&gt;...&lt;/p&gt;</p>
+          <p class="bg-rosy color-white">สีพื้นหลัง &lt;p class=bg-rosy&gt;...&lt;/p&gt;</p>
+          <p class="bg-silver color-black">สีพื้นหลัง &lt;p class=bg-silver&gt;...&lt;/p&gt;</p>
+          <p class="bg-white color-black">สีพื้นหลัง &lt;p class=bg-white&gt;...&lt;/p&gt;</p>
+          <p class="comment">สีตัวอักษรใช้เป็นตัวอย่างให้สามารถเห็นตัวอักษรเท่านั้น</p>
+        </div>
+      </section>
+
+      <!-- Status messages -->
+      <section class="section">
+        <h2>Status Messages</h2>
+        <div class="demo-section">
+          <p class="success">ข้อความสำเร็จ &lt;p class=success&gt;</p>
+          <p class="info">ข้อความแจ้งข้อมูล &lt;p class=info&gt;</p>
+          <p class="warning">ข้อความเตือน &lt;p class=warning&gt;</p>
+          <p class="error">ข้อความผิดพลาด &lt;p class=error&gt; (หรือ danger)</p>
+          <aside class="success">&lt;aside class=success&gt; กล่องข้อความพร้อมพื้นหลังและกรอบ</aside>
+          <aside class="info">&lt;aside class=info&gt; กล่องข้อความพร้อมพื้นหลังและกรอบ</aside>
+          <aside class="warning">&lt;aside class=warning&gt; กล่องข้อความพร้อมพื้นหลังและกรอบ</aside>
+          <aside class="error">&lt;aside class=error&gt; กล่องข้อความพร้อมพื้นหลังและกรอบ (หรือ danger)</aside>
+          <p class="comment">กล่อง &lt;aside&gt; ที่ว่างจะไม่แสดงกรอบ (:not(:empty)) จึงวางไว้รอใส่ข้อความจาก JavaScript ได้</p>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;p class=&quot;success&quot;&gt;...&lt;/p&gt;   &lt;!-- success / info / warning / error / danger --&gt;
+          &lt;aside class=&quot;warning&quot;&gt;...&lt;/aside&gt;
+        </code></pre>
+      </section>
+
+      <!-- Badges -->
+      <section class="section">
+        <h2>Badges</h2>
+        <div class="demo-section">
+          <p>มี data-badge แสดงค่าเป็นป้ายต่อท้ายข้อความ
+            <span class="badge-success" data-badge="10">badge-success</span>
+            <span class="badge-error" data-badge="-10">badge-error</span>
+            <span class="badge-danger" data-badge="3">badge-danger</span>
+            <span class="badge-warning" data-badge="+5">badge-warning</span>
+            <span class="badge-info" data-badge="1">badge-info</span>
+          </p>
+          <p>ไม่มี data-badge ทั้ง element เป็นป้าย
+            <span class="badge-success">อนุมัติ</span>
+            <span class="badge-error">ยกเลิก</span>
+            <span class="badge-warning">รอดำเนินการ</span>
+            <span class="badge-info">ใหม่</span>
+          </p>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;span class=&quot;badge-success&quot; data-badge=&quot;10&quot;&gt;Inbox&lt;/span&gt;
+          &lt;span class=&quot;badge-warning&quot;&gt;รอดำเนินการ&lt;/span&gt;
+        </code></pre>
+      </section>
+
+      <!-- Status marks -->
+      <section class="section">
+        <h2>Status Colors</h2>
+        <div class="demo-section">
+          <p>class status0 - status11 สำหรับไฮไลต์หรือแสดงสถานะ (เช่น สถานะจากฐานข้อมูล)</p>
+          <p class="flex wrap gap">
+            <mark class="status0">.status0</mark>
+            <mark class="status1">.status1</mark>
+            <mark class="status2">.status2</mark>
+            <mark class="status3">.status3</mark>
+            <mark class="status4">.status4</mark>
+            <mark class="status5">.status5</mark>
+            <mark class="status6">.status6</mark>
+            <mark class="status7">.status7</mark>
+            <mark class="status8">.status8</mark>
+            <mark class="status9">.status9</mark>
+            <mark class="status10">.status10</mark>
+            <mark class="status11">.status11</mark>
+          </p>
+          <p class="comment">สีมาจากตัวแปร --color-0 ถึง --color-11 · ใช้กับ element ใดก็ได้ เช่น &lt;span class="status{{status}}"&gt;</p>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;mark class=&quot;status1&quot;&gt;Active&lt;/mark&gt;
+        </code></pre>
+      </section>
+
+      <!-- Truncation & whitespace -->
+      <section class="section">
+        <h2>Truncation &amp; White Space</h2>
+        <div class="demo-section">
+          <div style="max-width: 360px;">
+            <p class="one_line"><b>.one_line</b> ตัดข้อความให้เหลือบรรทัดเดียวพร้อม ... เมื่อข้อความยาวเกินความกว้างของกล่อง</p>
+            <hr>
+            <p class="two_line"><b>.two_line</b> ตัดข้อความให้เหลือสองบรรทัดพร้อม ... เหมาะกับคำอธิบายสั้นในการ์ด ข้อความส่วนที่เกินจะถูกซ่อนไว้ ข้อความส่วนที่เกินจะถูกซ่อนไว้</p>
+            <hr>
+            <p class="three_line"><b>.three_line</b> ตัดข้อความให้เหลือสามบรรทัดพร้อม ... เหมาะกับบทนำของบทความในหน้ารวม ข้อความส่วนที่เกินจะถูกซ่อนไว้ ข้อความส่วนที่เกินจะถูกซ่อนไว้ ข้อความส่วนที่เกินจะถูกซ่อนไว้</p>
+            <hr>
+            <p class="nowrap" style="overflow: auto;"><b>.nowrap</b> ไม่ตัดบรรทัด ข้อความจะยาวต่อไปทางขวาจนกว่าจะจบประโยค</p>
+            <hr>
+            <p class="pre-line"><b>.pre-line</b> รักษาการขึ้นบรรทัดของข้อความ
+เช่น เหตุผล หรือหมายเหตุ
+ที่ผู้ใช้พิมพ์ไว้หลายบรรทัด</p>
+          </div>
+          <p class="comment">มี .four_line ด้วย · .wrap คืนค่า white-space: normal (บน .flex คือ flex-wrap)</p>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;p class=&quot;two_line&quot;&gt;...&lt;/p&gt;   &lt;!-- one_line / two_line / three_line / four_line --&gt;
+          &lt;td class=&quot;nowrap&quot;&gt;...&lt;/td&gt;
+          &lt;p class=&quot;pre-line&quot; data-text=&quot;reason&quot;&gt;&lt;/p&gt;
+        </code></pre>
+      </section>
+
+      <!-- Icons with text -->
+      <section class="section">
+        <h2>Icons with Text</h2>
+        <div class="demo-section">
+          <div><h4 class="icon-info">หัวข้อพร้อมไอคอน &lt;h4 class=icon-info&gt;</h4></div>
+          <p><span class="icon-calendar">ข้อความพร้อมไอคอน &lt;span class=icon-calendar&gt;</span></p>
+          <p><span class="icon-phone color-green">02-123-4567</span> · <a href="#" class="icon-email color-primary">contact</a></p>
+          <p class="comment">class icon-* ใส่ไอคอนจากฟอนต์ icomoon ไว้หน้าข้อความ ต้องโหลด Now/css/fonts.css · element จะกลายเป็น display: inline-flex จึงไปต่อบรรทัดกับ element ข้างเคียง ใส่ไว้ใน element ที่เป็น block อีกชั้น · ดูรายชื่อไอคอนทั้งหมดใน Now/css/fonts.css</p>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;h4 class=&quot;icon-info&quot;&gt;หัวข้อ&lt;/h4&gt;
+          &lt;span class=&quot;icon-phone color-green&quot;&gt;02-123-4567&lt;/span&gt;
+        </code></pre>
+      </section>
+
+      <!-- Accessibility -->
+      <section class="section">
+        <h2>Screen Reader Only</h2>
+        <div class="demo-section">
+          <p><button class="btn icon-search"><span class="sr-only">ค้นหา</span></button> ปุ่มนี้มีข้อความ "ค้นหา" ใน &lt;span class=sr-only&gt; ซ่อนจากตาแต่โปรแกรมอ่านหน้าจอยังอ่านได้</p>
+          <p class="comment">ใช้ .hidden เมื่อต้องการซ่อนจากทุกคน (display: none)</p>
+        </div>
+        <pre><code data-component="syntaxhighlighter" data-language="html">
+          &lt;button class=&quot;btn icon-search&quot;&gt;&lt;span class=&quot;sr-only&quot;&gt;ค้นหา&lt;/span&gt;&lt;/button&gt;
+        </code></pre>
+      </section>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer data-component="footer"></footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+  <script src="main.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</body>
+
+</html>

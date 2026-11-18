@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Landing Page - Now.js Examples</title>
+  <meta name="description" content="Beautiful animated landing page showcasing AnimationManager capabilities">
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="../../Now/dist/now.core.min.css">
+  <link rel="stylesheet" href="../../Now/css/fonts.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body data-animation-auto>
+
+  <!-- ============================================ -->
+  <!-- HERO SECTION -->
+  <!-- ============================================ -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge" data-enter="fade" data-enter-duration="600">
+          <span class="badge-dot"></span>
+          <span>Introducing Nova Platform</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="title-line" data-enter="slideUp" data-enter-duration="700">Build faster.</span>
+          <span class="title-line" data-enter="slideUp" data-enter-duration="700" style="animation-delay: 100ms">Scale smarter.</span>
+          <span class="title-line gradient-text" data-enter="slideUp" data-enter-duration="700" style="animation-delay: 200ms">Grow together.</span>
+        </h1>
+
+        <p class="hero-subtitle" data-enter="fade" data-enter-duration="800">
+          The all-in-one platform that helps teams build, deploy, and scale
+          applications faster than ever before.
+        </p>
+
+        <div class="hero-cta" data-enter="slideUp" data-enter-duration="600">
+          <a href="#" class="btn btn-primary btn-lg">
+            <span>Get Started Free</span>
+            <span class="icon-arrow-right"></span>
+          </a>
+          <a href="#features" class="btn btn-outline btn-lg">
+            <span class="icon-play"></span>
+            <span>Watch Demo</span>
+          </a>
+        </div>
+
+        <div class="hero-stats" data-enter="fade" data-enter-duration="800">
+          <div class="stat-item">
+            <span class="stat-value">50K+</span>
+            <span class="stat-label">Active Users</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">99.9%</span>
+            <span class="stat-label">Uptime SLA</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">150+</span>
+            <span class="stat-label">Countries</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator" data-enter="fade" data-enter-duration="1000">
+      <span class="scroll-text">Scroll to explore</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FEATURES SECTION -->
+  <!-- ============================================ -->
+  <section id="features" class="section features-section">
+    <div class="container">
+      <div class="section-header" data-enter="slideUp" data-enter-duration="600">
+        <span class="section-badge">Features</span>
+        <h2>Everything you need<br><span class="gradient-text">in one place</span></h2>
+        <p>Powerful tools designed to help your team work faster and smarter.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card" data-enter="slideUp" data-enter-duration="500">
+          <div class="feature-icon">
+            <span class="icon-power"></span>
+          </div>
+          <h3>Lightning Fast</h3>
+          <p>Optimized for speed with edge computing and global CDN distribution.</p>
+        </div>
+
+        <div class="feature-card" data-enter="slideUp" data-enter-duration="500">
+          <div class="feature-icon">
+            <span class="icon-lock"></span>
+          </div>
+          <h3>Secure by Default</h3>
+          <p>Enterprise-grade security with SOC2 compliance and end-to-end encryption.</p>
+        </div>
+
+        <div class="feature-card" data-enter="slideUp" data-enter-duration="500">
+          <div class="feature-icon">
+            <span class="icon-stack"></span>
+          </div>
+          <h3>Auto Scaling</h3>
+          <p>Automatically scale your infrastructure based on demand.</p>
+        </div>
+
+        <div class="feature-card" data-enter="slideUp" data-enter-duration="500">
+          <div class="feature-icon">
+            <span class="icon-clock"></span>
+          </div>
+          <h3>Real-time Analytics</h3>
+          <p>Detailed insights and metrics to help you make data-driven decisions.</p>
+        </div>
+
+        <div class="feature-card" data-enter="slideUp" data-enter-duration="500">
+          <div class="feature-icon">
+            <span class="icon-users"></span>
+          </div>
+          <h3>Team Collaboration</h3>
+          <p>Work together seamlessly with real-time collaboration tools.</p>
+        </div>
+
+        <div class="feature-card" data-enter="slideUp" data-enter-duration="500">
+          <div class="feature-icon">
+            <span class="icon-cpu"></span>
+          </div>
+          <h3>Powerful API</h3>
+          <p>RESTful and GraphQL APIs for seamless integration with your tools.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- HOW IT WORKS SECTION -->
+  <!-- ============================================ -->
+  <section class="section how-it-works-section">
+    <div class="container">
+      <div class="section-header" data-enter="slideUp" data-enter-duration="600">
+        <span class="section-badge">How It Works</span>
+        <h2>Get started in<br><span class="gradient-text">3 simple steps</span></h2>
+      </div>
+
+      <div class="steps-container">
+        <div class="step" data-enter="slideRight" data-enter-duration="600">
+          <div class="step-number">01</div>
+          <div class="step-content">
+            <h3>Create Your Account</h3>
+            <p>Sign up in seconds with your email or connect with GitHub, Google, or GitLab.</p>
+          </div>
+          <div class="step-visual">
+            <div class="visual-card">
+              <div class="card-header">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <div class="card-content">
+                <div class="skeleton-line w-60"></div>
+                <div class="skeleton-line w-80"></div>
+                <div class="skeleton-btn"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step reverse" data-enter="slideLeft" data-enter-duration="600">
+          <div class="step-number">02</div>
+          <div class="step-content">
+            <h3>Connect Your Project</h3>
+            <p>Import your existing repository or start fresh with our templates.</p>
+          </div>
+          <div class="step-visual">
+            <div class="visual-card">
+              <div class="card-content code-preview">
+                <code>$ nova deploy</code>
+                <code class="success">✓ Deployed to production</code>
+                <code class="muted">https://your-app.nova.dev</code>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" data-enter="slideRight" data-enter-duration="600">
+          <div class="step-number">03</div>
+          <div class="step-content">
+            <h3>Deploy & Scale</h3>
+            <p>Push to deploy. We handle the rest—scaling, SSL, CDN, and more.</p>
+          </div>
+          <div class="step-visual">
+            <div class="visual-card metrics-card">
+              <div class="metric">
+                <span class="metric-value">2.3M</span>
+                <span class="metric-label">Requests/day</span>
+              </div>
+              <div class="metric">
+                <span class="metric-value">99.99%</span>
+                <span class="metric-label">Uptime</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- TESTIMONIALS SECTION -->
+  <!-- ============================================ -->
+  <section class="section testimonials-section">
+    <div class="container">
+      <div class="section-header" data-enter="slideUp" data-enter-duration="600">
+        <span class="section-badge">Testimonials</span>
+        <h2>Loved by teams<br><span class="gradient-text">worldwide</span></h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card" data-enter="scale" data-enter-duration="500">
+          <div class="testimonial-content">
+            <p>"Nova transformed how we deploy. What used to take hours now happens in seconds."</p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">JD</div>
+            <div class="author-info">
+              <strong>John Doe</strong>
+              <span>CTO at TechCorp</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card featured" data-enter="scale" data-enter-duration="500">
+          <div class="testimonial-content">
+            <p>"The best platform we've ever used. Our team productivity increased by 300% after switching to Nova."</p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar gradient-avatar">SM</div>
+            <div class="author-info">
+              <strong>Sarah Miller</strong>
+              <span>Lead Developer at StartupXYZ</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card" data-enter="scale" data-enter-duration="500">
+          <div class="testimonial-content">
+            <p>"Finally, a platform that actually delivers on its promises. Incredible performance."</p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">MJ</div>
+            <div class="author-info">
+              <strong>Mike Johnson</strong>
+              <span>Founder at DevAgency</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- PRICING SECTION -->
+  <!-- ============================================ -->
+  <section id="pricing" class="section pricing-section">
+    <div class="container">
+      <div class="section-header" data-enter="slideUp" data-enter-duration="600">
+        <span class="section-badge">Pricing</span>
+        <h2>Simple, transparent<br><span class="gradient-text">pricing</span></h2>
+        <p>Start free. Upgrade when you need to.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card" data-enter="slideUp" data-enter-duration="500">
+          <div class="pricing-header">
+            <h3>Starter</h3>
+            <p>Perfect for side projects</p>
+          </div>
+          <div class="pricing-price">
+            <span class="price">$0</span>
+            <span class="period">/month</span>
+          </div>
+          <ul class="pricing-features">
+            <li><span class="icon-check"></span> 3 Projects</li>
+            <li><span class="icon-check"></span> 100GB Bandwidth</li>
+            <li><span class="icon-check"></span> SSL Certificates</li>
+            <li><span class="icon-check"></span> Community Support</li>
+          </ul>
+          <a href="#" class="btn btn-outline btn-block">Get Started</a>
+        </div>
+
+        <div class="pricing-card popular" data-enter="slideUp" data-enter-duration="500">
+          <div class="popular-badge">Most Popular</div>
+          <div class="pricing-header">
+            <h3>Pro</h3>
+            <p>For growing teams</p>
+          </div>
+          <div class="pricing-price">
+            <span class="price">$29</span>
+            <span class="period">/month</span>
+          </div>
+          <ul class="pricing-features">
+            <li><span class="icon-check"></span> Unlimited Projects</li>
+            <li><span class="icon-check"></span> 1TB Bandwidth</li>
+            <li><span class="icon-check"></span> Custom Domains</li>
+            <li><span class="icon-check"></span> Priority Support</li>
+            <li><span class="icon-check"></span> Advanced Analytics</li>
+          </ul>
+          <a href="#" class="btn btn-primary btn-block">Start Free Trial</a>
+        </div>
+
+        <div class="pricing-card" data-enter="slideUp" data-enter-duration="500">
+          <div class="pricing-header">
+            <h3>Enterprise</h3>
+            <p>For large organizations</p>
+          </div>
+          <div class="pricing-price">
+            <span class="price">Custom</span>
+          </div>
+          <ul class="pricing-features">
+            <li><span class="icon-check"></span> Everything in Pro</li>
+            <li><span class="icon-check"></span> Unlimited Bandwidth</li>
+            <li><span class="icon-check"></span> SLA Guarantee</li>
+            <li><span class="icon-check"></span> Dedicated Support</li>
+            <li><span class="icon-check"></span> Custom Integrations</li>
+          </ul>
+          <a href="#" class="btn btn-outline btn-block">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CTA SECTION -->
+  <!-- ============================================ -->
+  <section class="section cta-section">
+    <div class="cta-bg">
+      <div class="gradient-orb orb-cta-1"></div>
+      <div class="gradient-orb orb-cta-2"></div>
+    </div>
+
+    <div class="container">
+      <div class="cta-content" data-enter="scale" data-enter-duration="700">
+        <h2>Ready to get started?</h2>
+        <p>Join thousands of teams already building with Nova.</p>
+        <div class="cta-buttons">
+          <a href="#" class="btn btn-primary btn-xl">
+            Start Building Free
+            <span class="icon-arrow-right"></span>
+          </a>
+        </div>
+        <span class="cta-note">No credit card required • Free forever for hobby projects</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FOOTER -->
+  <!-- ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">Nova</div>
+          <p>Build faster, scale smarter.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Product</h4>
+          <a href="#">Features</a>
+          <a href="#">Pricing</a>
+          <a href="#">Enterprise</a>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <a href="#">Documentation</a>
+          <a href="#">Guides</a>
+          <a href="#">API Reference</a>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <a href="#">About</a>
+          <a href="#">Blog</a>
+          <a href="#">Careers</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Nova. All rights reserved.</p>
+        <p class="powered-by">
+          Animations powered by <a href="https://nowjs.net">Now.js AnimationManager</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Framework Scripts -->
+  <script src="../../Now/dist/now.core.min.js"></script>
+
+  <!-- App Script -->
+  <script src="main.js"></script>
+
+</body>
+
+</html>
